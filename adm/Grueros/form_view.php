@@ -1,4 +1,4 @@
-<?php include('../../view_header_admin.php')?>
+<?php include('../../view_header_admin.php');         ?>
 
 <form action="index.php">
 	<div class="box box-primary">

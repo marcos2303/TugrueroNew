@@ -38,10 +38,9 @@ $values = array_merge($values,$_FILES);
 		require('list_view.php');
 	}
 	function executeNew($values = null)
-	{       
-        $values['status'] = '1';
+	{      
+
 		$values['action'] = 'add';
-		$values['EstatusPoliza'] = 'Activo';
 		require('form_view.php');
 	}
 	function executeSave($values = null)

@@ -9,20 +9,19 @@ if(@$_SERVER['HTTP_HOST'] == '127.0.0.1' or @$_SERVER['HTTP_HOST'] == 'localhost
 }
 if($development_env == true)
 {
-    $project_folder = '/tugruero';
+    $project_folder = '/tugrueroNew';
 }
 
 define("main_folder",$project_folder);//Project name and directory name//prueba 2
 define("title","TU/GRUERO®");
-define("Author","Marcos De Andrade");
+define("Author","De Andrade Groups C.A");
 define("Company","TU/GRUERO®");
 define("version","");
-define("development_by","frbcomputersgroup");
+define("development_by","De Andrade Developmen Group C.A");
 define("upload_temp_dir",$_SERVER["DOCUMENT_ROOT"]."/".main_folder."/web/uploads/temp");
 define("upload_dir",$_SERVER["DOCUMENT_ROOT"]."/".main_folder."/web/uploads/documentos");
 define("images_dir","../../../../web/images/");
 define("dir_cuadros",$_SERVER["DOCUMENT_ROOT"]."/".main_folder."/web/files/Cuadros/");
-
 /* configuraciones apache*/
 $base_dir  = __DIR__; // Absolute path to your installation, ex: /var/www/mywebsite
 $doc_root  = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']); # ex: /var/www
