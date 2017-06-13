@@ -1,0 +1,49 @@
+
+
+<script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+Mercadopago.setPublishableKey("APP_USR-09293edc-8543-4c7e-aa50-f04305e47448");
+
+</script>
+<form action="" method="post" id="pay" name="pay" >
+    <fieldset>
+        <ul>
+            <li>
+                <label for="email">Email</label>
+                <input id="email" name="email" value="deandrademarcos@hotmail.com" type="email" placeholder="your email"/>
+            </li>
+            <li>
+                <label for="cardNumber">Credit card number:</label>
+                <input type="text" id="cardNumber" data-checkout="cardNumber" placeholder="4509 9535 6623 3704" value='4966382331109310'/>
+            </li>
+            <li>
+                <label for="securityCode">Security code:</label>
+                <input type="text" id="securityCode" data-checkout="securityCode" placeholder="123" value='123' />
+            </li>
+            <li>
+                <label for="cardExpirationMonth">Expiration month:</label>
+                <input type="text" id="cardExpirationMonth" data-checkout="cardExpirationMonth" placeholder="12" value="01" />
+            </li>
+            <li>
+                <label for="cardExpirationYear">Expiration year:</label>
+                <input type="text" id="cardExpirationYear" data-checkout="cardExpirationYear" placeholder="2015"  value="2017"/>
+            </li>
+            <li>
+                <label for="cardholderName">Card holder name:</label>
+                <input type="text" id="cardholderName" data-checkout="cardholderName" placeholder="APRO" value='APRO'/>
+            </li>
+            <li>
+                <label for="docType">Document type:</label>
+                <select id="docType" data-checkout="docType" name="docType"></select>
+            </li>
+            <li>
+                <label for="docNumber">Document number:</label>
+                <input type="text" id="docNumber" data-checkout="docNumber" name="docNumber" placeholder="12345678" value='12345678' />
+            </li>
+        </ul>
+        <input type="submit" value="Pagar" />
+    </fieldset>
+</form>
+
+
