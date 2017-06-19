@@ -5,7 +5,7 @@
     private $conn   = NULL;          
                 function __construct() 
                 {
-                    $this->dbname = "admin_tugruero";
+                    $this->dbname = "TuGrueroNew";
                     //$this->host = '34.208.124.125';
                     $this->host = 'localhost';
                     $this->port = "3306";

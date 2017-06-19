@@ -37,55 +37,45 @@ $values = $_REQUEST;
 	require('bienvenida.php');
 	}
 	function executeAcceso($values = null){
-		
 		$login = true;
-		$securimage = new Securimage();
+		/*$securimage = new Securimage();
 		$captcha = $values['ct_captcha'];
 		if ($securimage->check($captcha) == false) 
 		{
 				$errors['captcha_error'] = 'Incorrect security code entered<br />';
 				$values['error'] = "Imagen incorrecta";
 				require('login.php');die;
-		}else
-		{
-			if($login == false)
+		}*/
+			if( (!isset($values['Login']) and $values['Login'] == '') or  (!isset($values['Clave']) and $values['Clave'] == '') )
 			{
-				require('bienvenida.php');
+				$values['error'] = "Debe indicar usuario y clave";
+				require('login.php');die;
 			}else
 			{
-				$Users = new Users();
-				$user_data = $Users->getLogin($values);
-				if($user_data['id_user'] == false or $user_data['id_user']=='' or !isset($user_data['id_user']))
-				{
-					$values['error'] = "Usuario o clave incorrecto";
+				$Usuarios= new Usuarios();
+				$usuario_data = $Usuarios->getLogin($values);	
+				if(!$usuario_data['IdUsuario']){
+					$values['error'] = "Error en Usuario y/o Clave";
 					require('login.php');die;
-				}else
-				{
-					if($user_data["id_perms"]!=2)
-					{
-						$values['error'] = "No posee permisos para ingresar. Comuníquese con el administrador";
-						require('login.php');die;
-					}else
-					{
-						$_SESSION['id_perms'] =$user_data["id_perms"];
-						$_SESSION['id_user'] = $user_data["id_user"];
-						$_SESSION['login'] = $user_data["login"];
-						$_SESSION['name'] = ucwords(strtolower($user_data["first_name"]))." ".ucwords(strtolower($user_data["first_last_name"]));
-
-						require('bienvenida.php');die;
-					}
-
+				}else{
+					
+					$_SESSION['IdUsuario'] = $usuario_data['IdUsuario'];
+					$_SESSION['Usuario'] = $usuario_data['Login'];
+					$_SESSION['AutorizarPagos'] = $usuario_data['AutorizarPagos'];
+					$_SESSION['AutorizarServicios'] = $usuario_data['AutorizarServicios'];
+					$_SESSION['Nombres'] = $usuario_data['Nombres'];
+					$_SESSION['Apellidos'] = $usuario_data['Apellidos'];
+					$_SESSION['Perfil'] = $usuario_data['Perfil'];
+					require('bienvenida.php');die;
+					
 				}
-				
-				
-				
 			}
-		}
-	require('bienvenida.php');
+		
+
 	}
 	function executeLogout($values = null){
         session_destroy();
-	unset($_SESSION['id_perms'],$_SESSION['id_user'],$_SESSION['id_company'],$_SESSION['name'],$_SESSION['login']);
+	unset($_SESSION['IdUsuario'],$_SESSION['Login'],$_SESSION['AutorizarPagos'],$_SESSION['AutorizarServicios'],$_SESSION['Nombres'],$_SESSION['Apellidos']);
 
 	require('login.php');
 	}

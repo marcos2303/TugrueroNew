@@ -1,30 +1,86 @@
-<?php include("../view_header_app.php");?>
-<?php include("menu.php");?>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <div class="page-header">
-        <h1>Bienvenido(a) <strong><?php echo $_SESSION['name']?> </strong><small> a <?php echo title;?> <?php echo version;?></small></h1>
-    </div>
-</div>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-	<div class="col-xs-1 col-sm-1 col-md-4 col-lg-4">
+<?php include("../view_header_admin.php");?>
+<div class="col-xs-12">
 
-	</div>
-	<div class="col-xs-10 col-sm-10 col-md-4 col-lg-4">
-		<div class="panel panel-default">
-		  <div class="panel-body">
-                    <ul class="list-group">
-                        <li class="list-group-item">Empresa: <strong>TU/GRUERO®</strong></li>
-                        <li class="list-group-item">Usuario: <strong><?php echo $_SESSION['login'];?></strong></li>
-						<li class="list-group-item text-center"><img src="<?php echo full_url;?>/web/img/logo_tugruero_mail.png"></li>
-                        
-                    </ul>                    
-		  </div>
-		</div>	
-	</div>
-	<div class="col-xs-1 col-sm-1 col-md-4 col-lg-4">
-	</div>
-</div>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="col-xs-4">
 
+          <!-- Profile Image -->
+          <div class="box box-primary">
+            <div class="box-body box-profile">
+				<img class="profile-user-img img-responsive img-circle" src="../web/admin_template/dist/img/user4-128x128.jpg" alt="User profile picture">
+
+              <h3 class="profile-username text-center"><?php echo $_SESSION['Nombres']?> <?php echo $_SESSION['Apellidos']?></h3>
+
+              <p class="text-muted text-center"><?php echo $_SESSION['Perfil']?></p>
+
+              <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                  <b>Servicios ultimos 3 dias</b> <a class="pull-right">1,322</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Servicios ultimos 15 dias</b> <a class="pull-right">543</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Servicios ultimos 45 dias</b> <a class="pull-right">13,287</a>
+                </li>
+              </ul>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <div class="col-xs-4">
+
+          <!-- Profile Image -->
+          <div class="box box-primary">
+            <div class="box-body box-profile">
+				<img class="profile-user-img img-responsive img-circle" src="../web/admin_template/dist/img/user4-128x128.jpg" alt="User profile picture">
+
+              <h3 class="profile-username text-center"><?php echo $_SESSION['Nombres']?> <?php echo $_SESSION['Apellidos']?></h3>
+
+              <p class="text-muted text-center"><?php echo $_SESSION['Perfil']?></p>
+
+              <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                  <b>Servicios ultimos 3 dias</b> <a class="pull-right">1,322</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Servicios ultimos 15 dias</b> <a class="pull-right">543</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Servicios ultimos 45 dias</b> <a class="pull-right">13,287</a>
+                </li>
+              </ul>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <div class="col-xs-4">
+
+          <!-- Profile Image -->
+          <div class="box box-primary">
+            <div class="box-body box-profile">
+				<img class="profile-user-img img-responsive img-circle" src="../web/admin_template/dist/img/user4-128x128.jpg" alt="User profile picture">
+
+              <h3 class="profile-username text-center"><?php echo $_SESSION['Nombres']?> <?php echo $_SESSION['Apellidos']?></h3>
+
+              <p class="text-muted text-center"><?php echo $_SESSION['Perfil']?></p>
+
+              <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                  <b>Servicios ultimos 3 dias</b> <a class="pull-right">1,322</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Servicios ultimos 15 dias</b> <a class="pull-right">543</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Servicios ultimos 45 dias</b> <a class="pull-right">13,287</a>
+                </li>
+              </ul>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
 </div>
-<?php //include("../view_footer.php");?>
+<?php include("../view_footer_admin.php");?>
