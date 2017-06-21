@@ -1,25 +1,18 @@
 <?php
 
-	class Baremo 
-	{
+	class Baremo {
 		
-		
-		function GetBaremo($values) {
-
-			$ConnectionAws = new ConnectionAws();
-			$q = $ConnectionAws->getConnect()->Baremo
+		function datosBaremo() {
+			
+			$ConnectionORM = new ConnectionORM();
+			$q = $ConnectionORM->getConnect()->Baremo
 			->select("*")->fetch();
-			//->where("Disponible=?","SI");
-			return $q; 
-		}
-
-		//------------------------------
-		//Calculando la oferta
-		//------------------------------
-		function CalcularOferta($EstadoOrigen, $Distancia, $QueOcurre, $Neumaticos, $Situacion, $timeOpen, $baremo) {
-
-			$enganche = $baremo['enganche'];
-			$kilometraje = $Distancia * $baremo['km'];
+			return $q; 	
+		}		
+		function calcularOferta($Distancia, $QueOcurre, $Neumaticos, $Situacion, $timeOpen) {
+			$baremo = $this->datosBaremo();
+			$enganche = $baremo['Enganche'];
+			$kilometraje = $Distancia * $baremo['KM'];
 			$weekendFactor = $this->WeekendFactor($timeOpen, $baremo);
 			$problemaAjuste = $this->ProblemaFactor($QueOcurre, $Neumaticos, $baremo) * $enganche;
 
@@ -37,10 +30,10 @@
 			switch ($QueOcurre) {
 
 				case "Encunetado":
-					return $baremo['encunetado'];
+					return $baremo[Encunetado];
 
 				case "Volante/Palanca trabada":
-					return $baremo["caja"];
+					return $baremo["Caja"];
 
 				case "Neumático espichado":
 					$Cambios = 0;
@@ -62,9 +55,9 @@
 		//Calculando Factor de fin de semana.
 		//------------------------------
 		function WeekendFactor($timeOpen, $baremo) {
-			$dw = @date("w", $timeOpen);
+			$dw = date("w", $timeOpen);
 			if ($dw == 6 || $dw == 0) {
-				return $baremo['finsemana'];
+				return $baremo['FinSemana'];
 			} else {
 				return 1;
 			}
@@ -76,10 +69,10 @@
 		function SituacionFactor($Situacion, $baremo) {
 			switch ($Situacion) {
 				case 'Atascado en barro o arena.':
-					return $baremo['atasco'];
+					return $baremo['Atasco'];
 
 				case 'Estacionamiento techado o sótano':
-					return $baremo['sotano'];
+					return $baremo['Sotano'];
 
 				default:
 					return 0;
@@ -95,27 +88,24 @@
 			$hora = date('H', $time);
 
 			if ($hora > 4 && $hora < 19) {
-				return $baremo['diurno'];
+				return $baremo['Diurno'];
 			}
 
 			if ($hora > 18 && $hora < 24) {
-				return $baremo['nocturno'];
+				return $baremo['Nocturno'];
 			}
 
-			return $baremo['extranocturno'];
+			return $baremo['ExtraNocturno'];
 		}
-
-		//------------------------------
-		//Calculando Distancia.
-		//------------------------------
-		function GetDistancia($oLAT, $oLNG, $dLAT, $dLNG) { //equación de Haversine
+	
+		function getDistancia($LatitudOrigen, $LongitudOrigen, $LatitudDestino, $LongitudDestino) { //equación de Haversine
 			//Conversión de Latitudes a Radianes
-			$origenLAT = deg2rad($oLAT);
-			$destinoLAT = deg2rad($dLAT);
+			$origenLAT = deg2rad($LatitudOrigen);
+			$destinoLAT = deg2rad($LatitudDestino);
 
 			//Cálculo de Deltas
 			$deltaLAT = ($destinoLAT - $origenLAT);
-			$deltaLON = deg2rad($dLNG - $oLNG); //transformación a radianes.
+			$deltaLON = deg2rad($LongitudDestino - $LongitudOrigen); //transformación a radianes.
 			//Cáculo de factores
 			$senoDeltaLAT = sin($deltaLAT / 2);
 			$senoDeltaLAT *=$senoDeltaLAT; //al cuadrado
@@ -128,8 +118,5 @@
 
 			return round($distancia);
 		}
-		
-		
-		
-		
 	}
+	

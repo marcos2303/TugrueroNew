@@ -13,22 +13,22 @@
                     $this->dsn = "mysql:dbname=".$this->dbname.";host=".$this->host.";port=".$this->port.";charset=".$this->charset;  
                     $this->username = 'admin_tugruero';
                     $this->password = 'tugrua';
-                return $this->open();
                     
                 }            
-		public function getConnect($connect = ''){
 		
-        $NotOrm = new NotORM($this->conn);
-		return $NotOrm; 
-           
-		}
-		
-		public function open() {
-
+		public function getConnect() {
 			if (!is_resource($this->conn)){
-				$this->conn = @new PDO($this->dsn,$this->username,$this->password,array(PDO::ATTR_PERSISTENT => true,PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+				
+				try{
+					$this->conn = @new PDO($this->dsn,$this->username,$this->password,array(PDO::ATTR_PERSISTENT => true,PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+
+				}catch(PDOException $e){
+					//echo $e->getMessage();die;
+					echo "Error: ".$e->getMessage();die;
+				}
 			}
-			return $this;
+			$NotOrm = new NotORM($this->conn);
+			return $NotOrm; 
 		}		
 		public function close() {
 
@@ -37,7 +37,14 @@
 		public function ejecutarPreparado($query) {
 
 			if (!is_resource($this->conn)){
-				$this->conn = new PDO($this->dsn,$this->username,$this->password,array(PDO::ATTR_PERSISTENT => true,PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+				try{
+					$this->conn = @new PDO($this->dsn,$this->username,$this->password,array(PDO::ATTR_PERSISTENT => true,PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+
+				}catch(PDOException $e){
+					//echo $e->getMessage();die;
+					echo "Error: ".$e->getMessage();die;
+				}			
+				
 			}
 			
 			$q = $this->conn->query($query);
