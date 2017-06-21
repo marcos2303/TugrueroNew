@@ -9,7 +9,6 @@ $Servicios = new Servicios();
 $ServiciosClientes = new ServiciosClientes();
 $ServiciosPrecios = new ServiciosPrecios();
 $Baremo = new Baremo();
-/***************************************************/
 /****************Seteo y comprobacion de valores*******************/
 
 $values['IdAplicacion'] = 1;
@@ -28,10 +27,6 @@ if(!isset($values['KM']) or $values['KM']==''){
 //Calculo de KM en caso que no envie
 $values['KM'] = $Baremo->getDistancia($LatitudOrigen, $LongitudOrigen, $LatitudDestino, $LongitudDestino);
 }
-
-/*********************************************************************/
-
-
 /**********************se efectua el calculo del baremo automatico****************************/
 //calculo el precio sin iva
 $values['PrecioSIvaBaremo'] = $Baremo->calcularOferta( $values['KM'], "Encunetado", '1000', "Atascado en barro o arena.", $values['Inicio']);
