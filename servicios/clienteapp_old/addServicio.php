@@ -56,4 +56,7 @@ if(!$ServiciosPrecios ->addServiciosPrecios($values)){
 /***********************Localizar Grúas y enviar push*************************************************/
 
 $response = array("Error"=>0,"MensajeError"=>"","MensajeSuccess"=> 'Ok',"IdServicio"=>$values['IdServicio']);
-echo json_encode($response,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+echo json_encode($response);die;
+
+
+

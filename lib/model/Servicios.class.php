@@ -108,6 +108,7 @@
 			->select("*")
 			->join("ServiciosClientes","LEFT JOIN ServiciosClientes c on c.IdServicio = Servicios.IdServicio")
 			->join("ServiciosPrecios","LEFT JOIN ServiciosPrecios p on p.IdServicio = Servicios.IdServicio")
+			->join("ServiciosGruas","LEFT JOIN ServiciosGruas g on g.IdServicio = Servicios.IdServicio")
 			->where("Servicios.IdServicio=?",$values['IdServicio']);
 			return $q; 	
 		}
