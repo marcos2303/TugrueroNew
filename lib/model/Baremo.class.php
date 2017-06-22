@@ -6,17 +6,17 @@
 			
 			$ConnectionORM = new ConnectionORM();
 			$q = $ConnectionORM->getConnect()->Baremo
-			->select("*")->fetch();
+			->select("*")->where("Estatus=?",1)->fetch();
 			return $q; 	
 		}		
-		function calcularOferta($Distancia, $QueOcurre, $Neumaticos, $Situacion, $timeOpen) {
+		function calcularOferta($Distancia, $IdAveria, $Neumaticos, $IdCondicionLugar, $timeOpen) {
 			$baremo = $this->datosBaremo();
 			$enganche = $baremo['Enganche'];
 			$kilometraje = $Distancia * $baremo['KM'];
 			$weekendFactor = $this->WeekendFactor($timeOpen, $baremo);
-			$problemaAjuste = $this->ProblemaFactor($QueOcurre, $Neumaticos, $baremo) * $enganche;
+			$problemaAjuste = $this->AveriaFactor($IdAveria, $Neumaticos) * $enganche;
 
-			$situacionAjuste = $this->SituacionFactor($Situacion, $baremo) * $enganche;
+			$situacionAjuste = $this->SituacionFactor($IdCondicionLugar, $baremo) * $enganche;
 			$horaFactor = $this->HorarioFactor($timeOpen, $baremo);
 
 			$precio = ($enganche + $kilometraje + $problemaAjuste +$situacionAjuste) * $weekendFactor * $horaFactor;
@@ -26,28 +26,34 @@
 		//------------------------------
 		//Calculando Factor Que ocurre.
 		//------------------------------
-		function ProblemaFactor($QueOcurre, $Neumaticos, $baremo) {
-			switch ($QueOcurre) {
+		function AveriaFactor($IdAveria, $Neumaticos) {
+			$Averias = new Averias();
+			$datos_averia = $Averias->getAveriasInfo($IdAveria);		
+			
+			switch ($datos_averia['IdAveria']) {				
 
-				case "Encunetado":
-					return $baremo[Encunetado];
 
-				case "Volante/Palanca trabada":
-					return $baremo["Caja"];
-
-				case "Neumático espichado":
-					$Cambios = 0;
+				case "3":
+					$Cambios = 0;	
 					for ($n = 0; $n < 4; $n++) {
 						if ($Neumaticos[$n] === '1') {
 							$Cambios++;
 						}
 					}
-					$Cambio = "Cambio" . $Cambios;
-					$factor = ($Cambios === 0) ? 0 : $baremo[$Cambio];
-					return $factor;
+					if($Cambios == 0){
+						return $datos_averia['FactorGeneral'];
+					}elseif($Cambios == 1){
+						return $datos_averia['Factor1'];
+					}elseif($Cambios == 2){
+						return $datos_averia['Factor2'];
+					}elseif($Cambios == 3){
+						return $datos_averia['Factor3'];
+					}else{
+						return $datos_averia['Factor4'];
+					}
 
-				default :
-					return 0;
+				default :			
+					return $datos_averia['FactorGeneral'];
 			}
 		}
 
@@ -66,17 +72,12 @@
 		//------------------------------
 		//Calculando factor por situacion.
 		//------------------------------
-		function SituacionFactor($Situacion, $baremo) {
-			switch ($Situacion) {
-				case 'Atascado en barro o arena.':
-					return $baremo['Atasco'];
-
-				case 'Estacionamiento techado o sótano':
-					return $baremo['Sotano'];
-
-				default:
-					return 0;
-			}
+		function SituacionFactor($IdCondicionLugar, $baremo) {
+			$CondicionLugar = new CondicionLugar();
+			$datos_condicion = $CondicionLugar->getCondicionLugarInfo($IdCondicionLugar);
+			$datos_condicion['Factor'];
+			return $datos_condicion['Factor'];
+		
 		}
 
 		//------------------------------
