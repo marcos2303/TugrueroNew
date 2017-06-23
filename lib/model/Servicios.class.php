@@ -105,11 +105,29 @@
 		function getServiciosInfo($values){
 			$ConnectionORM = new ConnectionORM();
 			$q = $ConnectionORM->getConnect()->Servicios
-			->select("*")
+			->select("
+				Servicios.IdServicio,Servicios.IdEstatus,Servicios.CodigoServicio,Servicios.IdAplicacion,Servicios.IdServicioTipo,
+				Servicios.LatitudOrigen,Servicios.LongitudOrigen,Servicios.IdEstadoOrigen,Servicios.DireccionOrigen,Servicios.DireccionOrigenDetallada,
+				Servicios.LatitudDestino,Servicios.LongitudDestino,Servicios.IdEstadoDestino,Servicios.DireccionDestino,Servicios.DireccionDestinoDetallada,
+				Servicios.Agendado,Servicios.FechaAgendado,Servicios.IdAveria,Servicios.AveriaDetalle,Servicios.IdCondicionLugar,Servicios.CondicionDetalle,Servicios.KM,Servicios.Inicio,Servicios.Fin,Servicios.Inicio,Servicios.Fin,Servicios.Observacion,Servicios.UltimaActCliente,Servicios.UltimaActGruero,
+				c.Nombres, c.Apellidos,c.Cedula,c.Placa,c.IdMarca, c.Modelo,c.Color,c.Anio,c.Celular,
+				g.IdGrua,g.IdProveedor,g.Nombres as NombresGruero,g.Apellidos as ApellidosGruero,g2.Placa as PlacaGruero,
+				g2.IdGruaTipo  as IdGruaTipo,g2.IdMarca  as IdMarcaGruero,g2.Modelo as ModeloGruero,g2.Color as ColorGruero,g2.Anio as AnioGruero,g2.Celular as CelularGruero,g2.Cedula as CedulaGruero,g2.Latitud as LatitudGruero,g2.Longitud as LongitudGruero,
+				p.PrecioModificado,p.PrecioSIvaBaremo,p.PrecioCIvaBaremo,p.PrecioSIvaModificado,p.PrecioCIvaModificado,p.IdUsuarioPermiso
+				")
 			->join("ServiciosClientes","LEFT JOIN ServiciosClientes c on c.IdServicio = Servicios.IdServicio")
 			->join("ServiciosPrecios","LEFT JOIN ServiciosPrecios p on p.IdServicio = Servicios.IdServicio")
 			->join("ServiciosGruas","LEFT JOIN ServiciosGruas g on g.IdServicio = Servicios.IdServicio")
-			->where("Servicios.IdServicio=?",$values['IdServicio']);
+			->join("Gruas","LEFT JOIN Gruas g2 on g2.IdGrua = g.IdGrua")
+			->join("Usuarios","LEFT JOIN Usuarios u on u.IdUsuario = Servicios.IdUsuario")
+			->join("Aplicaciones","LEFT JOIN Aplicaciones ap on ap.IdAplicacion = Servicios.IdAplicacion")
+			->join("Averias","LEFT JOIN Averias av on av.IdAveria = Servicios.IdAveria")
+			->join("CondicionLugar","LEFT JOIN CondicionLugar cl on cl.IdCondicionLugar = Servicios.IdCondicionLugar")
+			->join("Estados","LEFT JOIN Estados e on e.IdEstado = Servicios.IdEstadoOrigen")
+			->join("Estados","LEFT JOIN Estados e2 on e2.IdEstado = Servicios.IdEstadoDestino")
+			->where("Servicios.IdServicio=?",$values['IdServicio'])
+			->fetch();
+			//echo $q;die;
 			return $q; 	
 		}
 	}
