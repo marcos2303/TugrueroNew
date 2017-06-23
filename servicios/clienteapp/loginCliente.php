@@ -33,9 +33,10 @@ if($datos_poliza){
 				"Color"=> $datos_poliza['Color'],
 				"Anio"=> $datos_poliza['Anio'],
 				"Serial"=> $datos_poliza['Serial'],
+				"IdPoliza"=> $datos_poliza['IdPoliza'],
 				"IdSeguro"=> $datos_poliza['IdSeguro'],
 				"NumPoliza"=> $datos_poliza['NumPoliza'],
-				"DireccionEDO"=> $datos_poliza['DireccionEDO'],
+				"IdEstado"=> $datos_poliza['IdEstado'],
 				"Celular"=> $datos_poliza['Celular']
 				);	
 		}

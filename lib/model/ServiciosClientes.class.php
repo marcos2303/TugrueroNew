@@ -48,7 +48,7 @@
 					'Apellidos' => $values['Apellidos'],
 					'Cedula' => $values['Cedula'],
 					'Placa' => $values['Placa'],
-					'Marca' => $values['Marca'],
+					'IdMarca' => $values['IdMarca'],
 					'Modelo' => $values['Modelo'],
 					'Color' => $values['Color'],
 					'Anio' => $values['Anio'],
@@ -61,8 +61,21 @@
 			$q = $ConnectionORM->getConnect()->ServiciosClientes()->insert($array);
 			return $q;
 		}
-		function updateServiciosClientes(){
+		function updateServiciosClientes($values){
 			
+			
+			$array = array();
+			if(count($values)>0){
+				foreach($values as $key => $val){
+					if(strlen($val)>0){
+						$array[$key] = $val;
+					}
+				}
+			}
+			$ConnectionORM= new ConnectionORM();
+			$q = $ConnectionORM->getConnect()->ServiciosClientes("IdServicio", $values['IdServicio'])->update($array);
+			return $q;
+
 		}
 		function deleteServiciosClientes(){
 			

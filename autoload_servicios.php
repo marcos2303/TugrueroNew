@@ -57,3 +57,4 @@ include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Baremo.class.php")
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Averias.class.php");
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/CondicionLugar.class.php");
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Polizas.class.php");
+include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Gruas.class.php");

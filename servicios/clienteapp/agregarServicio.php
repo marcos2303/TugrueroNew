@@ -20,7 +20,7 @@ $values['LatitudOrigen']  = '10.2131868';
 $values['LongitudOrigen']  = '-67.8862887';
 $values['LatitudDestino']  = '10.212626514872';
 $values['LongitudDestino']  = '-67.8864110297';
-
+$values['IdEstatus']  = '1';
 if(!isset($values['Inicio']) or $values['Inicio']==''){
 	$values['Inicio'] = date('Y-m-d h:i:s');
 }

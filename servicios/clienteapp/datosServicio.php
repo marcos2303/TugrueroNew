@@ -8,7 +8,7 @@ include('../../autoload_servicios.php');
 /************* Clases a utilizar *******************/
 $Servicios = new Servicios();
 /****************Seteo y comprobacion de valores*******************/
-$values['IdServicio'] = 50;
+$values['IdServicio'] = 60;
 $response = array("Error"=>1,"MensajeError"=>"Servicio no existe","MensajeSuccess"=> '',"IdServicio"=>"");
 $datos = $Servicios->getServiciosInfo($values);
 if($datos){

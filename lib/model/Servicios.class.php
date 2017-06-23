@@ -32,7 +32,7 @@
 				'CodigoServicio' => null,
 				'IdAplicacion' => $values['IdAplicacion'],
 				'IdServicioTipo' => $values['IdServicioTipo'],
-				'EstatusServicio' => $values['EstatusServicio'],
+				'IdEstatus' => $values['IdEstatus'],
 				'Agendado' => $values['Agendado'],
 				'FechaAgendado' => $values['FechaAgendado'],
 				'IdUsuario' => $values['IdUsuario'],
@@ -42,19 +42,19 @@
 				'CondicionDetalle' => $values['CondicionDetalle'],
 				'LatitudOrigen' => $values['LatitudOrigen'],
 				'LongitudOrigen' => $values['LongitudOrigen'],
-				'EstadoOrigen' => $values['EstadoOrigen'],
+				'IdEstadoOrigen' => $values['IdEstadoOrigen'],
 				'DireccionOrigen' => $values['DireccionOrigen'],
 				'DireccionOrigenDetallada' => $values['DireccionOrigenDetallada'],
 				'LatitudDestino' => $values['LatitudDestino'],
 				'LongitudDestino' => $values['LongitudDestino'],
-				'EstadoDestino' => $values['EstadoDestino'],
+				'IdEstadoDestino' => $values['IdEstadoDestino'],
 				'DireccionDestino' => $values['DireccionDestino'],
 				'DireccionDestinoDetallada' => $values['DireccionDestinoDetallada'],
 				'KM' => $values['KM'],
 				'Inicio' => date('Y-m-d h:i:s'),
 				'Fin' => null,
 				'Observacion' => $values['Observacion'],
-				'UlimaActCliente' => date('Y-m-d h:i:s'),
+				'UltimaActCliente' => date('Y-m-d h:i:s'),
 				'UltimaActGruero' => null
 			);
 			
@@ -69,37 +69,19 @@
 			$q = $ConnectionORM->getConnect()->Servicios("IdServicio", $values['IdServicio'])->delete();
 		}
 		function updateServicios($values){
-		$array = array(
-				'CodigoServicio' => $values['CodigoServicio'],
-				'IdAplicacion' => $values['IdAplicacion'],
-				'IdServicioTipo' => $values['IdServicioTipo'],
-				'EstatusServicio' => $values['EstatusServicio'],
-				'Agendado' => $values['Agendado'],
-				'FechaAgendado' => $values['FechaAgendado'],
-				'IdUsuario' => $values['IdUsuario'],
-				'IdAveria' => $values['IdAveria'],
-				'AveriaDetalle' => $values['AveriaDetalle'],
-				'IdCondicionLugar' => $values['IdCondicionLugar'],
-				'CondicionDetalle' => $values['CondicionDetalle'],
-				'LatitudOrigen' => $values['LatitudOrigen'],
-				'LongitudOrigen' => $values['LongitudOrigen'],
-				'EstadoOrigen' => $values['EstadoOrigen'],
-				'DireccionOrigen' => $values['DireccionOrigen'],
-				'DireccionOrigenDetallada' => $values['DireccionOrigenDetallada'],
-				'LatitudDestino' => $values['LatitudDestino'],
-				'LongitudDestino' => $values['LongitudDestino'],
-				'EstadoDestino' => $values['EstadoDestino'],
-				'DireccionDestino' => $values['DireccionDestino'],
-				'DireccionDestinoDetallada' => $values['DireccionDestinoDetallada'],
-				'KM' => $values['KM'],
-				'Inicio' => $values['Inicio'],
-				'Fin' => $values['Fin'],
-				'Observacion' => $values['Observacion'],
-				'UlimaActCliente' => $values['UlimaActCliente'],
-				'UltimaActGruero' => $values['UlimaActCliente'],
-			);
+			
+			
+			$array = array();
+			if(count($values)>0){
+				foreach($values as $key => $val){
+					if(strlen($val)>0){
+						$array[$key] = $val;
+					}
+				}
+			}
 			$ConnectionORM= new ConnectionORM();
 			$q = $ConnectionORM->getConnect()->Servicios("IdServicio", $values['IdServicio'])->update($array);
+			return $q;
 
 		}
 		function getServiciosInfo($values){
