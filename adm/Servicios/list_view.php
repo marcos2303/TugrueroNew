@@ -1,38 +1,9 @@
-<?php include('../../view_header_app.php')?>
-<?php include('../menu.php')?>
-<div class="container">
-	<h1 class="text-center big_title">Pólizas</h1>
-	<table id="example" class="table table-striped table-bordered table-responsive" width="100%" cellspacing="0">
-			<thead>
-				<tr>
-					<th>IdPoliza</th>
-                    <th>Seguro</th>
-                    <th>Número póliza</th>
-                    <th>Placa</th>
-					<th>Cédula</th>
-					<th>Nombre y apellido</th>
-					<th>Vencimiento</th>				
-					<th>Detalle</th>
-				</tr>
-			</thead>
-			<tfoot>
-				<tr>
-					<th><input id="idPoliza" name="idPoliza" type="text"></th>
-                    <th><input id="Seguro" name="Seguro" type="text"></th>
-                    <th><input id="NumPoliza" name="NumPoliza" type="text"></th>
-                    <th><input id="Placa" name="Placa" type="text"></th>
-					<th><input id="Cedula" name="Cedula" type="text"></th>
-					<th><input id="NombreApellido" name="NombreApellido" type="text"></th>
-					<th><input id="Vencimiento" name="Vencimiento" type="text"></th>				
-					<th>Detalle</th>
-				</tr>
-			</tfoot>
-		</table>
-	<a class="btn btn-default"  href="<?php echo full_url."/adm/solicitud/index.php";?>"><i class="fa fa-arrow-left  fa-pull-left fa-border"></i> Regresar</a>
-
-	<a class="btn btn-default"  href="<?php echo full_url."/adm/Polizas/index.php?action=new"?>"><i class="fa fa-file-o fa-pull-left fa-border"></i>Agregar</a>
+<?php include('../../view_header_admin.php')?>
+<div class="container-fluid">
+	<h1 class="">Servicios</h1>
+	<a class="btn btn-default"  href="<?php echo full_url."/adm/Servicios/index.php?action=new"?>"><i class="fa fa-plus-circle"></i> Agregar</a>
 </div>
-	<?php include('../../view_footer_solicitud.php')?>
+	<?php include('../../view_footer_admin.php')?>
 <script>
 
 	
