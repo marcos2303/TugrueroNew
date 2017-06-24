@@ -3,36 +3,42 @@
 }
 #custom-bootstrap-menu.navbar-default {
     /*font-size: 14px;*/
-    background-color: #ccc;
+    background-color: #fff;
     border-width: 1px;
     border-radius: 4px;
 }
 #custom-bootstrap-menu.navbar-default .navbar-nav>li>a {
     color: #000;
-    background-color: #ccc;
+    background-color: #fff;
 }
 #custom-bootstrap-menu.navbar-default .navbar-nav>li>a:hover,
 #custom-bootstrap-menu.navbar-default .navbar-nav>li>a:focus {
     color: #000;
-    background-color: #ccc;
+    background-color: #fff;
 }
 #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a,
 #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:hover,
 #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:focus {
     color: #000;
-    background-color: #ccc;
+    background-color: #fff;
 }
 #custom-bootstrap-menu.navbar-default .navbar-toggle {
-    border-color: #ccc;
+    border-color: #fff;
 }
 #custom-bootstrap-menu.navbar-default .navbar-toggle:hover,
 #custom-bootstrap-menu.navbar-default .navbar-toggle:focus {
-    background-color: #ccc;
+    background-color: #fff;
 }
 #custom-bootstrap-menu.navbar-default .navbar-toggle .icon-bar {
-    background-color: #ccc;
+    background-color: #fff;
 }
 #custom-bootstrap-menu.navbar-default .navbar-toggle:hover .icon-bar,
 #custom-bootstrap-menu.navbar-default .navbar-toggle:focus .icon-bar {
-    background-color: #ccc;
+    background-color: #fff;
+}
+.wrapper{
+    margin-top: -20px !important;
+}
+.main-sidebar{
+     margin-top: -50px !important;
 }
