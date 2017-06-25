@@ -70,7 +70,7 @@ var link_servidor = Servidor + Proyecto;
             
 	var parametros = {
 		"popup": "popupCargando",
-		"imagen": "Logon",
+		"imagen": "Conectando",
 		"mensaje": "Cargando",
 		"displaybarra": ['block'],
 		"displaysBotones": ['none', 'none', 'none', 'none'],
@@ -91,11 +91,16 @@ var link_servidor = Servidor + Proyecto;
 
             jqxhr.done(function (data) {
                 closePops();
-		if (extra === undefined) {
-			exito(data);
-		} else {
-			exito(data, extra);
-		}
+                if(data.Error == "1"){
+                    MensajeErrorJson(data);
+                }else{
+                    if (extra === undefined) {
+                            exito(data);
+                    } else {
+                            exito(data, extra);
+                    }   
+                }
+
             });
 
             jqxhr.fail(function (jqXHR, textStatus) {
@@ -131,9 +136,22 @@ var link_servidor = Servidor + Proyecto;
 	};
 	genericPop(parametros);
     }
-    
     function MensajeExtra(){
-        alert("extra");
+
+    }
+    
+    function MensajeErrorJson(data){
+	var parametros = {
+		"popup": "popupError",
+		"imagen": "Error",
+		"mensaje": "" + data.MensajeError,
+		"displaybarra": ['none'],
+		"displaysBotones": ['none', 'none', 'none', 'inline'],
+		"text": ['', '', '', 'Aceptar'],
+		"onClick": ["", "", "", "closePops()"]
+
+	};
+	genericPop(parametros);
     }
 
     function genericPop(parametros) {
