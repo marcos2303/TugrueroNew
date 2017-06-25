@@ -67,9 +67,9 @@ $values = array_merge($values,$_FILES);
 	}	
 	function executeListJson($values)
 	{
-		$Polizas = new Polizas();
-		$list_json = $Polizas ->getPolizasList($values);
-		$list_json_cuenta = $Polizas ->getCountPolizasList($values);
+		$Proveedores = new Proveedores();
+		$list_json = $Proveedores ->getList($values);
+		$list_json_cuenta = $Proveedores ->getCountList($values);
 		$array_json = array();
 		$array_json['recordsTotal'] = $list_json_cuenta;
 		$array_json['recordsFiltered'] = $list_json_cuenta;
@@ -77,21 +77,16 @@ $values = array_merge($values,$_FILES);
 		{
 			foreach ($list_json as $list) 
 			{
-				$EstatusPoliza = null;
-				if($list['dias_vencimiento'] > 0)
-				{
-					$EstatusPoliza = 'Vencido';
-				}
-				$idPoliza = $list['idPoliza'];
+
+				$IdProveedor = $list['IdProveedor'];
 				$array_json['data'][] = array(
-					"idPoliza" => $idPoliza,
-					"Seguro" => $list['Seguro'],
-					"NumPoliza" => $list['NumPoliza'],
-					"Placa" => $list['Placa'],
-					"Cedula" => $list['Cedula'],
-					"EstatusPoliza" => $EstatusPoliza,
-                    "NombreApellido" => $list['Nombre'].' '.$list['Apellido'],
-                    "Vencimiento" => $list['Vencimiento'],
+					"IdProveedor" => $IdProveedor,
+                    "Identificacion" => $list['Identificacion'],
+					"Nombres" => $list['Nombres'],
+					"Apellidos" => $list['Apellidos'],
+					"NombreTipoProveedor" => $list['NombreTipoProveedor'],
+					"NombreEstado" => $list['NombreEstado'],
+                    "Ciudad" => $list['NombreEstado'],
 					"actions" => 
                                        '<form method="POST" action = "'.full_url.'/adm/Polizas/index.php" >'
                                        .'<input type="hidden" name="action" value="edit">  '
@@ -106,7 +101,15 @@ $values = array_merge($values,$_FILES);
 		}else{
 			$array_json['recordsTotal'] = 0;
 			$array_json['recordsFiltered'] = 0;
-			$array_json['data'][0] = array("idPoliza"=>null,"Seguro"=>"","NumPoliza"=>"","Placa"=>"","Cedula"=>"","EstatusPoliza" => null,"NombreApellido"=>"","Vencimiento"=>"","actions"=>"");
+			$array_json['data'][0] = array(
+            "IdProveedor"=>null,
+            "Identificacion"=>"",
+            "Nombres"=>"",
+            "Apellidos"=>"",
+            "NombreProveedorTipo"=>"",
+            "NombreEstado" => null,
+            "Ciudad"=>"",
+            "actions"=>"");
 		}
 		echo json_encode($array_json);die;
 		

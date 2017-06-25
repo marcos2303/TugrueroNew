@@ -1,6 +1,6 @@
 <?php include('../../view_header_admin.php');         ?>
 
-<form action="index.php">
+<form action="" name="DataForm" id="DataForm">
 	<div class="box box-primary">
         <div class="box-header with-border">
 			<h1 class="box-title">Grueros</h1>
@@ -10,103 +10,89 @@
         </div>
         <div class="box-body">
 			<div class="row">
-				<div class="col-md-3">
+				<div class="col-sm-3">
 					<div class="form-group">
 						<label>Empresa o independiente</label>
-						<select class="form-control select2" style="width: 100%;">
-						  <option selected="selected">Alabama</option>
-						  <option>Alaska</option>
-						  <option>California</option>
-						  <option>Delaware</option>
-						  <option>Tennessee</option>
-						  <option>Texas</option>
-						  <option>Washington</option>
+						<select class="form-control select2" id="IdProveedorTipo" name="IdProveedorTipo" style="width: 100%;">
 						</select>
 					</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-sm-3">
 					<div class="form-group">
 						<label>CI o Rif</label>
-						<input class="form-control" type="text" placeholder="">
+						<input class="form-control" id="Identificacion" name="Identificacion" type="text" placeholder="">
 					</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-sm-3">
 					<div class="form-group">
 						<label>Nombres</label>
-						<input class="form-control" type="text" placeholder="">
+						<input class="form-control" id="Nombres" name="Nombres" type="text" placeholder="">
 					</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-sm-3">
 					<div class="form-group">
 						<label>Apellidos</label>
-						<input class="form-control" type="text" placeholder="">
+						<input class="form-control" id="Apellidos" name="Apellidos" type="text" placeholder="">
 					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-3">
+				<div class="col-sm-3">
 					<div class="form-group">
 						<label>Estado</label>
-						<select class="form-control" style="width: 100%;">
-						  <option selected="selected">Alabama</option>
-						  <option>Alaska</option>
-						  <option>California</option>
-						  <option>Delaware</option>
-						  <option>Tennessee</option>
-						  <option>Texas</option>
-						  <option>Washington</option>
+						<select class="form-control" id="IdEstado" name="IdEstado" style="width: 100%;">
 						</select>
 					</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-sm-3">
 					<div class="form-group">
 						<label>Ciudad</label>
-						<input class="form-control" type="text" placeholder="">
+						<input class="form-control" name="Ciudad" id="Ciudad" type="text" placeholder="">
 					</div>
 				</div>
-				<div class="col-md-6">
+				<div class="col-sm-6">
 					<div class="form-group">
 						<label>Zona</label>
-						<input class="form-control" type="text" placeholder="">
+						<input class="form-control" name="Zona" id="Zona" type="text" placeholder="">
 					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-3">
+				<div class="col-sm-3">
 					<div class="form-group">
 						<label>Celular 1</label>
-						<input class="form-control" type="text" placeholder="">
+						<input class="form-control" name="Celular1" id="Celular1" type="text" placeholder="">
 					</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-sm-3">
 					<div class="form-group">
 						<label>Celular 2</label>
-						<input class="form-control" type="text" placeholder="">
+						<input class="form-control" name="Celular2" id="Celular2" type="text" placeholder="">
 					</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-sm-3">
 					<div class="form-group">
 						<label>Celular 3</label>
-						<input class="form-control" type="text" placeholder="">
+						<input class="form-control" name="Celular3" id="Celular3" type="text" placeholder="">
 					</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-sm-3">
 					<div class="form-group">
 						<label>Clave especial</label>
-						<input class="form-control" type="text" placeholder="">
+						<input class="form-control" name="ClaveEspecial" id="ClaveEspecial" type="text" placeholder="">
 					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-sm-12">
                     <div class="btn-group">				
 						<button type="Regresar" class="btn btn-default"><i class="fa fa-arrow-circle-left"></i> Regresar</button>
-						<button type="Aceptar" class="btn btn-primary"><i class="fa fa-save"></i> Aceptar</button>                    
+						<button type="button" id="EnviarProveedor" class="btn btn-primary"><i class="fa fa-save"></i> Aceptar</button>                    
 					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-8 col-md-offset-4">
+				<div class="col-sm-8 col-sm-offset-4">
                     <div class="btn-group">				
 						<button type="button" class="btn btn-default btn-md"><i class="fa fa-plus-circle"></i> Agregar de grúas</button>
 						<button type="button" class="btn btn-default btn-md"><i class="fa fa-list"></i> Listado de grúas </button>
@@ -124,7 +110,7 @@
         <div class="box-body">
 			
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-sm-4">
 					<div class="form-group">
 						<label>Placa</label>
 						<div class="input-group">
@@ -137,58 +123,44 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-2">
+				<div class="col-sm-2">
 					<div class="form-group">
 						<label>Tipo de grúa</label>
-							<select class="form-control" style="width: 100%;">
-							  <option selected="selected">Alabama</option>
-							  <option>Alaska</option>
-							  <option>California</option>
-							  <option>Delaware</option>
-							  <option>Tennessee</option>
-							  <option>Texas</option>
-							  <option>Washington</option>
-							</select>
+							<select class="form-control" id="IdGruaTipo" name="IdGruaTipo" style="width: 100%;"></select>
 					</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-sm-3">
 					<div class="form-group">
 						<label>Marca</label>
 
-						  <input class="form-control" type="text">
+						  <input class="form-control" type="text" id="Marca" name="Marca">
 
 					</div>
 				</div>
-				<div class="col-md-2">
+				<div class="col-sm-2">
 					<div class="form-group">
 						<label>Modelo</label>
-						  <input class="form-control" type="text">
+						  <input class="form-control" type="text" id="Modelo" name="Modelo">
 					</div>
 				</div>
-				<div class="col-md-2">
+				<div class="col-sm-2">
 					<div class="form-group">
 						<label>Año</label>
-							<select class="form-control" style="width: 100%;">
-							  <option selected="selected">Alabama</option>
-							  <option>Alaska</option>
-							  <option>California</option>
-							  <option>Delaware</option>
-							  <option>Tennessee</option>
-							  <option>Texas</option>
-							  <option>Washington</option>
+							<select class="form-control" style="width: 100%;" id="Anio" name="Anio">
+							  <option selected="selected" value="2017">2017</option>
 							</select>
 					</div>
 				</div>
-				<div class="col-md-2">
+				<div class="col-sm-2">
 					<div class="form-group">
 						<label>Clave</label>
 						  <input class="form-control" type="text">
 					</div>
 				</div>
-				<div class="col-md-1">
+				<div class="col-sm-1">
 					<div class="form-group">
 						<label>&nbsp;</label>
-						<button type="Aceptar" class="btn btn-primary form-control"><i class="fa fa-save"></i> Aceptar</button>                    
+						<button type="button" id="EnviarGrua" class="btn btn-primary form-control"><i class="fa fa-save"></i> Aceptar</button>                    
 
 					</div>
 				</div>
@@ -197,8 +169,33 @@
 
 	</div>	
 </form>
-	
-
-
-
 <?php include('../../view_footer_admin.php')?>
+<script  type="text/javascript">
+
+$(document).ready(function(){
+    
+    
+    listaProveedoresTipo();
+    listaEstados();
+    listaGruasTipos();
+    
+    $('#EnviarProveedor').click(function(){
+    var DataForm = $('#DataForm').serializeArray();
+    var parametros = {};
+        $.each(DataForm,
+        function(i, v) {
+            parametros[v.name] = v.value;
+        });
+        AjaxCall("servicios/adminapp/agregarProveedor.php", parametros, MensajeSuccess, MensajeError,MensajeExtra);
+
+        
+    });
+    
+    
+    
+    $('#EnviarGrua').click(function(){
+        alert(1);
+    });    
+});
+
+</script>

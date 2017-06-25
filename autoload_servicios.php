@@ -58,3 +58,7 @@ include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Averias.class.php"
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/CondicionLugar.class.php");
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Polizas.class.php");
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Gruas.class.php");
+include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Proveedores.class.php");
+include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/ProveedoresTipos.class.php");
+include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Estados.class.php");
+include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/GruasTipos.class.php");
