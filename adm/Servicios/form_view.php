@@ -7,14 +7,8 @@
             
         </aside>
         <div class="content-wrapper">
-            <a href="#" class="btn btn-default pull-right" data-toggle="push-menu" role="button"><i class="fa fa-map-marker"></i> Mapa</a>
-            
-            
-            
-            
-            
-            
-            
+            <a href="#" class="btn btn-default" data-toggle="push-menu" role="button"><i class="fa fa-map-marker"></i> Mapa</a>
+
             <a class="btn btn-default"  href="<?php echo full_url."/adm/Servicios/index.php";?>"><i class="fa fa-arrow-circle-left"></i> Regresar</a>
 
         </div>

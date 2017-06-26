@@ -50,7 +50,7 @@
             <li><a href="#">Separated link</a></li>
           </ul>
         </li>
-        <li><a href="#"> <i class="fa fa-power-off"></i> Salir</a></li>
+        <li><a href="<?php echo full_url;?>/adm/index.php?action=logout"> <i class="fa fa-power-off"></i> Salir</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
