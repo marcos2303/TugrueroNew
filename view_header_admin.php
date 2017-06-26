@@ -33,7 +33,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a class="" href="<?php echo full_url;?>/adm/Servicios/index.php"> <i class="fa fa-automobile"></i> Servicios y monitoreo</a></li>
-        <li><a class="" href="<?php echo full_url;?>/adm/Grueros/index.php"> <i class="fa fa-truck"></i> Grueros</a></li>
+        <li><a class="" href="<?php echo full_url;?>/adm/Proveedores/index.php"> <i class="fa fa-truck"></i> Grueros</a></li>
         <li><a class="" href="<?php echo full_url;?>/adm/Administracion/index.php"> <i class="fa fa-pie-chart"></i> Administración</a></li>
         <li><a class="" href="<?php echo full_url;?>/adm/Polizas/index.php"> <i class="fa fa-hospital-o"></i> Pólizas</a></li>
         <li><a class="" href="<?php echo full_url;?>/adm/Planes/index.php"> <i class="fa fa-envelope"></i> Planes</a></li>

@@ -67,48 +67,38 @@ var link_servidor = Servidor + Proyecto;
 
     function AjaxCall(URL, parametros, exito, fallo, extra) {
             
-            
-	var parametros = {
-		"popup": "popupCargando",
-		"imagen": "Conectando",
-		"mensaje": "Cargando",
-		"displaybarra": ['block'],
-		"displaysBotones": ['none', 'none', 'none', 'none'],
-		"text": ['', '', '', ''],
-		"onClick": ["", "", "", ""]
-
-	};
-	genericPop(parametros);
-            
-            
-            jqxhr = $.ajax({
+            var data;
+           
+            var jqxhr = $.ajax({
                     url:  "http://localhost/TugrueroNew/" + URL,
                     type: "POST",
                     data: JSON.stringify(parametros),
-                    dataType: "JSON",
+                    dataType: "json",
                     timeout: 20000,
-            });
-
-            jqxhr.done(function (data) {
-                closePops();
-                if(data.Error == "1"){
-                    MensajeErrorJson(data);
-                }else{
-                    if (extra === undefined) {
-                            exito(data);
-                    } else {
-                            exito(data, extra);
-                    }   
-                }
-
-            });
-
-            jqxhr.fail(function (jqXHR, textStatus) {
-                closePops();
-		if (textStatus !== "abort") {
-			fallo(jqXHR);
-		}
-            });
+                    global: false,
+                    async:false,
+                    success: function(data) {
+                        if(data.Error == "1"){
+                            MensajeErrorJson(data);
+                        }else{
+                            if (extra === undefined) {
+                                    exito(data);
+                            } else {
+                                    exito(data, extra);
+                            }   
+                        }
+                        return data;
+                    },
+                    error: function(jqXHR, textStatus) { 
+                        if (textStatus !== "abort") {
+                                fallo(jqXHR);
+                        }
+                    }
+                    
+            }).responseJSON;
+           
+        return jqxhr;
+              
     }
     function MensajeSuccess(data, extra){
 	var parametros = {
@@ -122,6 +112,7 @@ var link_servidor = Servidor + Proyecto;
 
 	};
 	genericPop(parametros);
+
     }
     function MensajeError(jqXHR){
 	var parametros = {

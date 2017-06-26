@@ -1,6 +1,7 @@
 <?php include('../../view_header_admin.php');         ?>
 
 <form action="" name="DataForm" id="DataForm">
+	<input type="text" id="IdProveedor" name="IdProveedor" value="<?php if(isset($values['IdProveedor']) and $values['IdProveedor']!='') echo $values['IdProveedor'];?>">
 	<div class="box box-primary">
         <div class="box-header with-border">
 			<h1 class="box-title">Grueros</h1>
@@ -103,6 +104,7 @@
 
         </div>
 	</div>
+</form>
 	<div class="box box-primary">
         <div class="box-header with-border">
           <h1 class="box-title">Agregar Grúa</h1>
@@ -168,26 +170,44 @@
         </div>
 
 	</div>	
-</form>
+
 <?php include('../../view_footer_admin.php')?>
 <script  type="text/javascript">
 
 $(document).ready(function(){
-    
-    
+	  
     listaProveedoresTipo();
     listaEstados();
     listaGruasTipos();
     
+	var parametros = {
+		IdProveedor : 50
+	};
+	var respuesta = AjaxCall("servicios/adminapp/datosProveedor.php", parametros, MensajeSuccess, MensajeError);
+	
+	
+	
     $('#EnviarProveedor').click(function(){
-    var DataForm = $('#DataForm').serializeArray();
-    var parametros = {};
+		var parametros = {};  
+		var DataForm = $('#DataForm').serializeArray();
+    
         $.each(DataForm,
         function(i, v) {
             parametros[v.name] = v.value;
         });
-        AjaxCall("servicios/adminapp/agregarProveedor.php", parametros, MensajeSuccess, MensajeError,MensajeExtra);
+		
+		if($("#IdProveedor").val()==''){
+			var respuesta = AjaxCall("servicios/adminapp/agregarProveedor.php", parametros, MensajeSuccess, MensajeError);
 
+		}else{
+			var respuesta = AjaxCall("servicios/adminapp/actualizarProveedor.php", parametros, MensajeSuccess, MensajeError);
+
+		}
+		
+		if(typeof(respuesta) !='undefined'){
+			$("#IdProveedor").val(respuesta.IdProveedor);
+		}
+		
         
     });
     

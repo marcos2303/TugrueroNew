@@ -50,6 +50,7 @@ define("image_url",full_url."/web/images/");
 /******************** definicion de clases *************/
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/notorm-master/NotORM.php");//se debe incluir una sola vez en todo el cms
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/ConnectionORM.class.php");
+include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Usuarios.class.php");
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Servicios.class.php");
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/ServiciosClientes.class.php");
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/ServiciosPrecios.class.php");

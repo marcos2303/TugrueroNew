@@ -132,7 +132,31 @@ class Proveedores{
 			$q = $ConnectionORM->getConnect()->Proveedores()->insert($array);	
 			$this->SetIdProveedor($ConnectionORM->getConnect()->Proveedores()->insert_id());
 			return $q;
-        }    
+        }
+		function updateProveedores($values){
+			
+			
+			$array = array();
+			if(count($values)>0){
+				foreach($values as $key => $val){
+					if(strlen($val)>0){
+						$array[$key] = $val;
+					}
+				}
+			}
+			$ConnectionORM= new ConnectionORM();
+			$q = $ConnectionORM->getConnect()->Proveedores("IdProveedor", $values['IdProveedor'])->update($array);
+			return $q;
+
+		}
+		function getProveedoresInfo($values){
+			$ConnectionORM = new ConnectionORM();
+			$q = $ConnectionORM->getConnect()->Proveedores
+			->select("*")
+			->where("IdProveedor=?",$values['IdProveedor'])
+            ->fetch();
+			return $q;
+		}
 
 }
 
