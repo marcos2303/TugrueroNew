@@ -1,10 +1,10 @@
 var Servidor = "http://localhost/";
 var Proyecto = "TugrueroNew/";
 var link_servidor = Servidor + Proyecto;
-        
-        
+
+
     function listaProveedoresTipo(IdProveedorTipo){
-        
+        $('#IdProveedorTipo').find('option').remove().end().append('<option value="">Seleccione...</option>');
         var selected = "";
         var jqxhr = $.get( link_servidor + "/servicios/adminapp/listaProveedoresTipo.php", function(datos) {
         })
@@ -14,17 +14,17 @@ var link_servidor = Servidor + Proyecto;
             if(typeof(IdProveedorTipo) != 'undefined'){
                 if(parseInt(IdProveedorTipo) === parseInt(item.IdProveedorTipo)){
                     selected = 'selected = "selected"';
-                }  
+                }
             }
               $("#IdProveedorTipo").append('<option value="'+ item.IdProveedorTipo +'" '+selected+'>' + item.Nombre + '</option>');
             });
         })
         .fail(function() {
             alert( "error" );
-        });  
+        });
     }
     function listaEstados(IdEstado){
-        
+        $('#IdEstado').find('option').remove().end().append('<option value="">Seleccione...</option>');
         var selected = "";
         var jqxhr = $.get( link_servidor + "/servicios/adminapp/listaEstados.php", function(datos) {
         })
@@ -34,17 +34,17 @@ var link_servidor = Servidor + Proyecto;
             if(typeof(IdEstado) != 'undefined'){
                 if(parseInt(IdEstado) === parseInt(item.IdEstado)){
                     selected = 'selected = "selected"';
-                }  
+                }
             }
-              $("#IdEstado").append('<option value="'+ item.IdEstado +'" '+selected+'>' + item.Nombre + '</option>');
+            $("#IdEstado").append('<option value="'+ item.IdEstado +'" '+selected+'>' + item.Nombre + '</option>');
             });
         })
         .fail(function() {
             alert( "error" );
-        });  
+        });
     }
     function listaGruasTipos(IdGruaTipo){
-        
+        $('#IdGruaTipo').find('option').remove().end().append('<option value="">Seleccione...</option>');
         var selected = "";
         var jqxhr = $.get( link_servidor + "/servicios/adminapp/listaGruasTipos.php", function(datos) {
         })
@@ -54,21 +54,54 @@ var link_servidor = Servidor + Proyecto;
             if(typeof(IdGruaTipo) != 'undefined'){
                 if(parseInt(IdGruaTipo) === parseInt(item.IdGruaTipo)){
                     selected = 'selected = "selected"';
-                }  
+                }
             }
               $("#IdGruaTipo").append('<option value="'+ item.IdGruaTipo +'" '+selected+'>' + item.Nombre + '</option>');
             });
         })
         .fail(function() {
             alert( "error" );
-        });  
+        });
     }
+    function listaMarcas(IdMarca){
+        $('#IdMarca').find('option').remove().end().append('<option value="">Seleccione...</option>');
+        var selected = "";
+        var jqxhr = $.get( link_servidor + "/servicios/adminapp/listaMarcas.php", function(datos) {
+        })
+        .done(function(datos) {
+            $.each(datos.data, function(i, item) {
+            selected = "";
+            if(typeof(IdMarca) != 'undefined'){
+                if(parseInt(IdMarca) === parseInt(item.IdMarca)){
+                    selected = 'selected = "selected"';
+                }
+            }
+              $("#IdMarca").append('<option value="'+ item.IdMarca +'" '+selected+'>' + item.Nombre + '</option>');
+            });
+        })
+        .fail(function() {
+            alert( "error" );
+        });
+    }
+    function convertiraAJson(DataForm){
+        var parametros = {};
 
+        $.each(DataForm,function(i, v) {
+            parametros[v.name] = v.value;
+        });
+        return parametros;
+    }
+    function convertiraAInputs(DataJson){
 
+        $.each(DataJson,function(i, v) {
+            $("#" + i).val(v);
+        });
+        return DataJson;
+    }
     function AjaxCall(URL, parametros, exito, fallo, extra) {
-            
+
             var data;
-           
+
             var jqxhr = $.ajax({
                     url:  "http://localhost/TugrueroNew/" + URL,
                     type: "POST",
@@ -81,26 +114,28 @@ var link_servidor = Servidor + Proyecto;
                         if(data.Error == "1"){
                             MensajeErrorJson(data);
                         }else{
-                            if (extra === undefined) {
-                                    exito(data);
-                            } else {
-                                    exito(data, extra);
-                            }   
+                            if (exito === undefined || exito =="") {
+
+                            }else{
+                                exito(data);
+                            }
+
+
                         }
                         return data;
                     },
-                    error: function(jqXHR, textStatus) { 
+                    error: function(jqXHR, textStatus) {
                         if (textStatus !== "abort") {
                                 fallo(jqXHR);
                         }
                     }
-                    
+
             }).responseJSON;
-           
+
         return jqxhr;
-              
+
     }
-    function MensajeSuccess(data, extra){
+    function agregarSuccess(data, extra){
 	var parametros = {
 		"popup": "popupSuccess",
 		"imagen": "Logon",
@@ -111,8 +146,52 @@ var link_servidor = Servidor + Proyecto;
 		"onClick": ["", "", "", "closePops()"]
 
 	};
-	genericPop(parametros);
 
+        if(data.MensajeError !=''){
+            parametros.mensaje = data.MensajeError;
+            genericPop(parametros);
+        }
+        if(data.Agregado =="1"){
+           genericPop(parametros);
+        }
+
+    }
+
+    function actualizarSuccess(data, extra){
+	var parametros = {
+		"popup": "popupSuccess",
+		"imagen": "Logon",
+		"mensaje": "<h4>Actualizado satisfactoriamente.</h4>",
+		"displaybarra": ['none'],
+		"displaysBotones": ['none', 'none', 'none', 'inline'],
+		"text": ['', '', '', 'Aceptar'],
+		"onClick": ["", "", "", "closePops()"]
+
+	};
+        if(data.MensajeError !=''){
+            parametros.mensaje = data.MensajeError;
+            genericPop(parametros);
+        }
+        if(data.Actualizado =="1"){
+           genericPop(parametros);
+        }
+
+    }
+    function CargaSuccess(data, extra){
+	var parametros = {
+		"popup": "popupSuccess",
+		"imagen": "Logon",
+		"mensaje": "<h4>Actualizado satisfactoriamente.</h4>",
+		"displaybarra": ['none'],
+		"displaysBotones": ['none', 'none', 'none', 'inline'],
+		"text": ['', '', '', 'Aceptar'],
+		"onClick": ["", "", "", "closePops()"]
+
+	};
+        if(data.MensajeError !=''){
+            parametros.mensaje = data.MensajeError;
+            genericPop(parametros);
+        }
     }
     function MensajeError(jqXHR){
 	var parametros = {
@@ -130,7 +209,7 @@ var link_servidor = Servidor + Proyecto;
     function MensajeExtra(){
 
     }
-    
+
     function MensajeErrorJson(data){
 	var parametros = {
 		"popup": "popupError",
@@ -148,8 +227,8 @@ var link_servidor = Servidor + Proyecto;
     function genericPop(parametros) {
 
 	var pop = document.getElementById(parametros.popup); //Venatana padre
-	var imagen = pop.getElementsByTagName('img');
-	imagen[0].src = link_servidor + "/web/img_admin/SVGs/" + parametros.imagen + ".svg";
+
+
 	var mensaje = pop.getElementsByTagName('p');
 	var botones = pop.getElementsByTagName('button'); //[0]interno,[1]aceptar,[2]cancelar,[2]Conitnuar	var barra = pop.getElementsByClassName('progress');
         var barra = pop.getElementsByClassName('progress');
@@ -160,11 +239,15 @@ var link_servidor = Servidor + Proyecto;
 	if (!$("#" + parametros.popup).hasClass('in')) {
 		$("#" + parametros.popup).modal("show");
 	}
-        
-	$(imagen[0]).css('width', 'auto');
-	$(imagen[0]).css('height', 'auto');
-	$(imagen[0]).css('min-width', '100%');
-	$(imagen[0]).css('min-height', '100%');
+        if(parametros.imagen !='none'){
+            var imagen = pop.getElementsByTagName('img');
+            imagen[0].src = link_servidor + "/web/img_admin/SVGs/" + parametros.imagen + ".svg";
+            $(imagen[0]).css('width', 'auto');
+            $(imagen[0]).css('height', 'auto');
+            $(imagen[0]).css('min-width', '100%');
+            $(imagen[0]).css('min-height', '100%');
+        }
+
 
     }
 
@@ -176,6 +259,10 @@ var link_servidor = Servidor + Proyecto;
 		$("#popupError").modal("hide");
 	if ($("#popupCargando").hasClass("in"))
 		$("#popupCargando").modal("hide");
+	if ($("#popupAutenticacion").hasClass("in"))
+		$("#popupAutenticacion").modal("hide");
+    if ($("#popupListas").hasClass("in"))
+  		$("#popupListas").modal("hide");
     }
     function hideShow(elementos, parametros) {
 
@@ -184,4 +271,19 @@ var link_servidor = Servidor + Proyecto;
                     elementos[i].setAttribute('onClick', parametros.onClick[i]);
                     elementos[i].innerHTML = parametros.text[i];
             }
+    }
+    function clearInputs(Form){
+
+        $(':input','#' + Form).not(':button, :submit, :reset, :hidden').val('').removeAttr('checked').removeAttr('selected');
+    }
+    function autenticacionEspecial(Usuario, ClaveEspecial){
+        closePops();
+        var parametros = {
+           Usuario: Usuario,
+           ClaveEspecial: ClaveEspecial
+        }
+        var respuesta = AjaxCall("servicios/adminapp/autenticacionEspecial.php", parametros);
+        $("#Usuario").val("");
+        $("#UsuarioClaveEspecial").val("");
+        return respuesta;
     }

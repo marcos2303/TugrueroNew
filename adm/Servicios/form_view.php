@@ -1,10 +1,11 @@
 <?php include('../../view_header_admin.php');?>
+<?php include('../menu.php');?>
 <div class="">
    <div class="wrapper">
       <header class="main-header"></header>
 
         <aside class="main-sidebar">
-            
+
         </aside>
         <div class="content-wrapper">
             <a href="#" class="btn btn-default" data-toggle="push-menu" role="button"><i class="fa fa-map-marker"></i> Mapa</a>

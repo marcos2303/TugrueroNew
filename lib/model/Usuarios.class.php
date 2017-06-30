@@ -31,6 +31,19 @@
 			
 			
 		}
+		function getLoginEspecial($values){
+			$ConnectionORM = new ConnectionORM();			
+			$where = "upper(Usuarios.Login) = '".strtoupper($values['Usuario'])."'";
+			$where.= " and Usuarios.ClaveEspecial = '".hash("sha256",$values['ClaveEspecial'])."'";
+			$where.= " and Usuarios.Estatus = 1";
+			$q = $ConnectionORM->getConnect()->Usuarios
+			->select("*")
+			->where("$where")
+			->fetch();
+			return $q; 				
+			
+			
+		}
 		public function getUserModifById($values){
 			$ConnectionORM = new ConnectionORM();
 			$q = $ConnectionORM->getConnect()->users

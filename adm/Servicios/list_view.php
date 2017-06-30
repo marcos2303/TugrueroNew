@@ -1,4 +1,5 @@
-<?php include('../../view_header_admin.php')?>
+<?php include('../../view_header_admin.php');?>
+<?php include('../menu.php');?>
 <div class="container-fluid">
 	<h1 class="">Servicios</h1>
 	<a class="btn btn-default"  href="<?php echo full_url."/adm/Servicios/index.php?action=new"?>"><i class="fa fa-plus-circle"></i> Agregar</a>
@@ -6,24 +7,24 @@
 	<?php include('../../view_footer_admin.php')?>
 <script>
 
-	
+
 $(document).ready(function() {
-	
+
 	$('#example tfoot th').each( function () {
 		var title = $('#example thead th').eq( $(this).index() ).text();
-		
+
 		if(title != 'Detalle')
 		{
-			$(this).html( '<input size="10" class="input-sm filtros" id="column_'+$(this).index()+'" type="text" placeholder="'+title+'" />' );			
+			$(this).html( '<input size="10" class="input-sm filtros" id="column_'+$(this).index()+'" type="text" placeholder="'+title+'" />' );
 		}
 		if(title == 'Detalle')
 		{
-			$(this).html( '<button id="clear">Limpiar</button>' );	
+			$(this).html( '<button id="clear">Limpiar</button>' );
 		}
 
 	} );
 
-	
+
     var table = $('#example').DataTable({
         "scrollX": true,
         "processing": true,
@@ -47,7 +48,7 @@ $(document).ready(function() {
             /*if ( data.idSolicitud == "10" ) {
 				$(row).css("background-color","red");
 				$("td:eq(3)", row).css("background-color","red");
-			 
+
             }*/
             if ( data.EstatusPoliza == "Vencido" ) {
 				$(row).css("background-color","red");
@@ -55,7 +56,7 @@ $(document).ready(function() {
         },
       "aoColumnDefs": [
           { 'bSortable': false, 'aTargets': [ 7 ] }
-       ]				
+       ]
     });
 
 $('#column_0').on ('keypress', function(e){

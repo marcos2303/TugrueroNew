@@ -7,11 +7,11 @@ include('../../autoload_servicios.php');
 
 $Proveedores = new Proveedores();
 /****************Seteo y comprobacion de valores*******************/
-$response = array("Error"=>1,"MensajeError"=>"Registro no actualizado.","MensajeSuccess"=> '',"IdProveedor"=>$values['IdProveedor']);
+$response = array("Error"=>0,"Actualizado"=> 0,"MensajeError"=>"","MensajeSuccess"=> '',"IdProveedor"=>$values['IdProveedor']);
 /*************************Actualizamos************************************/
 
 if($Proveedores->updateProveedores($values)){
-$response = array("Error"=>0,"MensajeError"=>"","MensajeSuccess"=> 'Ok',"IdProveedor"=>$values['IdProveedor']);
+$response = array("Error"=>0,"Actualizado"=> 1,"MensajeError"=>"","MensajeSuccess"=> 'Ok',"IdProveedor"=>$values['IdProveedor']);
 	
 }
 echo json_encode($response,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);

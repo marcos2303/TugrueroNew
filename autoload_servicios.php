@@ -63,3 +63,4 @@ include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Proveedores.class.
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/ProveedoresTipos.class.php");
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Estados.class.php");
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/GruasTipos.class.php");
+include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Marcas.class.php");

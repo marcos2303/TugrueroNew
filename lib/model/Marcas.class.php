@@ -20,13 +20,19 @@
 		public function getMarcasListSelect()
 		{	
 			
-                        $ConnectionORM = new ConnectionORM();
+            $ConnectionORM = new ConnectionORM();
 			$q = $ConnectionORM->getConnect()->Marcas
 			->select("*")
 			->where("Estado = 'A'");
 			return $q; 			
 		}
-	
+		public function getList(){
+			$ConnectionORM = new ConnectionORM();
+			$q = $ConnectionORM->getConnect()->Marcas
+			->select("*")
+            ->where("Estatus=?",1);
+			return $q; 	
+		}
 
 
 

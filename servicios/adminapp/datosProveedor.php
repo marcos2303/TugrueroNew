@@ -6,6 +6,7 @@ include('../../autoload_servicios.php');
 /************* Clases a utilizar *******************/
 $Proveedores= new Proveedores();
 /****************Seteo y comprobacion de valores*******************/
+
 $response = array("Error"=>1,"MensajeError"=>"No existe el proveedor","MensajeSuccess"=> '');
 $datos = $Proveedores->getProveedoresInfo($values['IdProveedor']);
 if($datos){
@@ -13,6 +14,7 @@ if($datos){
 		"Error"=>0,
 		"MensajeError"=>"",
 		"MensajeSuccess"=> 'Ok',
+		'IdProveedor' => $datos['IdProveedor'],
 		'IdProveedorTipo' => $datos['IdProveedorTipo'],
 		'IdEstado' => $datos['IdEstado'],
         'Estatus' => 1,

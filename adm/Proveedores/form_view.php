@@ -1,10 +1,12 @@
-<?php include('../../view_header_admin.php');         ?>
-
-<form action="" name="DataForm" id="DataForm">
+<?php include('../../view_header_admin.php');?>
+<?php include('../menu.php');?>
+<form action="" name="DataForm" id="DataForm" onsubmit="return false;">
 	<input type="text" id="IdProveedor" name="IdProveedor" value="<?php if(isset($values['IdProveedor']) and $values['IdProveedor']!='') echo $values['IdProveedor'];?>">
+	<input type="text" id="action" value="<?php echo $values['action'];?>">
+
 	<div class="box box-primary">
         <div class="box-header with-border">
-			<h1 class="box-title">Grueros</h1>
+			<h1 class="box-title">Proveedores</h1>
 			<div class="box-tools pull-right">
 				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 			</div>
@@ -86,44 +88,48 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-12">
-                    <div class="btn-group">				
+                    <div class="btn-group">
 						<button type="Regresar" class="btn btn-default"><i class="fa fa-arrow-circle-left"></i> Regresar</button>
-						<button type="button" id="EnviarProveedor" class="btn btn-primary"><i class="fa fa-save"></i> Aceptar</button>                    
+						<button type="button" id="EnviarProveedor" class="btn btn-primary"><i class="fa fa-save"></i> Aceptar</button>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-8 col-sm-offset-4">
-                    <div class="btn-group">				
-						<button type="button" class="btn btn-default btn-md"><i class="fa fa-plus-circle"></i> Agregar de grúas</button>
-						<button type="button" class="btn btn-default btn-md"><i class="fa fa-list"></i> Listado de grúas </button>
+                    <div class="btn-group">
+						<button type="button" id="AgregarGrua" class="btn btn-default btn-md"><i class="fa fa-plus-circle"></i> Agregar de grúas</button>
+						<button type="button" id="ListarGruas" class="btn btn-default btn-md"><i class="fa fa-list"></i> Listado de grúas </button>
 						<button type="button" class="btn btn-default btn-md"><i class="fa fa-clock-o"></i> Historial de servicios</button>
-                    </div>	
+                    </div>
 				</div>
 			</div>
 
         </div>
 	</div>
 </form>
-	<div class="box box-primary">
+<form action="" name="DataFormGrua" id="DataFormGrua" onsubmit="return false;">
+	<input type="text" value="" name="IdGrua" Id="IdGrua">
+	<div class="box box-primary" id="DivGruas" style="display: none;">
         <div class="box-header with-border">
           <h1 class="box-title">Agregar Grúa</h1>
         </div>
         <div class="box-body">
-			
+
 			<div class="row">
 				<div class="col-sm-4">
 					<div class="form-group">
 						<label>Placa</label>
 						<div class="input-group">
-							<input class="form-control" type="text">
+							<input class="form-control" type="text" id="Placa" name="Placa">
 							<span class="input-group-btn">
-								<button type="button" class="btn btn-success btn-flat"><i class="fa fa-check-circle"></i> Verificar</button>
+								<button type="button" class="btn btn-success btn-flat" id="Verificar"><i class="fa fa-check-circle"></i> Verificar</button>
+								<!--<button type="button" id="Reasignar" style="display:none;" class="btn btn-primary"></i> Reasignar</button> -->
 							</span>
 						</div>
 					</div>
 				</div>
 			</div>
+			<div id="DatosGrua" style="display: none;">
 			<div class="row">
 				<div class="col-sm-2">
 					<div class="form-group">
@@ -134,9 +140,7 @@
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label>Marca</label>
-
-						  <input class="form-control" type="text" id="Marca" name="Marca">
-
+							<select class="form-control" id="IdMarca" name="IdMarca" style="width: 100%;"></select>
 					</div>
 				</div>
 				<div class="col-sm-2">
@@ -156,66 +160,23 @@
 				<div class="col-sm-2">
 					<div class="form-group">
 						<label>Clave</label>
-						  <input class="form-control" type="text">
+						  <input class="form-control" type="text" id="Clave" name="Clave">
 					</div>
 				</div>
 				<div class="col-sm-1">
 					<div class="form-group">
 						<label>&nbsp;</label>
-						<button type="button" id="EnviarGrua" class="btn btn-primary form-control"><i class="fa fa-save"></i> Aceptar</button>                    
+
+						<button type="button" id="EnviarGrua" class="btn btn-primary form-control"><i class="fa fa-save"></i> Agregar/Actualizar</button>
 
 					</div>
 				</div>
 			</div>
+			</div>
         </div>
 
-	</div>	
+	</div>
+</form>
 
 <?php include('../../view_footer_admin.php')?>
-<script  type="text/javascript">
-
-$(document).ready(function(){
-	  
-    listaProveedoresTipo();
-    listaEstados();
-    listaGruasTipos();
-    
-	var parametros = {
-		IdProveedor : 50
-	};
-	var respuesta = AjaxCall("servicios/adminapp/datosProveedor.php", parametros, MensajeSuccess, MensajeError);
-	
-	
-	
-    $('#EnviarProveedor').click(function(){
-		var parametros = {};  
-		var DataForm = $('#DataForm').serializeArray();
-    
-        $.each(DataForm,
-        function(i, v) {
-            parametros[v.name] = v.value;
-        });
-		
-		if($("#IdProveedor").val()==''){
-			var respuesta = AjaxCall("servicios/adminapp/agregarProveedor.php", parametros, MensajeSuccess, MensajeError);
-
-		}else{
-			var respuesta = AjaxCall("servicios/adminapp/actualizarProveedor.php", parametros, MensajeSuccess, MensajeError);
-
-		}
-		
-		if(typeof(respuesta) !='undefined'){
-			$("#IdProveedor").val(respuesta.IdProveedor);
-		}
-		
-        
-    });
-    
-    
-    
-    $('#EnviarGrua').click(function(){
-        alert(1);
-    });    
-});
-
-</script>
+<script src="<?php echo full_url;?>/web/js/Proveedores.js"></script>

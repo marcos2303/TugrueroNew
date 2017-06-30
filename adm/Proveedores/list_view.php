@@ -1,4 +1,5 @@
-<?php include('../../view_header_admin.php')?>
+<?php include('../../view_header_admin.php');?>
+<?php include('../menu.php');?>
 <div class="container-fluid">
 	<h1 class="text-center big_title">Proveedores</h1>
 	<table id="example" class="table table-striped table-bordered table-responsive" width="100%" cellspacing="0">
@@ -9,7 +10,7 @@
                     <th>Apellidos</th>
 					<th>Tipo</th>
 					<th>Estado</th>
-					<th>Ciudad</th>				
+					<th>Ciudad</th>
 					<th>Detalle</th>
 				</tr>
 			</thead>
@@ -30,24 +31,24 @@
 	<?php include('../../view_footer_admin.php')?>
 <script>
 
-	
+
 $(document).ready(function() {
-	
+
 	$('#example tfoot th').each( function () {
 		var title = $('#example thead th').eq( $(this).index() ).text();
-		
+
 		if(title != 'Detalle')
 		{
-			$(this).html( '<input size="10" class="input-sm filtros" id="column_'+$(this).index()+'" type="text" placeholder="'+title+'" />' );			
+			$(this).html( '<input size="10" class="input-sm filtros" id="column_'+$(this).index()+'" type="text" placeholder="'+title+'" />' );
 		}
 		if(title == 'Detalle')
 		{
-			$(this).html( '<button id="clear">Limpiar</button>' );	
+			$(this).html( '<button id="clear">Limpiar</button>' );
 		}
 
 	} );
 
-	
+
     var table = $('#example').DataTable({
         "scrollX": true,
         "processing": true,
@@ -69,7 +70,7 @@ $(document).ready(function() {
         },
       "aoColumnDefs": [
           { 'bSortable': false, 'aTargets': [ 6 ] }
-       ]				
+       ]
     });
 
 $('#column_0').on ('keypress', function(e){
