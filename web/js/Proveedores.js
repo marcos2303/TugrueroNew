@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	var respuesta = {};
     if($('#action').val()=='new'){
+			$("#DivBotones").hide();
 		listaProveedoresTipo();
 		listaEstados();
 		listaGruasTipos();
@@ -28,8 +29,8 @@ $(document).ready(function(){
 		}else{
 			var respuesta = AjaxCall("servicios/adminapp/actualizarProveedor.php", parametros, actualizarSuccess, MensajeError);
 		}
-
-
+		$("#action").val("edit");
+			$("#DivBotones").show();
     });
 	/************************************************/
 
@@ -80,11 +81,13 @@ $(document).ready(function(){
 
     });
     $('#AgregarGrua').click(function(){
+				if($("#action").val()!='new'){
+					if($("#DivGruas").is(":visible") ){
+	        }else{
+	            $("#DivGruas").show();
+	        }
+				}
 
-        if($("#DivGruas").is(":visible") ){
-        }else{
-            $("#DivGruas").show();
-        }
     });
 
     $('#EnviarGrua').click(function(){

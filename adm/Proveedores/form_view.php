@@ -5,13 +5,13 @@
 	<input type="text" id="action" value="<?php echo $values['action'];?>">
 
 	<div class="box box-primary">
-        <div class="box-header with-border">
+		<div class="box-header with-border">
 			<h1 class="box-title">Proveedores</h1>
 			<div class="box-tools pull-right">
 				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 			</div>
-        </div>
-        <div class="box-body">
+		</div>
+		<div class="box-body">
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="form-group">
@@ -88,32 +88,32 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-12">
-                    <div class="btn-group">
-						<button type="Regresar" class="btn btn-default"><i class="fa fa-arrow-circle-left"></i> Regresar</button>
+					<div class="btn-group">
+						<a class="btn btn-default" href="index.php" ><i class="fa fa-arrow-circle-left"></i> Regresar</a>
 						<button type="button" id="EnviarProveedor" class="btn btn-primary"><i class="fa fa-save"></i> Aceptar</button>
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-sm-8 col-sm-offset-4">
-                    <div class="btn-group">
+			<div class="row" id="DivBotones" style="display:none;">
+				<div class="col-sm-8 col-sm-offset-4" >
+					<div class="btn-group">
 						<button type="button" id="AgregarGrua" class="btn btn-default btn-md"><i class="fa fa-plus-circle"></i> Agregar de grúas</button>
 						<button type="button" id="ListarGruas" class="btn btn-default btn-md"><i class="fa fa-list"></i> Listado de grúas </button>
 						<button type="button" class="btn btn-default btn-md"><i class="fa fa-clock-o"></i> Historial de servicios</button>
-                    </div>
+					</div>
 				</div>
 			</div>
 
-        </div>
+		</div>
 	</div>
 </form>
 <form action="" name="DataFormGrua" id="DataFormGrua" onsubmit="return false;">
 	<input type="text" value="" name="IdGrua" Id="IdGrua">
 	<div class="box box-primary" id="DivGruas" style="display: none;">
-        <div class="box-header with-border">
-          <h1 class="box-title">Agregar Grúa</h1>
-        </div>
-        <div class="box-body">
+		<div class="box-header with-border">
+			<h1 class="box-title">Agregar Grúa</h1>
+		</div>
+		<div class="box-body">
 
 			<div class="row">
 				<div class="col-sm-4">
@@ -130,50 +130,50 @@
 				</div>
 			</div>
 			<div id="DatosGrua" style="display: none;">
-			<div class="row">
-				<div class="col-sm-2">
-					<div class="form-group">
-						<label>Tipo de grúa</label>
+				<div class="row">
+					<div class="col-sm-2">
+						<div class="form-group">
+							<label>Tipo de grúa</label>
 							<select class="form-control" id="IdGruaTipo" name="IdGruaTipo" style="width: 100%;"></select>
+						</div>
 					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="form-group">
-						<label>Marca</label>
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label>Marca</label>
 							<select class="form-control" id="IdMarca" name="IdMarca" style="width: 100%;"></select>
+						</div>
 					</div>
-				</div>
-				<div class="col-sm-2">
-					<div class="form-group">
-						<label>Modelo</label>
-						  <input class="form-control" type="text" id="Modelo" name="Modelo">
+					<div class="col-sm-2">
+						<div class="form-group">
+							<label>Modelo</label>
+							<input class="form-control" type="text" id="Modelo" name="Modelo">
+						</div>
 					</div>
-				</div>
-				<div class="col-sm-2">
-					<div class="form-group">
-						<label>Año</label>
+					<div class="col-sm-2">
+						<div class="form-group">
+							<label>Año</label>
 							<select class="form-control" style="width: 100%;" id="Anio" name="Anio">
-							  <option selected="selected" value="2017">2017</option>
+								<option selected="selected" value="2017">2017</option>
 							</select>
+						</div>
 					</div>
-				</div>
-				<div class="col-sm-2">
-					<div class="form-group">
-						<label>Clave</label>
-						  <input class="form-control" type="text" id="Clave" name="Clave">
+					<div class="col-sm-2">
+						<div class="form-group">
+							<label>Clave</label>
+							<input class="form-control" type="text" id="Clave" name="Clave">
+						</div>
 					</div>
-				</div>
-				<div class="col-sm-1">
-					<div class="form-group">
-						<label>&nbsp;</label>
+					<div class="col-sm-1">
+						<div class="form-group">
+							<label>&nbsp;</label>
 
-						<button type="button" id="EnviarGrua" class="btn btn-primary form-control"><i class="fa fa-save"></i> Agregar/Actualizar</button>
+							<button type="button" id="EnviarGrua" class="btn btn-primary form-control"><i class="fa fa-save"></i> Agregar/Actualizar</button>
 
+						</div>
 					</div>
 				</div>
 			</div>
-			</div>
-        </div>
+		</div>
 
 	</div>
 </form>
