@@ -55,6 +55,7 @@ $(document).ready(function() {
 		"scrollX": true,
 		"processing": true,
 		"serverSide": true,
+		"scrollY":	'200px',
 		"sDom": 'trp',
 		"ajax": "<?php echo full_url."/adm/Proveedores/index.php?action=list_json"?>",
 		"language": {

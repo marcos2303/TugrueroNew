@@ -74,7 +74,6 @@
       </div>
       <div class="modal-body">
         <p></p>
-        <h4 class="text-center">Ingrese Usuario y clave para realizar la reasignación</h4>
         <div class="row">
           <div class="col-sm-12">
             <div class="form-group">

@@ -31,7 +31,6 @@
 
 
 $(document).ready(function() {
-
 	$('#example tfoot th').each( function () {
 		var title = $('#example thead th').eq( $(this).index() ).text();
 
@@ -48,10 +47,11 @@ $(document).ready(function() {
 
 
 	var table = $('#example').DataTable({
-		"scrollX": true,
+		"scrollX": false,
 		"processing": true,
 		"serverSide": true,
-		scrollCollapse: true,
+		"scrollY": "500px",
+	  "scrollCollapse": true,
 		"sDom": 'trp',
 		"ajax": "<?php echo full_url."/adm/Listas/index.php?action=lista_gruas_json&IdProveedor=";if(isset($values['IdProveedor']) and $values['IdProveedor']!='') echo $values['IdProveedor']; ?>",
 		"language": {

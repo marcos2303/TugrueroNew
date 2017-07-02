@@ -1,13 +1,14 @@
 $(document).ready(function(){
 	var respuesta = {};
-    if($('#action').val()=='new'){
-			$("#DivBotones").hide();
+	if($('#action').val()=='new'){
+		$("#DivBotones").hide();
 		listaProveedoresTipo();
 		listaEstados();
 		listaGruasTipos();
-                listaMarcas();
+		listaMarcas();
 	}
 	if($('#action').val()=='edit'){
+		$("#DivBotones").show();
 		var parametros = {
 			IdProveedor : $('#IdProveedor').val()
 		};
@@ -16,10 +17,10 @@ $(document).ready(function(){
 		if(datos.IdProveedorTipo != '') listaProveedoresTipo(datos.IdProveedorTipo);
 		if(datos.IdEstado != '') listaEstados(datos.IdEstado);
 		if(datos.IdGruaTipo != '') listaGruasTipos(datos.IdGruaTipo);
-                if(datos.IdMarca != '') listaMarcas(datos.IdMarca);
+		if(datos.IdMarca != '') listaMarcas(datos.IdMarca);
 	}
 	/***************************************************/
-    $('#EnviarProveedor').click(function(){
+	$('#EnviarProveedor').click(function(){
 		var DataForm = $('#DataForm').serializeArray();
 
 		var parametros = convertiraAJson(DataForm);
@@ -30,71 +31,29 @@ $(document).ready(function(){
 			var respuesta = AjaxCall("servicios/adminapp/actualizarProveedor.php", parametros, actualizarSuccess, MensajeError);
 		}
 		$("#action").val("edit");
-			$("#DivBotones").show();
-    });
+		$("#DivBotones").show();
+	});
 	/************************************************/
 
 
-    $('#Verificar').click(function(){
-        var DataFormGrua = $('#DataFormGrua').serializeArray();
-	var parametros = convertiraAJson(DataFormGrua);
-        parametros.IdProveedor = $('#IdProveedor').val();
-	var respuesta = AjaxCall("servicios/adminapp/verificarPlaca.php", parametros, CargaSuccess, MensajeError);
-        delete respuesta.IdProveedor;
-        $("#IdGrua").val(respuesta.IdGrua);
-                $("#DatosGrua").show();
-		if(respuesta.MismoProveedor == "0"){
-                    $("#Reasignar").show();
-                    $("#EnviarGrua").hide();
-		}else{
-                    $("#EnviarGrua").show();
-                    $("#Reasignar").hide();
-                }
-        if(respuesta.MensajeError == "" && respuesta.MismoProveedor == "0"){
-            convertiraAInputs(respuesta);
-            var popup = {
-                    "popup": "popupAutenticacion",
-                    "imagen": "none",
-                    "mensaje": "",
-                    "displaybarra": ['none'],
-                    "displaysBotones": ['none', 'none', 'inline', 'inline'],
-                    "text": ['', '', 'Cancelar', 'Aceptar'],
-                    "onClick": ["", "", "closePops()", "reasignar()"]
+	$('#Verificar').click(function(){
+		verificarDatosGrua();
+	});
+	$('#AgregarGrua').click(function(){
+		if($("#action").val()!='new'){
+			if($("#DivGruas").is(":visible") ){
+			}else{
+				$("#DivGruas").show();
+			}
+		}
 
-            };
-            genericPop(popup);
+	});
 
-        }else{
-            if(respuesta.MensajeError != ''){
-                limpiarGruaForm();
-            }else{
-                convertiraAInputs(respuesta);
-								if(respuesta.IdProveedorTipo != '') listaProveedoresTipo(respuesta.IdProveedorTipo);
-								if(respuesta.IdEstado != '') listaEstados(respuesta.IdEstado);
-								if(respuesta.IdGruaTipo != '') listaGruasTipos(respuesta.IdGruaTipo);
-                if(respuesta.IdMarca != '') listaMarcas(respuesta.IdMarca);
-            }
-
-        }
-
-
-
-    });
-    $('#AgregarGrua').click(function(){
-				if($("#action").val()!='new'){
-					if($("#DivGruas").is(":visible") ){
-	        }else{
-	            $("#DivGruas").show();
-	        }
-				}
-
-    });
-
-    $('#EnviarGrua').click(function(){
+	$('#EnviarGrua').click(function(){
 		var DataForm = $('#DataFormGrua').serializeArray();
 
 		var parametros = convertiraAJson(DataForm);
-                parametros.IdProveedor = $("#IdProveedor").val();
+		parametros.IdProveedor = $("#IdProveedor").val();
 		if($("#IdGrua").val()==''){
 			var respuesta = AjaxCall("servicios/adminapp/agregarGrua.php", parametros, agregarSuccess,MensajeError);
 
@@ -102,70 +61,132 @@ $(document).ready(function(){
 			var respuesta = AjaxCall("servicios/adminapp/actualizarGrua.php", parametros, actualizarSuccess,MensajeError);
 		}
 		$("#IdGrua").val("");
-                $("#DatosGrua").hide();
-                $("#Placa").val("");
-                limpiarGruaForm();
+		$("#DatosGrua").hide();
+		$("#Placa").val("");
+		limpiarGruaForm();
 
-    });
-		$('#ListarGruas').click(function(){
-			IdProveedor = $('#IdProveedor').val();
-			$.ajax({
-			  url: link_servidor + "adm/Listas/index.php?action=lista_gruas&IdProveedor="+ IdProveedor+"",
-			  success: function(html){
-						$('#popupListas .modal-body').html(html);
-			   		$('#popupListas').modal('show');
-				}
-			});
+	});
+	$('#ListarGruas').click(function(){
+		IdProveedor = $('#IdProveedor').val();
+		$.ajax({
+			url: link_servidor + "adm/Listas/index.php?action=lista_gruas&IdProveedor="+ IdProveedor+"",
+			success: function(html){
+				$('#popupListas .modal-body').html(html);
+				$('#popupListas').modal('show');
+			}
+		});
 
 
 
-    });
+	});
 
 });
 function reasignar(){
-    var Usuario = $('#Usuario').val();
-    var ClaveEspecial = $('#UsuarioClaveEspecial').val();
-    var autenticacion = autenticacionEspecial(Usuario, ClaveEspecial);
+	var Usuario = $('#Usuario').val();
+	var ClaveEspecial = $('#UsuarioClaveEspecial').val();
+	var autenticacion = autenticacionEspecial(Usuario, ClaveEspecial);
 
-    if(autenticacion.MensajeError == ''){
-        if(autenticacion.AutorizarGruas != "1"){
-            closePops();
-            var popup = {
-                    "popup": "popupError",
-                    "imagen": "Error",
-                    "mensaje": "No tiene los privilegios suficientes para realizar esta modificación",
-                    "displaybarra": ['none'],
-                    "displaysBotones": ['none', 'none', 'none', 'inline'],
-                    "text": ['', '', '', 'Aceptar'],
-                    "onClick": ["", "", "", "closePops()"]
+	if(autenticacion.MensajeError == ''){
+		if(autenticacion.AutorizarGruas != "1"){
+			closePops();
+			var popup = {
+				"popup": "popupError",
+				"imagen": "Error",
+				"mensaje": "No tiene los privilegios suficientes para realizar esta modificación",
+				"displaybarra": ['none'],
+				"displaysBotones": ['none', 'none', 'none', 'inline'],
+				"text": ['', '', '', 'Aceptar'],
+				"onClick": ["", "", "", "closePops()"]
 
-            };
-            genericPop(popup);
-        }else{
-              parametros = {
-                IdGrua:  $("#IdGrua").val(),
-                IdProveedor: $("#IdProveedor").val(),
-              };
-              respuesta = AjaxCall("servicios/adminapp/actualizarGrua.php", parametros, actualizarSuccess, MensajeError);
-              $("#Reasignar").hide();
-              $("#EnviarGrua").show();
-        }
-    }
+			};
+			genericPop(popup);
+		}else{
+			parametros = {
+				IdGrua:  $("#IdGrua").val(),
+				IdProveedor: $("#IdProveedor").val(),
+			};
+			respuesta = AjaxCall("servicios/adminapp/actualizarGrua.php", parametros, actualizarSuccess, MensajeError);
+			$("#Reasignar").hide();
+			$("#EnviarGrua").show();
+			$("#IdGrua").val("");
+			$("#DatosGrua").hide();
+			$("#Placa").val("");
+			limpiarGruaForm();
+		}
+	}else{
+		limpiarGruaForm();
+	}
 
 }
 function editarDatatable(Placa){
+	var parametros = {
+		"Placa": Placa
+	};
+	var respuesta = AjaxCall("servicios/adminapp/verificarPlaca.php", parametros, CargaSuccess, MensajeError);
+	delete respuesta.IdProveedor;
+	convertiraAInputs(respuesta);
+	$("#DatosGrua").show();
+	closePops();
 
-var parametros = {
-	"Placa" : Placa
-}
-var respuesta = AjaxCall("servicios/adminapp/verificarPlaca.php", parametros, CargaSuccess, MensajeError);
+
 }
 function limpiarGruaForm(){
-    $("#IdTipoGrua").removeAttr('selected');
-    $('#IdTipoGrua').removeProp("selected");
-    $("#IdMarca").removeAttr('selected');
-    $("#Modelo").val("");
-    $("#Color").val("");
-    $("#Anio").removeAttr('selected');
-    $("#Clave").val("");
+	$("#Reasignar").hide();
+	$("#EnviarGrua").show();
+	$("#IdGrua").val("");
+	$("#DatosGrua").hide();
+	$("#IdTipoGrua").removeAttr('selected');
+	$('#IdTipoGrua').removeProp("selected");
+	$("#IdMarca").removeAttr('selected');
+	$("#Modelo").val("");
+	$("#Color").val("");
+	$("#Anio").removeAttr('selected');
+	$("#Clave").val("");
+}
+function cerrarPopAutenticacion(){
+	limpiarGruaForm();
+	closePops();
+
+}
+function verificarDatosGrua(){
+	var DataFormGrua = $('#DataFormGrua').serializeArray();
+	var parametros = convertiraAJson(DataFormGrua);
+	parametros.IdProveedor = $('#IdProveedor').val();
+	var respuesta = AjaxCall("servicios/adminapp/verificarPlaca.php", parametros, CargaSuccess, MensajeError);
+	delete respuesta.IdProveedor;
+	$("#IdGrua").val(respuesta.IdGrua);
+	$("#DatosGrua").show();
+	if(respuesta.MismoProveedor == "0"){
+		$("#Reasignar").show();
+		$("#EnviarGrua").hide();
+	}else{
+		$("#EnviarGrua").show();
+		$("#Reasignar").hide();
+	}
+	if(respuesta.MensajeError == "" && respuesta.MismoProveedor == "0"){
+		convertiraAInputs(respuesta);
+		var popup = {
+			"popup": "popupAutenticacion",
+			"imagen": "none",
+			"mensaje": "¿Está seguro(a) de reasignar la placa <b>"+$("#Placa").val()+"</b> a <b>" +$("#Nombres").val()+$("#Apellidos").val()+"</b> ?",
+			"displaybarra": ['none'],
+			"displaysBotones": ['none', 'none', 'inline', 'inline'],
+			"text": ['', '', 'Cancelar', 'Aceptar'],
+			"onClick": ["", "", "cerrarPopAutenticacion()", "reasignar()"]
+
+		};
+		genericPop(popup);
+
+	}else{
+		if(respuesta.MensajeError != ''){
+			limpiarGruaForm();
+		}else{
+			convertiraAInputs(respuesta);
+			if(respuesta.IdProveedorTipo != '') listaProveedoresTipo(respuesta.IdProveedorTipo);
+			if(respuesta.IdEstado != '') listaEstados(respuesta.IdEstado);
+			if(respuesta.IdGruaTipo != '') listaGruasTipos(respuesta.IdGruaTipo);
+			if(respuesta.IdMarca != '') listaMarcas(respuesta.IdMarca);
+		}
+
+	}
 }

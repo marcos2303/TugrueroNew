@@ -78,7 +78,7 @@ function executeListaGruasJson($values)
 			"Modelo" => null,
 			"Color" => null,
 			"Anio" => null,
-			"actions" => 'actions'
+			"actions" => null
 		);
 	}
 	echo json_encode($array_json);die;

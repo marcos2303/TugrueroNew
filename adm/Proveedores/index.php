@@ -64,7 +64,18 @@ function executeListJson($values)
 				"NombreEstado" => $list['NombreEstado'],
 				"Ciudad" => $list['Ciudad'],
 				"Zona" => $list['Zona'],
-				"actions" => ''
+				"actions" =>
+				'<div class="btn-group">
+				<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<i class="fa fa-gear"></i> <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu dropdown-menu-right">
+				<li><a href="'.full_url.'/adm/Proveedores/index.php?action=edit&IdProveedor='.$list['IdProveedor'].'"> Editar</a></li>
+				<li><a href="#"> Historial de servicios</a></li>
+				<li><a href="#"> Conexiones</a></li>
+				<li><a href="#"> Reiniciar dispositivo</a></li>
+				</ul>
+				</div>'
 			);
 		}
 	}else{
