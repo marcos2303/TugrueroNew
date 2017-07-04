@@ -47,11 +47,10 @@ $(document).ready(function() {
 
 
 	var table = $('#example').DataTable({
-		"scrollX": false,
+		"scrollX": true,
 		"processing": true,
 		"serverSide": true,
-		"scrollY": "500px",
-	  "scrollCollapse": true,
+		"scrollY":	'100%',
 		"sDom": 'trp',
 		"ajax": "<?php echo full_url."/adm/Listas/index.php?action=lista_gruas_json&IdProveedor=";if(isset($values['IdProveedor']) and $values['IdProveedor']!='') echo $values['IdProveedor']; ?>",
 		"language": {

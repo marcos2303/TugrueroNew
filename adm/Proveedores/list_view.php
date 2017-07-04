@@ -1,7 +1,7 @@
 <?php include('../../view_header_admin.php');?>
 <?php include('../menu.php');?>
 <div class="container-fluid">
-	<h1 class="text-center big_title">Proveedores</h1>
+	<h1 class="text-center big_title">Grueros</h1>
 	<table id="example" class="table table-striped table-bordered table-responsive" width="100%" cellspacing="0">
 		<thead>
 			<tr>
@@ -55,7 +55,7 @@ $(document).ready(function() {
 		"scrollX": true,
 		"processing": true,
 		"serverSide": true,
-		"scrollY":	'200px',
+		"scrollY":	'100%',
 		"sDom": 'trp',
 		"ajax": "<?php echo full_url."/adm/Proveedores/index.php?action=list_json"?>",
 		"language": {
@@ -116,7 +116,24 @@ $(document).ready(function() {
 		table.search( '' ).columns().search( '' ).draw();
 		$('.filtros').val('');
 	});
+	//click
+	$('#example tbody').on( 'click', 'tr', function () {
+		if ( $(this).hasClass('seleccionado') ) {
+			$(this).removeClass('seleccionado');
+		}
+		else {
+			table.$('tr.seleccionado').removeClass('seleccionado');
+			$(this).addClass('seleccionado');
+		}
+	} );
+	//double click
+	$('#example tbody').on('dblclick', 'tr', function () {
+		var data = table.row( this ).data();
+		$(this).addClass('seleccionado');
+		console.log(data.idSolicitudPlan);
 
+		$(location).attr('href', '<?php echo full_url."/adm/Proveedores/index.php?action=edit&IdProveedor="?>' + + data.IdProveedor);
+	} );
 
 } );
 

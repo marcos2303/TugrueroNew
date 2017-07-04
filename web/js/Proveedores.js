@@ -20,7 +20,28 @@ $(document).ready(function(){
 		if(datos.IdMarca != '') listaMarcas(datos.IdMarca);
 	}
 	/***************************************************/
-	$('#EnviarProveedor').click(function(){
+	$('#DataForm').submit(function(event){
+			if(!this.checkValidity()){
+
+					event.preventDefault();
+					$('#DataForm :input:visible[required="required"]').each(function()
+					{
+					    if(!this.validity.valid)
+					    {
+					        $(this).focus();
+					        // break
+					        return false;
+					    }
+					});
+			}else{
+					EnviarProveedor();
+					return false;
+
+			}
+	});
+
+	function EnviarProveedor(){
+
 		var DataForm = $('#DataForm').serializeArray();
 
 		var parametros = convertiraAJson(DataForm);
@@ -32,9 +53,10 @@ $(document).ready(function(){
 		}
 		$("#action").val("edit");
 		$("#DivBotones").show();
-	});
-	/************************************************/
 
+
+	}
+	/************************************************/
 
 	$('#Verificar').click(function(){
 		verificarDatosGrua();
@@ -180,6 +202,7 @@ function verificarDatosGrua(){
 	}else{
 		if(respuesta.MensajeError != ''){
 			limpiarGruaForm();
+			$("#DatosGrua").show();
 		}else{
 			convertiraAInputs(respuesta);
 			if(respuesta.IdProveedorTipo != '') listaProveedoresTipo(respuesta.IdProveedorTipo);
