@@ -1,7 +1,7 @@
 <div class="modal modal-default" id="popupSuccess">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header text-center">
         <img src="">
       </div>
       <div class="modal-body">
@@ -24,7 +24,7 @@
 <div class="modal modal-default" id="popupError">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header text-center">
         <img src="">
       </div>
       <div class="modal-body">
@@ -37,8 +37,8 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-success"></button>
         <button type="button" class="btn btn-success"></button>
-        <button type="button" class="btn btn-danger"></button>
-        <button type="button" class="btn btn-success"></button>
+        <button type="button" class="btn btn-danger"><i class="fa fa-gear"></i></button>
+        <button type="button" class="btn btn-success"><i class="fa fa-gear"></i></button>
       </div>
     </div>
   </div>
@@ -47,7 +47,7 @@
 <div class="modal modal-default" id="popupCargando">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header text-center">
         <img src="">
       </div>
       <div class="modal-body">
@@ -69,7 +69,7 @@
 <div class="modal modal-default" id="popupAutenticacion">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header text-center">
         <img src="">
       </div>
       <div class="modal-body">

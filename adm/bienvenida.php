@@ -1,5 +1,5 @@
 <?php include("../view_header_admin.php");?>
-<?php include("../menu.php");?>
+<?php include("menu.php");?>
 <div class="col-xs-12">
 
 

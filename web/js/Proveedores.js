@@ -6,9 +6,11 @@ $(document).ready(function(){
 		listaEstados();
 		listaGruasTipos();
 		listaMarcas();
+		listaAnios();
 	}
 	if($('#action').val()=='edit'){
 		$("#DivBotones").show();
+		//$("#DivGruas").show();
 		var parametros = {
 			IdProveedor : $('#IdProveedor').val()
 		};
@@ -18,6 +20,7 @@ $(document).ready(function(){
 		if(datos.IdEstado != '') listaEstados(datos.IdEstado);
 		if(datos.IdGruaTipo != '') listaGruasTipos(datos.IdGruaTipo);
 		if(datos.IdMarca != '') listaMarcas(datos.IdMarca);
+		if(datos.Anio != '') listaAnios(datos.Anio);
 	}
 	/***************************************************/
 	$('#DataForm').submit(function(event){
@@ -38,6 +41,7 @@ $(document).ready(function(){
 					return false;
 
 			}
+		return false;
 	});
 
 	function EnviarProveedor(){
@@ -59,9 +63,27 @@ $(document).ready(function(){
 	/************************************************/
 
 	$('#Verificar').click(function(){
+		if($("#Placa").val().length < 6){
+			var popup = {
+				"popup": "popupError",
+				"imagen": "Error",
+				"mensaje": "Debe indicar la placa (ejemplo: AAABBB)",
+				"displaybarra": ['none'],
+				"displaysBotones": ['none', 'none', 'none', 'inline'],
+				"text": ['', '', '', 'Aceptar'],
+				"onClick": ["", "", "", "closePops()"]
+
+			};
+			genericPop(popup);
+			return false;
+		}
 		verificarDatosGrua();
 	});
 	$('#AgregarGrua').click(function(){
+		$("#IdGrua").val("");
+		$("#DatosGrua").hide();
+		$("#Placa").val("");
+		limpiarGruaForm();
 		if($("#action").val()!='new'){
 			if($("#DivGruas").is(":visible") ){
 			}else{
@@ -70,8 +92,26 @@ $(document).ready(function(){
 		}
 
 	});
+	$('#DataFormGrua').submit(function(event){
+			if(!this.checkValidity()){
 
-	$('#EnviarGrua').click(function(){
+					event.preventDefault();
+					$('#DataFormGrua :input:visible[required="required"]').each(function()
+					{
+					    if(!this.validity.valid)
+					    {
+					        $(this).focus();
+					        // break
+					        return false;
+					    }
+					});
+			}else{
+					EnviarGrua();
+					return false;
+
+			}
+	});
+	function EnviarGrua(){
 		var DataForm = $('#DataFormGrua').serializeArray();
 
 		var parametros = convertiraAJson(DataForm);
@@ -82,12 +122,11 @@ $(document).ready(function(){
 		}else{
 			var respuesta = AjaxCall("servicios/adminapp/actualizarGrua.php", parametros, actualizarSuccess,MensajeError);
 		}
-		$("#IdGrua").val("");
-		$("#DatosGrua").hide();
-		$("#Placa").val("");
-		limpiarGruaForm();
-
-	});
+		//$("#IdGrua").val("");
+		//$("#DatosGrua").hide();
+		//$("#Placa").val("");
+		//limpiarGruaForm();
+	}
 	$('#ListarGruas').click(function(){
 		IdProveedor = $('#IdProveedor').val();
 		$.ajax({
@@ -148,6 +187,7 @@ function editarDatatable(Placa){
 	delete respuesta.IdProveedor;
 	convertiraAInputs(respuesta);
 	$("#DatosGrua").show();
+	$("#DivGruas").show();
 	closePops();
 
 

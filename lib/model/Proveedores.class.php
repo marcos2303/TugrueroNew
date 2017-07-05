@@ -161,5 +161,19 @@ class Proveedores{
     ->where("IdProveedor=?",$IdProveedor)->fetch();
     return $q;
   }
+  public function getExisteProveedor($IdProveedor = null, $Identificacion){
+		$ConnectionORM = new ConnectionORM();
+		if($IdProveedor!=null){
+			$q = $ConnectionORM->getConnect()->Proveedores
+			->select("count(*) as cuenta")
+			->where("IdProveedor<>?",$IdProveedor)
+			->and("Identificacion=?",$Identificacion)->fetch();
+		}else{
+			$q = $ConnectionORM->getConnect()->Proveedores
+			->select("count(*) as cuenta")
+			->where("Identificacion=?",$Identificacion)->fetch();
+		}
 
+		return $q;
+	}
 }

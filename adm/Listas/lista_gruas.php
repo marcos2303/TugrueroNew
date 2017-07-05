@@ -1,5 +1,5 @@
 <?php //include('../../view_header_admin.php')?>
-<div class="container-fluid">
+<div class="">
 	<h3 class="text-center">Grúas</h3>
 	<table id="example" class="table table-striped table-bordered table-responsive" width="100%" cellspacing="0">
 		<thead>
@@ -10,6 +10,7 @@
 				<th>Modelo</th>
 				<th>Color</th>
 				<th>Año</th>
+				<th>Clave</th>
 				<th>Detalle</th>
 			</tr>
 		</thead>
@@ -21,6 +22,7 @@
 				<th><input id="Modelo" name="Modelo" type="text"></th>
 				<th><input id="Color" name="Color" type="text"></th>
 				<th><input id="Anio" name="Anio" type="text"></th>
+				<th><input id="Clave" name="Clave" type="text"></th>
 				<th>Detalle</th>
 			</tr>
 		</tfoot>
@@ -50,12 +52,32 @@ $(document).ready(function() {
 		"scrollX": true,
 		"processing": true,
 		"serverSide": true,
-		"scrollY":	'100%',
-		"sDom": 'trp',
+		"scrollY":	false,
+		"sDom": 'Btrp',
 		"ajax": "<?php echo full_url."/adm/Listas/index.php?action=lista_gruas_json&IdProveedor=";if(isset($values['IdProveedor']) and $values['IdProveedor']!='') echo $values['IdProveedor']; ?>",
 		"language": {
 			"url": "<?php echo full_url."/web/js/"?>datatables.spanish.lang"
 		},
+
+		buttons: [
+				{
+						extend: 'colvisGroup',
+						text: 'Datos básicos',
+						show: [ 1, 2, 3,4 ],
+						hide: [ 5,6 ]
+				},
+				{
+						extend: 'colvisGroup',
+						text: 'Datos APP',
+						show: [  6 ],
+						hide: [ 1, 2,3,4,5 ]
+				},
+				{
+						extend: 'colvisGroup',
+						text: 'Todos',
+						show: ':hidden'
+				}
+		],
 		"columns": [
 			{ "data": "Placa" },
 			{ "data": "NombreGruaTipo" },
@@ -63,11 +85,13 @@ $(document).ready(function() {
 			{ "data": "Modelo" },
 			{ "data": "Color" },
 			{ "data": "Anio" },
+			{ "data": "Clave" },
 			{ "data": "actions" }
 		],"rowCallback": function( row, data, index ) {
 		},
 		"aoColumnDefs": [
-			{ 'bSortable': false, 'aTargets': [ 6 ] }
+			{ "visible": false, "targets": [5,6] },
+			{ 'bSortable': false, 'aTargets': [ 6,7 ] }
 		]
 	});
 

@@ -14,8 +14,17 @@ $values['IdMarca'] = 12;
 $values['Estatus'] = 0;
 $values['Placa'] = 0;*/
 /*************************Creamos la grua************************************/
-if($Gruas ->addGrua($values)){
-	$response = array("Error"=>0,"Agregado"=>1,"MensajeError" => "","MensajeSuccess"=> "OK","IdGrua"=>$Gruas->getIdGrua());
+$valido = true;
+$datos_existe = $Gruas->getExistePlaca($values['Placa']);
+if($datos_existe["cuenta"]>0){
+	$response = array("Error"=>1,"Agregado"=> 0,"MensajeError"=>"La placa ya se encuentra registrada para otra grúa","MensajeSuccess"=> '',"Placa"=>$values['Placa']);
+	$valido = false;
 }
+if($valido){
+	if($Gruas ->addGrua($values)){
+		$response = array("Error"=>0,"Agregado"=>1,"MensajeError" => "","MensajeSuccess"=> "OK","IdGrua"=>$Gruas->getIdGrua());
+	}
+}
+
 
 echo json_encode($response,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);

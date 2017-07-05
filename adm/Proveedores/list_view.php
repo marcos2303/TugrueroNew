@@ -1,34 +1,39 @@
 <?php include('../../view_header_admin.php');?>
 <?php include('../menu.php');?>
 <div class="container-fluid">
-	<h1 class="text-center big_title">Grueros</h1>
-	<table id="example" class="table table-striped table-bordered table-responsive" width="100%" cellspacing="0">
-		<thead>
-			<tr>
-				<th>Cédula/RIF</th>
-				<th>Nombres</th>
-				<th>Apellidos</th>
-				<th>Tipo</th>
-				<th>Estado</th>
-				<th>Ciudad</th>
-				<th>Zona</th>
-				<th>Detalle</th>
-			</tr>
-		</thead>
-		<tfoot>
-			<tr>
-				<th><input id="Identificacion" name="Identificacion" type="text"></th>
-				<th><input id="Nombres" name="Nombres" type="text"></th>
-				<th><input id="Apellidos" name="Apellidos" type="text"></th>
-				<th><input id="NombreProveedorTipo" name="NombreProveedorTipo" type="text"></th>
-				<th><input id="NombreEstado" name="NombreEstado" type="text"></th>
-				<th><input id="Ciudad" name="Ciudad" type="text"></th>
-				<th><input id="Zona" name="Zona" type="text"></th>
-				<th>Detalle</th>
-			</tr>
-		</tfoot>
-	</table>
-	<a class="btn btn-primary"  href="<?php echo full_url."/adm/Proveedores/index.php?action=new"?>"><i class="fa fa-plus"></i> Agregar</a>
+	<h1 class="text-center">Grueros</h1>
+	<div class="box box-shadow">
+		<div class="box-header with-border">
+			<table id="example" class="table table-striped table-bordered table-responsive" width="100%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>Cédula/RIF</th>
+						<th>Nombres</th>
+						<th>Apellidos</th>
+						<th>Tipo</th>
+						<th>Estado</th>
+						<th>Ciudad</th>
+						<th>Zona</th>
+						<th>Detalle</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th><input id="Identificacion" name="Identificacion" type="text"></th>
+						<th><input id="Nombres" name="Nombres" type="text"></th>
+						<th><input id="Apellidos" name="Apellidos" type="text"></th>
+						<th><input id="NombreProveedorTipo" name="NombreProveedorTipo" type="text"></th>
+						<th><input id="NombreEstado" name="NombreEstado" type="text"></th>
+						<th><input id="Ciudad" name="Ciudad" type="text"></th>
+						<th><input id="Zona" name="Zona" type="text"></th>
+						<th>Detalle</th>
+					</tr>
+				</tfoot>
+			</table>
+			<a class="btn btn-primary"  href="<?php echo full_url."/adm/Proveedores/index.php?action=new"?>"><i class="fa fa-plus"></i> Agregar</a>
+		</div>
+	</div>
+
 </div>
 <?php include('../../view_footer_admin.php')?>
 <script>
@@ -56,11 +61,31 @@ $(document).ready(function() {
 		"processing": true,
 		"serverSide": true,
 		"scrollY":	'100%',
-		"sDom": 'trp',
+		"sDom": 'Btrp',
+
 		"ajax": "<?php echo full_url."/adm/Proveedores/index.php?action=list_json"?>",
 		"language": {
 			"url": "<?php echo full_url."/web/js/"?>datatables.spanish.lang"
 		},
+		buttons: [
+				{
+						extend: 'colvisGroup',
+						text: 'Datos básicos',
+						show: [ 1, 2, 3 ],
+						hide: [ 4, 5,6 ]
+				},
+				{
+						extend: 'colvisGroup',
+						text: 'Datos ubicación',
+						show: [  4, 5,6 ],
+						hide: [ 1, 2,3 ]
+				},
+				{
+						extend: 'colvisGroup',
+						text: 'Todos',
+						show: ':hidden'
+				}
+		],
 		"columns": [
 			{ "data": "Identificacion" },
 			{ "data": "Nombres" },
@@ -73,10 +98,10 @@ $(document).ready(function() {
 		],"rowCallback": function( row, data, index ) {
 		},
 		"aoColumnDefs": [
+			{ "visible": false, "targets": [4,5,6] },
 			{ 'bSortable': false, 'aTargets': [ 7 ] }
 		]
 	});
-
 	$('#column_0').on ('keypress', function(e){
 		if(e.which == 13) {
 			table.column(table.column(0)).search($(this).val()).draw();

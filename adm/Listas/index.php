@@ -53,6 +53,7 @@ function executeListaGruasJson($values)
 				"Modelo" => $list['Modelo'],
 				"Color" => $list['Color'],
 				"Anio" => $list['Anio'],
+				"Clave" => $list['Clave'],
 				"actions" => '
 				<div class="btn-group">
 				<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -78,6 +79,7 @@ function executeListaGruasJson($values)
 			"Modelo" => null,
 			"Color" => null,
 			"Anio" => null,
+			"Clave" => null,
 			"actions" => null
 		);
 	}

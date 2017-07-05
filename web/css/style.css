@@ -110,11 +110,40 @@
   background-color: #fff;
   z-index: 800;
 }
+/************Datatable*****************/
 table tbody tr {
 	cursor: pointer;
 }
 table.dataTable tbody > tr.seleccionado,
 table.dataTable tbody > tr > .seleccionado {
   background-color: #ccc !important;
-  color: #000 !important
+  color: #000 !important;
 }
+.table th {
+  background-color: #fff !important;
+  color: #444;
+}
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:after {
+    color: #eee;
+}
+
+table.dataTable thead .sorting:after {
+  opacity: 0.3;
+  content: "\e150";
+  color: #000;
+  /* sort */
+}
+table.dataTable thead .sorting_asc:after {
+  opacity: 1;
+  content: "\e155";
+  color: #000;
+  /* sort-by-attributes */
+}
+table.dataTable thead .sorting_desc:after {
+  opacity: 1;
+  content: "\e156";
+  color: #000;
+  /* sort-by-attributes-alt */
+}
+/****************************************/

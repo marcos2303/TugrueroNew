@@ -8,20 +8,17 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-        <!--<a class="navbar-brand" href="#"><img src="<?php echo full_url;?>/web/img_admin/logo_blanco.png"></img></a>-->
+        <a class="navbar-brand" href="<?php echo full_url;?>/adm/index.php?action=bienvenida"><img src="<?php echo full_url;?>/web/img_admin/logo_blanco.png" width="100"></img></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav navbar-right">
         <li><a class="" href="<?php echo full_url;?>/adm/Servicios/index.php"> <i class="fa fa-automobile"></i> Servicios y monitoreo</a></li>
         <li><a class="" href="<?php echo full_url;?>/adm/Proveedores/index.php"> <i class="fa fa-truck"></i> Grueros</a></li>
         <li><a class="" href="<?php echo full_url;?>/adm/Administracion/index.php"> <i class="fa fa-pie-chart"></i> Administración</a></li>
         <li><a class="" href="<?php echo full_url;?>/adm/Polizas/index.php"> <i class="fa fa-hospital-o"></i> Pólizas</a></li>
         <li><a class="" href="<?php echo full_url;?>/adm/Planes/index.php"> <i class="fa fa-envelope"></i> Planes</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-user"></i> MDEANDRADE <span class="caret"></span></a>
           <ul class="dropdown-menu">

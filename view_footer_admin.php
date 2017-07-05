@@ -13,6 +13,8 @@
 <!-- <script src="<?php echo full_url;?>/web/admin_template/dist/js/demo.js"></script>-->
 <script src="<?php echo full_url;?>/web/js/datatables.js"></script>
 <script src="<?php echo full_url;?>/web/js/fnReloadAjax.js"></script>
+<script src="<?php echo full_url;?>/web/js/dataTables.buttons.min.js"></script>
+<script src="<?php echo full_url;?>/web/js/buttons.colVis.min.js"></script>
 <script src="<?php echo full_url;?>/web/js/app.js"></script>
 <script>
 </script>
