@@ -23,19 +23,19 @@
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label><small class="text-danger"> * </small> CI o Rif <small class="text-muted"> (V-12345678) </small></label>
-						<input class="form-control" id="Identificacion" name="Identificacion" type="text" placeholder="" required="required" pattern="^([VEJPG]{1})(-)([0-9]{5,9})$">
+						<input class="form-control" id="Identificacion" name="Identificacion" type="text" placeholder="" required="required" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$">
 					</div>
 				</div>
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label><small class="text-danger"> * </small> Nombres</label>
-						<input class="form-control" id="Nombres" name="Nombres" type="text" placeholder="" required="required" pattern="^([a-zA-Z]{3,50})$">
+						<input class="form-control" id="Nombres" name="Nombres" type="text" placeholder="" required="required" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$">
 					</div>
 				</div>
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label>Apellidos</label>
-						<input class="form-control" id="Apellidos" name="Apellidos" type="text" placeholder="" pattern="^([a-zA-Z]{3,50})$">
+						<input class="form-control" id="Apellidos" name="Apellidos" type="text" placeholder="" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$">
 					</div>
 				</div>
 			</div>
@@ -50,13 +50,13 @@
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label>Ciudad</label>
-						<input class="form-control" name="Ciudad" id="Ciudad" type="text" placeholder="" pattern="^([a-zA-Z]{3,50})$">
+						<input class="form-control" name="Ciudad" id="Ciudad" type="text" placeholder="" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$">
 					</div>
 				</div>
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label>Zona</label>
-						<input class="form-control" name="Zona" id="Zona" type="text" placeholder="" pattern="^([a-zA-Z0-9]{3,100})$">
+						<input class="form-control" name="Zona" id="Zona" type="text" placeholder="" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$">
 					</div>
 				</div>
 			</div>
@@ -141,13 +141,13 @@
 					<div class="col-sm-2">
 						<div class="form-group">
 							<label>Marca</label>
-							<select class="form-control" id="IdMarca" name="IdMarca" style="width: 100%;" required="required"></select>
+							<select class="form-control" id="IdMarca" name="IdMarca" style="width: 100%;" required="required" pattern="^([a-zA-Z0-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$"></select>
 						</div>
 					</div>
 					<div class="col-sm-2">
 						<div class="form-group">
 							<label>Modelo</label>
-							<input class="form-control" type="text" id="Modelo" name="Modelo" required="required">
+							<input class="form-control" type="text" id="Modelo" name="Modelo" required="required" pattern="^([a-zA-Z0-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$">
 						</div>
 					</div>
 					<div class="col-sm-2">
@@ -161,7 +161,7 @@
 					<div class="col-sm-2">
 						<div class="form-group">
 							<label>Color</label>
-							<input class="form-control" type="text" id="Color" name="Color" required="required">
+							<input class="form-control" type="text" id="Color" name="Color" required="required" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð '-]{3,50})$">
 						</div>
 					</div>
 					<div class="col-sm-2">

@@ -60,7 +60,7 @@ $(document).ready(function() {
 		"scrollX": true,
 		"processing": true,
 		"serverSide": true,
-		"scrollY":	'100%',
+		"sScrollY": "400",
 		"sDom": 'Btrp',
 
 		"ajax": "<?php echo full_url."/adm/Proveedores/index.php?action=list_json"?>",

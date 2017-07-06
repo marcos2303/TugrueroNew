@@ -52,7 +52,7 @@ $(document).ready(function() {
 		"scrollX": true,
 		"processing": true,
 		"serverSide": true,
-		"scrollY":	false,
+		"sScrollY": "400",
 		"sDom": 'Btrp',
 		"ajax": "<?php echo full_url."/adm/Listas/index.php?action=lista_gruas_json&IdProveedor=";if(isset($values['IdProveedor']) and $values['IdProveedor']!='') echo $values['IdProveedor']; ?>",
 		"language": {
