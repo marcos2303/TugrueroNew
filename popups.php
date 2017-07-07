@@ -102,7 +102,7 @@
   </div>
 </div>
 
-<div class="modal bs-example-modal-lg" tabindex="-1" id="popupListas" role="dialog">
+<div class="modal bs-example-modal-lg modal-lista" tabindex="-1" id="popupListas" role="dialog">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-body">

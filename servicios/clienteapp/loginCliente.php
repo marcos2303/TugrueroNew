@@ -9,9 +9,9 @@ include('../../autoload_servicios.php');
 $Polizas = new Polizas();
 /****************Seteo y comprobacion de valores*******************/
 $response = array("Error"=>0,"MensajeError"=>"","MensajeSuccess"=> 'Ok',"IdServicio"=>"0");
-$values['Cedula']='V-21411814';
-$values['Placa'] = 'AAABBB';
-$values['IdSeguro'] = '1';
+//$values['Cedula']='V-21411814';
+//$values['Placa'] = 'AAABBB';
+//$values['IdSeguro'] = '1';
 $datos_poliza = $Polizas->getLoginPoliza($values);
 if($datos_poliza){
 	$isVigente = $Polizas->isVigente($datos_poliza['Vencimiento']);
@@ -38,12 +38,12 @@ if($datos_poliza){
 				"NumPoliza"=> $datos_poliza['NumPoliza'],
 				"IdEstado"=> $datos_poliza['IdEstado'],
 				"Celular"=> $datos_poliza['Celular']
-				);	
+				);
 		}
-	
+
 }else{
 $response = array("Error"=>1,"MensajeError"=> "Los datos no coinciden, verifique la información suministrada e intente nuevamente.","MensajeSuccess"=> '');
-	
+
 }
 
 echo json_encode($response,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);

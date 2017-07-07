@@ -188,34 +188,257 @@ class Servicios {
 		$offset = $values['start'];
 
 		if(isset($values['IdProveedor']) and $values['IdProveedor']!=''){
-			$where.=" AND p.IdProveedor = '".$values['IdProveedor']."'";
-		}
+      $where.=" AND p.IdProveedor = ".$values['IdProveedor']."";
+    }
+    if(isset($values['IdGrua']) and $values['IdGrua']!=''){
+      $where.=" AND sg.IdGrua = ".$values['IdGrua']."";
+    }
 		if(isset($values['columns'][0]['search']['value']) and $values['columns'][0]['search']['value']!='')
 		{
 			$where.=" AND upper(CodigoServicio) like ('%".strtoupper($values['columns'][0]['search']['value'])."%')";
 		}
 		if(isset($values['columns'][1]['search']['value']) and $values['columns'][1]['search']['value']!='')
 		{
-			$where.=" AND upper(st.Nombre) like ('%".strtoupper($values['columns'][1]['search']['value'])."%')";
+			$where.=" AND upper(ap.Nombre) like ('%".strtoupper($values['columns'][1]['search']['value'])."%')";
 		}
 		if(isset($values['columns'][2]['search']['value']) and $values['columns'][2]['search']['value']!='')
 		{
-			$where.=" AND upper(e.Nombre) like ('%".strtoupper($values['columns'][2]['search']['value'])."%')";
+			$where.=" AND upper(st.Nombre) like ('%".strtoupper($values['columns'][2]['search']['value'])."%')";
 		}
 		if(isset($values['columns'][3]['search']['value']) and $values['columns'][3]['search']['value']!='')
 		{
-			$where.=" AND upper(Agendado) like ('%".strtoupper($values['columns'][3]['search']['value'])."%')";
+			$where.=" AND upper(e.Nombre) like ('%".strtoupper($values['columns'][3]['search']['value'])."%')";
 		}
 		if(isset($values['columns'][4]['search']['value']) and $values['columns'][4]['search']['value']!='')
 		{
-			$where.=" AND upper(Color) like ('%".strtoupper($values['columns'][4]['search']['value'])."%')";
+			$where.=" AND upper(Agendado) like ('%".strtoupper($values['columns'][4]['search']['value'])."%')";
 		}
 		if(isset($values['columns'][5]['search']['value']) and $values['columns'][5]['search']['value']!='')
 		{
-			$where.=" AND Anio like ('%".strtoupper($values['columns'][5]['search']['value'])."%')";
+			$where.=" AND upper(FechaAgendado) like ('%".strtoupper($values['columns'][5]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][6]['search']['value']) and $values['columns'][6]['search']['value']!='')
+		{
+			$where.=" AND upper(u.Login) like ('%".strtoupper($values['columns'][6]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][7]['search']['value']) and $values['columns'][7]['search']['value']!='')
+		{
+			$where.=" AND upper(a.Nombre) like ('%".strtoupper($values['columns'][7]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][8]['search']['value']) and $values['columns'][8]['search']['value']!='')
+		{
+			$where.=" AND upper(AveriaDetalle) like ('%".strtoupper($values['columns'][8]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][9]['search']['value']) and $values['columns'][9]['search']['value']!='')
+		{
+			$where.=" AND upper(cl.Nombre) like ('%".strtoupper($values['columns'][9]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][10]['search']['value']) and $values['columns'][10]['search']['value']!='')
+		{
+			$where.=" AND upper(CondicionDetalle) like ('%".strtoupper($values['columns'][10]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][11]['search']['value']) and $values['columns'][11]['search']['value']!='')
+		{
+			$where.=" AND upper(LatitudOrigen) like ('%".strtoupper($values['columns'][11]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][12]['search']['value']) and $values['columns'][12]['search']['value']!='')
+		{
+			$where.=" AND upper(LongitudOrigen) like ('%".strtoupper($values['columns'][12]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][13]['search']['value']) and $values['columns'][13]['search']['value']!='')
+		{
+			$where.=" AND upper(e1.Nombre) like ('%".strtoupper($values['columns'][13]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][14]['search']['value']) and $values['columns'][14]['search']['value']!='')
+		{
+			$where.=" AND upper(DireccionOrigen) like ('%".strtoupper($values['columns'][14]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][15]['search']['value']) and $values['columns'][15]['search']['value']!='')
+		{
+			$where.=" AND upper(DireccionOrigenDetallada) like ('%".strtoupper($values['columns'][15]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][16]['search']['value']) and $values['columns'][16]['search']['value']!='')
+		{
+			$where.=" AND upper(LatitudDestino) like ('%".strtoupper($values['columns'][16]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][17]['search']['value']) and $values['columns'][17]['search']['value']!='')
+		{
+			$where.=" AND upper(LongitudDestino) like ('%".strtoupper($values['columns'][17]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][18]['search']['value']) and $values['columns'][18]['search']['value']!='')
+		{
+			$where.=" AND upper(e2.Nombre) like ('%".strtoupper($values['columns'][18]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][19]['search']['value']) and $values['columns'][19]['search']['value']!='')
+		{
+			$where.=" AND upper(DireccionDestino) like ('%".strtoupper($values['columns'][19]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][20]['search']['value']) and $values['columns'][20]['search']['value']!='')
+		{
+			$where.=" AND upper(DireccionDestinoDetallada) like ('%".strtoupper($values['columns'][20]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][21]['search']['value']) and $values['columns'][21]['search']['value']!='')
+		{
+			$where.=" AND upper(KM) like ('%".strtoupper($values['columns'][21]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][22]['search']['value']) and $values['columns'][22]['search']['value']!='')
+		{
+			$where.=" AND upper(Inicio) like ('%".strtoupper($values['columns'][22]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][23]['search']['value']) and $values['columns'][23]['search']['value']!='')
+		{
+			$where.=" AND Fin like ('%".strtoupper($values['columns'][23]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][24]['search']['value']) and $values['columns'][24]['search']['value']!='')
+		{
+			$where.=" AND upper(Observacion) like ('%".strtoupper($values['columns'][24]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][25]['search']['value']) and $values['columns'][25]['search']['value']!='')
+		{
+			$where.=" AND upper(UltimaActCliente) like ('%".strtoupper($values['columns'][25]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][26]['search']['value']) and $values['columns'][26]['search']['value']!='')
+		{
+			$where.=" AND upper(UltimaActGruero) like ('%".strtoupper($values['columns'][26]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][27]['search']['value']) and $values['columns'][27]['search']['value']!='')
+		{
+			$where.=" AND upper(p.Identificacion) like ('%".strtoupper($values['columns'][27]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][28]['search']['value']) and $values['columns'][28]['search']['value']!='')
+		{
+			$where.=" AND upper(p.Nombres) like ('%".strtoupper($values['columns'][28]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][29]['search']['value']) and $values['columns'][29]['search']['value']!='')
+		{
+			$where.=" AND upper(p.Apellidos) like ('%".strtoupper($values['columns'][29]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][30]['search']['value']) and $values['columns'][30]['search']['value']!='')
+		{
+			$where.=" AND upper(pt.Nombre) like ('%".strtoupper($values['columns'][30]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][31]['search']['value']) and $values['columns'][31]['search']['value']!='')
+		{
+			$where.=" AND upper(g.Placa) like ('%".strtoupper($values['columns'][31]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][32]['search']['value']) and $values['columns'][32]['search']['value']!='')
+		{
+			$where.=" AND upper(m.Nombre) like ('%".strtoupper($values['columns'][32]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][33]['search']['value']) and $values['columns'][33]['search']['value']!='')
+		{
+			$where.=" AND upper(g.Modelo) like ('%".strtoupper($values['columns'][33]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][34]['search']['value']) and $values['columns'][34]['search']['value']!='')
+		{
+			$where.=" AND upper(g.Anio) like ('%".strtoupper($values['columns'][34]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][35]['search']['value']) and $values['columns'][35]['search']['value']!='')
+		{
+			$where.=" AND upper(g.Color) like ('%".strtoupper($values['columns'][35]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][36]['search']['value']) and $values['columns'][36]['search']['value']!='')
+		{
+			$where.=" AND upper(sg.Nombres) like ('%".strtoupper($values['columns'][36]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][37]['search']['value']) and $values['columns'][37]['search']['value']!='')
+		{
+			$where.=" AND upper(sg.Apellidos) like ('%".strtoupper($values['columns'][37]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][38]['search']['value']) and $values['columns'][38]['search']['value']!='')
+		{
+			$where.=" AND upper(sg.Cedula) like ('%".strtoupper($values['columns'][38]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][39]['search']['value']) and $values['columns'][39]['search']['value']!='')
+		{
+			$where.=" AND upper(sg.Celular) like ('%".strtoupper($values['columns'][39]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][40]['search']['value']) and $values['columns'][40]['search']['value']!='')
+		{
+			$where.=" AND upper(sg.TratoCordial) like ('%".strtoupper($values['columns'][40]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][41]['search']['value']) and $values['columns'][41]['search']['value']!='')
+		{
+			$where.=" AND upper(sg.Presencia) like ('%".strtoupper($values['columns'][41]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][42]['search']['value']) and $values['columns'][42]['search']['value']!='')
+		{
+			$where.=" AND upper(sg.TratoVehiculo) like ('%".strtoupper($values['columns'][42]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][43]['search']['value']) and $values['columns'][43]['search']['value']!='')
+		{
+			$where.=" AND upper(sg.Puntual) like ('%".strtoupper($values['columns'][43]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][44]['search']['value']) and $values['columns'][44]['search']['value']!='')
+		{
+			$where.=" AND upper(sc.Nombres) like ('%".strtoupper($values['columns'][44]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][45]['search']['value']) and $values['columns'][45]['search']['value']!='')
+		{
+			$where.=" AND upper(sc.Apellidos) like ('%".strtoupper($values['columns'][45]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][46]['search']['value']) and $values['columns'][46]['search']['value']!='')
+		{
+			$where.=" AND upper(sc.Cedula) like ('%".strtoupper($values['columns'][46]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][47]['search']['value']) and $values['columns'][47]['search']['value']!='')
+		{
+			$where.=" AND upper(sc.Placa) like ('%".strtoupper($values['columns'][47]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][48]['search']['value']) and $values['columns'][48]['search']['value']!='')
+		{
+			$where.=" AND UPPER(sc.Modelo) like ('%".strtoupper($values['columns'][5]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][49]['search']['value']) and $values['columns'][49]['search']['value']!='')
+		{
+			$where.=" AND upper(sc.Color) like ('%".strtoupper($values['columns'][49]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][50]['search']['value']) and $values['columns'][50]['search']['value']!='')
+		{
+			$where.=" AND upper(sc.Anio) like ('%".strtoupper($values['columns'][50]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][51]['search']['value']) and $values['columns'][51]['search']['value']!='')
+		{
+			$where.=" AND upper(sc.Celular) like ('%".strtoupper($values['columns'][51]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][52]['search']['value']) and $values['columns'][52]['search']['value']!='')
+		{
+			$where.=" AND upper(sc.PolizaVencida) like ('%".strtoupper($values['columns'][52]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][53]['search']['value']) and $values['columns'][53]['search']['value']!='')
+		{
+			$where.=" AND upper(u2.Login) like ('%".strtoupper($values['columns'][53]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][54]['search']['value']) and $values['columns'][54]['search']['value']!='')
+		{
+			$where.=" AND upper(sp.PrecioModificado) like ('%".strtoupper($values['columns'][54]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][55]['search']['value']) and $values['columns'][55]['search']['value']!='')
+		{
+			$where.=" AND upper(sp.PrecioSIvaBaremo) like ('%".strtoupper($values['columns'][55]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][56]['search']['value']) and $values['columns'][56]['search']['value']!='')
+		{
+			$where.=" AND upper(sp.PrecioCIvaBaremo) like ('%".strtoupper($values['columns'][56]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][57]['search']['value']) and $values['columns'][57]['search']['value']!='')
+		{
+			$where.=" AND upper(sp.PrecioSIvaModificado) like ('%".strtoupper($values['columns'][57]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][58]['search']['value']) and $values['columns'][58]['search']['value']!='')
+		{
+			$where.=" AND upper(sp.PrecioCIvaModificado) like ('%".strtoupper($values['columns'][58]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][59]['search']['value']) and $values['columns'][59]['search']['value']!='')
+		{
+			$where.=" AND upper(u3.Login) like ('%".strtoupper($values['columns'][59]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][60]['search']['value']) and $values['columns'][60]['search']['value']!='')
+		{
+			$where.=" AND upper(CodigoServicio) like ('%".strtoupper($values['columns'][60]['search']['value'])."%')";
 		}
 
-
+		/*****************************ORDER**************************************************************************/
 		if(isset($values['order'][0]['column']) and $values['order'][0]['column']!='0')
 		{
 			$column_order = $columns[$values['order'][0]['column']];
@@ -274,43 +497,267 @@ class Servicios {
 	{
 		$where = '1 = 1';
 		if(isset($values['IdProveedor']) and $values['IdProveedor']!=''){
-			$where.=" AND p.IdProveedor = '".$values['IdProveedor']."'";
-		}
+      $where.=" AND p.IdProveedor = ".$values['IdProveedor']."";
+    }
+    if(isset($values['IdGrua']) and $values['IdGrua']!=''){
+      $where.=" AND sg.IdGrua = ".$values['IdGrua']."";
+    }
+
 		if(isset($values['columns'][0]['search']['value']) and $values['columns'][0]['search']['value']!='')
 		{
-			$where.=" AND upper(Placa) like ('%".strtoupper($values['columns'][0]['search']['value'])."%')";
+			$where.=" AND upper(CodigoServicio) like ('%".strtoupper($values['columns'][0]['search']['value'])."%')";
 		}
 		if(isset($values['columns'][1]['search']['value']) and $values['columns'][1]['search']['value']!='')
 		{
-			$where.=" AND upper(gt.Nombre) like ('%".strtoupper($values['columns'][1]['search']['value'])."%')";
+			$where.=" AND upper(ap.Nombre) like ('%".strtoupper($values['columns'][1]['search']['value'])."%')";
 		}
 		if(isset($values['columns'][2]['search']['value']) and $values['columns'][2]['search']['value']!='')
 		{
-			$where.=" AND upper(m.Nombre) like ('%".strtoupper($values['columns'][2]['search']['value'])."%')";
+			$where.=" AND upper(st.Nombre) like ('%".strtoupper($values['columns'][2]['search']['value'])."%')";
 		}
 		if(isset($values['columns'][3]['search']['value']) and $values['columns'][3]['search']['value']!='')
 		{
-			$where.=" AND upper(Modelo) like ('%".strtoupper($values['columns'][3]['search']['value'])."%')";
+			$where.=" AND upper(e.Nombre) like ('%".strtoupper($values['columns'][3]['search']['value'])."%')";
 		}
 		if(isset($values['columns'][4]['search']['value']) and $values['columns'][4]['search']['value']!='')
 		{
-			$where.=" AND upper(Color) like ('%".strtoupper($values['columns'][4]['search']['value'])."%')";
+			$where.=" AND upper(Agendado) like ('%".strtoupper($values['columns'][4]['search']['value'])."%')";
 		}
 		if(isset($values['columns'][5]['search']['value']) and $values['columns'][5]['search']['value']!='')
 		{
-			$where.=" AND Anio like ('%".strtoupper($values['columns'][5]['search']['value'])."%')";
+			$where.=" AND upper(FechaAgendado) like ('%".strtoupper($values['columns'][5]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][6]['search']['value']) and $values['columns'][6]['search']['value']!='')
+		{
+			$where.=" AND upper(u.Login) like ('%".strtoupper($values['columns'][6]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][7]['search']['value']) and $values['columns'][7]['search']['value']!='')
+		{
+			$where.=" AND upper(a.Nombre) like ('%".strtoupper($values['columns'][7]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][8]['search']['value']) and $values['columns'][8]['search']['value']!='')
+		{
+			$where.=" AND upper(AveriaDetalle) like ('%".strtoupper($values['columns'][8]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][9]['search']['value']) and $values['columns'][9]['search']['value']!='')
+		{
+			$where.=" AND upper(cl.Nombre) like ('%".strtoupper($values['columns'][9]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][10]['search']['value']) and $values['columns'][10]['search']['value']!='')
+		{
+			$where.=" AND upper(CondicionDetalle) like ('%".strtoupper($values['columns'][10]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][11]['search']['value']) and $values['columns'][11]['search']['value']!='')
+		{
+			$where.=" AND upper(LatitudOrigen) like ('%".strtoupper($values['columns'][11]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][12]['search']['value']) and $values['columns'][12]['search']['value']!='')
+		{
+			$where.=" AND upper(LongitudOrigen) like ('%".strtoupper($values['columns'][12]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][13]['search']['value']) and $values['columns'][13]['search']['value']!='')
+		{
+			$where.=" AND upper(e1.Nombre) like ('%".strtoupper($values['columns'][13]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][14]['search']['value']) and $values['columns'][14]['search']['value']!='')
+		{
+			$where.=" AND upper(DireccionOrigen) like ('%".strtoupper($values['columns'][14]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][15]['search']['value']) and $values['columns'][15]['search']['value']!='')
+		{
+			$where.=" AND upper(DireccionOrigenDetallada) like ('%".strtoupper($values['columns'][15]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][16]['search']['value']) and $values['columns'][16]['search']['value']!='')
+		{
+			$where.=" AND upper(LatitudDestino) like ('%".strtoupper($values['columns'][16]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][17]['search']['value']) and $values['columns'][17]['search']['value']!='')
+		{
+			$where.=" AND upper(LongitudDestino) like ('%".strtoupper($values['columns'][17]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][18]['search']['value']) and $values['columns'][18]['search']['value']!='')
+		{
+			$where.=" AND upper(e2.Nombre) like ('%".strtoupper($values['columns'][18]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][19]['search']['value']) and $values['columns'][19]['search']['value']!='')
+		{
+			$where.=" AND upper(DireccionDestino) like ('%".strtoupper($values['columns'][19]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][20]['search']['value']) and $values['columns'][20]['search']['value']!='')
+		{
+			$where.=" AND upper(DireccionDestinoDetallada) like ('%".strtoupper($values['columns'][20]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][21]['search']['value']) and $values['columns'][21]['search']['value']!='')
+		{
+			$where.=" AND upper(KM) like ('%".strtoupper($values['columns'][21]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][22]['search']['value']) and $values['columns'][22]['search']['value']!='')
+		{
+			$where.=" AND upper(Inicio) like ('%".strtoupper($values['columns'][22]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][23]['search']['value']) and $values['columns'][23]['search']['value']!='')
+		{
+			$where.=" AND Fin like ('%".strtoupper($values['columns'][23]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][24]['search']['value']) and $values['columns'][24]['search']['value']!='')
+		{
+			$where.=" AND upper(Observacion) like ('%".strtoupper($values['columns'][24]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][25]['search']['value']) and $values['columns'][25]['search']['value']!='')
+		{
+			$where.=" AND upper(UltimaActCliente) like ('%".strtoupper($values['columns'][25]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][26]['search']['value']) and $values['columns'][26]['search']['value']!='')
+		{
+			$where.=" AND upper(UltimaActGruero) like ('%".strtoupper($values['columns'][26]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][27]['search']['value']) and $values['columns'][27]['search']['value']!='')
+		{
+			$where.=" AND upper(p.Identificacion) like ('%".strtoupper($values['columns'][27]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][28]['search']['value']) and $values['columns'][28]['search']['value']!='')
+		{
+			$where.=" AND upper(p.Nombres) like ('%".strtoupper($values['columns'][28]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][29]['search']['value']) and $values['columns'][29]['search']['value']!='')
+		{
+			$where.=" AND upper(p.Apellidos) like ('%".strtoupper($values['columns'][29]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][30]['search']['value']) and $values['columns'][30]['search']['value']!='')
+		{
+			$where.=" AND upper(pt.Nombre) like ('%".strtoupper($values['columns'][30]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][31]['search']['value']) and $values['columns'][31]['search']['value']!='')
+		{
+			$where.=" AND upper(g.Placa) like ('%".strtoupper($values['columns'][31]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][32]['search']['value']) and $values['columns'][32]['search']['value']!='')
+		{
+			$where.=" AND upper(m.Nombre) like ('%".strtoupper($values['columns'][32]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][33]['search']['value']) and $values['columns'][33]['search']['value']!='')
+		{
+			$where.=" AND upper(g.Modelo) like ('%".strtoupper($values['columns'][33]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][34]['search']['value']) and $values['columns'][34]['search']['value']!='')
+		{
+			$where.=" AND upper(g.Anio) like ('%".strtoupper($values['columns'][34]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][35]['search']['value']) and $values['columns'][35]['search']['value']!='')
+		{
+			$where.=" AND upper(g.Color) like ('%".strtoupper($values['columns'][35]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][36]['search']['value']) and $values['columns'][36]['search']['value']!='')
+		{
+			$where.=" AND upper(sg.Nombres) like ('%".strtoupper($values['columns'][36]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][37]['search']['value']) and $values['columns'][37]['search']['value']!='')
+		{
+			$where.=" AND upper(sg.Apellidos) like ('%".strtoupper($values['columns'][37]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][38]['search']['value']) and $values['columns'][38]['search']['value']!='')
+		{
+			$where.=" AND upper(sg.Cedula) like ('%".strtoupper($values['columns'][38]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][39]['search']['value']) and $values['columns'][39]['search']['value']!='')
+		{
+			$where.=" AND upper(sg.Celular) like ('%".strtoupper($values['columns'][39]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][40]['search']['value']) and $values['columns'][40]['search']['value']!='')
+		{
+			$where.=" AND upper(sg.TratoCordial) like ('%".strtoupper($values['columns'][40]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][41]['search']['value']) and $values['columns'][41]['search']['value']!='')
+		{
+			$where.=" AND upper(sg.Presencia) like ('%".strtoupper($values['columns'][41]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][42]['search']['value']) and $values['columns'][42]['search']['value']!='')
+		{
+			$where.=" AND upper(sg.TratoVehiculo) like ('%".strtoupper($values['columns'][42]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][43]['search']['value']) and $values['columns'][43]['search']['value']!='')
+		{
+			$where.=" AND upper(sg.Puntual) like ('%".strtoupper($values['columns'][43]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][44]['search']['value']) and $values['columns'][44]['search']['value']!='')
+		{
+			$where.=" AND upper(sc.Nombres) like ('%".strtoupper($values['columns'][44]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][45]['search']['value']) and $values['columns'][45]['search']['value']!='')
+		{
+			$where.=" AND upper(sc.Apellidos) like ('%".strtoupper($values['columns'][45]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][46]['search']['value']) and $values['columns'][46]['search']['value']!='')
+		{
+			$where.=" AND upper(sc.Cedula) like ('%".strtoupper($values['columns'][46]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][47]['search']['value']) and $values['columns'][47]['search']['value']!='')
+		{
+			$where.=" AND upper(sc.Placa) like ('%".strtoupper($values['columns'][47]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][48]['search']['value']) and $values['columns'][48]['search']['value']!='')
+		{
+			$where.=" AND UPPER(sc.Modelo) like ('%".strtoupper($values['columns'][5]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][49]['search']['value']) and $values['columns'][49]['search']['value']!='')
+		{
+			$where.=" AND upper(sc.Color) like ('%".strtoupper($values['columns'][49]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][50]['search']['value']) and $values['columns'][50]['search']['value']!='')
+		{
+			$where.=" AND upper(sc.Anio) like ('%".strtoupper($values['columns'][50]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][51]['search']['value']) and $values['columns'][51]['search']['value']!='')
+		{
+			$where.=" AND upper(sc.Celular) like ('%".strtoupper($values['columns'][51]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][52]['search']['value']) and $values['columns'][52]['search']['value']!='')
+		{
+			$where.=" AND upper(sc.PolizaVencida) like ('%".strtoupper($values['columns'][52]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][53]['search']['value']) and $values['columns'][53]['search']['value']!='')
+		{
+			$where.=" AND upper(u2.Login) like ('%".strtoupper($values['columns'][53]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][54]['search']['value']) and $values['columns'][54]['search']['value']!='')
+		{
+			$where.=" AND upper(sp.PrecioModificado) like ('%".strtoupper($values['columns'][54]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][55]['search']['value']) and $values['columns'][55]['search']['value']!='')
+		{
+			$where.=" AND upper(sp.PrecioSIvaBaremo) like ('%".strtoupper($values['columns'][55]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][56]['search']['value']) and $values['columns'][56]['search']['value']!='')
+		{
+			$where.=" AND upper(sp.PrecioCIvaBaremo) like ('%".strtoupper($values['columns'][56]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][57]['search']['value']) and $values['columns'][57]['search']['value']!='')
+		{
+			$where.=" AND upper(sp.PrecioSIvaModificado) like ('%".strtoupper($values['columns'][57]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][58]['search']['value']) and $values['columns'][58]['search']['value']!='')
+		{
+			$where.=" AND upper(sp.PrecioCIvaModificado) like ('%".strtoupper($values['columns'][58]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][59]['search']['value']) and $values['columns'][59]['search']['value']!='')
+		{
+			$where.=" AND upper(u3.Login) like ('%".strtoupper($values['columns'][59]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][60]['search']['value']) and $values['columns'][60]['search']['value']!='')
+		{
+			$where.=" AND upper(CodigoServicio) like ('%".strtoupper($values['columns'][60]['search']['value'])."%')";
 		}
 		$ConnectionORM = new ConnectionORM();
 		$query = "SELECT count(*) as cuenta
 		FROM Servicios
+		INNER JOIN ServiciosClientes sc ON sc.IdServicio = Servicios.IdServicio
 		INNER JOIN Usuarios u ON u.IdUsuario = Servicios.IdUsuario
 		LEFT JOIN ServiciosGruas sg ON sg.IdServicio = Servicios.IdServicio
-		INNER JOIN Gruas g ON g.IdGrua = sg.IdGrua
-		INNER JOIN Marcas m ON m.IdMarca = g.IdMarca
-		INNER JOIN GruasTipos gt ON gt.IdGruaTipo = g.IdGruaTipo
-		INNER JOIN Proveedores p ON p.IdProveedor = g.IdProveedor
-		INNER JOIN ProveedoresTipos pt ON pt.IdProveedorTipo = p.IdProveedorTipo
-		INNER JOIN ServiciosClientes sc ON sc.IdServicio = Servicios.IdServicio
+		LEFT JOIN Gruas g ON g.IdGrua = sg.IdGrua
+		LEFT JOIN Marcas m ON m.IdMarca = g.IdMarca
+		LEFT JOIN GruasTipos gt ON gt.IdGruaTipo = g.IdGruaTipo
+		LEFT JOIN Proveedores p ON p.IdProveedor = g.IdProveedor
+		LEFT JOIN ProveedoresTipos pt ON pt.IdProveedorTipo = p.IdProveedorTipo
 		LEFT JOIN Usuarios u2 ON u2.IdUsuario = sc.IdUsuarioPermiso
 		LEFT JOIN Polizas pol ON pol.IdPoliza = sc.IdPoliza
 		LEFT JOIN Seguros seg ON seg.IdSeguro = pol.IdSeguro
@@ -319,7 +766,6 @@ class Servicios {
 		LEFT JOIN Usuarios u3 ON u3.IdUsuario = sp.IdUsuarioPermiso
 		LEFT JOIN ServiciosTipos st ON st.IdServicioTipo = Servicios.IdServicioTipo
 		LEFT JOIN Estatus e ON e.IdEstatus = Servicios.IdEstatus
-
 		LEFT JOIN Estados e1 ON e1.IdEstado = Servicios.IdEstadoOrigen
 		LEFT JOIN Estados e2 ON e2.IdEstado = Servicios.IdEstadoDestino
 		LEFT JOIN Averias a ON a.IdAveria = Servicios.IdAveria

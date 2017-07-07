@@ -140,7 +140,19 @@ $(document).ready(function(){
 
 
 	});
+	$('#ListarServicios').click(function(){
+		IdProveedor = $('#IdProveedor').val();
+		$.ajax({
+			url: link_servidor + "adm/Listas/index.php?action=lista_servicios&IdProveedor="+ IdProveedor+"",
+			success: function(html){
+				$('#popupListas .modal-body').html(html);
+				$('#popupListas').modal('show');
+			}
+		});
 
+
+
+	});
 });
 function reasignar(){
 	var Usuario = $('#Usuario').val();

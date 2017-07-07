@@ -28,7 +28,6 @@ class Proveedores{
     $limit = $values['length'];
     $offset = $values['start'];
 
-
     if(isset($values['columns'][0]['search']['value']) and $values['columns'][0]['search']['value']!='')
     {
       $where.=" AND upper(Identificacion) like ('%".strtoupper($values['columns'][0]['search']['value'])."%')";

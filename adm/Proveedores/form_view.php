@@ -23,19 +23,19 @@
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label><small class="text-danger"> * </small> CI o Rif <small class="text-muted"> (V-12345678) </small></label>
-						<input class="form-control" id="Identificacion" name="Identificacion" type="text" placeholder="" required="required" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$">
+						<input class="form-control" id="Identificacion" name="Identificacion" type="text" placeholder="" required="required" pattern="^([VvEeJjPpGg]{1})(-)([0-9]{5,9})$" autocomplete="off">
 					</div>
 				</div>
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label><small class="text-danger"> * </small> Nombres</label>
-						<input class="form-control" id="Nombres" name="Nombres" type="text" placeholder="" required="required" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$">
+						<input class="form-control" id="Nombres" name="Nombres" type="text" placeholder="" required="required" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$" autocomplete="off">
 					</div>
 				</div>
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label>Apellidos</label>
-						<input class="form-control" id="Apellidos" name="Apellidos" type="text" placeholder="" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$">
+						<input class="form-control" id="Apellidos" name="Apellidos" type="text" placeholder="" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$" autocomplete="off">
 					</div>
 				</div>
 			</div>
@@ -50,13 +50,13 @@
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label>Ciudad</label>
-						<input class="form-control" name="Ciudad" id="Ciudad" type="text" placeholder="" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$">
+						<input class="form-control" name="Ciudad" id="Ciudad" type="text" placeholder="" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$" autocomplete="off">
 					</div>
 				</div>
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label>Zona</label>
-						<input class="form-control" name="Zona" id="Zona" type="text" placeholder="" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$">
+						<input class="form-control" name="Zona" id="Zona" type="text" placeholder="" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$" autocomplete="off">
 					</div>
 				</div>
 			</div>
@@ -64,25 +64,25 @@
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label><small class="text-danger"> * </small> Celular 1 <small class="text-muted"> (04261234567) </small></label>
-						<input class="form-control" name="Celular1" id="Celular1" type="text" placeholder="" required="required" pattern="^([04]{2})([0-9]{2})([0-9]{7})$" maxlength="11">
+						<input class="form-control" name="Celular1" id="Celular1" type="text" placeholder="" required="required" pattern="^([04]{2})([0-9]{2})([0-9]{7})$" maxlength="11" autocomplete="off">
 					</div>
 				</div>
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label>Celular 2</label>
-						<input class="form-control" name="Celular2" id="Celular2" type="text" placeholder="" pattern="^([04]{2})([0-9]{2})([0-9]{7})$" maxlength="11">
+						<input class="form-control" name="Celular2" id="Celular2" type="text" placeholder="" pattern="^([04]{2})([0-9]{2})([0-9]{7})$" maxlength="11" autocomplete="off">
 					</div>
 				</div>
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label>Celular 3</label>
-						<input class="form-control" name="Celular3" id="Celular3" type="text" placeholder="" pattern="^([04]{2})([0-9]{2})([0-9]{7})$" maxlength="11">
+						<input class="form-control" name="Celular3" id="Celular3" type="text" placeholder="" pattern="^([04]{2})([0-9]{2})([0-9]{7})$" maxlength="11" autocomplete="off">
 					</div>
 				</div>
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label>Clave especial</label>
-						<input class="form-control" name="ClaveEspecial" id="ClaveEspecial" type="text" placeholder="" maxlength="12">
+						<input class="form-control" name="ClaveEspecial" id="ClaveEspecial" type="text" placeholder="" maxlength="12" autocomplete="off">
 					</div>
 				</div>
 			</div>
@@ -99,7 +99,7 @@
 					<div class="btn-group well well-sm">
 						<button type="button" id="AgregarGrua" class="btn btn-primary btn-md"><i class="fa fa-plus-circle"></i> Agregar grúas</button>
 						<button type="button" id="ListarGruas" class="btn btn-default btn-md"><i class="fa fa-list"></i> Listado de grúas </button>
-						<button type="button" class="btn btn-default btn-md"><i class="fa fa-clock-o"></i> Historial de servicios</button>
+						<button type="button" id="ListarServicios" class="btn btn-default btn-md"><i class="fa fa-clock-o"></i> Historial de servicios</button>
 					</div>
 				</div>
 			</div>
@@ -141,13 +141,13 @@
 					<div class="col-sm-2">
 						<div class="form-group">
 							<label>Marca</label>
-							<select class="form-control" id="IdMarca" name="IdMarca" style="width: 100%;" required="required" pattern="^([a-zA-Z0-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$"></select>
+							<select class="form-control" id="IdMarca" name="IdMarca" style="width: 100%;" required="required" pattern="^([a-zA-Z0-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$" autocomplete="off"></select>
 						</div>
 					</div>
 					<div class="col-sm-2">
 						<div class="form-group">
 							<label>Modelo</label>
-							<input class="form-control" type="text" id="Modelo" name="Modelo" required="required" pattern="^([a-zA-Z0-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$">
+							<input class="form-control" type="text" id="Modelo" name="Modelo" required="required" pattern="^([a-zA-Z0-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$" autocomplete="off">
 						</div>
 					</div>
 					<div class="col-sm-2">
@@ -161,13 +161,13 @@
 					<div class="col-sm-2">
 						<div class="form-group">
 							<label>Color</label>
-							<input class="form-control" type="text" id="Color" name="Color" required="required" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð '-]{3,50})$">
+							<input class="form-control" type="text" id="Color" name="Color" required="required" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð '-]{3,50})$" autocomplete="off">
 						</div>
 					</div>
 					<div class="col-sm-2">
 						<div class="form-group">
 							<label>Clave</label>
-							<input class="form-control" type="text" id="Clave" name="Clave" required="required">
+							<input class="form-control" type="text" id="Clave" name="Clave" required="required" autocomplete="off">
 						</div>
 					</div>
 					<div class="col-sm-1 col-sm-offset-11">

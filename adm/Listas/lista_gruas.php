@@ -62,13 +62,13 @@ $(document).ready(function() {
 		buttons: [
 				{
 						extend: 'colvisGroup',
-						text: 'Datos básicos',
+						text: 'Básicos',
 						show: [ 1, 2, 3,4 ],
 						hide: [ 5,6 ]
 				},
 				{
 						extend: 'colvisGroup',
-						text: 'Datos APP',
+						text: 'APP',
 						show: [  6 ],
 						hide: [ 1, 2,3,4,5 ]
 				},

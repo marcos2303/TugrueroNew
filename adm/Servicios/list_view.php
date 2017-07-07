@@ -3,9 +3,7 @@
 <div class="container-fluid">
 	<h1 class="">Servicios</h1>
 
-	<div id="DataServicios">
-
-	</div>
+	<div id="DataServicios"></div>
 
 	<a class="btn btn-default"  href="<?php echo full_url."/adm/Servicios/index.php?action=new"?>"><i class="fa fa-plus-circle"></i> Agregar</a>
 </div>
