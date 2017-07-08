@@ -71,9 +71,6 @@ function executeListJson($values)
 				</button>
 				<ul class="dropdown-menu dropdown-menu-right">
 				<li><a href="'.full_url.'/adm/Proveedores/index.php?action=edit&IdProveedor='.$list['IdProveedor'].'"> Editar</a></li>
-				<li><a href="#"> Historial de servicios</a></li>
-				<li><a href="#"> Conexiones</a></li>
-				<li><a href="#"> Reiniciar dispositivo</a></li>
 				</ul>
 				</div>'
 			);
