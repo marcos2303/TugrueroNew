@@ -97,7 +97,7 @@
 			<div class="row" id="DivBotones" style="display:none;">
 				<div class="col-sm-4 col-sm-offset-4 " >
 					<div class="btn-group well well-sm">
-						<button type="button" id="AgregarGrua" class="btn btn-primary btn-md"><i class="fa fa-plus-circle"></i> Agregar grúas</button>
+						<button type="button" id="AgregarGrua" class="btn btn-primary btn-md"><i class="fa fa-plus-circle"></i> Agregar grúa</button>
 						<button type="button" id="ListarGruas" class="btn btn-default btn-md"><i class="fa fa-list"></i> Listado de grúas </button>
 						<button type="button" id="ListarServicios" class="btn btn-default btn-md"><i class="fa fa-clock-o"></i> Historial de servicios</button>
 					</div>
@@ -186,4 +186,3 @@
 </form>
 
 <?php include('../../view_footer_admin.php')?>
-<script src="<?php echo full_url;?>/web/js/Proveedores.js"></script>

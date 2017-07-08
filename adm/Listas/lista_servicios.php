@@ -130,6 +130,10 @@
     </tr>
   </tfoot>
 </table>
+<?php if(isset($values['regresar']) and $values['regresar'] == 1):?>
+  <a href="#" class="btn btn-default" onclick="ListarGruas(<?php echo $values['IdProveedor']?>);"><i class="fa fa-arrow-circle-left"></i> Regresar</a>
+
+<?php endif;?>
 <script>
 $(document).ready(function() {
   $('#example tfoot th').each( function () {

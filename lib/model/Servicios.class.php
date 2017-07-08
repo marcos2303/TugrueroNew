@@ -777,4 +777,51 @@ class Servicios {
 		$q = $q->fetch();
 		return $q['cuenta'];
 	}
+	public function getServiciosDetalle($values){
+
+		$IdServicio = $values['IdServicio'];
+		$ConnectionORM = new ConnectionORM();
+		$query = "		SELECT
+		Servicios.IdServicio,CodigoServicio,ap.Nombre AS NombreAplicacion, st.Nombre AS NombreServicioTipo,e.Nombre AS NombreEstatus,
+		CASE WHEN Agendado = 1 THEN 'SI' ELSE 'NO' END AS Agendado, FechaAgendado, u.Login AS NombreUsuarioServicio, a.Nombre AS NombreAveria,
+		AveriaDetalle, cl.Nombre AS NombreCondicionLugar, CondicionDetalle,LatitudOrigen, LongitudOrigen, e1.Nombre AS NombreEstadoOrigen,
+		DireccionOrigen, DireccionOrigenDetallada, LatitudDestino, LongitudDestino,e2.Nombre AS NombreEstadoDestino,DireccionDestino, DireccionDestinoDetallada,
+		KM, Inicio, Fin, UltimaActCliente, UltimaActGruero, sg.IdGrua, p.Nombres AS NombresProveedor,p.Apellidos AS ApellidosProveedor,
+		p.Identificacion AS IdentificacionProveedor,pt.Nombre AS NombreProveedorTipo, sg.Nombres AS NombresGruas, sg.Apellidos AS ApellidosGruas,
+		sg.Cedula AS CedulaGruas, sg.Celular AS CelularGruas,g.Placa AS PlacaGrua, m.Nombre AS NombreMarcaGruas,g.Modelo AS ModeloGrua, g.Color AS ColorGrua,g.Anio AS AnioGrua,
+		sg.Nombres AS NombresGrua,sg.Apellidos AS ApellidosGrua,sg.Cedula AS CedulaGrua,sg.Celular AS CelularGrua,sg.TratoCordial, sg.Presencia,
+		sg.TratoVehiculo, sg.Puntual, sc.IdPoliza , m2.Nombre AS NombreMarcaCliente, sc.Nombres AS NombresCliente,sc.Apellidos AS ApellidosCliente,
+		sc.Cedula AS CedulaCliente, sc.Placa AS PlacaCliente, sc.Modelo AS ModeloCliente, sc.Color AS ColorCliente, sc.Anio AS AnioCliente,
+		sc.Celular AS CelularCliente,
+		CASE PolizaVencida WHEN PolizaVencida = 1 THEN 'SI' ELSE 'NO' END AS PolizaVencida, u2.Login AS NombreUsuarioCliente,
+		sp.PrecioModificado, sp.PrecioSIvaBaremo, sp.PrecioCIvaBaremo, sp.PrecioSIvaModificado, sp.PrecioSIvaModificado,sp.PrecioCIvaModificado, u3.login AS NombreUsuarioPrecio
+		FROM Servicios
+		INNER JOIN ServiciosClientes sc ON sc.IdServicio = Servicios.IdServicio
+		INNER JOIN Usuarios u ON u.IdUsuario = Servicios.IdUsuario
+		LEFT JOIN ServiciosGruas sg ON sg.IdServicio = Servicios.IdServicio
+		LEFT JOIN Gruas g ON g.IdGrua = sg.IdGrua
+		LEFT JOIN Marcas m ON m.IdMarca = g.IdMarca
+		LEFT JOIN GruasTipos gt ON gt.IdGruaTipo = g.IdGruaTipo
+		LEFT JOIN Proveedores p ON p.IdProveedor = g.IdProveedor
+		LEFT JOIN ProveedoresTipos pt ON pt.IdProveedorTipo = p.IdProveedorTipo
+		LEFT JOIN Usuarios u2 ON u2.IdUsuario = sc.IdUsuarioPermiso
+		LEFT JOIN Polizas pol ON pol.IdPoliza = sc.IdPoliza
+		LEFT JOIN Seguros seg ON seg.IdSeguro = pol.IdSeguro
+		LEFT JOIN Marcas m2 ON m2.IdMarca = sc.IdMarca
+		LEFT JOIN ServiciosPrecios sp ON sp.IdServicio = Servicios.IdServicio
+		LEFT JOIN Usuarios u3 ON u3.IdUsuario = sp.IdUsuarioPermiso
+		LEFT JOIN ServiciosTipos st ON st.IdServicioTipo = Servicios.IdServicioTipo
+		LEFT JOIN Estatus e ON e.IdEstatus = Servicios.IdEstatus
+		LEFT JOIN Estados e1 ON e1.IdEstado = Servicios.IdEstadoOrigen
+		LEFT JOIN Estados e2 ON e2.IdEstado = Servicios.IdEstadoDestino
+		LEFT JOIN Averias a ON a.IdAveria = Servicios.IdAveria
+		INNER JOIN CondicionLugar cl ON cl.IdCondicionLugar = Servicios.IdCondicionLugar
+		INNER JOIN Aplicaciones ap ON ap.IdAplicacion = Servicios.IdAplicacion
+
+		WHERE Servicios.IdServicio = $IdServicio";
+		$q = $ConnectionORM->ejecutarPreparado($query);
+		$q = $q->fetch();
+		return $q;
+
+	}
 }
