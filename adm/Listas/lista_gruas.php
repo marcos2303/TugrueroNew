@@ -1,5 +1,3 @@
-<?php //include('../../view_header_admin.php')?>
-<div class="">
 	<h3 class="text-center">Grúas</h3>
 	<table id="example" class="table table-striped table-bordered table-responsive" width="100%" cellspacing="0">
 		<thead>
@@ -27,8 +25,6 @@
 			</tr>
 		</tfoot>
 	</table>
-</div>
-<?php //include('../../view_footer_admin.php')?>
 <script>
 
 
@@ -52,7 +48,8 @@ $(document).ready(function() {
 		"scrollX": true,
 		"processing": true,
 		"serverSide": true,
-		"sScrollY": "400",
+        "sServerMethod": "POST",
+		"sScrollY": "300",
 		"sDom": 'Btrp',
 		"ajax": "<?php echo full_url."/adm/Listas/index.php?action=lista_gruas_json&IdProveedor=";if(isset($values['IdProveedor']) and $values['IdProveedor']!='') echo $values['IdProveedor']; ?>",
 		"language": {

@@ -1,13 +1,13 @@
 <table id="example" class="table table-striped table-bordered table-responsive" width="100%" cellspacing="0">
   <thead>
     <tr>
-      <th>CodigoServicio</th>
-      <th>NombreAplicacion</th>
-      <th>NombreServicioTipo</th>
-      <th>NombreEstatus</th>
+      <th>Código</th>
+      <th>Aplicacion</th>
+      <th>Tipo servicio</th>
+      <th>Estatus</th>
       <th>Agendado</th>
-      <th>FechaAgendado</th>
-      <th>NombreUsuarioServicio</th>
+      <th>F.Agendado</th>
+      <th>Usuario</th>
       <th>NombreAveria</th>
       <th>AveriaDetalle</th>
       <th>NombreCondicionLugar</th>
@@ -141,7 +141,7 @@ $(document).ready(function() {
 
     if(title != 'Detalle')
     {
-      $(this).html( '<input size="10" class="input-sm filtros" id="column_'+$(this).index()+'" type="text" placeholder="'+title+'" />' );
+      $(this).html( '<input size="5%" class="input-sm filtros" id="column_'+$(this).index()+'" type="text" placeholder="'+title+'" />' );
     }
     if(title == 'Detalle')
     {
@@ -156,7 +156,7 @@ $(document).ready(function() {
     "processing": true,
     "sServerMethod": "POST",
     "serverSide": true,
-    "sScrollY": "400",
+    "sScrollY": "300",
     "sDom": 'Btrp',
     "ajax":link_servidor + "/adm/Listas/index.php?action=lista_servicios_json&IdProveedor=<?php echo $values['IdProveedor'];?>&IdGrua=<?php echo $values['IdGrua'];?>",
     "language": {
@@ -294,6 +294,9 @@ $(document).ready(function() {
                   { 'bSortable': false, 'aTargets': [ 60 ] }
                 ]
               });
+                $('#example').css( 'display', 'table' );
+
+                table.responsive.recalc();
 
               /*for(i=0; i< table.columns()[0].length;i++){
 

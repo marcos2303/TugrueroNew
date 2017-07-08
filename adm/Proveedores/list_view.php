@@ -2,8 +2,6 @@
 <?php include('../menu.php');?>
 <div class="container-fluid">
 	<h1 class="text-center">Grueros</h1>
-	<div class="box box-shadow">
-		<div class="box-header with-border">
 			<table id="example" class="table table-striped table-bordered table-responsive" width="100%" cellspacing="0">
 				<thead>
 					<tr>
@@ -31,8 +29,6 @@
 				</tfoot>
 			</table>
 			<a class="btn btn-primary"  href="<?php echo full_url."/adm/Proveedores/index.php?action=new"?>"><i class="fa fa-plus"></i> Agregar</a>
-		</div>
-	</div>
 
 </div>
 <?php include('../../view_footer_admin.php')?>
@@ -60,7 +56,7 @@ $(document).ready(function() {
 		"scrollX": true,
 		"processing": true,
 		"serverSide": true,
-		"sScrollY": "400",
+		"sScrollY": "300",
 		"sDom": 'Btrp',
 
 		"ajax": "<?php echo full_url."/adm/Proveedores/index.php?action=list_json"?>",

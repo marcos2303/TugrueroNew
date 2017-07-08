@@ -95,8 +95,8 @@
 				</div>
 			</div>
 			<div class="row" id="DivBotones" style="display:none;">
-				<div class="col-sm-4 col-sm-offset-4 " >
-					<div class="btn-group well well-sm">
+				<div class="col-sm-6 col-sm-offset-4 " >
+					<div class="btn-group well well-xs">
 						<button type="button" id="AgregarGrua" class="btn btn-primary btn-md"><i class="fa fa-plus-circle"></i> Agregar grúa</button>
 						<button type="button" id="ListarGruas" class="btn btn-default btn-md"><i class="fa fa-list"></i> Listado de grúas </button>
 						<button type="button" id="ListarServicios" class="btn btn-default btn-md"><i class="fa fa-clock-o"></i> Historial de servicios</button>

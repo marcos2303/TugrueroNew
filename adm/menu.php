@@ -8,7 +8,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-        <a class="navbar-brand" href="<?php echo full_url;?>/adm/index.php?action=bienvenida"><img src="<?php echo full_url;?>/web/img_admin/logo_blanco.png" width="100"></img></a>
+        <a class="navbar-brand hidden-sm hidden-xs" href="<?php echo full_url;?>/adm/index.php?action=bienvenida"><img src="<?php echo full_url;?>/web/img_admin/logo_blanco.png" width="100"></img></a>
+        <a class="navbar-brand hidden-md hidden-lg " href="<?php echo full_url;?>/adm/index.php?action=bienvenida"><img src="<?php echo full_url;?>/web/img_admin/logo_blanco.png" width="60"></img></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
