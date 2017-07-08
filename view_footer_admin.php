@@ -16,6 +16,7 @@
 <script src="<?php echo full_url;?>/web/js/dataTables.buttons.min.js"></script>
 <script src="<?php echo full_url;?>/web/js/buttons.colVis.min.js"></script>
 <script src="<?php echo full_url;?>/web/js/app.js"></script>
+<script src="<?php echo full_url;?>/web/js/Proveedores.js"></script>
 <script>
 </script>
 </body>

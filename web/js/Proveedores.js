@@ -127,32 +127,19 @@ $(document).ready(function(){
 		//$("#Placa").val("");
 		//limpiarGruaForm();
 	}
-	$('#ListarGruas').click(function(){
-		IdProveedor = $('#IdProveedor').val();
-		$.ajax({
-			url: link_servidor + "adm/Listas/index.php?action=lista_gruas&IdProveedor="+ IdProveedor+"",
-			success: function(html){
-				$('#popupListas .modal-body').html(html);
-				$('#popupListas').modal('show');
-			}
-		});
 
 
-
-	});
 	$('#ListarServicios').click(function(){
 		IdProveedor = $('#IdProveedor').val();
-		$.ajax({
-			url: link_servidor + "adm/Listas/index.php?action=lista_servicios&IdProveedor="+ IdProveedor+"",
-			success: function(html){
-				$('#popupListas .modal-body').html(html);
-				$('#popupListas').modal('show');
-			}
-		});
-
-
-
+		ListarServicios(IdProveedor);
 	});
+/*** end ready**/
+});
+/*****/
+$('#ListarGruas').click(function(){
+	IdProveedor = $('#IdProveedor').val();
+	ListarGruas(IdProveedor);
+
 });
 function reasignar(){
 	var Usuario = $('#Usuario').val();
@@ -264,4 +251,40 @@ function verificarDatosGrua(){
 		}
 
 	}
+}
+function ListarGruas(IdProveedor){
+		$.ajax({
+			url: link_servidor + "adm/Listas/index.php?action=lista_gruas&IdProveedor="+ IdProveedor+"",
+			success: function(html){
+				$('#popupListas .modal-body').html(html);
+				$('#popupListas').modal('show');
+			}
+		});
+}
+function ListarServiciosGrua(IdProveedor, IdGrua){
+		$.ajax({
+			url: link_servidor + "adm/Listas/index.php?action=lista_servicios&IdProveedor="+ IdProveedor+"&IdGrua="+ IdGrua+ "&regresar=1&services_regresar=lista_gruas",
+			success: function(html){
+				$('#popupListas .modal-body').html(html);
+				$('#popupListas').modal('show');
+			}
+		});
+}
+function ListarServicios(IdProveedor){
+		$.ajax({
+			url: link_servidor + "adm/Listas/index.php?action=lista_servicios&IdProveedor="+ IdProveedor,
+			success: function(html){
+				$('#popupListas .modal-body').html(html);
+				$('#popupListas').modal('show');
+			}
+		});
+}
+function DetalleServicio(IdServicio){
+		$.ajax({
+			url: link_servidor + "adm/Listas/index.php?action=detalle_servicio&IdServicio="+ IdServicio,
+			success: function(html){
+				$('#popupListas .modal-body').html(html);
+				$('#popupListas').modal('show');
+			}
+		});
 }
