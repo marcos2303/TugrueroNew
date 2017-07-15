@@ -186,3 +186,4 @@
 </form>
 
 <?php include('../../view_footer_admin.php')?>
+<script src="<?php echo full_url;?>/web/js/Proveedores.js"></script>

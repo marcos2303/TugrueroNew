@@ -51,7 +51,7 @@ class Servicios {
 			'DireccionDestino' => $values['DireccionDestino'],
 			'DireccionDestinoDetallada' => $values['DireccionDestinoDetallada'],
 			'KM' => $values['KM'],
-			'Inicio' => date('Y-m-d h:i:s'),
+			'Inicio' => $values['Inicio'],
 			'Fin' => null,
 			'Observacion' => $values['Observacion'],
 			'UltimaActCliente' => date('Y-m-d h:i:s'),
@@ -88,13 +88,13 @@ class Servicios {
 		$ConnectionORM = new ConnectionORM();
 		$q = $ConnectionORM->getConnect()->Servicios
 		->select("
-		Servicios.IdServicio,Servicios.IdEstatus,Servicios.CodigoServicio,Servicios.IdAplicacion,Servicios.IdServicioTipo,
+		Servicios.IdServicio,Servicios.CodigoServicio,Servicios.IdEstatus,Servicios.CodigoServicio,Servicios.IdAplicacion,Servicios.IdServicioTipo,
 		Servicios.LatitudOrigen,Servicios.LongitudOrigen,Servicios.IdEstadoOrigen,Servicios.DireccionOrigen,Servicios.DireccionOrigenDetallada,
 		Servicios.LatitudDestino,Servicios.LongitudDestino,Servicios.IdEstadoDestino,Servicios.DireccionDestino,Servicios.DireccionDestinoDetallada,
 		Servicios.Agendado,Servicios.FechaAgendado,Servicios.IdAveria,Servicios.AveriaDetalle,Servicios.IdCondicionLugar,Servicios.CondicionDetalle,Servicios.KM,Servicios.Inicio,Servicios.Fin,Servicios.Inicio,Servicios.Fin,Servicios.Observacion,Servicios.UltimaActCliente,Servicios.UltimaActGruero,
 		c.Nombres, c.Apellidos,c.Cedula,c.Placa,c.IdMarca, c.Modelo,c.Color,c.Anio,c.Celular,
 		g.IdGrua,g.IdProveedor,g.Nombres as NombresGruero,g.Apellidos as ApellidosGruero,g2.Placa as PlacaGruero,
-		g2.IdGruaTipo  as IdGruaTipo,g2.IdMarca  as IdMarcaGruero,g2.Modelo as ModeloGruero,g2.Color as ColorGruero,g2.Anio as AnioGruero,g2.Celular as CelularGruero,g2.Cedula as CedulaGruero,g2.Latitud as LatitudGruero,g2.Longitud as LongitudGruero,
+		g2.IdGruaTipo  as IdGruaTipo,g2.IdMarca  as IdMarcaGruero,g2.Modelo as ModeloGruero,g2.Color as ColorGruero,g2.Anio as AnioGruero,g.Celular as CelularGruero,g.Cedula as CedulaGruero,g2.Latitud as LatitudGruero,g2.Longitud as LongitudGruero,
 		p.PrecioModificado,p.PrecioSIvaBaremo,p.PrecioCIvaBaremo,p.PrecioSIvaModificado,p.PrecioCIvaModificado,p.IdUsuarioPermiso
 		")
 		->join("ServiciosClientes","LEFT JOIN ServiciosClientes c on c.IdServicio = Servicios.IdServicio")
@@ -109,7 +109,6 @@ class Servicios {
 		->join("Estados","LEFT JOIN Estados e2 on e2.IdEstado = Servicios.IdEstadoDestino")
 		->where("Servicios.IdServicio=?",$values['IdServicio'])
 		->fetch();
-		//echo $q;die;
 		return $q;
 	}
 	public function getList($values)
@@ -483,7 +482,7 @@ class Servicios {
 		LEFT JOIN Estados e1 ON e1.IdEstado = Servicios.IdEstadoOrigen
 		LEFT JOIN Estados e2 ON e2.IdEstado = Servicios.IdEstadoDestino
 		LEFT JOIN Averias a ON a.IdAveria = Servicios.IdAveria
-		INNER JOIN CondicionLugar cl ON cl.IdCondicionLugar = Servicios.IdCondicionLugar
+		LEFT JOIN CondicionLugar cl ON cl.IdCondicionLugar = Servicios.IdCondicionLugar
 		INNER JOIN Aplicaciones ap ON ap.IdAplicacion = Servicios.IdAplicacion
 
 		WHERE $where
@@ -769,7 +768,7 @@ class Servicios {
 		LEFT JOIN Estados e1 ON e1.IdEstado = Servicios.IdEstadoOrigen
 		LEFT JOIN Estados e2 ON e2.IdEstado = Servicios.IdEstadoDestino
 		LEFT JOIN Averias a ON a.IdAveria = Servicios.IdAveria
-		INNER JOIN CondicionLugar cl ON cl.IdCondicionLugar = Servicios.IdCondicionLugar
+		LEFT JOIN CondicionLugar cl ON cl.IdCondicionLugar = Servicios.IdCondicionLugar
 		INNER JOIN Aplicaciones ap ON ap.IdAplicacion = Servicios.IdAplicacion
 		WHERE $where
 		";

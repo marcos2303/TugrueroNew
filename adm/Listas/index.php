@@ -26,6 +26,9 @@ switch ($action) {
 	case "lista_servicios_json":
 	executeListaServiciosJson($values);
 	break;
+	case "lista_servicios_corta":
+	executeListaServiciosCorta($values);
+	break;
 	case "detalle_servicio":
 	executeDetalleServicio($values);
 	break;
@@ -100,6 +103,9 @@ function executeListaGruasJson($values)
 }
 function executeListaServicios($values){
 	require("lista_servicios.php");
+}
+function executeListaServiciosCorta($values){
+	require("lista_servicios_corta.php");
 }
 function executeListaServiciosJson($values)
 {

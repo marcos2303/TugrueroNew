@@ -109,7 +109,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         getGeocodeOrigen();
         getGeocodeDestino();
     } else {
-      window.alert('Directions request failed due to ' + status);
+      //window.alert('Directions request failed due to ' + status);
     }
   });
   //getGeocodeOrigen();

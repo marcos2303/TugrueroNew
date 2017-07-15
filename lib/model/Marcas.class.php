@@ -12,34 +12,33 @@
 	 * @author marcos
 	 */
 	class Marcas {
-		
-		public function __construct() 
+
+		public function __construct()
 		{
-			
+
 		}
 		public function getMarcasListSelect()
-		{	
-			
-            $ConnectionORM = new ConnectionORM();
+		{
+
+    	$ConnectionORM = new ConnectionORM();
 			$q = $ConnectionORM->getConnect()->Marcas
 			->select("*")
 			->where("Estado = 'A'");
-			return $q; 			
+			return $q;
 		}
 		public function getList(){
 			$ConnectionORM = new ConnectionORM();
 			$q = $ConnectionORM->getConnect()->Marcas
 			->select("*")
-            ->where("Estatus=?",1);
-			return $q; 	
+            ->where("Estatus=?",1)->order('Nombre');
+			return $q;
 		}
 
 
 
 
-		
+
 
 
 
 	}
-	

@@ -8,8 +8,8 @@
             <div class="inner">
                 <h3 class="text-center">Servicios</h3>
                 <div class="text-center">
-                    <a href="<?php echo full_url."/adm/Servicios/index.php?action=new"?>" class="btn btn-default">Asegurado</a>
-                    <a href="<?php echo full_url."/adm/Servicios/index.php?action=new"?>" class="btn btn-default">Particular</a>              
+                    <a href="<?php echo full_url."/adm/Servicios/index.php?action=new&IdServicioTipo=1"?>" class="btn btn-default">Asegurado</a>
+                    <a href="<?php echo full_url."/adm/Servicios/index.php?action=new&IdServicioTipo=2"?>" class="btn btn-default">Particular</a>
                 </div>
             </div>
           </div>

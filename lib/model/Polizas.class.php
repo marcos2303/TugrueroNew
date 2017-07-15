@@ -12,13 +12,13 @@
 	 * @author marcos
 	 */
 	class Polizas {
-		
-		public function __construct() 
+
+		public function __construct()
 		{
-			
+
 		}
 		public function getPolizasList($values)
-		{	
+		{
 			$columns = array();
 			$columns[0] = 'idPoliza';
 			$columns[1] = 'Placa';
@@ -33,7 +33,7 @@
 			$limit = $values['length'];
 			$offset = $values['start'];
 			if(isset($values['search']['value']) and $values['search']['value'] !='')
-			{	
+			{
 				$str = $values['search']['value'];
 				$where = "upper(Placa) like upper('%$str%')"
 					. "OR upper(Cedula) like upper('%".$str."%')"
@@ -42,7 +42,7 @@
 					. "OR upper(Apellido) like upper('%".$str."%')"
 					. "OR upper(Seguro) like upper('%".$str."%')";
 			}
-			
+
 			if(isset($values['columns'][0]['search']['value']) and $values['columns'][0]['search']['value']!='')
 			{
 				$where.=" AND idPoliza = ".$values['columns'][0]['search']['value']."";
@@ -52,34 +52,34 @@
 			{
 				$where.=" AND upper(Seguro) like ('%".$values['columns'][1]['search']['value']."%')";
 				//echo $values['columns'][0]['search']['value'];die;
-			}			
+			}
 			if(isset($values['columns'][2]['search']['value']) and $values['columns'][2]['search']['value']!='')
 			{
 				$where.=" AND upper(NumPoliza) like ('%".$values['columns'][2]['search']['value']."%')";
 				//echo $values['columns'][0]['search']['value'];die;
-			}			
+			}
 			if(isset($values['columns'][3]['search']['value']) and $values['columns'][3]['search']['value']!='')
 			{
 				$where.=" AND upper(Placa) like ('%".$values['columns'][3]['search']['value']."%')";
 				//echo $values['columns'][0]['search']['value'];die;
-			}	
+			}
 			if(isset($values['columns'][4]['search']['value']) and $values['columns'][4]['search']['value']!='')
 			{
 				$where.=" AND upper(Cedula) like ('%".$values['columns'][4]['search']['value']."%')";
 				//echo $values['columns'][0]['search']['value'];die;
-			}	
+			}
 			if(isset($values['columns'][5]['search']['value']) and $values['columns'][5]['search']['value']!='')
 			{
 				$where.=" AND CONCAT(upper(Nombre),' ',upper(Apellido) ) like ('%".$values['columns'][5]['search']['value']."%')";
 				//echo $values['columns'][0]['search']['value'];die;
-			}	
+			}
 			if(isset($values['columns'][6]['search']['value']) and $values['columns'][6]['search']['value']!='')
 			{
 				$where.=" AND DATE_FORMAT(Polizas.Vencimiento, '%d/%m/%Y') = '".$values['columns'][6]['search']['value']."'";
 				//echo $values['columns'][0]['search']['value'];die;
-			}				
-			
-			
+			}
+
+
 			if(isset($values['order'][0]['column']) and $values['order'][0]['column']!='0')
 			{
 				$column_order = $columns[$values['order'][0]['column']];
@@ -96,13 +96,13 @@
 			->where("$where")
 			->limit($limit,$offset);
 			//echo $q;die;
-			return $q; 			
+			return $q;
 		}
 		public function getCountPolizasList($values)
-		{	
+		{
 			$where = '1 = 1';
 			if(isset($values['search']['value']) and $values['search']['value'] !='')
-			{	
+			{
 				$str = $values['search']['value'];
 				$where = " ";
 			}
@@ -110,31 +110,31 @@
 			$q = $ConnectionORM->getConnect()->Polizas
 			->select("count(*) as cuenta")
 			->where("$where")->fetch();
-			return $q['cuenta']; 			
+			return $q['cuenta'];
 		}
 		public function getPolizasById($values){
 			$ConnectionORM = new ConnectionORM();
 			$q = $ConnectionORM->getConnect()->Polizas
 			->select("*,DATE_FORMAT(Vencimiento, '%d/%m/%Y') as Vencimiento,DATE_FORMAT(DesdeVigencia, '%d/%m/%Y') as DesdeVigencia")
 			->where("idPoliza=?",$values['idPoliza'])->fetch();
-			return $q; 				
-			
+			return $q;
+
 		}
 		public function getPolizasBySeguroName($Seguro){
 			$ConnectionORM = new ConnectionORM();
 			$q = $ConnectionORM->getConnect()->Polizas
 			->select("*")
 			->where("Seguro=?",$Seguro);
-			return $q; 				
-			
+			return $q;
+
 		}
 		function deletePolizas($id){
 			unset($values['action']);
 			$ConnectionORM = new ConnectionORM();
 			$q = $ConnectionORM->getConnect()->Polizas("idPoliza", $id)->delete();
-			
-			
-		}		
+
+
+		}
 		function savePolizas($values){
 			$Utilitarios = new Utilitarios();
             if(isset($values['Vencimiento']) and $values['Vencimiento']!='')
@@ -178,7 +178,7 @@
 				'updated_by' => 1,
 				'EstatusPoliza' => $values['EstatusPoliza'],
 			);
-			
+
 			$ConnectionORM = new ConnectionORM();
 			$q = $ConnectionORM->getConnect()->Polizas()->insert($array_poliza);
 			$values['idPoliza'] = $ConnectionORM->getConnect()->Polizas()->insert_id();
@@ -192,18 +192,18 @@
 				$array_poliza['Domicilio'],
 				$array_poliza['Serial'],
 				$array_poliza['created_by'],
-				$array_poliza['updated_by']			
+				$array_poliza['updated_by']
 				);
-			//inserto en aws 
-                     
+			//inserto en aws
+
 			$ConnectionAws= new ConnectionAws();
-			$q = $ConnectionAws->getConnect()->Polizas()->insert($array_poliza);			
-			
-			
-			return $values;	
-			
+			$q = $ConnectionAws->getConnect()->Polizas()->insert($array_poliza);
+
+
+			return $values;
+
 		}
-		function updatePolizas($values){			
+		function updatePolizas($values){
 			$Utilitarios = new Utilitarios();
             if(isset($values['Vencimiento']) and $values['Vencimiento']!='')
             {
@@ -221,8 +221,8 @@
             }else
             {
 				$values['DesdeVigencia']=null;
-            }	
-			
+            }
+
  			$hora = date(gmdate('Y-m-d H:i:s', time() - (4 * 3600)));
 			$array_poliza = array(
 				'Placa' => $values['Placa'],
@@ -250,7 +250,7 @@
 			$idPoliza = $values['idPoliza'];
 			$ConnectionORM = new ConnectionORM();
 			$q = $ConnectionORM->getConnect()->Polizas("idPoliza", $idPoliza)->update($array_poliza);
-			
+
 			//preparo datos para el AWS
 			unset(
 				$array_poliza['date_created'],
@@ -260,18 +260,18 @@
 				$array_poliza['Domicilio'],
 				$array_poliza['Serial'],
 				$array_poliza['created_by'],
-				$array_poliza['updated_by']			
+				$array_poliza['updated_by']
 				);
-			//actualizo en aws 
+			//actualizo en aws
 			$ConnectionAws= new ConnectionAws();
-			$q = $ConnectionAws->getConnect()->Polizas("idPoliza", $idPoliza)->update($array_poliza);			
-			
-			
-			
-			
-			
+			$q = $ConnectionAws->getConnect()->Polizas("idPoliza", $idPoliza)->update($array_poliza);
+
+
+
+
+
 			return $q;
-			
+
 		}
 
 		public function getCountUserPolizasCompanyByIdPolizas($values){
@@ -279,17 +279,17 @@
 			$q = $ConnectionORM->getConnect()->Polizas
 			->select("count(*) as cuenta")
 			->where("users_Polizas_company.id_Polizas=?",$values['idPoliza'])->fetch();
-			return $q; 				
-			
+			return $q;
+
 		}
-		
+
 		public function insertPoliza($array){
 			//error_reporting(0);
 			//print_r($array);die;
 				$ConnectionORM = new ConnectionORM();
 				$ConnectionAws = new ConnectionAws();
 				$i = 0;
-					
+
 					foreach($array as $arr)
 					{
 
@@ -297,7 +297,7 @@
 						//$ConnectionAws->transaction = "BEGIN";
 						if(isset($arr['Cedula']) and isset($arr['NumPoliza']) and isset($arr['Seguro']))
 						{
-							
+
 							$q = $ConnectionORM->getConnect()->Polizas
 							->select("*")
 							->where("Polizas.cedula=?",$arr['Cedula'])
@@ -306,7 +306,7 @@
 							->fetch();
 						}
 
-							
+
 						if(!isset($q['idPoliza']) or $q['idPoliza'] =='' or $q['idPoliza'] == null)//si no existe la poliza
 						{
 							//print_r($arr).$i."<br>";
@@ -316,7 +316,7 @@
 							@$arr['idPoliza'] = $ConnectionORM->getConnect()->Polizas()->insert_id();//obtengo el idPoliza nuevo
 							//quito campos que no estan en el aws
 							unset($arr['NumPoliza'],$arr['Domicilio'],$arr['Nacionalidad']);
-							$insert_aws = $ConnectionAws->getConnect()->Polizas()->insert($arr);	
+							$insert_aws = $ConnectionAws->getConnect()->Polizas()->insert($arr);
 						}
 						if(isset($q['idPoliza']) and $q['idPoliza'] !='' and $q['idPoliza'] != null)//si existe la poliza
 						{
@@ -335,35 +335,35 @@
 					}
 					//echo "termino";die;
 					return true;
-		
+
 		}
 		public function updatePoliza($array){
 			//print_r($array);die;
 			$ConnectionORM = new ConnectionORM();
-			$q = $ConnectionORM->getConnect()->Polizas()->insert($array);			
+			$q = $ConnectionORM->getConnect()->Polizas()->insert($array);
 		}
 		public function getPolizasByDocumento($values){
-			
+
 			$where = " Polizas.cedula = '".$values['Cedula']."' or Polizas.Placa = '".$values['Placa']."'";
 			$ConnectionORM = new ConnectionORM();
 			$q = $ConnectionORM->getConnect()->Polizas
 			->select("*")
 			->where($where)
             ->fetch();
-			return $q; 				
-			
+			return $q;
+
 		}
 		public function getLoginPoliza($values){
-			
-			
+
+
 			$ConnectionORM = new ConnectionORM();
 			$q = $ConnectionORM->getConnect()->Polizas
 			->select("*")
-			->where("Cedula=?",$values['Cedula'])
-			->and('Placa=?',$values['Placa'])
-            ->fetch();
-			return $q; 				
-			
+			->where("upper(Cedula)=?",strtoupper($values['Cedula']))
+			->and('upper(Placa)=?',strtoupper($values['Placa']))
+      ->fetch();
+			return $q;
+
 		}
 		function isVigente($vencimiento) {
 			$dateVencida = date_create_from_format('Y-m-d H:i:s', $vencimiento);
@@ -371,4 +371,3 @@
 			return ($dateaActual < $dateVencida);
 		}
 	}
-	
