@@ -6,10 +6,21 @@ var directionsDisplay = new google.maps.DirectionsRenderer({
   map: map,
   //panel: document.getElementById('right-panel')
 });
+directionsDisplay.setOptions({
+//suppressMarkers : true,
+polylineOptions: {
+            strokeWeight: 4,
+            strokeOpacity: 1,
+            strokeColor:  'red'
+        }
+});
+var markerArray = [];
 var LatitudOrigen;
 var LongitudOrigen;
 var LatitudDestino;
 var LongitudDestino;
+var DireccionOrigen;
+var DireccionDestino;
 function initialize() {
 // Instantiate a directions service.
 
@@ -99,6 +110,9 @@ autocomplete_end.addListener('place_changed', function() {
 });
 google.maps.event.addDomListener(window, 'load', initialize);
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+  for (var i = 0; i < markerArray.length; i++) {
+    markerArray[i].setMap(null);
+  }
   directionsService.route({
     origin: document.getElementById('start').value,
     destination: document.getElementById('end').value,
@@ -106,6 +120,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
   }, function(response, status) {
     if (status === 'OK') {
       directionsDisplay.setDirections(response);
+
         getGeocodeOrigen();
         getGeocodeDestino();
     } else {
@@ -128,7 +143,7 @@ function getGeocodeOrigen(){
       //$("#end").val(results[0].formatted_address);
       //map.setCenter(results[0].geometry.location);
     } else {
-      window.alert('Geocode was not successful for the following reason: ' + status);
+      console.log('Geocode was not successful for the following reason: ' + status);
     }
   });
 }
@@ -143,7 +158,7 @@ function getGeocodeDestino(){
 
       //map.setCenter(results[0].geometry.location);
     } else {
-      window.alert('Geocode was not successful for the following reason: ' + status);
+      console.log('Geocode was not successful for the following reason: ' + status);
     }
   });
 }
@@ -153,14 +168,22 @@ function computeTotalDistance(results) {
  console.log(LatitudDestino + "  "  + LongitudDestino);*/
   //getGeocodeOrigen();
   //getGeocodeDestino();
-  //console.log(results.routes[0].legs[0]);
   LatitudOrigen = results.routes[0].legs[0].start_location.lat();
   LongitudOrigen = results.routes[0].legs[0].start_location.lng();
   LatitudDestino = results.routes[0].legs[0].end_location.lat();
   LongitudDestino = results.routes[0].legs[0].end_location.lng();
+  $("#LatitudOrigen").val(LatitudOrigen);
+  $("#LongitudOrigen").val(LongitudOrigen);
+  $("#LatitudDestino").val(LatitudDestino);
+  $("#LongitudDestino").val(LongitudDestino);
+
+  formateaOrigen(LatitudOrigen, LongitudOrigen);
+  formateaDestino(LatitudDestino, LongitudDestino);
+
 
   //console.log("Origen" + LatitudOrigen + "  "  + LongitudOrigen);
-
+  //console.log(DireccionOrigen);
+  //console.log(DireccionDestino);
   //console.log("Destino" + LatitudDestino + "  "  + LongitudDestino);
 
   var total = 0;
@@ -171,6 +194,80 @@ function computeTotalDistance(results) {
   total = total / 1000;
   //console.log(total);
   //document.getElementById('total').innerHTML = total + ' km';
+}
+function formateaOrigen(Latitud, Longitud){
+  var latlng = {lat: parseFloat(Latitud), lng: parseFloat(Longitud)};
+  geocoder.geocode({'location': latlng}, function(results, status) {
+          if (status === 'OK') {
+            if (results) {
+              //console.log(results[1]);
+              $("#DireccionOrigen").val(results[1].formatted_address);
+              //console.log(results[1].address_components[3].long_name);
+              $.each(results[1].address_components, function(index, valores) {
+                console.log(index + " " + valores.long_name);
+                $('#IdEstadoOrigen option:contains(' + valores.long_name + ')').each(function(){
+                    if ($(this).text() == valores.long_name) {
+                        $(this).attr('selected', 'selected');
+                        return false;
+                    }
+                    return true;
+                });
+
+              });
+            } else {
+              console.log('No results found');
+              //return false;
+            }
+          } else {
+            console.log('Geocoder failed due to: ' + status);
+            //return false;
+          }
+        });
+}
+function formateaDestino(Latitud, Longitud){
+  $('#IdEstadoDestino').prop('selected', false);
+  var latlng = {lat: parseFloat(Latitud), lng: parseFloat(Longitud)};
+  geocoder.geocode({'location': latlng}, function(results, status) {
+          if (status === 'OK') {
+            if (results) {
+              //console.log(results);
+              $("#DireccionDestino").val(results[1].formatted_address);
+              //console.log(1);
+              //console.log(results[1].address_components);
+              $.each(results[1].address_components, function(index, valores) {
+                console.log(index + " " + valores.long_name);
+                $('#IdEstadoDestino option:contains(' + valores.long_name + ')').each(function(){
+                    if ($(this).text() == valores.long_name) {
+                        $(this).attr('selected', 'selected');
+                        return false;
+                    }
+                    return true;
+                });
+
+              });
+              /*$('#IdEstadoDestino option:contains(' + results[1].address_components[3].long_name + ')').each(function(){
+                  if ($(this).text() == results[1].address_components[3].long_name) {
+                      $(this).attr('selected', 'selected');
+                      return false;
+                  }
+                  return true;
+              });
+              $('#IdEstadoDestino option:contains(' + results[1].address_components[4].long_name + ')').each(function(){
+                  if ($(this).text() == results[1].address_components[4].long_name) {
+                      $(this).attr('selected', 'selected');
+                      return false;
+                  }
+                  return true;
+              });*/
+            } else {
+              console.log('No results found');
+              //return false;
+            }
+          } else {
+            console.log('Geocoder failed due to: ' + status);
+            //return false;
+          }
+        });
 }
 function clearMarkers() {
   setMapOnAll(null);

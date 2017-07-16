@@ -10,9 +10,9 @@
       <a href="#" class="btn btn-default" data-toggle="push-menu" role="button"><i class="fa fa-map-marker"></i> Mapa</a>
       <a class="btn btn-default"  href="<?php echo full_url."/adm/Servicios/index.php";?>"><i class="fa fa-arrow-circle-left"></i> Regresar</a>
       <form action="" name="DataForm" id="DataForm" class="">
-        <input type="text" id="IdUsuario" name="IdUsuario" value="<?php if(isset($_SESSION['IdUsuario']) and $_SESSION['IdUsuario']!='') echo $_SESSION['IdUsuario'];?>">
-        <input type="text" id="IdServicioTipo" name="IdServicioTipo" value="<?php if(isset($values['IdServicioTipo']) and $values['IdServicioTipo']!='') echo $values['IdServicioTipo'];?>">
-        <input type="text" class="SaveAutomaticoServicioCliente SaveAutomaticoServicio SaveAutomaticoServicioPrecio SaveAutomaticoServicioGrua" id="IdServicio" name="IdServicio" value="<?php if(isset($values['IdServicio']) and $values['IdServicio']!='') echo $values['IdServicio'];?>">
+        <input type="hidden" id="IdUsuario" name="IdUsuario" value="<?php if(isset($_SESSION['IdUsuario']) and $_SESSION['IdUsuario']!='') echo $_SESSION['IdUsuario'];?>">
+        <input type="hidden" id="IdServicioTipo" name="IdServicioTipo" value="<?php if(isset($values['IdServicioTipo']) and $values['IdServicioTipo']!='') echo $values['IdServicioTipo'];?>">
+        <input type="hidden" class="SaveAutomaticoServicioCliente SaveAutomaticoServicio SaveAutomaticoServicioPrecio SaveAutomaticoServicioGrua" id="IdServicio" name="IdServicio" value="<?php if(isset($values['IdServicio']) and $values['IdServicio']!='') echo $values['IdServicio'];?>">
         <input class="form-control SaveAutomaticoServicioCliente" name="IdPoliza" id="IdPoliza" type="text">
         <input type="hidden" id="action" value="<?php echo $values['action'];?>">
         <div class="box box-shadow <!--collapsed-box-->">
@@ -35,7 +35,7 @@
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
-                  <label>Placa</label>
+                  <label><small class="text-danger"> * </small>  Placa</label>
                   <input class="form-control SaveAutomaticoServicioCliente" id="Placa" name="Placa" type="text" placeholder="" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$" autocomplete="off">
                 </div>
               </div>
@@ -97,13 +97,13 @@
               </div>
               <div class="col-sm-2">
                 <div class="form-group">
-                  <label>Fecha de emisión</label>
+                  <label>F.Emisión</label>
                   <input class="form-control" id="DesdeVigencia" name="DesdeVigencia" type="text" placeholder="" readonly="readonly">
                 </div>
               </div>
               <div class="col-sm-2">
                 <div class="form-group">
-                  <label><small class="text-danger"> * </small> Fecha de vencimiento</label>
+                  <label><small class="text-danger"> * </small> F.Vencimiento</label>
                   <input class="form-control" name="Vencimiento" id="Vencimiento" type="text" placeholder="" readonly="readonly">
                 </div>
               </div>
@@ -139,9 +139,15 @@
         </div>
         <div class="box box-shadow collapsed-box">
           <div class="box-header with-border" data-toggle="DivDatosServicio" data-widget="collapse">
+
             <h2 class="box-title">Datos del servicio</h2>
           </div>
           <div class="box-body" id="DivDatosServicio">
+            <input type="text" class="SaveAutomaticoServicio" id="LatitudOrigen" name="LatitudOrigen" value="">
+            <input type="text" class="SaveAutomaticoServicio" id="LongitudOrigen" name="LongitudOrigen" value="">
+            <input type="text" class="SaveAutomaticoServicio" id="LatitudDestino" name="LatitudDestino" value="">
+            <input type="text" class="SaveAutomaticoServicio" id="LongitudDestino" name="LongitudDestino" value="">
+
             <div class="row">
               <div class="col-sm-12 box-title"><label>Origen</label></div>
             </div>
@@ -149,13 +155,13 @@
               <div class="col-sm-4">
                 <div class="form-group">
                   <label><small class="text-danger"> * </small> Estado</label>
-                  <input class="form-control" id="Nombres" name="Nombres" type="text" placeholder="" required="required" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$" autocomplete="off">
+                  <select class="form-control SaveAutomaticoServicio" id="IdEstadoOrigen" name="IdEstadoOrigen" style="width: 100%;"></select>
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
                   <label>Dirección maps</label>
-                  <input class="form-control" id="Apellidos" name="Apellidos" type="text" placeholder="" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$" autocomplete="off">
+                  <input class="form-control" id="DireccionOrigen" name="DireccionOrigen" type="text" placeholder="" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$" autocomplete="off">
                 </div>
               </div>
 
@@ -163,7 +169,7 @@
               <div class="col-sm-4">
                 <div class="form-group">
                   <label><small class="text-danger"> * </small> Dirección detallada</label>
-                  <input class="form-control" name="Celular" id="Celular" type="text" placeholder="" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$" autocomplete="off">
+                  <input class="form-control" name="DireccionOrigenDetallada" id="DireccionOrigenDetallada" type="text" placeholder="" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$" autocomplete="off">
                 </div>
               </div>
             </div>
@@ -174,13 +180,13 @@
               <div class="col-sm-4">
                 <div class="form-group">
                   <label><small class="text-danger"> * </small> Estado</label>
-                  <input class="form-control" id="Nombres" name="Nombres" type="text" placeholder="" required="required" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$" autocomplete="off">
+                  <select class="form-control SaveAutomaticoServicio" id="IdEstadoDestino" name="IdEstadoDestino" style="width: 100%;"></select>
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
                   <label>Dirección maps</label>
-                  <input class="form-control" id="Apellidos" name="Apellidos" type="text" placeholder="" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$" autocomplete="off">
+                  <input class="form-control" id="DireccionDestino" name="DireccionDestino" type="text" placeholder="" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$" autocomplete="off">
                 </div>
               </div>
 
@@ -188,7 +194,7 @@
               <div class="col-sm-4">
                 <div class="form-group">
                   <label><small class="text-danger"> * </small> Dirección detallada</label>
-                  <input class="form-control" name="Celular" id="Celular" type="text" placeholder="" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$" autocomplete="off">
+                  <input class="form-control" name="DireccionDestinoDetallada" id="DireccionDestinoDetallada" type="text" placeholder="" pattern="^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,50})$" autocomplete="off">
                 </div>
               </div>
             </div>
@@ -237,3 +243,4 @@
 </div>
 <?php include('../../view_footer_admin.php');?>
 <script src="<?php echo full_url;?>/web/js/Servicios.js"></script>
+<script src="<?php echo full_url."/web/js/maps/mapa_servicio.js";?>" async defer></script>

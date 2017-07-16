@@ -1,5 +1,7 @@
 $(document).ready(function(){
   listaMarcas();
+  listaEstadosOrigen();
+  listaEstadosDestino();
   if($("#IdServicioTipo").val()=="1"){
     $(".asegurado").show();
     $('#Nombres').prop('readonly', true);
@@ -89,7 +91,7 @@ function DatosPoliza(){
     $("#Vencimiento").val(datos_poliza.Vencimiento);
     $("#Celular").val(datos_poliza.Celular);
     $("#Domicilio").val(datos_poliza.Domicilio);
-
+    
     GuardarAutomaticoServicioCliente();
 
   }

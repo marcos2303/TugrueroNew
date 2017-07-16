@@ -1,3 +1,4 @@
+
 #custom-bootstrap-menu.navbar-default .navbar-brand {
     color: #ddd;
 }
@@ -166,9 +167,62 @@ table.dataTable thead .sorting_desc:after {
     }
     table.dataTable thead, tbody, tfoot{
         font-size: 12px;
-    
+
     }
     h1 {
         font-size: 14px;
     }
+}
+.login-box {
+  background: transparent url("../img_admin/Fondos/fondoinicio.jpg") no-repeat fixed top;
+}
+.login-box-body {
+  height: 400px;
+  background: transparent;
+}
+.login-box-msg {
+  color: #FFF;
+}
+.login-entrada-logo {
+    color: #FFF;
+}
+.login-logo {
+  padding-top: 20px;
+  margin-bottom: 5px;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 16px !important;
+  line-height: 1.428571429;
+  border-radius: 15px;
+  background: transparent;
+  color: #ccc;
+}
+.btn-circle:hover {
+  color: #fff;
+  border: solid 3px #000;
+  -moz-box-shadow: 1px 1px 5px #000;
+  -webkit-box-shadow: 1px 1px 5px #000;
+  box-shadow: 1px 1px 1px #000;
+}
+.btn-circle.btn-lg {
+  width: 50px;
+  height: 50px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 25px;
+}
+.btn-circle.btn-xl {
+  width: 90px;
+  height: 90px;
+  padding: 10px 16px;
+  font-size: 24px;
+  line-height: 1.33;
+  border-radius: 45px;
+  border-color: #FFF;
 }

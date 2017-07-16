@@ -9,6 +9,4 @@
   </div>
 </div>
 <div id="map-canvas"></div>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1_5ATmWh8kZkKHo6skucFrl9emI3dPMA&v=3.exp&libraries=places" async defer></script>
-
-<script src="<?php echo full_url."/web/js/maps/mapa_servicio.js";?>" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFeSlIAjDg8U7zsWW82uJCNLi3IZxq9fI&v=3.exp&libraries=places" async defer></script>

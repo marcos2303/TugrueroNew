@@ -43,6 +43,46 @@ function listaEstados(IdEstado){
     alert( "error" );
   });
 }
+function listaEstadosOrigen(IdEstado){
+  $('#IdEstadoOrigen').find('option').remove().end().append('<option value="">Seleccione...</option>');
+  var selected = "";
+  var jqxhr = $.get( link_servidor + "/servicios/adminapp/listaEstados.php", function(datos) {
+  })
+  .done(function(datos) {
+    $.each(datos.data, function(i, item) {
+      selected = "";
+      if(typeof(IdEstado) != 'undefined'){
+        if(parseInt(IdEstado) === parseInt(item.IdEstado)){
+          selected = 'selected = "selected"';
+        }
+      }
+      $("#IdEstadoOrigen").append('<option value="'+ item.IdEstado +'" '+selected+'>' + item.Nombre + '</option>');
+    });
+  })
+  .fail(function() {
+    alert( "error" );
+  });
+}
+function listaEstadosDestino(IdEstado){
+  $('#IdEstadoDestino').find('option').remove().end().append('<option value="">Seleccione...</option>');
+  var selected = "";
+  var jqxhr = $.get( link_servidor + "/servicios/adminapp/listaEstados.php", function(datos) {
+  })
+  .done(function(datos) {
+    $.each(datos.data, function(i, item) {
+      selected = "";
+      if(typeof(IdEstado) != 'undefined'){
+        if(parseInt(IdEstado) === parseInt(item.IdEstado)){
+          selected = 'selected = "selected"';
+        }
+      }
+      $("#IdEstadoDestino").append('<option value="'+ item.IdEstado +'" '+selected+'>' + item.Nombre + '</option>');
+    });
+  })
+  .fail(function() {
+    alert( "error" );
+  });
+}
 function listaGruasTipos(IdGruaTipo){
   $('#IdGruaTipo').find('option').remove().end().append('<option value="">Seleccione...</option>');
   var selected = "";
