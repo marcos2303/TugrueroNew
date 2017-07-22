@@ -5,6 +5,8 @@ $values = json_decode($values, true);
 include('../../autoload_servicios.php');
 /************* Clases a utilizar *******************/
 $Gruas = new Gruas();
+/*$values['Placa'] = "AAABBB";
+$values['Clave'] = '1234';*/
 /****************Seteo y comprobacion de valores*******************/
 $response = array("Error"=>0,"MensajeError"=>"","MensajeSuccess"=> 'Ok',"IdServicio"=>"0");
 $datos_gruero = $Gruas->getLoginGruero($values);

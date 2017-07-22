@@ -8,8 +8,9 @@ $Gruas= new Gruas();
 /****************Seteo y comprobacion de valores*******************/
 $response = array("Error"=>0,"Actualizado"=> 0,"MensajeError"=>"","MensajeSuccess"=> '',"IdGrua"=>$values['IdGrua'],"Placa"=>$values['Placa'],"DatosGrua" => null);
 /*************************Actualizamos************************************/
-$valido = true;
-
+/*$valido = true;
+$values['IdGrua'] = 1;
+$values['Disponible'] = 0;*/
 if($Gruas->updateGrua($values)){
 
 	$datos_gruero = $Gruas->getGruaInfo($values['IdGrua']);
