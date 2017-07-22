@@ -1,4 +1,4 @@
-<table id="example" class="table table-striped table-bordered table-responsive" width="100%" cellspacing="0">
+<table id="example" class="table-small table table-striped table-bordered table-responsive" width="100%" cellspacing="0">
   <thead>
     <tr>
       <th>Código</th>
@@ -64,7 +64,7 @@
       <th>Detalle</th>
     </tr>
   </thead>
-  <tfoot>
+  <!--<tfoot>
     <tr>
       <th><input id="CodigoServicio" name="CodigoServicio" type="text"></th>
       <th><input id="NombreAplicacion" name="NombreAplicacion" type="text"></th>
@@ -128,7 +128,7 @@
       <th><input id="NombreUsuarioPrecio" name="NombreUsuarioPrecio" type="text"></th>
       <th>Detalle</th>
     </tr>
-  </tfoot>
+  </tfoot>-->
 </table>
 <?php if(isset($values['regresar']) and $values['regresar'] == 1):?>
   <a href="#" class="btn btn-default" onclick="ListarGruas(<?php echo $values['IdProveedor']?>);"><i class="fa fa-arrow-circle-left"></i> Regresar</a>
@@ -156,14 +156,15 @@ $(document).ready(function() {
     "processing": true,
     "sServerMethod": "POST",
     "serverSide": true,
-    "sScrollY": "100",
-    "sDom": 'Btrp',
+    "sScrollY": "300",
+    "sDom": 'tr',
+    "iDisplayLength": 100,
     "ajax":link_servidor + "/adm/Listas/index.php?action=lista_servicios_json&IdProveedor=<?php echo $values['IdProveedor'];?>&IdGrua=<?php echo $values['IdGrua'];?>",
     "language": {
       "url": link_servidor + "/web/js/datatables.spanish.lang"
     },
 
-    buttons: [
+    /*buttons: [
 
       {
         extend: 'colvisGroup',
@@ -219,7 +220,7 @@ $(document).ready(function() {
                     text: 'Todos',
                     show: ':hidden'
                   }
-                ],
+                ],*/
                 "columns": [
                   { "data" : "CodigoServicio" },
                   { "data" : "NombreAplicacion" },

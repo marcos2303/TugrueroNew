@@ -1,5 +1,5 @@
 <table id="example" class="table table-striped table-bordered table-responsive" width="100%" cellspacing="0">
-  <thead>
+  <thead class="">
     <tr>
       <th>Código</th>
       <th>Aplicacion</th>
@@ -156,7 +156,7 @@ $(document).ready(function() {
     "processing": true,
     "sServerMethod": "POST",
     "serverSide": true,
-    "sScrollY": "300",
+    "sScrollY": "260",
     "sDom": 'Btrp',
     "ajax":link_servidor + "/adm/Listas/index.php?action=lista_servicios_json&IdProveedor=<?php echo $values['IdProveedor'];?>&IdGrua=<?php echo $values['IdGrua'];?>",
     "language": {

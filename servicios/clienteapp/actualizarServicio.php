@@ -7,11 +7,23 @@ include('../../autoload_servicios.php');
 
 $Servicios = new Servicios();
 /****************Seteo y comprobacion de valores*******************/
-$response = array("Error"=>1,"Actualizado"=>"0","MensajeError"=>"","MensajeSuccess"=> '');
+$response = array("Error"=>0,"Actualizado"=>"0","MensajeError"=>"","MensajeSuccess"=> '');
 /*************************Actualizamos el Servicio************************************/
 
 if($Servicios->updateServicios($values)){
-$response = array("Error"=>0,"Actualizado"=>"1","MensajeError"=>"","MensajeSuccess"=> 'Ok',"IdServicio"=>$values['IdServicio']);
+
+  $response = array("Error"=>0,
+  "Actualizado"=>"1",
+  "MensajeError"=>"",
+  "MensajeSuccess"=> 'Ok',
+  "IdServicio"=>$values['IdServicio'],
+
+  );
 
 }
+$DatosServicio = $Servicios->getServiciosInfo($values);
+$response["DatosServicio"] = $DatosServicio;
+
+
+
 echo json_encode($response,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);

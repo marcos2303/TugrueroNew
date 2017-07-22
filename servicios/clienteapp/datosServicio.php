@@ -8,7 +8,6 @@ include('../../autoload_servicios.php');
 /************* Clases a utilizar *******************/
 $Servicios = new Servicios();
 /****************Seteo y comprobacion de valores*******************/
-$values['IdServicio'] = 60;
 $response = array("Error"=>1,"MensajeError"=>"Servicio no existe","MensajeSuccess"=> '',"IdServicio"=>"");
 $datos = $Servicios->getServiciosInfo($values);
 if($datos){
@@ -71,11 +70,11 @@ if($datos){
 		"PrecioModificado"=> $datos['PrecioModificado'],
 		"PrecioSIvaBaremo"=> $datos['PrecioSIvaBaremo'],
 		"PrecioCIvaBaremo"=> $datos['PrecioCIvaBaremo'],
-		"PrecioSIvaModificado"=> $datos['PrecioSIvaModificado'],		
-		"PrecioCIvaModificado"=> $datos['PrecioCIvaModificado'],		
+		"PrecioSIvaModificado"=> $datos['PrecioSIvaModificado'],
+		"PrecioCIvaModificado"=> $datos['PrecioCIvaModificado'],
 		"IdUsuarioPermiso"=> $datos['IdUsuarioPermiso'],
-		
-		
+
+
 		);
 
 }

@@ -123,6 +123,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 
         getGeocodeOrigen();
         getGeocodeDestino();
+
     } else {
       //window.alert('Directions request failed due to ' + status);
     }
@@ -181,19 +182,16 @@ function computeTotalDistance(results) {
   formateaDestino(LatitudDestino, LongitudDestino);
 
 
-  //console.log("Origen" + LatitudOrigen + "  "  + LongitudOrigen);
-  //console.log(DireccionOrigen);
-  //console.log(DireccionDestino);
-  //console.log("Destino" + LatitudDestino + "  "  + LongitudDestino);
-
   var total = 0;
   var myroute = results.routes[0];
   for (var i = 0; i < myroute.legs.length; i++) {
     total += myroute.legs[i].distance.value;
   }
   total = total / 1000;
+  $("#KM").val(total);
   //console.log(total);
   //document.getElementById('total').innerHTML = total + ' km';
+
 }
 function formateaOrigen(Latitud, Longitud){
   var latlng = {lat: parseFloat(Latitud), lng: parseFloat(Longitud)};
@@ -214,6 +212,8 @@ function formateaOrigen(Latitud, Longitud){
                 });
 
               });
+              GuardarAutomaticoServicio();
+
             } else {
               console.log('No results found');
               //return false;
@@ -245,6 +245,7 @@ function formateaDestino(Latitud, Longitud){
                 });
 
               });
+              GuardarAutomaticoServicio();
               /*$('#IdEstadoDestino option:contains(' + results[1].address_components[3].long_name + ')').each(function(){
                   if ($(this).text() == results[1].address_components[3].long_name) {
                       $(this).attr('selected', 'selected');

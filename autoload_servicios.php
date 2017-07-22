@@ -46,7 +46,7 @@ define("image_url",full_url."/web/images/");
  define('max_input_size',1000000);
  define('message_max_size',"El archivo debe pesar máximo 10MB");
  define('IVA',1.12);
- 
+
 /******************** definicion de clases *************/
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/notorm-master/NotORM.php");//se debe incluir una sola vez en todo el cms
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/ConnectionORM.class.php");
@@ -64,3 +64,5 @@ include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/ProveedoresTipos.c
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Estados.class.php");
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/GruasTipos.class.php");
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Marcas.class.php");
+include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Seguros.class.php");
+include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Push.class.php");

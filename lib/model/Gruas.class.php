@@ -15,7 +15,7 @@ class Gruas {
 	public function getGruaInfo($IdGrua){
 		$ConnectionORM = new ConnectionORM();
 		$q = $ConnectionORM->getConnect()->Gruas
-		->select("Gruas.*, m.Nombre as NombreMarca, p.Nombres as NombresProveedor, p.Apellidos as ApellidosProveedor, gt.Nombre as NombreGruasTipo")
+		->select("Gruas.*, m.Nombre as NombreMarca, p.Nombres as NombresProveedor, p.Apellidos as ApellidosProveedor, gt.Nombre as NombreGruasTipo,p.Identificacion as IdentificacionProveedor")
 		->join("Proveedores","INNER JOIN Proveedores p on p.IdProveedor = Gruas.IdProveedor")
 		->join("Marcas","INNER JOIN Marcas m on m.IdMarca = Gruas.IdMarca")
 		->join("GruasTipos","INNER JOIN GruasTipos gt on gt.IdGruaTipo = Gruas.IdGruaTipo")
@@ -193,4 +193,49 @@ class Gruas {
 		->fetch();
 		return $q['cuenta'];
 	}
+	function getLoginGruero($values){
+
+		$ConnectionORM = new ConnectionORM();
+		$q = $ConnectionORM->getConnect()->Gruas
+		->select("Gruas.*,p.Nombres as NombresProveedor, p.Apellidos as ApellidosProveedor, p.Identificacion as IdentificacionProveedor,
+		m.Nombre as NombreMarca,gt.Nombre as NombreGruaTipo")
+		->join("Proveedores","INNER JOIN Proveedores p on p.IdProveedor = Gruas.IdProveedor")
+		->join("Marcas","INNER JOIN Marcas m on m.IdMarca = Gruas.IdMarca")
+		->join("GruasTipos","INNER JOIN GruasTipos gt on gt.IdGruaTipo = Gruas.IdGruaTipo")
+		->where("upper(Placa)=?",strtoupper($values['Placa']))
+		->and('Clave=?',strtoupper($values['Clave']))
+		->fetch();
+		return $q;
+	}
+	function getGruasServicio($datos_servicio,$grados) {
+		$Tokens = array();
+		$mTopes = array(
+			'supLat' => $datos_servicio["LatitudOrigen"] + $grados,
+			'infLat' => $datos_servicio["LatitudOrigen"] - $grados,
+			'supLng' => $datos_servicio["LongitudOrigen"] + $grados,
+			'infLng' => $datos_servicio["LongitudOrigen"] - $grados
+		);
+
+		if(!isset($datos_servicio['IdGrua']) or $datos_servicio['IdGrua']==''){
+			$where = " Disponible = 1
+			AND
+				((Latitud BETWEEN '".$mTopes['infLat']."'
+				AND '".$mTopes['supLat']."'
+				AND Longitud BETWEEN '".$mTopes['supLng']."'
+				AND '".$mTopes['infLng']."'
+			)
+			OR IdEstado = '".$datos_servicio['IdEstadoOrigen']."'
+
+			)";
+		}else{
+			$where = " Disponible = 1 and IdGrua = ".$datos_servicio['IdGrua']."";
+
+		}
+
+		$ConnectionORM = new ConnectionORM();
+		$query = "SELECT IdGrua, Token FROM Gruas where $where";
+		$q = $ConnectionORM->ejecutarPreparado($query);
+		return $q;
+	}
+
 }

@@ -1,14 +1,14 @@
 <?php
 
 	class Baremo {
-		
+
 		function datosBaremo() {
-			
+
 			$ConnectionORM = new ConnectionORM();
 			$q = $ConnectionORM->getConnect()->Baremo
 			->select("*")->where("Estatus=?",1)->fetch();
-			return $q; 	
-		}		
+			return $q;
+		}
 		function calcularOferta($Distancia, $IdAveria, $Neumaticos, $IdCondicionLugar, $timeOpen) {
 			$baremo = $this->datosBaremo();
 			$enganche = $baremo['Enganche'];
@@ -28,13 +28,13 @@
 		//------------------------------
 		function AveriaFactor($IdAveria, $Neumaticos) {
 			$Averias = new Averias();
-			$datos_averia = $Averias->getAveriasInfo($IdAveria);		
-			
-			switch ($datos_averia['IdAveria']) {				
+			$datos_averia = $Averias->getAveriasInfo($IdAveria);
+
+			switch ($datos_averia['IdAveria']) {
 
 
 				case "3":
-					$Cambios = 0;	
+					$Cambios = 0;
 					for ($n = 0; $n < 4; $n++) {
 						if ($Neumaticos[$n] === '1') {
 							$Cambios++;
@@ -52,7 +52,7 @@
 						return $datos_averia['Factor4'];
 					}
 
-				default :			
+				default :
 					return $datos_averia['FactorGeneral'];
 			}
 		}
@@ -77,7 +77,7 @@
 			$datos_condicion = $CondicionLugar->getCondicionLugarInfo($IdCondicionLugar);
 			$datos_condicion['Factor'];
 			return $datos_condicion['Factor'];
-		
+
 		}
 
 		//------------------------------
@@ -98,12 +98,11 @@
 
 			return $baremo['ExtraNocturno'];
 		}
-	
+
 		function getDistancia($LatitudOrigen, $LongitudOrigen, $LatitudDestino, $LongitudDestino) { //equación de Haversine
 			//Conversión de Latitudes a Radianes
 			$origenLAT = deg2rad($LatitudOrigen);
 			$destinoLAT = deg2rad($LatitudDestino);
-
 			//Cálculo de Deltas
 			$deltaLAT = ($destinoLAT - $origenLAT);
 			$deltaLON = deg2rad($LongitudDestino - $LongitudOrigen); //transformación a radianes.
@@ -120,4 +119,3 @@
 			return round($distancia);
 		}
 	}
-	

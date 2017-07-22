@@ -18,5 +18,5 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<body class="hold-transition sidebar-collapse ">
-  <section class="bg-tugruero">
+<body class="hold-transition sidebar-collapse">
+  <section class="">

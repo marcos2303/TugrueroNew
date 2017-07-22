@@ -4,7 +4,8 @@ var link_servidor = Servidor + Proyecto;
 
 
 function listaProveedoresTipo(IdProveedorTipo){
-  $('#IdProveedorTipo').find('option').remove().end().append('<option value="">Seleccione...</option>');
+  //$('#IdProveedorTipo').find('option').remove().end().append('<option value="">Seleccione...</option>');
+  $('#IdProveedorTipo').find('option').remove().end();
   var selected = "";
   var jqxhr = $.get( link_servidor + "/servicios/adminapp/listaProveedoresTipo.php", function(datos) {
   })
@@ -24,7 +25,9 @@ function listaProveedoresTipo(IdProveedorTipo){
   });
 }
 function listaEstados(IdEstado){
-  $('#IdEstado').find('option').remove().end().append('<option value="">Seleccione...</option>');
+  //$('#IdEstado').find('option').remove().end().append('<option value="">Seleccione...</option>');
+  $('#IdEstado').find('option').remove().end();
+
   var selected = "";
   var jqxhr = $.get( link_servidor + "/servicios/adminapp/listaEstados.php", function(datos) {
   })
@@ -44,7 +47,9 @@ function listaEstados(IdEstado){
   });
 }
 function listaEstadosOrigen(IdEstado){
-  $('#IdEstadoOrigen').find('option').remove().end().append('<option value="">Seleccione...</option>');
+  //$('#IdEstadoOrigen').find('option').remove().end().append('<option value="">Seleccione...</option>');
+  $('#IdEstadoOrigen').find('option').remove().end();
+
   var selected = "";
   var jqxhr = $.get( link_servidor + "/servicios/adminapp/listaEstados.php", function(datos) {
   })
@@ -64,7 +69,8 @@ function listaEstadosOrigen(IdEstado){
   });
 }
 function listaEstadosDestino(IdEstado){
-  $('#IdEstadoDestino').find('option').remove().end().append('<option value="">Seleccione...</option>');
+  //$('#IdEstadoDestino').find('option').remove().end().append('<option value="">Seleccione...</option>');
+  $('#IdEstadoDestino').find('option').remove().end();
   var selected = "";
   var jqxhr = $.get( link_servidor + "/servicios/adminapp/listaEstados.php", function(datos) {
   })
@@ -84,7 +90,9 @@ function listaEstadosDestino(IdEstado){
   });
 }
 function listaGruasTipos(IdGruaTipo){
-  $('#IdGruaTipo').find('option').remove().end().append('<option value="">Seleccione...</option>');
+  //$('#IdGruaTipo').find('option').remove().end().append('<option value="">Seleccione...</option>');
+  $('#IdGruaTipo').find('option').remove().end();
+
   var selected = "";
   var jqxhr = $.get( link_servidor + "/servicios/adminapp/listaGruasTipos.php", function(datos) {
   })
@@ -104,7 +112,9 @@ function listaGruasTipos(IdGruaTipo){
   });
 }
 function listaMarcas(IdMarca){
-  $('#IdMarca').find('option').remove().end().append('<option value="">Seleccione...</option>');
+  //$('#IdMarca').find('option').remove().end().append('<option value="">Seleccione...</option>');
+  $('#IdMarca').find('option').remove().end();
+
   var selected = "";
   var jqxhr = $.get( link_servidor + "/servicios/adminapp/listaMarcas.php", function(datos) {
   })
@@ -122,6 +132,133 @@ function listaMarcas(IdMarca){
   .fail(function() {
     alert( "error" );
   });
+}
+function listaSeguros(IdSeguro){
+  //$('#IdSeguro').find('option').remove().end().append('<option value="">Seleccione...</option>');
+  $('#IdSeguro').find('option').remove().end();
+  var selected = "";
+  var jqxhr = $.get( link_servidor + "/servicios/adminapp/listaSeguros.php", function(datos) {
+  })
+  .done(function(datos) {
+    $.each(datos.data, function(i, item) {
+      selected = "";
+      if(typeof(IdSeguro) != 'undefined'){
+        if(parseInt(IdSeguro) === parseInt(item.IdSeguro)){
+          selected = 'selected = "selected"';
+        }
+      }
+      $("#IdSeguro").append('<option value="'+ item.IdSeguro +'" '+selected+'>' + item.Nombre + '</option>');
+    });
+  })
+  .fail(function() {
+    alert( "error" );
+  });
+}
+function listaAverias(IdAveria){
+  //$('#IdAveria').find('option').remove().end().append('<option value="">Seleccione...</option>');
+  $('#IdAveria').find('option').remove().end();
+
+  var selected = "";
+  var parametros = {
+    "IdAveriaPadre": "0"
+  };
+  var jqxhr = $.ajax({
+    url:  link_servidor + "/servicios/adminapp/listaAverias.php",
+    type: "POST",
+    data: JSON.stringify(parametros),
+    dataType: "json",
+    timeout: 20000,
+    global: false,
+    async:false,
+    success: function(datos) {
+      $.each(datos.data, function(i, item) {
+        selected = "";
+        if(typeof(IdAveria) != 'undefined'){
+          if(parseInt(IdAveria) === parseInt(item.IdAveria)){
+            selected = 'selected = "selected"';
+          }
+        }
+        $("#IdAveria").append('<option value="'+ item.IdAveria +'" '+selected+'>' + item.Nombre + '</option>');
+      });
+    },
+    error: function(jqXHR, textStatus) {
+      if (textStatus !== "abort") {
+        console.log("error");
+      }
+    }
+
+  }).responseJSON;
+}
+function listaAveriasHijo(IdAveria,IdAveriaPadre){
+  //$('#IdAveria').find('option').remove().end().append('<option value="">Seleccione...</option>');
+  $('#IdAveriaHijo').find('option').remove().end();
+
+  var selected = "";
+  var parametros = {
+    "IdAveriaPadre": IdAveriaPadre
+  };
+  var jqxhr = $.ajax({
+    url:  link_servidor + "/servicios/adminapp/listaAverias.php",
+    type: "POST",
+    data: JSON.stringify(parametros),
+    dataType: "json",
+    timeout: 20000,
+    global: false,
+    async:false,
+    success: function(datos) {
+      $.each(datos.data, function(i, item) {
+        selected = "";
+        if(typeof(IdAveria) != 'undefined'){
+          if(parseInt(IdAveria) === parseInt(item.IdAveria)){
+            selected = 'selected = "selected"';
+          }
+        }
+        $("#IdAveriaHijo").append('<option value="'+ item.IdAveria +'" '+selected+'>' + item.Nombre + '</option>');
+      });
+    },
+    error: function(jqXHR, textStatus) {
+      if (textStatus !== "abort") {
+        console.log("error");
+      }
+    }
+
+  }).responseJSON;
+
+}
+function listaCondicionLugar(IdCondicionLugar){
+  //$('#IdAveria').find('option').remove().end().append('<option value="">Seleccione...</option>');
+  $('#IdCondicionLugar').find('option').remove().end();
+
+  var selected = "";
+  var parametros = {
+
+  };
+  var jqxhr = $.ajax({
+    url:  link_servidor + "/servicios/adminapp/listaCondicionLugar.php",
+    type: "POST",
+    data: JSON.stringify(parametros),
+    dataType: "json",
+    timeout: 20000,
+    global: false,
+    async:false,
+    success: function(datos) {
+      $.each(datos.data, function(i, item) {
+        selected = "";
+        if(typeof(IdCondicionLugar) != 'undefined'){
+          if(parseInt(IdCondicionLugar) === parseInt(item.IdCondicionLugar)){
+            selected = 'selected = "selected"';
+          }
+        }
+        $("#IdCondicionLugar").append('<option value="'+ item.IdCondicionLugar +'" '+selected+'>' + item.Nombre + '</option>');
+      });
+    },
+    error: function(jqXHR, textStatus) {
+      if (textStatus !== "abort") {
+        console.log("error");
+      }
+    }
+
+  }).responseJSON;
 }
 function listaAnios(Anio){
   $('#Anio').find('option').remove().end().append('<option value="">Seleccione...</option>');

@@ -42,7 +42,7 @@ if($datos_poliza){
 
 				);
 }else{
-$response = array("Error"=>1,"MensajeError"=> "Los datos no coinciden, verifique la información suministrada e intente nuevamente.","MensajeSuccess"=> '');
+$response = array("Error"=>0,"MensajeError"=> "","MensajeSuccess"=> '');
 
 }
 

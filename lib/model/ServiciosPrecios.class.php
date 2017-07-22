@@ -1,10 +1,10 @@
 <?php
 
 	class ServiciosPrecios {
-		
+
 		public $PrecioModificado = 0;//inicializo en no
 		public $IdUsuarioPermiso = null;
-		
+
 		function getPrecioModificado() {
 			return $this->PrecioModificado;
 		}
@@ -21,33 +21,37 @@
 			$this->IdUsuarioPermiso = $IdUsuarioPermiso;
 		}
 
-				
-		
+
+
 		function addServiciosPrecios($values){
-		
+
 			if(!isset($values['PrecioModificado']) or $values['PrecioModificado']==''){
-				$values['PrecioModificado'] = $this->getPrecioModificado();			
-			}
-			if(!isset($values['IdUsuarioPermiso']) or $values['IdUsuarioPermiso']==''){
-				$values['IdUsuarioPermiso'] = $this->getIdUsuarioPermiso();			
+				$values['PrecioModificado'] = $this->getPrecioModificado();
 			}
 			$array = array(
-				
+
 				'IdServicio' => $values['IdServicio'],
-				'PrecioModificado' => $values['PrecioModificado'],
 				'PrecioSIvaBaremo' => $values['PrecioSIvaBaremo'],
+				'IvaBaremo' => $values['IvaBaremo'],
 				'PrecioCIvaBaremo' => $values['PrecioCIvaBaremo'],
-				'PrecioSIvaModificado' => $values['PrecioSIvaModificado'],
-				'PrecioCIvaModificado' => $values['PrecioCIvaModificado'],
+				'PrecioSIvaBaremoModificado	' => $values['PrecioSIvaBaremoModificado'],
+				'IvaBaremoModificado' => $values['IvaBaremoModificado'],
+				'PrecioCIvaBaremoModificado' => $values['PrecioCIvaBaremoModificado'],
+				'PrecioClienteSIva' => $values['PrecioClienteSIva'],
+				'IvaCliente' => $values['IvaCliente'],
+				'PrecioClienteCIva' => $values['PrecioClienteCIva'],
+				'PrecioClienteSIvaModificado' => $values['PrecioClienteSIvaModificado'],
+				'IvaClienteModificado' => $values['IvaClienteModificado'],
+				'PrecioClienteCIvaModificado' => $values['PrecioClienteCIvaModificado'],
 				'IdUsuarioPermiso' => $values['IdUsuarioPermiso'],
-			);			
+			);
 			$ConnectionORM = new ConnectionORM();
 			$q = $ConnectionORM->getConnect()->ServiciosPrecios()->insert($array);
 			return $q;
 		}
 		function updateServiciosPrecios($values){
-			
-			
+
+
 			$array = array();
 			if(count($values)>0){
 				foreach($values as $key => $val){
@@ -62,8 +66,8 @@
 
 		}
 		function deleteServiciosPrecios(){
-			
-			
-			
+
+
+
 		}
 	}

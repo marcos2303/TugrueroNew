@@ -226,3 +226,130 @@ table.dataTable thead .sorting_desc:after {
   border-radius: 45px;
   border-color: #FFF;
 }
+table.table tr th {
+  background-color:#444 !important;
+  color: #fff !important;
+}
+.bg-tugruero {
+    background-color: #444;
+    color: #f27730 !important;
+}
+.bg-body-tugruero {
+    background-color: #444 !important;
+    color: #000;
+}
+.btn-tugruero {
+    color: #fff;
+    background-color: #444 !important;
+    border-color: #fff !important;
+}
+.btn-tugruero:hover {
+    color: #000;
+    background-color: #f27730 !important;
+    border-color: #fff;
+}
+.btn-tugruero:active {
+    color: #fff;
+}
+a .btn-tugruero:hover {
+    color: #000;
+    background-color: #f27730;
+    border-color: #fff;
+}
+a .btn-tugruero:visited {
+    color: #000;
+    background-color: #f27730;
+    border-color: #fff;
+}
+ .btn-tugruero, a:active {
+    color: #fff !important;
+}
+
+.buttons-colvisGroup{
+  color: #fff;
+  background-color: #444;
+  border-color: #fff;
+  font-size: 14px;
+  padding: 5px;
+}
+.buttons-colvisGroup:hover {
+    color: #000;
+    background-color: #f27730;
+    border-color: #fff;
+}
+.buttons-colvisGroup:active {
+    color: #fff;
+}
+.panel-tugruero > .panel-heading {
+    color: #f27730;
+    background-color: #444;
+    border-color: #bce8f1;
+}
+.small-box {
+    border-radius: 10px;
+    position: relative;
+    display: block;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+.small-box h3 {
+  font-size: 26px;
+}
+.panel-title a {
+  text-decoration: none;
+}
+.content-wrapper, .left-side, .right-side {
+    min-height: 100%;
+    background-color: #fff;
+    z-index: 800;
+}
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #bbb;
+    color: #000;
+}
+.table-striped > tbody > tr:hover {
+    background-color: #fff;
+    color: #000;
+}
+.table-small {
+  font-size: 12px !important;
+}
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #f27730;
+    border-color: #f27730;
+}
+.pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus {
+    z-index: 2;
+    color: #fff;
+    background-color: #ccc;
+    border-color: #ddd;
+}
+.pagination > li > a, .pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #fff;
+    text-decoration: none;
+    background-color: #444;
+    border: 1px solid #ddd;
+}
+input[readonly], .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background-color: #aaa;
+    color: #fff !important;
+    opacity: 1;
+}
+.alert {
+    padding: 5px;
+
+    border-radius: 4px;
+}
+.alert-tugruero {
+    color: #000;
+    font-size: 16px !important;
+    background-color: #ccc;
+}

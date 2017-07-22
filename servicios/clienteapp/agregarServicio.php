@@ -72,5 +72,5 @@ if(isset($values['IdServicio']) and $values['IdServicio']!=''){
 	$data_servicio = $Servicios->getServiciosInfo($values);
 	//var_dump($data_servicio);die;
 }
-$response = array("Error"=>0,"MensajeError"=>"","MensajeSuccess"=> 'Ok',"IdServicio"=>$values['IdServicio'],"CodigoServicio"=>$data_servicio['CodigoServicio']);
+$response = array("Error"=>0,"MensajeError"=>"","MensajeSuccess"=> 'Ok',"IdServicio"=>$values['IdServicio'],"CodigoServicio"=>$data_servicio['CodigoServicio'],"DatosServicio" => $data_servicio);
 echo json_encode($response,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);

@@ -7,7 +7,8 @@ include('../../autoload_servicios.php');
 
 $ServiciosClientes = new ServiciosClientes();
 /****************Seteo y comprobacion de valores*******************/
-$response = array("Error"=>1,"MensajeError"=>"No actualizado.","MensajeSuccess"=> '');
+
+$response = array("Error"=>0,"MensajeError"=>"","MensajeSuccess"=> '');
 /*************************Actualizamos el Servicio************************************/
 
 if($ServiciosClientes->updateServiciosClientes($values)){
