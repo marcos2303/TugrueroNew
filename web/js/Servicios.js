@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
   listaMarcas();
   listaEstadosOrigen();
   listaEstadosDestino();
@@ -94,10 +95,15 @@ function GuardarAutomaticoServicioCliente(){
   $("#Inicio").val(DatosServicio.Inicio);
 }
 function CargaHistorialServicios(){
+  var Cedula = $("#Cedula").val();
+  var Placa = $("#Placa").val();
   $.ajax({
     url: link_servidor + "/adm/Listas/index.php?action=lista_servicios_corta",
+    data: { Cedula: Cedula, Placa: Placa},
     success: function(html){
+
       $("#DivHistorialServicios").html(html);
+      $("#example").dataTable().fnAdjustColumnSizing();
     }
   });
 

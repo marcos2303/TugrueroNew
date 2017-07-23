@@ -159,11 +159,10 @@ $(document).ready(function() {
     "sScrollY": "300",
     "sDom": 'tr',
     "iDisplayLength": 100,
-    "ajax":link_servidor + "/adm/Listas/index.php?action=lista_servicios_json&IdProveedor=<?php echo $values['IdProveedor'];?>&IdGrua=<?php echo $values['IdGrua'];?>",
+    "ajax":link_servidor + "/adm/Listas/index.php?action=lista_servicios_json&IdProveedor=<?php echo $values['IdProveedor'];?>&IdGrua=<?php echo $values['IdGrua'];?>&Cedula=<?php echo $values['Cedula'];?>&Placa=<?php echo $values['Placa'];?>",
     "language": {
       "url": link_servidor + "/web/js/datatables.spanish.lang"
     },
-
     /*buttons: [
 
       {
@@ -287,6 +286,9 @@ $(document).ready(function() {
                   { "data" : "NombreUsuarioPrecio" },
                   { "data" : "actions" },
                 ],
+                "fnInitComplete": function() {
+                  this.fnAdjustColumnSizing();
+                },
                 "aoColumnDefs": [
                   { "visible": false, "targets": [ 1,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
                     21,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
@@ -297,7 +299,7 @@ $(document).ready(function() {
               });
                 $('#example').css( 'display', 'table' );
 
-                table.responsive.recalc();
+                //table.responsive.recalc();
 
               /*for(i=0; i< table.columns()[0].length;i++){
 

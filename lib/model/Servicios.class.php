@@ -193,6 +193,12 @@ class Servicios {
     if(isset($values['IdGrua']) and $values['IdGrua']!=''){
       $where.=" AND sg.IdGrua = ".$values['IdGrua']."";
     }
+		if(isset($values['Placa']) and $values['Placa']!=''){
+      $where.=" AND sc.Placa = '".$values['Placa']."'";
+    }
+		if(isset($values['Cedula']) and $values['Cedula']!=''){
+      $where.=" AND sc.Cedula = '".$values['Cedula']."'";
+    }
 		if(isset($values['columns'][0]['search']['value']) and $values['columns'][0]['search']['value']!='')
 		{
 			$where.=" AND upper(CodigoServicio) like ('%".strtoupper($values['columns'][0]['search']['value'])."%')";
@@ -503,7 +509,12 @@ class Servicios {
     if(isset($values['IdGrua']) and $values['IdGrua']!=''){
       $where.=" AND sg.IdGrua = ".$values['IdGrua']."";
     }
-
+		if(isset($values['Placa']) and $values['Placa']!=''){
+      $where.=" AND sc.Placa = '".$values['Placa']."'";
+    }
+		if(isset($values['Cedula']) and $values['Cedula']!=''){
+      $where.=" AND sc.Cedula = '".$values['Cedula']."'";
+    }
 		if(isset($values['columns'][0]['search']['value']) and $values['columns'][0]['search']['value']!='')
 		{
 			$where.=" AND upper(CodigoServicio) like ('%".strtoupper($values['columns'][0]['search']['value'])."%')";
