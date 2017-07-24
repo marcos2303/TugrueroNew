@@ -29,7 +29,7 @@ $data = array( 'message' => '¡Nuevo servicio de Grúa!' );
 // Call our custom GCM function
 //------------------------------
 $ids = array(
-  'fKGBTEBAf40:APA91bFA1IY2G1l5WsHxpLYjZK7VJ7kRLf-AjOUnf6g5VHCwf74sPar1CX-OGyRQSiSqK5l-TzIIBrtQ0WsR7XsKFyYbGV3kVhTpjcSI4jUYJy1FFw3zSRWhWLWAGkrZE44ZBPHCUWj5'
+  'd5bZsD1oG2s:APA91bGUGJcodaHTDOJ92ia8INU5B5so7nULvTehAENNuQpmgmAShpvak8s8ujjltzkY_Nydb8Qu4BDJ3JkZMJRk6H5RhvtMP9XKpWAoOOPpfXkAWeZx1XhmS7iZ_emtGzSxWDbJLHgw'
 );
 $notification =
    array(
@@ -68,7 +68,7 @@ function sendGoogleCloudMessage( $ids,$notification )
 
     $post = array(
                     'registration_ids'  => $ids,
-                    "notification" => $notification
+                    "data" => $notification
 
                     );
 

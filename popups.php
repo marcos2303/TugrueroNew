@@ -114,3 +114,16 @@
     </div>
   </div>
 </div>
+
+<div class="modal bs-example-modal-lg modal-lista" tabindex="-1" id="popupMapa" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" onclick="stopInterval();"> Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

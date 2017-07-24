@@ -237,5 +237,20 @@ class Gruas {
 		$q = $ConnectionORM->ejecutarPreparado($query);
 		return $q;
 	}
+	public function getGruasMapa(){
+		$ConnectionORM = new ConnectionORM();
+		$q = $ConnectionORM->getConnect()->Gruas
+		->select("Gruas.*, m.Nombre as NombreMarca,
+		p.Nombres as NombresProveedor, p.Apellidos as ApellidosProveedor, p.Celular1 as Celular1Proveedor,p.Celular2 as Celular2Proveedor,p.Celular3 as Celular3Proveedor,
+		gt.Nombre as NombreGruasTipo")
+		->join("Proveedores","INNER JOIN Proveedores p on p.IdProveedor = Gruas.IdProveedor")
+		->join("Marcas","INNER JOIN Marcas m on m.IdMarca = Gruas.IdMarca")
+		->join("GruasTipos","INNER JOIN GruasTipos gt on gt.IdGruaTipo = Gruas.IdGruaTipo")
+		->where("Gruas.Estatus=?",1)
+		->and("Latitud<>?","")
+		->and("Longitud<>?","");
+		//echo $q;die;
+		return $q;
+	}
 
 }

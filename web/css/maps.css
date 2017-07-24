@@ -1,3 +1,6 @@
+#mapa{
+   height:700px;
+}
 #map-canvas {
        height: 700px;
        margin: 0px;
@@ -8,6 +11,9 @@
          height: 580px;
          margin: 0px;
          padding: 0px
+       }
+       #mapa{
+          height: 580px;
        }
 }
 

@@ -1,3 +1,4 @@
+
 <div class="container-fluid bg-tugruero" id="floating-panel">
     <div class="col-sm-6">
       <div class="form-group">
@@ -13,4 +14,4 @@
     </div>
 </div>
 <div id="map-canvas"></div>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFeSlIAjDg8U7zsWW82uJCNLi3IZxq9fI&v=3.exp&libraries=places" async defer></script>
+<script src="<?php echo full_url."/web/js/maps/mapa_servicio.js";?>"></script>

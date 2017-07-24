@@ -475,6 +475,8 @@ function closePops() {
   $("#popupAutenticacion").modal("hide");
   if ($("#popupListas").hasClass("in"))
   $("#popupListas").modal("hide");
+  if ($("#popupMapa").hasClass("in"))
+  $("#popupMapa").modal("hide");
 }
 function hideShow(elementos, parametros) {
 

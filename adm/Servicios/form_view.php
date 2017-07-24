@@ -4,7 +4,7 @@
   <div class="wrapper ">
     <header class="main-header"></header>
     <aside class="main-sidebar">
-      <div><?php include('mapa_servicio.php');?></div>
+      <div id="MapaServicio"></div>
     </aside>
     <div class="content-wrapper bg-body-tugruero">
       <div class="text-right" style="margin:5px;">
@@ -29,6 +29,7 @@
           <?php include('historial_servicios.php');?>
           <?php include('datos_servicio.php');?>
           <?php include('monto_servicio.php');?>
+          <?php include('asignacion_gruero.php');?>
         </div>
       </form>
     </div>
@@ -39,4 +40,3 @@
 </div>
 <?php include('../../view_footer_admin.php');?>
 <script src="<?php echo full_url;?>/web/js/Servicios.js"></script>
-<script src="<?php echo full_url."/web/js/maps/mapa_servicio.js";?>" async defer></script>

@@ -1,4 +1,10 @@
 $(document).ready(function(){
+  $.ajax({
+    url: link_servidor + "/adm/Mapas/index.php?action=mapa_servicio",
+    success: function(html){
+      $('#MapaServicio').html(html);
+    }
+  });
 
   listaMarcas();
   listaEstadosOrigen();
@@ -269,4 +275,22 @@ function CambiarNegociar(e){
     $("#HoraAgendado").val("");
   }
   GuardarAutomaticoServicio();
+}
+function BusquedaGrueroMapa(){
+  $.ajax({
+    url: link_servidor + "/adm/Mapas/index.php?action=mapa_grueros",
+    success: function(html){
+      $('#popupMapa .modal-body').html(html);
+      $('#popupMapa').modal('show');
+    }
+  });
+}
+function BusquedaGrueroLista(){
+  $.ajax({
+    url: link_servidor + "/adm/Listas/index.php?action=lista_gruas&IdProveedor",
+    success: function(html){
+      $('#popupListas .modal-body').html(html);
+      $('#popupListas').modal('show');
+    }
+  });
 }
