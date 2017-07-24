@@ -23,6 +23,7 @@
         <input type="hidden" class="form-control SaveAutomaticoServicioCliente" name="IdPoliza" id="IdPoliza">
         <input type="hidden" class="form-control SaveAutomaticoServicioCliente" name="Inicio" id="Inicio">
 
+
         <input type="hidden" id="action" value="<?php echo $values['action'];?>">
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
           <?php include('datos_cliente.php');?>

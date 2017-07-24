@@ -287,10 +287,29 @@ function BusquedaGrueroMapa(){
 }
 function BusquedaGrueroLista(){
   $.ajax({
-    url: link_servidor + "/adm/Listas/index.php?action=lista_gruas&IdProveedor",
+    url: link_servidor + "/adm/Listas/index.php?action=lista_gruas&opcion=1",
     success: function(html){
       $('#popupListas .modal-body').html(html);
       $('#popupListas').modal('show');
     }
   });
+}
+function SeleccionarGruaLista(IdGrua){
+  DatosGrua(IdGrua);
+  $("#IdGrua").val(IdGrua);
+  closePops();
+}
+function SeleccionarGruaMapa(IdGrua){
+  DatosGrua(IdGrua);
+  $("#IdGrua").val(IdGrua);
+  stopInterval();
+  closePops();
+}
+function DatosGrua(IdGrua){
+  var parametros = {
+    IdGrua: IdGrua
+  };
+  var Datos = AjaxCall("servicios/clienteapp/datosGrua.php", parametros);
+  $("#NombresGrua").val(Datos.Nombres + ' ' + Datos.Apellidos);
+  $("#NombreGruasTipo").val(Datos.NombreGruasTipo);
 }

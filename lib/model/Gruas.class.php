@@ -98,6 +98,17 @@ class Gruas {
 		$columns[3] = 'Modelo';
 		$columns[4] = 'Color';
 		$columns[5] = 'Anio';
+		$columns[6] = 'Clave';
+		$columns[7] = 'p.Identificacion';
+		$columns[8] = "CONCAT(p.Nombres, ' ' , p.Apellidos )";
+		$columns[9] = 'e.Nombre';
+		$columns[10] = 'p.Ciudad';
+		$columns[11] = 'p.Zona';
+		$columns[12] = 'p.Celular1';
+		$columns[13] = 'p.Celular2';
+		$columns[14] = 'p.Celular3';
+		$columns[15] = 'Disponible';
+		$columns[6] = 'Clave';
 		$column_order = $columns[0];
 		$where = '1 = 1';
 		$order = 'asc';
@@ -131,6 +142,47 @@ class Gruas {
 		{
 			$where.=" AND Anio like ('%".strtoupper($values['columns'][5]['search']['value'])."%')";
 		}
+		if(isset($values['columns'][6]['search']['value']) and $values['columns'][6]['search']['value']!='')
+		{
+			$where.=" AND Clave like ('%".strtoupper($values['columns'][6]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][7]['search']['value']) and $values['columns'][7]['search']['value']!='')
+		{
+			$where.=" AND e.Identificacion like ('%".strtoupper($values['columns'][7]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][8]['search']['value']) and $values['columns'][8]['search']['value']!='')
+		{
+			$where.=" AND CONCAT(p.Nombres ,' ', p.Apellidos) like ('%".strtoupper($values['columns'][8]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][9]['search']['value']) and $values['columns'][9]['search']['value']!='')
+		{
+			$where.=" AND e.Nombre like ('%".strtoupper($values['columns'][9]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][10]['search']['value']) and $values['columns'][10]['search']['value']!='')
+		{
+			$where.=" AND p.Ciudad like ('%".strtoupper($values['columns'][10]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][11]['search']['value']) and $values['columns'][11]['search']['value']!='')
+		{
+			$where.=" AND p.Zona like ('%".strtoupper($values['columns'][11]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][12]['search']['value']) and $values['columns'][12]['search']['value']!='')
+		{
+			$where.=" AND p.Celular1 like ('%".strtoupper($values['columns'][12]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][13]['search']['value']) and $values['columns'][13]['search']['value']!='')
+		{
+			$where.=" AND p.Celular2 like ('%".strtoupper($values['columns'][13]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][14]['search']['value']) and $values['columns'][14]['search']['value']!='')
+		{
+			$where.=" AND p.Celular3 like ('%".strtoupper($values['columns'][14]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][15]['search']['value']) and $values['columns'][15]['search']['value']!='')
+		{
+			$where.=" AND (CASE Disponible WHEN 0 THEN 'NO'  WHEN 1 THEN 'SI' WHEN 2 THEN 'EN SERVICIO' END)  like ('%".strtoupper($values['columns'][15]['search']['value'])."%')";
+		}
+
 
 
 		if(isset($values['order'][0]['column']) and $values['order'][0]['column']!='0')
@@ -143,9 +195,14 @@ class Gruas {
 		}
 		$ConnectionORM = new ConnectionORM();
 		$q = $ConnectionORM->getConnect()->Gruas
-		->select("Gruas.*,m.Nombre as NombreMarca, gt.Nombre as NombreGruaTipo")
+		->select("Gruas.*,m.Nombre as NombreMarca, gt.Nombre as NombreGruaTipo,
+		p.Identificacion as IdentificacionProveedor,CONCAT(p.Nombres,' ',p.Apellidos ) as Proveedor, UPPER(e.Nombre) as NombreEstado,p.Ciudad as CiudadProveedor,
+		p.Zona as ZonaProveedor,p.Celular1, p.Celular2,p.Celular3,
+		CASE Disponible WHEN 0 THEN 'NO'  WHEN 1 THEN 'SI' WHEN 2 THEN 'EN SERVICIO' END AS Disponible
+		")
 		->join("Proveedores","INNER JOIN Proveedores p on p.IdProveedor = Gruas.IdProveedor")
 		->join("Marcas","INNER JOIN Marcas m on m.IdMarca = Gruas.IdMarca")
+		->join("Estados","INNER JOIN Estados e on e.IdEstado = p.IdEstado")
 		->join("GruasTipos","INNER JOIN GruasTipos gt on gt.IdGruaTipo = Gruas.IdGruaTipo")
 		->order("$column_order $order")
 		->where("$where")
@@ -189,6 +246,7 @@ class Gruas {
 		->join("Proveedores","INNER JOIN Proveedores p on p.IdProveedor = Gruas.IdProveedor")
 		->join("Marcas","INNER JOIN Marcas m on m.IdMarca = Gruas.IdMarca")
 		->join("GruasTipos","INNER JOIN GruasTipos gt on gt.IdGruaTipo = Gruas.IdGruaTipo")
+		->join("Estados","INNER JOIN Estados e on e.IdEstado = p.IdEstado")
 		->where("$where")
 		->fetch();
 		return $q['cuenta'];

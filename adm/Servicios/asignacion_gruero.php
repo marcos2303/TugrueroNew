@@ -9,6 +9,7 @@
   <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
     <div class="panel-body">
       <div class="" id="DivAsignacionGruero">
+        <input type="text" class="form-control SaveAutomaticoServicioCliente" name="IdGrua" id="IdGrua">
         <div class="row">
           <div class="col-lg-4 col-xs-4 col-xs-offset-4">
             <!-- small box -->
@@ -26,13 +27,13 @@
           <div class="col-sm-4">
             <div class="form-group">
               <label> Nombres y apellidos</label>
-              <input type="text" class="form-control SaveAutomaticoServicioPrecio input-sm " id="PrecioSIvaBaremo" name="PrecioSIvaBaremo" readonly="readonly">
+              <input type="text" class="form-control input-sm " id="NombresGrua" name="NombresGrua" readonly="readonly">
             </div>
           </div>
           <div class="col-sm-4">
             <div class="form-group">
               <label>Tipo de grúa</label>
-              <input class="form-control SaveAutomaticoServicioPrecio input-sm " id="IvaBaremo" name="IvaBaremo" type="text" autocomplete="off" readonly="readonly">
+              <input class="form-control input-sm " id="NombreGruasTipo" name="NombreGruasTipo" type="text" autocomplete="off" readonly="readonly">
             </div>
           </div>
           <div class="col-sm-4">

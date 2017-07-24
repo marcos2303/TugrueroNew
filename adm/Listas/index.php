@@ -54,13 +54,14 @@ function executeListaGruasJson($values)
 	$array_json = array();
 	$array_json['recordsTotal'] = $list_json_cuenta;
 	$array_json['recordsFiltered'] = $list_json_cuenta;
+	$i  = 0;
 	if(count($list_json)>0)
 	{
 		foreach ($list_json as $list)
 		{
 
 			$IdGrua = $list['IdGrua'];
-			$array_json['data'][] = array(
+			$array_json['data'][$i] = array(
 				"IdProveedor" => $IdProveedor,
 				"Placa" => $list['Placa'],
 				"NombreGruaTipo" => $list['NombreGruaTipo'],
@@ -69,19 +70,46 @@ function executeListaGruasJson($values)
 				"Color" => $list['Color'],
 				"Anio" => $list['Anio'],
 				"Clave" => $list['Clave'],
-				"actions" => '
-				<div class="btn-group">
-				<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<i class="fa fa-gear"></i> <span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu dropdown-menu-right">
-				<li><a href="#" onclick="editarDatatable('."'".$list['Placa']."'".')"> Editar</a></li>
-				<li><a href="#" onclick="ListarServiciosGrua(1,1)"> Historial de servicios</a></li>
-				<li><a href="#"> Conexiones</a></li>
-				<li><a href="#"> Reiniciar dispositivo</a></li>
-				</ul>
-				</div>'
-			);
+				"IdentificacionProveedor" => $list['IdentificacionProveedor'],
+				"Proveedor" => $list['Proveedor'],
+				"NombreEstado" => $list['NombreEstado'],
+				"CiudadProveedor" => $list['CiudadProveedor'],
+				"ZonaProveedor" => $list['ZonaProveedor'],
+				"Celular1" => $list['Celular1'],
+				"Celular2" => $list['Celular2'],
+				"Celular3" => $list['Celular3'],
+				"Disponible" => $list['Disponible']);
+
+				if(!isset($values['opcion'])){
+					$array_json['data'][$i]['actions'] = '
+					<div class="btn-group">
+					<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<i class="fa fa-gear"></i> <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu dropdown-menu-right">
+					<li><a href="#" onclick="editarDatatable('."'".$list['Placa']."'".')"> Editar</a></li>
+					<li><a href="#" onclick="ListarServiciosGrua(1,1)"> Historial de servicios</a></li>
+					<li><a href="#"> Conexiones</a></li>
+					<li><a href="#"> Reiniciar dispositivo</a></li>
+					</ul>
+					</div>';
+				}
+
+
+				if(isset($values['opcion']) and $values['opcion']=='1'){
+						$array_json['data'][$i]['actions'] = '
+						<div class="btn-group">
+						<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="fa fa-gear"></i> <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu dropdown-menu-right">
+						<li><a href="#" onclick="SeleccionarGruaLista('."'".$list['IdGrua']."'".')"> Seleccionar</a></li>
+						</ul>
+						</div>';
+				}
+
+
+				$i++;
 		}
 	}else{
 		$array_json['recordsTotal'] = 0;
@@ -95,7 +123,17 @@ function executeListaGruasJson($values)
 			"Color" => null,
 			"Anio" => null,
 			"Clave" => null,
-			"actions" => null
+			"IdentificacionProveedor" => null,
+			"Proveedor" => null,
+			"NombreEstado" => null,
+			"CiudadProveedor" => null,
+			"ZonaProveedor" => null,
+			"Celular1" => null,
+			"Celular2" => null,
+			"Celular3" => null,
+			"Disponible" => null,
+			"actions" => null,
+
 		);
 	}
 	echo json_encode($array_json);die;

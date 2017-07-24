@@ -7,7 +7,7 @@ include('../../autoload_servicios.php');
 $Gruas = new Gruas();
 /****************Seteo y comprobacion de valores*******************/
 //$values['IdGrua'] = 1;
-$response = array("Error"=>1,"MensajeError"=>"Grúa no existe.","MensajeSuccess"=> '',"IdServicio"=>"");
+$response = array("Error"=>1,"MensajeError"=>"Grúa no existe.","MensajeSuccess"=> '',"IdGrua"=>"");
 $datos = $Gruas->getGruaInfo($values['IdGrua']);
 if($datos){
 	$response = array(
@@ -19,6 +19,8 @@ if($datos){
 		"IdProveedor" => $datos['IdProveedor'],
 		"IdGruaTipo" => $datos['IdGruaTipo'],
 		"IdMarca" => $datos['IdMarca'],
+		"Nombres" => $datos['Nombres'],
+		"Apellidos" => $datos['Apellidos'],
 		"Estatus" => $datos['Estatus'],
 		"Placa" => $datos['Placa'],
 		"Modelo" => $datos['Modelo'],
@@ -30,14 +32,14 @@ if($datos){
 		"Token" => $datos['Token'],
 		"DeviceId" => $datos['DeviceId'],
 		"GPSOn" => $datos['GPSOn'],
-		/***************Proveedor*********************/		
+		/***************Proveedor*********************/
 		"NombresProveedor" => $datos['NombresProveedor'],
 		"ApellidosProveedor" => $datos['ApellidosProveedor'],
 		/******************Marca****************************/
 		"NombreMarca" => $datos['NombreMarca'],
 		/******************Gruas tipo********************************/
 		"NombreGruasTipo" => $datos['NombreGruasTipo'],
-		
+
 		);
 
 }

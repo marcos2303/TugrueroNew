@@ -88,6 +88,7 @@ function setMarker(map_gruas) {
     info+= "<b>Color : </b>" + value.Color + "<br>";
     info+= "<b>Estatus : </b>" + value.Estatus + "<br>";
     info+= "<b>Ultima actualización : </b>" + value.UltimaActualizacion + "<br>";
+    info+= "<p class='text-center'><button class='btn btn-tugruero' onclick='SeleccionarGruaMapa("+ value.IdGrua+")'> Seleccionar </button></p>";
     marcadores[index] = [
       info,
       value.Latitud,
