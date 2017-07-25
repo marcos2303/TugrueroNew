@@ -1,12 +1,12 @@
 <div class="panel panel-tugruero">
-  <div class="panel-heading" role="tab" id="headingSix">
+  <div class="panel-heading" role="tab" id="headingEight">
     <h4 class="panel-title">
-      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-        Asignación de gruero
+      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+        Calificación
       </a>
     </h4>
   </div>
-  <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+  <div id="collapseEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEight">
     <div class="panel-body">
       <div class="" id="DivAsignacionGruero">
         <input type="text" class="form-control SaveAutomaticoServicioCliente" name="IdGrua" id="IdGrua">

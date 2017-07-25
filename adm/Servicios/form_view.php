@@ -30,7 +30,10 @@
           <?php include('historial_servicios.php');?>
           <?php include('datos_servicio.php');?>
           <?php include('monto_servicio.php');?>
+          <?php include('metodo_pago.php');?>
           <?php include('asignacion_gruero.php');?>
+          <?php include('simulador.php');?>
+          <?php include('calificacion.php');?>
         </div>
       </form>
     </div>
@@ -39,5 +42,6 @@
   </div>
 
 </div>
+
 <?php include('../../view_footer_admin.php');?>
 <script src="<?php echo full_url;?>/web/js/Servicios.js"></script>

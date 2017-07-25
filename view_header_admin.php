@@ -14,7 +14,6 @@
   <link href="<?php echo full_url;?>/web/css/datatables.css" rel="stylesheet">
   <link rel="stylesheet" href="<?php echo full_url;?>/web/css/style.css">
   <link rel="stylesheet" href="<?php echo full_url;?>/web/css/maps.css">
-  <script src="<?php echo full_url;?>/web/js/datatables.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
