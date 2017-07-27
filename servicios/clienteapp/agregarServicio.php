@@ -8,6 +8,7 @@ include('../../autoload_servicios.php');
 $Servicios = new Servicios();
 $ServiciosClientes = new ServiciosClientes();
 $ServiciosPrecios = new ServiciosPrecios();
+$ServiciosGruas = new ServiciosGruas();
 $Baremo = new Baremo();
 /****************Seteo y comprobacion de valores*******************/
 $response = array("Error"=>0,"MensajeError"=>"","MensajeSuccess"=> 'Ok',"IdServicio"=>"0");
@@ -63,6 +64,11 @@ if(isset($values['IdServicio'])){
 	//insertamos en ServiciosPrecios
 	if(!$ServiciosPrecios ->addServiciosPrecios($values)){
 		$response = array("Error"=>0,"MensajeError" => "Se ha presentado un error iniciando el servicio precio. Intente de nuevo.");
+		echo json_encode($response);die;
+	}
+	//insertamos en ServiciosGruas
+	if(!$ServiciosGruas ->addServiciosGruas($values)){
+		$response = array("Error"=>0,"MensajeError" => "Se ha presentado un error iniciando el servicio gruero. Intente de nuevo.");
 		echo json_encode($response);die;
 	}
 }

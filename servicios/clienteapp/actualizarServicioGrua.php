@@ -11,7 +11,7 @@ $ServiciosGruas = new ServiciosGruas();
 $response = array("Error"=>0,"MensajeError"=>"","MensajeSuccess"=> '');
 /*************************Actualizamos el Servicio************************************/
 
-if($ServiciosClientes->updateServiciosGruas($values)){
+if($ServiciosGruas->updateServiciosGruas($values)){
 $response = array("Error"=>0,"MensajeError"=>"","MensajeSuccess"=> 'Ok',"IdServicio"=>$values['IdServicio']);
 
 }

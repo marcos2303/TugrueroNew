@@ -68,6 +68,9 @@ $(document).ready(function(){
       CargaHistorialServicios();
     }
   });
+  $(".SaveAutomaticoServicioGrua").change(function(){
+    GuardarAutomaticoServicioGrua();
+  });
 });//end document ready
 
 function GuardarAutomaticoServicio(){
@@ -99,6 +102,11 @@ function GuardarAutomaticoServicioCliente(){
 
   $("#CodigoServicio").val(DatosServicio.CodigoServicio);
   $("#Inicio").val(DatosServicio.Inicio);
+}
+function GuardarAutomaticoServicioGrua(){
+  var DataForm = $('#DataForm .SaveAutomaticoServicioGrua').serializeArray();
+  var parametros_servicio_grua = convertiraAJson(DataForm);
+  var actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioGrua.php", parametros_servicio_grua, agregarSuccess, MensajeError);
 }
 function CargaHistorialServicios(){
   var Cedula = $("#Cedula").val();
@@ -190,18 +198,6 @@ function DatosPoliza(){
   			};
   			genericPop(popup);
   		}else{
-  			parametros = {
-  				/*IdGrua:  $("#IdGrua").val(),
-  				IdProveedor: $("#IdProveedor").val(),*/
-  			};
-
-  			/*respuesta = AjaxCall("servicios/adminapp/actualizarGrua.php", parametros, actualizarSuccess, MensajeError);
-  			$("#Reasignar").hide();
-  			$("#EnviarGrua").show();
-  			$("#IdGrua").val("");
-  			$("#DatosGrua").hide();
-  			$("#Placa").val("");
-  			limpiarGruaForm();*/
         $('#IdServicioTipo').val(3);
         $('#IdPoliza').val(null);
         $('#Nombres').prop('readonly', false);
@@ -312,4 +308,11 @@ function DatosGrua(IdGrua){
   var Datos = AjaxCall("servicios/clienteapp/datosGrua.php", parametros);
   $("#NombresGrua").val(Datos.Nombres + ' ' + Datos.Apellidos);
   $("#NombreGruasTipo").val(Datos.NombreGruasTipo);
+}
+function FinalizarServicio(){
+  if(!confirm("¿Está seguro(a) de finalizar el servicio" + $("#CodigoServicio").val() +"?")){
+    return false;
+  }else{
+    return false;
+  }
 }
