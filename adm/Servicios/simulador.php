@@ -9,7 +9,52 @@
   <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
     <div class="panel-body">
       <div class="" id="DivAsignacionGruero">
-          dfgdfgd
+         <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" id ="EstatusGrueroCliente" onchange="actualizarServiciosEstatusClienteGruero();"> Confirmación de llegada Gruero-Cliente
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <input type="date" class="form-control input-sm" id="FechaGrueroCliente" onchange="actualizarServiciosEstatusClienteGruero();" name="" type="text" autocomplete="off">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <input type="time" class="form-control input-sm" id="HoraGrueroCliente" onchange="actualizarServiciosEstatusClienteGruero();" name="" type="text" autocomplete="off">
+              </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" id ="EstatusLlegada" onchange="actualizarServiciosEstatusLlegada();"> Confirmación de llegada destino
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <input type="date" class="form-control input-sm" id="FechaLlegada" onchange="actualizarServiciosEstatusLlegada();" type="text" autocomplete="off">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <input type="time" class="form-control input-sm" id="HoraLlegada" onchange="actualizarServiciosEstatusLlegada();" type="text" autocomplete="off">
+              </div>
+            </div>
+         </div>
       </div>
     </div>
   </div>

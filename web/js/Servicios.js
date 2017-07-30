@@ -316,3 +316,39 @@ function FinalizarServicio(){
     return false;
   }
 }
+function actualizarServiciosEstatusClienteGruero(){
+  var parametros = {
+    "IdServicio": $("#IdServicio").val(),
+    "IdEstatus" : 4,
+    "IdUsuario" : $("#IdUsuario").val(),
+    "Fecha": $("#FechaGrueroCliente").val(),
+    "Hora": $("#HoraGrueroCliente").val(),
+
+
+  }
+
+  if ($('#EstatusGrueroCliente').is(':checked')) {
+    var actualizarServicioEstatus = AjaxCall("servicios/clienteapp/actualizarServiciosEstatus.php", parametros);
+  }else{
+    var eliminarServicioEstatus = AjaxCall("servicios/clienteapp/eliminarServiciosEstatus.php", parametros);
+  }
+
+
+}
+function actualizarServiciosEstatusLlegada(){
+  var parametros = {
+    "IdServicio": $("#IdServicio").val(),
+    "IdEstatus" : 5,
+    "IdUsuario" : $("#IdUsuario").val(),
+    "Fecha": $("#FechaLlegada").val(),
+    "Hora": $("#HoraLlegada").val(),
+
+
+  }
+  if ($('#EstatusLlegada').is(':checked')) {
+    var actualizarServicioEstatus = AjaxCall("servicios/clienteapp/actualizarServiciosEstatus.php", parametros);
+  }else{
+    var eliminarServicioEstatus = AjaxCall("servicios/clienteapp/eliminarServiciosEstatus.php", parametros);
+  }
+
+}

@@ -1,11 +1,11 @@
 <?php
 
 	class ServiciosClientes {
-		
+
 		public $IdUsuarioPermiso = null;
 		public $IdPoliza = null;
 		public $PolizaVencida = 0;//inicializo en no
-		
+
 		function getIdUsuarioPermiso() {
 			return $this->IdUsuarioPermiso;
 		}
@@ -29,17 +29,17 @@
 			$this->PolizaVencida = $PolizaVencida;
 		}
 
-				
-		function addServiciosClientes($values){	
-			
+
+		function addServiciosClientes($values){
+
 			if(!isset($values['IdUsuarioPermiso']) or $values['IdUsuarioPermiso']==''){
-				$values['IdUsuarioPermiso'] = $this->getIdUsuarioPermiso();			
+				$values['IdUsuarioPermiso'] = $this->getIdUsuarioPermiso();
 			}
 			if(!isset($values['IdPoliza']) or $values['IdPoliza']==''){
-				$values['IdPoliza'] = $this->getIdPoliza();		
+				$values['IdPoliza'] = $this->getIdPoliza();
 			}
 			if(!isset($values['PolizaVencida']) or $values['PolizaVencida']==''){
-				$values['PolizaVencida'] = $this->getPolizaVencida();		
+				$values['PolizaVencida'] = $this->getPolizaVencida();
 			}
 			$array = array(
 					'IdServicio' =>  $values['IdServicio'],
@@ -56,14 +56,14 @@
 					'PolizaVencida' => $values['PolizaVencida'],
 					'IdUsuarioPermiso' => $values['IdUsuarioPermiso'],
 				);
-			
+
 			$ConnectionORM = new ConnectionORM();
 			$q = $ConnectionORM->getConnect()->ServiciosClientes()->insert($array);
 			return $q;
 		}
 		function updateServiciosClientes($values){
-			
-			
+
+
 			$array = array();
 			if(count($values)>0){
 				foreach($values as $key => $val){
@@ -78,8 +78,8 @@
 
 		}
 		function deleteServiciosClientes(){
-			
-			
-			
+
+
+
 		}
 	}

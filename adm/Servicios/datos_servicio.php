@@ -22,7 +22,7 @@
               </label>
             </div>
           </div>
-          <div class="col-sm-">
+          <div class="col-sm-5">
             <div class="form-group">
               <input type="date" class="form-control SaveAutomaticoServicio input-sm Agendado" style="display:none;" id="FechaAgendado" name="FechaAgendado" type="text" placeholder="" autocomplete="off">
             </div>

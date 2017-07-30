@@ -9,6 +9,7 @@ $Servicios = new Servicios();
 $ServiciosClientes = new ServiciosClientes();
 $ServiciosPrecios = new ServiciosPrecios();
 $ServiciosGruas = new ServiciosGruas();
+$ServiciosEstatus = new ServiciosEstatus();
 $Baremo = new Baremo();
 /****************Seteo y comprobacion de valores*******************/
 $response = array("Error"=>0,"MensajeError"=>"","MensajeSuccess"=> 'Ok',"IdServicio"=>"0");
@@ -56,6 +57,17 @@ if(!$Servicios ->addServicios($values)){
 $values['IdServicio'] = $Servicios->getIdServicio();//Variable IdServicio
 
 if(isset($values['IdServicio'])){
+	//Insertamos en ServiciosEstatus la traza
+	if(isset($values['IdEstatus']) and $values['IdEstatus']==''){
+		$values['IdEstatus'] = 2;
+	}
+
+	$values['Fecha'] = date("Y-m-d");
+	$values['Hora'] = date("h:i:s");
+	if(!$ServiciosEstatus ->addServiciosEstatus($values)){
+		$response = array("Error"=>0,"MensajeError" => "Se ha presentado un error iniciando el servicio estatus. Intente de nuevo.");
+		echo json_encode($response);die;
+	}
 	//insertamos en ServiciosCliente
 	if(!$ServiciosClientes ->addServiciosClientes($values)){
 		$response = array("Error"=>0,"MensajeError" => "Se ha presentado un error iniciando el servicio cliente. Intente de nuevo.");
@@ -71,6 +83,7 @@ if(isset($values['IdServicio'])){
 		$response = array("Error"=>0,"MensajeError" => "Se ha presentado un error iniciando el servicio gruero. Intente de nuevo.");
 		echo json_encode($response);die;
 	}
+
 }
 
 /***********************Localizar Grúas y enviar push*************************************************/

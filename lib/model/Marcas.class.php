@@ -30,7 +30,7 @@
 			$ConnectionORM = new ConnectionORM();
 			$q = $ConnectionORM->getConnect()->Marcas
 			->select("*")
-            ->where("Estatus=?",1)->order('Nombre');
+    	->where("Estatus=?",1)->order('Nombre');
 			return $q;
 		}
 
