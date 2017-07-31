@@ -336,6 +336,7 @@ function DatosGrua(IdGrua){
   var FechaAsignacion = String(anio+"-"+"0"+mes+"-"+dia);
   $("#FechaAsignacion").val(FechaAsignacion);
   $("#HoraAsignacion").val(HoraAsignacion);
+  calculaTiempoDeEspera();
 
 
 }
@@ -391,6 +392,11 @@ function actualizarServiciosEstatusLlegada(){
 
 }
 function calculaTiempoDeEspera(){
+    
+    
+  if($("#HoraAsignacion").val() == ''){
+      return false;
+  }  
   var HoraAsignacion =$("#HoraAsignacion").val();
   HoraAsignacion = HoraAsignacion.split(":");
   hora = HoraAsignacion[0];

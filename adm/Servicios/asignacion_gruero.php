@@ -9,7 +9,7 @@
   <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
     <div class="panel-body">
       <div class="" id="DivAsignacionGruero">
-        <input type="text" class="form-control SaveAutomaticoServicioCliente" name="IdGrua" id="IdGrua">
+        <input type="text" class="form-control SaveAutomaticoServicioCliente SaveAutomaticoServicioGrua" name="IdGrua" id="IdGrua">
         <div class="row">
           <div class="col-lg-4 col-xs-4 col-xs-offset-4">
             <!-- small box -->
@@ -58,23 +58,28 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-4">
+          <div class="col-sm-2">
             <div class="form-group">
-              <label> Tiempo estimado de espera</label>
-              <input type="number" min="0" max="96" value="0" class="form-control input-sm" onchange="calculaTiempoDeEspera();" id="HoraTiempoEstimadoEspera" name="HoraTiempoEstimadoEspera">
-              <input type="number" min="0" max="59" value="0" class="form-control input-sm" onchange="calculaTiempoDeEspera();" id="MinutosTiempoEstimadoEspera" name="MinutosTiempoEstimadoEspera">
-              <input type="time" class="form-control input-sm SaveAutomaticoServicioGrua" id="TiempoEstimadoEspera" name="TiempoEstimadoEspera">
+              <label>Hrs.Estimadas de espera</label>
+              <input type="number" size="4" min="0" max="96" value="0" class="form-control input-sm" onchange="calculaTiempoDeEspera();" id="HoraTiempoEstimadoEspera" name="HoraTiempoEstimadoEspera">
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label>Min.Estimados de espera</label>
+              <input type="number" size="4" min="0" max="59" value="0" class="form-control input-sm" onchange="calculaTiempoDeEspera();" id="MinutosTiempoEstimadoEspera" name="MinutosTiempoEstimadoEspera">
+              <input type="hidden" value="00:00" class="form-control input-sm SaveAutomaticoServicioGrua" id="TiempoEstimadoEspera" name="TiempoEstimadoEspera">
             </div>
           </div>
           <div class="col-sm-4">
             <div class="form-group">
-              <label> Fecha estimada de llegada</label>
+              <label> F.Estimada de llegada</label>
               <input class="form-control input-sm SaveAutomaticoServicioGrua" id="FechaEstimadaLlegada" name="FechaEstimadaLlegada" type="date" autocomplete="off" readonly="readonly">
             </div>
           </div>
           <div class="col-sm-4">
             <div class="form-group">
-              <label> Hora estimada de llegada</label>
+              <label> Hr.Estimada de llegada</label>
               <input class="form-control input-sm SaveAutomaticoServicioGrua" id="HoraEstimadaLlegada" name="HoraEstimadaLlegada" type="text" autocomplete="off" readonly="readonly">
             </div>
           </div>
