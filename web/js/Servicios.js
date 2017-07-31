@@ -69,6 +69,10 @@ $(document).ready(function(){
     }
   });
   $(".SaveAutomaticoServicioGrua").change(function(){
+    if($(this).attr('name') == "HoraTiempoEstimadoEspera" || $(this).attr('name') == "MinutosTiempoEstimadoEspera"){
+            calculaTiempoDeEspera();
+    }  
+    
     GuardarAutomaticoServicioGrua();
   });
 });//end document ready
@@ -106,7 +110,9 @@ function GuardarAutomaticoServicioCliente(){
 function GuardarAutomaticoServicioGrua(){
   var DataForm = $('#DataForm .SaveAutomaticoServicioGrua').serializeArray();
   var parametros_servicio_grua = convertiraAJson(DataForm);
-  var actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioGrua.php", parametros_servicio_grua, agregarSuccess, MensajeError);
+    var actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioGrua.php", parametros_servicio_grua, agregarSuccess, MensajeError);
+
+
 }
 function CargaHistorialServicios(){
   var Cedula = $("#Cedula").val();
@@ -316,6 +322,7 @@ function DatosGrua(IdGrua){
   mes = fechahora.getMonth() + 1;
   anio= fechahora.getFullYear();
 
+
   if(minutos <10){
     minutos = "0" + minutos;
   }
@@ -330,34 +337,6 @@ function DatosGrua(IdGrua){
   $("#FechaAsignacion").val(FechaAsignacion);
   $("#HoraAsignacion").val(HoraAsignacion);
 
-
-  minuto=23;
-  hora=20;
-
-  minutosumado=00;
-  horasumada=4;
-  fecha=$("#FechaAsignacion").val();
-  parametros=fecha.split("-");
-  fecha2 = new Date(parametros[0] , parametros[1]-1 , parametros[2], hora+horasumada, minuto+minutosumado);
-  minutos2 = fecha2.getMinutes();
-  hora2 = fecha2.getHours();
-  dia2 = fecha2.getDate();
-  mes2 = fecha2.getMonth() + 1;
-  anio2= fechahora.getFullYear();
-  if(minutos2 <10){
-    minutos2 = "0" + minutos2;
-  }
-  if(hora2 <10){
-    hora2 = "0" + hora2;
-  }
-  if(dia2<10){
-    dia2 = "0" + dia2;
-  }
-
-  var FechaEstimadaLlegada = String(anio2+"-"+"0"+mes2+"-"+dia2);
-  var HoraEstimadaLlegada = String(hora2+":"+minutos2);
-  $("#FechaEstimadaLlegada").val(FechaEstimadaLlegada);
-  $("#HoraEstimadaLlegada").val(HoraEstimadaLlegada);
 
 }
 function FinalizarServicio(){
@@ -410,4 +389,57 @@ function actualizarServiciosEstatusLlegada(){
     var eliminarServicioEstatus = AjaxCall("servicios/clienteapp/eliminarServiciosEstatus.php", parametros);
   }
 
+}
+function calculaTiempoDeEspera(){
+  var HoraAsignacion =$("#HoraAsignacion").val();
+  HoraAsignacion = HoraAsignacion.split(":");
+  hora = HoraAsignacion[0];
+  minuto = HoraAsignacion[1];
+
+  var horasumada = parseInt($("#HoraTiempoEstimadoEspera").val());
+  var minutosumado = parseInt($("#MinutosTiempoEstimadoEspera").val());
+  fecha=$("#FechaAsignacion").val();
+  parametros=fecha.split("-");
+  fecha = new Date(parametros[0] , parametros[1]-1 , parametros[2], hora , minuto);
+  //console.log(fecha);
+  fecha.setHours(horasumada + fecha.getHours());
+  fecha.setMinutes(minutosumado + fecha.getMinutes());
+  console.log(fecha);
+  
+  minutos2 = fecha.getMinutes();
+  hora2 = fecha.getHours();
+  dia2 = fecha.getDate();
+  mes2 = fecha.getMonth() + 1;
+  anio2= fecha.getFullYear();
+  
+  console.log("hora " + hora2);
+  
+  console.log("minuto " + minutos2);
+  
+  
+  if(mes2 <10){
+    mes2 = "0" + mes2;
+  }
+  if(minutos2 <10){
+    minutos2 = "0" + minutos2;
+  }
+  if(hora2 <10){
+    hora2 = "0" + hora2;
+  }
+  if(dia2<10){
+    dia2 = "0" + dia2;
+  }
+
+  var FechaEstimadaLlegada = String(anio2+"-"+mes2+"-"+dia2);
+  var HoraEstimadaLlegada = String(hora2+":"+minutos2);
+  $("#FechaEstimadaLlegada").val(FechaEstimadaLlegada);
+  $("#HoraEstimadaLlegada").val(HoraEstimadaLlegada);
+  if(horasumada <10){
+      horasumada = "0" + horasumada;
+  }
+  if(minutosumado <10){
+      minutosumado = "0" + minutosumado;
+  } 
+  $("#TiempoEstimadoEspera").val(horasumada + ":" + minutosumado);
+    GuardarAutomaticoServicioGrua();
 }

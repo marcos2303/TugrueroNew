@@ -61,6 +61,8 @@
           <div class="col-sm-4">
             <div class="form-group">
               <label> Tiempo estimado de espera</label>
+              <input type="number" min="0" max="96" value="0" class="form-control input-sm" onchange="calculaTiempoDeEspera();" id="HoraTiempoEstimadoEspera" name="HoraTiempoEstimadoEspera">
+              <input type="number" min="0" max="59" value="0" class="form-control input-sm" onchange="calculaTiempoDeEspera();" id="MinutosTiempoEstimadoEspera" name="MinutosTiempoEstimadoEspera">
               <input type="time" class="form-control input-sm SaveAutomaticoServicioGrua" id="TiempoEstimadoEspera" name="TiempoEstimadoEspera">
             </div>
           </div>
