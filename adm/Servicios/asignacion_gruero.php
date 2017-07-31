@@ -38,68 +38,42 @@
           </div>
           <div class="col-sm-4">
             <div class="form-group">
-              <label> Pago total gruero</label>
-              <input class="form-control SaveAutomaticoServicioPrecio input-sm " name="PrecioCIvaBaremo" id="PrecioCIvaBaremo" type="text" placeholder="" autocomplete="off" readonly="readonly">
+              <label> Celular</label>
+              <input class="form-control input-sm " name="CelularGrua" id="CelularGrua" type="text" placeholder="" autocomplete="off" readonly="readonly">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-5">
+            <div class="form-group">
+              <label> Fecha de asignación</label>
+              <input type="date" class="form-control input-sm SaveAutomaticoServicioGrua" id="FechaAsignacion" name="FechaAsignacion" readonly="readonly">
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label> Hora de asignación</label>
+              <input class="form-control input-sm SaveAutomaticoServicioGrua" id="HoraAsignacion" name="HoraAsignacion" type="time" autocomplete="off" readonly="readonly">
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-4">
             <div class="form-group">
-              <label> Pago gruero</label>
-              <input type="text" class="form-control SaveAutomaticoServicioPrecio input-sm " id="PrecioSIvaBaremoModificado" name="PrecioSIvaBaremoModificado">
+              <label> Tiempo estimado de espera</label>
+              <input type="time" class="form-control input-sm SaveAutomaticoServicioGrua" id="TiempoEstimadoEspera" name="TiempoEstimadoEspera">
             </div>
           </div>
           <div class="col-sm-4">
             <div class="form-group">
-              <label>Iva</label>
-              <input class="form-control input-sm SaveAutomaticoServicioPrecio" id="IvaBaremoModificado" name="IvaBaremoModificado" type="text" autocomplete="off">
+              <label> Fecha estimada de llegada</label>
+              <input class="form-control input-sm SaveAutomaticoServicioGrua" id="FechaEstimadaLlegada" name="FechaEstimadaLlegada" type="date" autocomplete="off" readonly="readonly">
             </div>
           </div>
           <div class="col-sm-4">
             <div class="form-group">
-              <label> Pago total gruero</label>
-              <input class="form-control SaveAutomaticoServicioPrecio input-sm " name="PrecioCIvaBaremoModificado" id="PrecioCIvaBaremoModificado" type="text" placeholder="" autocomplete="off">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="form-group">
-              <label> Pago cliente</label>
-              <input type="text" class="form-control SaveAutomaticoServicioPrecio input-sm " id="PrecioClienteSIva" name="PrecioClienteSIva" readonly="readonly">
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="form-group">
-              <label>Iva</label>
-              <input class="form-control SaveAutomaticoServicioPrecio input-sm " id="IvaCliente" name="IvaCliente" type="text" autocomplete="off" readonly="readonly">
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="form-group">
-              <label> Pago total cliente</label>
-              <input class="form-control SaveAutomaticoServicioPrecio input-sm " name="PrecioClienteCIva" id="PrecioClienteCIva" type="text" placeholder="" autocomplete="off" readonly="readonly">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="form-group">
-              <label> Pago cliente</label>
-              <input type="text" class="form-control SaveAutomaticoServicioPrecio input-sm " id="PrecioClienteSIvaModificado" name="PrecioClienteSIvaModificado">
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="form-group">
-              <label>Iva</label>
-              <input class="form-control SaveAutomaticoServicioPrecio input-sm " id="IvaClienteModificado" name="IvaClienteModificado" type="text" autocomplete="off">
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="form-group">
-              <label> Pago total cliente</label>
-              <input class="form-control SaveAutomaticoServicioPrecio input-sm " name="PrecioClienteCIvaModificado" id="PrecioClienteCIvaModificado" type="text" placeholder="" autocomplete="off">
+              <label> Hora estimada de llegada</label>
+              <input class="form-control input-sm SaveAutomaticoServicioGrua" id="HoraEstimadaLlegada" name="HoraEstimadaLlegada" type="text" autocomplete="off" readonly="readonly">
             </div>
           </div>
         </div>

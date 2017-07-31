@@ -308,6 +308,57 @@ function DatosGrua(IdGrua){
   var Datos = AjaxCall("servicios/clienteapp/datosGrua.php", parametros);
   $("#NombresGrua").val(Datos.Nombres + ' ' + Datos.Apellidos);
   $("#NombreGruasTipo").val(Datos.NombreGruasTipo);
+  $("#CelularGrua").val(Datos.Celular);
+  var fechahora = new Date();
+  minutos = fechahora.getMinutes();
+  hora = fechahora.getHours();
+  dia = fechahora.getDate();
+  mes = fechahora.getMonth() + 1;
+  anio= fechahora.getFullYear();
+
+  if(minutos <10){
+    minutos = "0" + minutos;
+  }
+  if(hora <10){
+    hora = "0" + hora;
+  }
+  if(dia<10){
+    dia = "0" + dia;
+  }
+  var HoraAsignacion = String(hora+":"+minutos);
+  var FechaAsignacion = String(anio+"-"+"0"+mes+"-"+dia);
+  $("#FechaAsignacion").val(FechaAsignacion);
+  $("#HoraAsignacion").val(HoraAsignacion);
+
+
+  minuto=23;
+  hora=20;
+
+  minutosumado=00;
+  horasumada=4;
+  fecha=$("#FechaAsignacion").val();
+  parametros=fecha.split("-");
+  fecha2 = new Date(parametros[0] , parametros[1]-1 , parametros[2], hora+horasumada, minuto+minutosumado);
+  minutos2 = fecha2.getMinutes();
+  hora2 = fecha2.getHours();
+  dia2 = fecha2.getDate();
+  mes2 = fecha2.getMonth() + 1;
+  anio2= fechahora.getFullYear();
+  if(minutos2 <10){
+    minutos2 = "0" + minutos2;
+  }
+  if(hora2 <10){
+    hora2 = "0" + hora2;
+  }
+  if(dia2<10){
+    dia2 = "0" + dia2;
+  }
+
+  var FechaEstimadaLlegada = String(anio2+"-"+"0"+mes2+"-"+dia2);
+  var HoraEstimadaLlegada = String(hora2+":"+minutos2);
+  $("#FechaEstimadaLlegada").val(FechaEstimadaLlegada);
+  $("#HoraEstimadaLlegada").val(HoraEstimadaLlegada);
+
 }
 function FinalizarServicio(){
   if(!confirm("¿Está seguro(a) de finalizar el servicio" + $("#CodigoServicio").val() +"?")){
@@ -328,8 +379,12 @@ function actualizarServiciosEstatusClienteGruero(){
   }
 
   if ($('#EstatusGrueroCliente').is(':checked')) {
+    $(".EstatusGrueroCliente").show();
     var actualizarServicioEstatus = AjaxCall("servicios/clienteapp/actualizarServiciosEstatus.php", parametros);
   }else{
+    $(".EstatusGrueroCliente").hide();
+    $("#HoraGrueroCliente").val();
+    $("#FechaGrueroCliente").val();
     var eliminarServicioEstatus = AjaxCall("servicios/clienteapp/eliminarServiciosEstatus.php", parametros);
   }
 
@@ -346,8 +401,12 @@ function actualizarServiciosEstatusLlegada(){
 
   }
   if ($('#EstatusLlegada').is(':checked')) {
+    $(".EstatusLlegada").show();
     var actualizarServicioEstatus = AjaxCall("servicios/clienteapp/actualizarServiciosEstatus.php", parametros);
   }else{
+    $(".EstatusLlegada").hide();
+    $("#HoraLlegada").val();
+    $("#FechaLlegada").val();
     var eliminarServicioEstatus = AjaxCall("servicios/clienteapp/eliminarServiciosEstatus.php", parametros);
   }
 
