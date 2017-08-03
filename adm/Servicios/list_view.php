@@ -39,6 +39,4 @@ $.ajax({
 		$("#DataServicios").append(html);
 	}
 });
-
-
 </script>

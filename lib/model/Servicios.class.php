@@ -160,7 +160,7 @@ class Servicios {
 		$columns[40] = 'sg.TratoCordial';
 		$columns[41] = 'sg.Presencia';
 		$columns[42] = 'sg.TratoVehiculo';
-		$columns[43] = 'sg.Puntual';
+		$columns[43] = 'sg.ServicioGeneral';
 		/**********Datos ServiciosClientes****************************/
 		$columns[44] = 'sc.Nombres';
 		$columns[45] = 'sc.Apellidos';
@@ -373,7 +373,7 @@ class Servicios {
 		}
 		if(isset($values['columns'][43]['search']['value']) and $values['columns'][43]['search']['value']!='')
 		{
-			$where.=" AND upper(sg.Puntual) like ('%".strtoupper($values['columns'][43]['search']['value'])."%')";
+			$where.=" AND upper(sg.ServicioGeneral) like ('%".strtoupper($values['columns'][43]['search']['value'])."%')";
 		}
 		if(isset($values['columns'][44]['search']['value']) and $values['columns'][44]['search']['value']!='')
 		{
@@ -464,7 +464,7 @@ class Servicios {
 		p.Identificacion AS IdentificacionProveedor,pt.Nombre AS NombreProveedorTipo, sg.Nombres AS NombresGruas, sg.Apellidos AS ApellidosGruas,
 		sg.Cedula AS CedulaGruas, sg.Celular AS CelularGruas,g.Placa AS PlacaGrua, m.Nombre AS NombreMarcaGruas,g.Modelo AS ModeloGrua, g.Color AS ColorGrua,g.Anio AS AnioGrua,
 		sg.Nombres AS NombresGrua,sg.Apellidos AS ApellidosGrua,sg.Cedula AS CedulaGrua,sg.Celular AS CelularGrua,sg.TratoCordial, sg.Presencia,
-		sg.TratoVehiculo, sg.Puntual, sc.IdPoliza , m2.Nombre AS NombreMarcaCliente, sc.Nombres AS NombresCliente,sc.Apellidos AS ApellidosCliente,
+		sg.TratoVehiculo, sg.ServicioGeneral, sc.IdPoliza , m2.Nombre AS NombreMarcaCliente, sc.Nombres AS NombresCliente,sc.Apellidos AS ApellidosCliente,
 		sc.Cedula AS CedulaCliente, sc.Placa AS PlacaCliente, sc.Modelo AS ModeloCliente, sc.Color AS ColorCliente, sc.Anio AS AnioCliente,
 		sc.Celular AS CelularCliente,
 		CASE PolizaVencida WHEN PolizaVencida = 1 THEN 'SI' ELSE 'NO' END AS PolizaVencida, u2.Login AS NombreUsuarioCliente,
@@ -497,6 +497,7 @@ class Servicios {
 		ORDER BY $column_order $order
 		LIMIT $limit
 		OFFSET $offset";
+        //echo $query;die;
     $q = $ConnectionORM->ejecutarPreparado($query);
 		return $q;
 	}
@@ -689,7 +690,7 @@ class Servicios {
 		}
 		if(isset($values['columns'][43]['search']['value']) and $values['columns'][43]['search']['value']!='')
 		{
-			$where.=" AND upper(sg.Puntual) like ('%".strtoupper($values['columns'][43]['search']['value'])."%')";
+			$where.=" AND upper(sg.ServicioGeneral) like ('%".strtoupper($values['columns'][43]['search']['value'])."%')";
 		}
 		if(isset($values['columns'][44]['search']['value']) and $values['columns'][44]['search']['value']!='')
 		{
@@ -802,7 +803,7 @@ class Servicios {
 		p.Identificacion AS IdentificacionProveedor,pt.Nombre AS NombreProveedorTipo, sg.Nombres AS NombresGruas, sg.Apellidos AS ApellidosGruas,
 		sg.Cedula AS CedulaGruas, sg.Celular AS CelularGruas,g.Placa AS PlacaGrua, m.Nombre AS NombreMarcaGruas,g.Modelo AS ModeloGrua, g.Color AS ColorGrua,g.Anio AS AnioGrua,
 		sg.Nombres AS NombresGrua,sg.Apellidos AS ApellidosGrua,sg.Cedula AS CedulaGrua,sg.Celular AS CelularGrua,sg.TratoCordial, sg.Presencia,
-		sg.TratoVehiculo, sg.Puntual, sc.IdPoliza , m2.Nombre AS NombreMarcaCliente, sc.Nombres AS NombresCliente,sc.Apellidos AS ApellidosCliente,
+		sg.TratoVehiculo, sg.ServicioGeneral, sc.IdPoliza , m2.Nombre AS NombreMarcaCliente, sc.Nombres AS NombresCliente,sc.Apellidos AS ApellidosCliente,
 		sc.Cedula AS CedulaCliente, sc.Placa AS PlacaCliente, sc.Modelo AS ModeloCliente, sc.Color AS ColorCliente, sc.Anio AS AnioCliente,
 		sc.Celular AS CelularCliente,
 		CASE PolizaVencida WHEN PolizaVencida = 1 THEN 'SI' ELSE 'NO' END AS PolizaVencida, u2.Login AS NombreUsuarioCliente,
