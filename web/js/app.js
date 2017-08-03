@@ -2,7 +2,6 @@ var Servidor = "http://localhost/";
 var Proyecto = "TugrueroNew/";
 var link_servidor = Servidor + Proyecto;
 
-
 function listaProveedoresTipo(IdProveedorTipo){
   //$('#IdProveedorTipo').find('option').remove().end().append('<option value="">Seleccione...</option>');
   $('#IdProveedorTipo').find('option').remove().end();

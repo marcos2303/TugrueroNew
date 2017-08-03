@@ -136,7 +136,6 @@
 <?php endif;?>
 <script>
 $(document).ready(function() {
-
   $('#example tfoot th').each( function () {
     var title = $('#example thead th').eq( $(this).index() ).text();
 
