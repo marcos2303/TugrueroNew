@@ -23,8 +23,14 @@ switch ($action) {
 	case "lista_servicios":
 	executeListaServicios($values);
 	break;
+	case "lista_servicios_administracion":
+	executeListaServiciosAdministracion($values);
+	break;
 	case "lista_servicios_json":
 	executeListaServiciosJson($values);
+	break;
+	case "lista_servicios_administracion_json":
+	executeListaServiciosAdministracionJson($values);
 	break;
 	case "lista_servicios_corta":
 	executeListaServiciosCorta($values);
@@ -145,6 +151,9 @@ function executeListaServicios($values){
 function executeListaServiciosCorta($values){
 	require("lista_servicios_corta.php");
 }
+function executeListaServiciosAdministracion($values){
+	require("lista_servicios_administracion.php");
+}
 function executeListaServiciosJson($values)
 {
 	$Servicios = new Servicios();
@@ -161,6 +170,169 @@ function executeListaServiciosJson($values)
 			$IdServicio = $list['IdServicio'];
 			$array_json['data'][] = array(
 				"CodigoServicio" =>  $list['CodigoServicio'],
+				"NombreAplicacion" =>  $list['NombreAplicacion'],
+				"NombreServicioTipo" =>  $list['NombreServicioTipo'],
+				"NombreEstatus" =>  $list['NombreEstatus'],
+				"Agendado" =>  $list['Agendado'],
+				"FechaAgendado" =>  $list['FechaAgendado'],
+				"NombreUsuarioServicio" =>  $list['NombreUsuarioServicio'],
+				"NombreAveria" =>  $list['NombreAveria'],
+				"AveriaDetalle" =>  $list['AveriaDetalle'],
+				"NombreCondicionLugar" =>  $list['NombreCondicionLugar'],
+				"CondicionDetalle" =>  $list['CondicionDetalle'],
+				"LatitudOrigen" =>  $list['LatitudOrigen'],
+				"LongitudOrigen" =>  $list['LongitudOrigen'],
+				"NombreEstadoOrigen" =>  $list['NombreEstadoOrigen'],
+				"DireccionOrigen" =>  $list['DireccionOrigen'],
+				"DireccionOrigenDetallada" =>  $list['DireccionOrigenDetallada'],
+				"LatitudDestino" =>  $list['LatitudDestino'],
+				"LongitudDestino" =>  $list['LongitudDestino'],
+				"NombreEstadoDestino" =>  $list['NombreEstadoDestino'],
+				"DireccionDestino" =>  $list['DireccionDestino'],
+				"DireccionDestinoDetallada" =>  $list['DireccionDestinoDetallada'],
+				"KM" =>  $list['KM'],
+				"Inicio" =>  $list['Inicio'],
+				"Fin" =>  $list['Fin'],
+				"Observacion" =>  $list['Observacion'],
+				"UltimaActCliente" =>  $list['UltimaActCliente'],
+				"UltimaActGruero" =>  $list['UltimaActGruero'],
+				/************Datos ServiciosGruas, Proveedores y Gruas*******************/
+				"IdentificacionProveedor" =>  $list['IdentificacionProveedor'],
+				"NombresProveedor" =>  $list['NombresProveedor'],
+				"ApellidosProveedor" =>  $list['ApellidosProveedor'],
+				"NombreProveedorTipo" =>  $list['NombreProveedorTipo'],
+				"PlacaGrua" =>  $list['PlacaGrua'],
+				"NombreMarcaGruas" =>  $list['NombreMarcaGruas'],
+				"ModeloGrua" =>  $list['ModeloGrua'],
+				"AnioGrua" =>  $list['AnioGrua'],
+				"ColorGrua" =>  $list['ColorGrua'],
+				"NombresGrua" =>  $list['NombresGrua'],
+				"ApellidosGrua" =>  $list['ApellidosGrua'],
+				"CedulaGrua" =>  $list['CedulaGrua'],
+				"CelularGrua" =>  $list['CelularGrua'],
+				"TratoCordial" =>  $list['TratoCordial'],
+				"Presencia" =>  $list['Presencia'],
+				"TratoVehiculo" =>  $list['TratoVehiculo'],
+				"Puntual" =>  $list['Puntual'],
+				/**********Datos ServiciosClientes****************************/
+				"NombresCliente" =>  $list['NombresCliente'],
+				"ApellidosCliente" =>  $list['ApellidosCliente'],
+				"CedulaCliente" =>  $list['CedulaCliente'],
+				"PlacaCliente" =>  $list['PlacaCliente'],
+				"ModeloCliente" =>  $list['ModeloCliente'],
+				"ColorCliente" =>  $list['ColorCliente'],
+				"AnioCliente" =>  $list['AnioCliente'],
+				"CelularCliente" =>  $list['CelularCliente'],
+				"PolizaVencida" =>  $list['PolizaVencida'],
+				"NombreUsuarioCliente" =>  $list['NombreUsuarioCliente'],
+				/*****************ServiciosPrecios*************************************/
+				"PrecioModificado" =>  $list['PrecioModificado'],
+				"PrecioSIvaBaremo" =>  $list['PrecioSIvaBaremo'],
+				"PrecioCIvaBaremo" =>  $list['PrecioCIvaBaremo'],
+				"PrecioSIvaModificado" =>  $list['PrecioSIvaModificado'],
+				"PrecioCIvaModificado" =>  $list['PrecioCIvaModificado'],
+				"NombreUsuarioPrecio" =>  $list['NombreUsuarioPrecio'],
+				"actions" => '
+				<div class="btn-group">
+				<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<i class="fa fa-gear"></i> <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu dropdown-menu-right">
+				<li><a href="#" onclick="DetalleServicio('.$list['IdServicio'].')"> Detalle servicio</a></li>
+				</ul>
+				</div>'
+			);
+		}
+	}else{
+		$array_json['recordsTotal'] = 0;
+		$array_json['recordsFiltered'] = 0;
+		$array_json['data'][] = array(
+			"CodigoServicio" =>  "",
+			"NombreAplicacion" =>  "",
+			"NombreServicioTipo" =>  "",
+			"NombreEstatus" => "",
+			"Agendado" =>  "",
+			"FechaAgendado" => "",
+			"NombreUsuarioServicio" =>  "",
+			"NombreAveria" =>  "",
+			"AveriaDetalle" =>  "",
+			"NombreCondicionLugar" =>  "",
+			"CondicionDetalle" =>  "",
+			"LatitudOrigen" =>  "",
+			"LongitudOrigen" =>  "",
+			"NombreEstadoOrigen" => "",
+			"DireccionOrigen" =>  "",
+			"DireccionOrigenDetallada" =>  "",
+			"LatitudDestino" =>  "",
+			"LongitudDestino" =>  "",
+			"NombreEstadoDestino" =>  "",
+			"DireccionDestino" =>  "",
+			"DireccionDestinoDetallada" =>  "",
+			"KM" => "",
+			"Inicio" =>  "",
+			"Fin" =>  "",
+			"Observacion" =>  "",
+			"UltimaActCliente" =>  "",
+			"UltimaActGruero" =>  "",
+			/************Datos ServiciosGruas, Proveedores y Gruas*******************/
+			"IdentificacionProveedor" =>  "",
+			"NombresProveedor" =>  "",
+			"ApellidosProveedor" =>  "",
+			"NombreProveedorTipo" =>  "",
+			"PlacaGrua" =>  "",
+			"NombreMarcaGruas" =>  "",
+			"ModeloGrua" =>  "",
+			"AnioGrua" =>  "",
+			"ColorGrua" =>  "",
+			"NombresGrua" =>  "",
+			"ApellidosGrua" => "",
+			"CedulaGrua" =>  "",
+			"CelularGrua" =>  "",
+			"TratoCordial" =>  "",
+			"Presencia" =>  "",
+			"TratoVehiculo" =>  "",
+			"Puntual" =>  "",
+			/**********Datos ServiciosClientes****************************/
+			"NombresCliente" =>  "",
+			"ApellidosCliente" =>  "",
+			"CedulaCliente" =>  "",
+			"PlacaCliente" =>  "",
+			"ModeloCliente" =>  "",
+			"ColorCliente" =>  "",
+			"AnioCliente" =>  "",
+			"CelularCliente" =>  "",
+			"PolizaVencida" =>  "",
+			"NombreUsuarioCliente" =>  "",
+			/*****************ServiciosPrecios*************************************/
+			"PrecioModificado" =>  "",
+			"PrecioSIvaBaremo" =>  "",
+			"PrecioCIvaBaremo" =>  "",
+			"PrecioSIvaModificado" =>  "",
+			"PrecioCIvaModificado" =>  "",
+			"NombreUsuarioPrecio" =>  "",
+			"actions" => ''
+		);
+	}
+
+	echo json_encode($array_json);die;
+
+}
+function executeListaServiciosAdministracionJson($values)
+{
+	$Servicios = new Servicios();
+	$list_json = $Servicios ->getList($values);
+	$list_json_cuenta = $Servicios ->getCountList($values);
+	$array_json = array();
+	$array_json['recordsTotal'] = $list_json_cuenta;
+	$array_json['recordsFiltered'] = $list_json_cuenta;
+	if($list_json_cuenta['cuenta']>0)
+	{
+		foreach ($list_json as $list)
+		{
+
+			$IdServicio = $list['IdServicio'];
+			$array_json['data'][] = array(
+				"CodigoServicio" =>  '<input type="checkbox" name="" class="selec" value="'.$IdServicio.'"> ['.$list['CodigoServicio']."]",
 				"NombreAplicacion" =>  $list['NombreAplicacion'],
 				"NombreServicioTipo" =>  $list['NombreServicioTipo'],
 				"NombreEstatus" =>  $list['NombreEstatus'],
