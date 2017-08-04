@@ -1,7 +1,7 @@
 <table id="example" class="table table-striped table-bordered table-responsive" width="100%" cellspacing="0">
   <thead class="">
     <tr>
-        <td><label for="Seleccionador"><input type="checkbox" id="Seleccionador"> Seleccionar/Deseleccionar</label></td>   
+        <td colspan="20"><label for="Seleccionador"><input type="checkbox" id="Seleccionador"> Seleccionar/Deseleccionar</label></td>   
     </tr>
     <tr>
       <th>Código</th>
