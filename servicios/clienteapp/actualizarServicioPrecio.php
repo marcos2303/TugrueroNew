@@ -8,8 +8,6 @@ include('../../autoload_servicios.php');
 $ServiciosPrecios = new ServiciosPrecios();
 /****************Seteo y comprobacion de valores*******************/
 $response = array("Error"=>1,"MensajeError"=>"No actualizado.","MensajeSuccess"=> '');
-$values['IdServicio'] = 50;
-$values['PrecioModificado'] = 2;
 /*************************Actualizamos el Servicio************************************/
 
 if($ServiciosPrecios->updateServiciosPrecios($values)){

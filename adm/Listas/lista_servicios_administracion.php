@@ -1,7 +1,7 @@
-<table id="example" class="table table-striped table-bordered table-responsive" width="100%" cellspacing="0">
+<table id="example" border="1" class="table table-striped table-bordered table-responsive" width="100%" cellspacing="0">
   <thead class="">
     <tr>
-        <td colspan="20"><label for="Seleccionador"><input type="checkbox" id="Seleccionador"> Seleccionar/Deseleccionar</label></td>   
+        <td colspan="64"><label for="Seleccionador"><input type="checkbox" id="Seleccionador"> Seleccionar/Deseleccionar</label></td>   
     </tr>
     <tr>
       <th>Código</th>
@@ -64,6 +64,10 @@
       <th>PrecioSIvaModificado</th>
       <th>PrecioCIvaModificado</th>
       <th>NombreUsuarioPrecio</th>
+      <th>FechaFacturaDigital</th>
+      <th>FechaEstimadaPago</th>
+      <th>FechaFacturaFisica</th>
+      <th>FacturaPagada</th>
       <th>Detalle</th>
     </tr>
   </thead>
@@ -129,6 +133,10 @@
       <th><input id="PrecioSIvaModificado" name="PrecioSIvaModificado" type="text"></th>
       <th><input id="PrecioCIvaModificado" name="PrecioCIvaModificado" type="text"></th>
       <th><input id="NombreUsuarioPrecio" name="NombreUsuarioPrecio" type="text"></th>
+      <th><input id="FechaFacturaDigitals" name="FechaFacturaDigital" type="text"></th>
+      <th><input id="FechaEstimadaPagos" name="FechaEstimadaPago" type="text"></th>
+      <th><input id="FechaFacturaFisicas" name="FechaFacturaFisica" type="text"></th>
+      <th><input id="FacturaPagadas" name="FacturaPagada" type="text"></th>
       <th>Detalle</th>
     </tr>
   </tfoot>
@@ -138,7 +146,7 @@
 
 <?php endif;?>
 <script>
-$(document).ready(function() {
+
   $('#example tfoot th').each( function () {
     var title = $('#example thead th').eq( $(this).index() ).text();
 
@@ -159,7 +167,7 @@ $(document).ready(function() {
     "processing": true,
     "sServerMethod": "POST",
     "serverSide": true,
-    "sScrollY": "260",
+    "sScrollY": "264",
     "sDom": 'Btrp',
     "ajax":link_servidor + "/adm/Listas/index.php?action=lista_servicios_administracion_json&IdProveedor=<?php echo $values['IdProveedor'];?>&IdGrua=<?php echo $values['IdGrua'];?>",
     "language": {
@@ -171,7 +179,7 @@ $(document).ready(function() {
       {
         extend: 'colvisGroup',
         text: 'Básicos',
-        show: [ 2,3,4,5,22,23,60 ],
+        show: [ 2,3,4,5,22,23,64 ],
         hide: [ 1,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
           21,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
           41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
@@ -187,7 +195,7 @@ $(document).ready(function() {
           {
             extend: 'colvisGroup',
             text: 'Gruero',
-            show: [ 31,32,33,35,36,37,38,39,60 ],
+            show: [ 31,32,33,35,36,37,38,39,64 ],
             hide: [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
               21,22,23,24,25,26,27,28,29,30,34,40,
               41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
@@ -195,7 +203,7 @@ $(document).ready(function() {
             {
               extend: 'colvisGroup',
               text: 'Averia/Condición',
-              show: [ 7,8,9,10,60 ],
+              show: [ 7,8,9,10,64 ],
               hide: [ 1,2,3,4,5,6,11,12,13,14,15,16,17,18,19,20,
                 21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
                 41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
@@ -211,7 +219,7 @@ $(document).ready(function() {
                 {
                   extend: 'colvisGroup',
                   text: 'Precios',
-                  show: [ 54,55,56,57,58,59,60 ],
+                  show: [ 54,55,56,57,58,59,64 ],
                   hide: [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
                     21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
                     41,42,43,44,45,46,47,48,49,50,51,52,53]
@@ -287,6 +295,10 @@ $(document).ready(function() {
                   { "data" : "PrecioSIvaModificado" },
                   { "data" : "PrecioCIvaModificado" },
                   { "data" : "NombreUsuarioPrecio" },
+                  { "data" : "FechaFacturaDigital" },
+                  { "data" : "FechaEstimadaPago" },
+                  { "data" : "FechaFacturaFisica" },
+                  { "data" : "FacturaPagada" },
                   { "data" : "actions" },
                 ],
                 "aoColumnDefs": [
@@ -294,23 +306,13 @@ $(document).ready(function() {
                     21,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
                     41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
                   },
-                  { 'bSortable': false, 'aTargets': [ 60 ] }
+                  { 'bSortable': false, 'aTargets': [ 64 ] }
                 ]
               });
                 $('#example').css( 'display', 'table' );
 
                 table.responsive.recalc();
 
-              /*for(i=0; i< table.columns()[0].length;i++){
-
-              $('#column_'+ i).on('keypress', function(e){
-
-              if(e.which == 13) {
-              table.column(table.column(i)).search($(this).val()).draw();
-              console.log('#column_'+ i);
-            }
-          });
-        }*/
         $('#column_0').on ('keypress', function(e){
           if(e.which == 13) {
             table.column(table.column(0)).search($(this).val()).draw();
@@ -611,9 +613,9 @@ $(document).ready(function() {
             table.column(table.column(59)).search($(this).val()).draw();
           }
         });
-        $('#column_60').on ('keypress', function(e){
+        $('#column_64').on('keypress', function(e){
           if(e.which == 13) {
-            table.column(table.column(60)).search($(this).val()).draw();
+            table.column(table.column(64)).search($(this).val()).draw();
           }
         });
         $('#clear').click(function(){
@@ -622,6 +624,116 @@ $(document).ready(function() {
         });
 
 
-      } );
+
+   $("#Seleccionador").click(function(){
+       ManejarSeleccion($(this));   
+    });
+function ManejarSeleccion(e){
+   if ($(e).is(':checked')) {
+       $(".selec").prop("checked",true);
+   }else{
+       $(".selec").prop("checked",false);
+   }
+}
+function CambiarFechaFacturaDigital(e,IdServicioPadre){
+        var FechaFacturaDigital = $(e).val();
+        var IdServicio = "";
+        var varios = false;
+        $('.selec').each(function (i,v) {
+                
+                if ($(v).is(':checked')) {
+                    varios = true;
+                    IdServicio = $(v).val();
+                    $(".FechaFacturaDigital_"+IdServicio).val(FechaFacturaDigital);
+                    //$('input[name=FechaFacturaDigital_'+ IdServicio+'][value="'+ FechaFacturaDigital +'"]');
+                    console.log(IdServicio);
+                    var parametros = {
+                        "IdServicio" : IdServicio,
+                        "FechaFacturaDigital" : FechaFacturaDigital,
+                    };
+                        
+                    var actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, actualizarSuccess, MensajeError);
+                }
+                
+        });
+        
+        if(varios == false){
+           
+        var parametros = {
+            "IdServicio" : IdServicioPadre,
+            "FechaFacturaDigital" : $(e).val(),
+        };
+        actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, actualizarSuccess, MensajeError);
+        
+        }    
+        //table.search( '' ).columns().search( '' ).draw();
+        //$('.filtros').val('');
+    
+}
+function CambiarFechaEstimadaPago(e,IdServicioPadre){
+        var FechaEstimadaPago = $(e).val();
+        var IdServicio = "";
+        var varios = false;
+        
+        $('.selec').each(function (i,v) {
+                
+                if ($(v).is(':checked')) {
+                    varios = true;
+                    IdServicio = $(v).val();
+                    $(".FechaEstimadaPago_"+IdServicio).val(FechaEstimadaPago);
+                    console.log(IdServicio);
+                    var parametros = {
+                        "IdServicio" : IdServicio,
+                        "FechaEstimadaPago" : FechaEstimadaPago,
+                    };
+                        
+                    var actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, actualizarSuccess, MensajeError);
+                }
+                
+        });
+        if(varios == false){
+        var parametros = {
+            "IdServicio" : IdServicioPadre,
+            "FechaEstimadaPago" : $(e).val(),
+        };
+        actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, actualizarSuccess, MensajeError);
+        }    
+        //table.search( '' ).columns().search( '' ).draw();
+        //$('.filtros').val('');
+    
+}
+function CambiarFechaFacturaFisica(e,IdServicioPadre){
+        var FechaFacturaFisica = $(e).val();
+        var IdServicio = "";
+        var varios = false;
+        $('.selec').each(function (i,v) {
+                
+                if ($(v).is(':checked')) {
+                    varios = true;
+                    IdServicio = $(v).val();
+                    $(".FechaFacturaFisica_"+IdServicio).val(FechaFacturaFisica);
+                    //console.log(IdServicio);
+                    var parametros = {
+                        "IdServicio" : IdServicio,
+                        "FechaFacturaFisica" : FechaFacturaFisica,
+                    };
+                        
+                    var actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, actualizarSuccess, MensajeError);
+                }
+        });
+        if(varios == false){
+        var parametros = {
+            "IdServicio" : IdServicioPadre,
+            "FechaFacturaFisica" : $(e).val(),
+        };
+        actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, actualizarSuccess, MensajeError);
+        }    
+        //table.search( '' ).columns().search( '' ).draw();
+        //$('.filtros').val('');
+    
+} 
+
+
+
       </script>
 <script src="<?php echo full_url;?>/web/js/Administracion.js"></script>

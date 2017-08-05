@@ -96,7 +96,7 @@ class Servicios {
 		g.IdGrua,g.IdProveedor,g.Nombres as NombresGruero,g.Apellidos as ApellidosGruero,g2.Placa as PlacaGruero,
 		g2.IdGruaTipo  as IdGruaTipo,g2.IdMarca  as IdMarcaGruero,g2.Modelo as ModeloGruero,g2.Color as ColorGruero,g2.Anio as AnioGruero,g.Celular as CelularGruero,g.Cedula as CedulaGruero,g2.Latitud as LatitudGruero,g2.Longitud as LongitudGruero,
 		p.PrecioSIvaBaremo,p.IvaBaremo, p.PrecioCIvaBaremo, p.PrecioSIvaBaremoModificado, p.IvaBaremoModificado, p.PrecioCIvaBaremoModificado, p.PrecioClienteSIva,
-		p.IvaCliente, p.PrecioClienteCIva, p.PrecioClienteSIvaModificado, p.IvaClienteModificado,p.PrecioClienteCIvaModificado, p.IdUsuarioPermiso
+		p.IvaCliente, p.PrecioClienteCIva, p.PrecioClienteSIvaModificado, p.IvaClienteModificado,p.PrecioClienteCIvaModificado, p.IdUsuarioPermiso, p.FechaFacturaDigital, p.FechaFacturaFisica, p.FechaEstimadaPago, p.FacturaPagada
 		")
 		->join("ServiciosClientes","LEFT JOIN ServiciosClientes c on c.IdServicio = Servicios.IdServicio")
 		->join("ServiciosPrecios","LEFT JOIN ServiciosPrecios p on p.IdServicio = Servicios.IdServicio")
@@ -469,7 +469,8 @@ class Servicios {
 		sc.Celular AS CelularCliente,
 		CASE PolizaVencida WHEN PolizaVencida = 1 THEN 'SI' ELSE 'NO' END AS PolizaVencida, u2.Login AS NombreUsuarioCliente,
 		sp.PrecioSIvaBaremo,sp.IvaBaremo, sp.PrecioCIvaBaremo, sp.PrecioSIvaBaremoModificado, sp.IvaBaremoModificado, sp.PrecioCIvaBaremoModificado, sp.PrecioClienteSIva,
-		sp.IvaCliente, sp.PrecioClienteCIva, sp.PrecioClienteSIvaModificado, sp.IvaClienteModificado,sp.PrecioClienteCIvaModificado, u3.login AS NombreUsuarioPrecio
+		sp.IvaCliente, sp.PrecioClienteCIva, sp.PrecioClienteSIvaModificado, sp.IvaClienteModificado,sp.PrecioClienteCIvaModificado, u3.login AS NombreUsuarioPrecio,
+        sp.FechaFacturaDigital, sp.FechaFacturaFisica, sp.FechaEstimadaPago, sp.FacturaPagada
 		FROM Servicios
 		INNER JOIN ServiciosClientes sc ON sc.IdServicio = Servicios.IdServicio
 		INNER JOIN Usuarios u ON u.IdUsuario = Servicios.IdUsuario

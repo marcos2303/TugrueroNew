@@ -4,7 +4,6 @@
 	<div id="DataServicios"></div>
 </div>
 <?php include('../../view_footer_admin.php')?>
-
 <script>
 $.ajax({
 	url: link_servidor + "/adm/Listas/index.php?action=lista_servicios_administracion",

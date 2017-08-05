@@ -332,7 +332,7 @@ function executeListaServiciosAdministracionJson($values)
 
 			$IdServicio = $list['IdServicio'];
 			$array_json['data'][] = array(
-				"CodigoServicio" =>  '<input type="checkbox" name="" class="selec" value="'.$IdServicio.'"> ['.$list['CodigoServicio']."]",
+				"CodigoServicio" =>  '<input type="checkbox" name="" class="selec" value="'.$IdServicio.'" id="CodigoServicio['.$list['IdServicio'].']"> ['.$list['CodigoServicio']."]",
 				"NombreAplicacion" =>  $list['NombreAplicacion'],
 				"NombreServicioTipo" =>  $list['NombreServicioTipo'],
 				"NombreEstatus" =>  $list['NombreEstatus'],
@@ -395,7 +395,15 @@ function executeListaServiciosAdministracionJson($values)
 				"PrecioSIvaModificado" =>  $list['PrecioSIvaModificado'],
 				"PrecioCIvaModificado" =>  $list['PrecioCIvaModificado'],
 				"NombreUsuarioPrecio" =>  $list['NombreUsuarioPrecio'],
-				"actions" => '
+                "FechaFacturaDigital" =>  '<input type="date" value="'.$list['FechaFacturaDigital'].'" class="bloquear FechaFacturaDigital_'.$list['IdServicio'].'" onchange="CambiarFechaFacturaDigital(this,'.$list['IdServicio'].');" id="FechaFacturaDigital_'.$list['IdServicio'].'">',
+                "FechaEstimadaPago" =>  "<input type='date' value='".$list['FechaEstimadaPago']."' class=' bloquear FechaEstimadaPago_".$list['IdServicio']."' onchange='CambiarFechaEstimadaPago(this,".$list['IdServicio'].");' id='FechaEstimadaPago[".$list['IdServicio']."]'>",
+                "FechaFacturaFisica" =>  "<input type='date' value='".$list['FechaFacturaFisica']."' class='bloquear FechaFacturaFisica_".$list['IdServicio']."'  onchange='CambiarFechaFacturaFisica(this,".$list['IdServicio'].");' id='FechaFacturaFisica[".$list['IdServicio']."]'>",
+                "FacturaPagada" =>  "<input type='checkbox' value='".$list['FacturaPagada']."' class='bloquear FacturaPagada_".$list['IdServicio']."' onchange='CambiarFacturaPagada(this,".$list['IdServicio'].");' id='FacturaPagada[".$list['IdServicio']."]'>",
+                /*"FechaFacturaDigital" =>  $list['FechaFacturaDigital'],
+                "FechaEstimadaPago" =>  $list['FechaEstimadaPago'],
+                "FechaFacturaFisica" =>  $list['FechaFacturaFisica'],
+                "FacturaPagada" =>  $list['FacturaPagada'],*/
+                "actions" => '
 				<div class="btn-group">
 				<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				<i class="fa fa-gear"></i> <span class="caret"></span>
@@ -473,6 +481,11 @@ function executeListaServiciosAdministracionJson($values)
 			"PrecioSIvaModificado" =>  "",
 			"PrecioCIvaModificado" =>  "",
 			"NombreUsuarioPrecio" =>  "",
+            "FechaFacturaDigital" =>  "",
+            "FechaEstimadaPago" =>  "",
+            "FechaFacturaFisica" =>  "",
+            "FacturaPagada" =>  "",
+
 			"actions" => ''
 		);
 	}
