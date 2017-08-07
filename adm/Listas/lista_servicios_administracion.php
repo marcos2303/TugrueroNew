@@ -64,6 +64,7 @@
       <th>PrecioSIvaModificado</th>
       <th>PrecioCIvaModificado</th>
       <th>NombreUsuarioPrecio</th>
+      <th>NumeroFactura</th>
       <th>FechaFacturaDigital</th>
       <th>FechaFacturaFisica</th>
       <th>FechaEstimadaPago</th>
@@ -134,6 +135,7 @@
       <th><input id="PrecioSIvaModificado" name="PrecioSIvaModificado" type="text"></th>
       <th><input id="PrecioCIvaModificado" name="PrecioCIvaModificado" type="text"></th>
       <th><input id="NombreUsuarioPrecio" name="NombreUsuarioPrecio" type="text"></th>
+      <th><input id="NumeroFactura" name="NumeroFactura" type="text"></th>
       <th><input id="FechaFacturaDigital" name="FechaFacturaDigital" type="text"></th>
       <th><input id="FechaFacturaFisica" name="FechaFacturaFisica" type="text"></th>
       <th><input id="FechaEstimadaPagos" name="FechaEstimadaPago" type="text"></th>
@@ -179,7 +181,7 @@ var table = $('#example').DataTable({
     {
       extend: 'colvisGroup',
       text: 'Básicos',
-      show: [ 2,3,4,5,22,23,64 ],
+      show: [ 2,3,4,5,22,23,65 ],
       hide: [ 1,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
         21,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
         41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
@@ -195,7 +197,7 @@ var table = $('#example').DataTable({
         {
           extend: 'colvisGroup',
           text: 'Gruero',
-          show: [ 31,32,33,35,36,37,38,39,64 ],
+          show: [ 31,32,33,35,36,37,38,39,65 ],
           hide: [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
             21,22,23,24,25,26,27,28,29,30,34,40,
             41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
@@ -203,7 +205,7 @@ var table = $('#example').DataTable({
           {
             extend: 'colvisGroup',
             text: 'Averia/Condición',
-            show: [ 7,8,9,10,64 ],
+            show: [ 7,8,9,10,65 ],
             hide: [ 1,2,3,4,5,6,11,12,13,14,15,16,17,18,19,20,
               21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
               41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
@@ -219,7 +221,7 @@ var table = $('#example').DataTable({
               {
                 extend: 'colvisGroup',
                 text: 'Precios',
-                show: [ 54,55,56,57,58,59,64 ],
+                show: [ 54,55,56,57,58,59,65 ],
                 hide: [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
                   21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
                   41,42,43,44,45,46,47,48,49,50,51,52,53]
@@ -295,6 +297,7 @@ var table = $('#example').DataTable({
                 { "data" : "PrecioSIvaModificado" },
                 { "data" : "PrecioCIvaModificado" },
                 { "data" : "NombreUsuarioPrecio" },
+                { "data" : "NumeroFactura" },
                 { "data" : "FechaFacturaDigital" },
                 { "data" : "FechaFacturaFisica" },
                 { "data" : "FechaEstimadaPago" },
@@ -306,12 +309,12 @@ var table = $('#example').DataTable({
                   21,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
                   41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
                 },
-                { 'bSortable': false, 'aTargets': [ 64 ] }
+                { 'bSortable': false, 'aTargets': [ 65 ] }
               ]
             });
             $('#example').css( 'display', 'table' );
 
-            table.responsive.recalc();
+            //table.responsive.recalc();
 
             $('#column_0').on ('keypress', function(e){
               if(e.which == 13) {
@@ -632,6 +635,38 @@ var table = $('#example').DataTable({
               }else{
                 $(".selec").prop("checked",false);
               }
+            }
+            function CambiarNumeroFactura(e,IdServicioPadre){
+              var NumeroFactura = $(e).val();
+              var IdServicio = "";
+              var parametros = {
+                  "IdServicio" : [],
+                  "NumeroFactura" : NumeroFactura
+              };
+              parametros["IdServicio"].push(IdServicioPadre);
+              $('.selec').each(function (i,v) {
+
+                if ($(v).is(':checked')) {
+                  IdServicio = $(v).val();
+                  $(".NumeroFactura_"+IdServicio).val(NumeroFactura);
+                  parametros["IdServicio"].push(IdServicio);                
+                }
+              });
+              
+              var actualizarServicioPrecio = AjaxCall("servicios/clienteapp/actualizarServicioPrecioArray.php", parametros, null, null,null);
+
+            
+            var popup = {
+                "popup": "popupSuccess",
+                "imagen": "none",
+                "mensaje": "Registro(s) actualizado(s) satisfactoriamente.",
+                "displaybarra": ['none'],
+                "displaysBotones": ['none', 'none', 'none', 'inline'],
+                "text": ['', '', '', 'Aceptar'],
+                "onClick": ["", "", "", "closePops()"]
+
+              };
+              genericPop(popup);
             }
             function CambiarFechaFacturaDigital(e,IdServicioPadre){
               var FechaFacturaDigital = $(e).val();
