@@ -10,8 +10,19 @@ $ServiciosPrecios = new ServiciosPrecios();
 $response = array("Error"=>1,"MensajeError"=>"No actualizado.","MensajeSuccess"=> '');
 /*************************Actualizamos el Servicio************************************/
 
+if(isset($values['FechaFacturaFisica']) and $values['FechaFacturaFisica']!=''){
+	$values['FechaEstimadaPago'] = $ServiciosPrecios->calculaFechaEstimadaPago($values['FechaFacturaFisica'],10);
+}
+
 if($ServiciosPrecios->updateServiciosPrecios($values)){
-$response = array("Error"=>0,"MensajeError"=>"","MensajeSuccess"=> 'Ok',"IdServicio"=>$values['IdServicio']);
-	
+$response = array(
+	"Error"=>0,
+	"MensajeError"=>"",
+	"MensajeSuccess"=> 'Ok',
+	"IdServicio"=> $values['IdServicio'],
+	"FechaEstimadaPago" =>  $values['FechaEstimadaPago']
+
+);
+
 }
 echo json_encode($response,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);

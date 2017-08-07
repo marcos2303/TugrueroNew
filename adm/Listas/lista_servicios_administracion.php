@@ -1,7 +1,7 @@
 <table id="example" border="1" class="table table-striped table-bordered table-responsive" width="100%" cellspacing="0">
   <thead class="">
     <tr>
-        <td colspan="64"><label for="Seleccionador"><input type="checkbox" id="Seleccionador"> Seleccionar/Deseleccionar</label></td>   
+      <td colspan="64"><label for="Seleccionador"><input type="checkbox" id="Seleccionador"> Seleccionar/Deseleccionar</label></td>
     </tr>
     <tr>
       <th>Código</th>
@@ -65,8 +65,9 @@
       <th>PrecioCIvaModificado</th>
       <th>NombreUsuarioPrecio</th>
       <th>FechaFacturaDigital</th>
-      <th>FechaEstimadaPago</th>
       <th>FechaFacturaFisica</th>
+      <th>FechaEstimadaPago</th>
+
       <th>FacturaPagada</th>
       <th>Detalle</th>
     </tr>
@@ -133,10 +134,10 @@
       <th><input id="PrecioSIvaModificado" name="PrecioSIvaModificado" type="text"></th>
       <th><input id="PrecioCIvaModificado" name="PrecioCIvaModificado" type="text"></th>
       <th><input id="NombreUsuarioPrecio" name="NombreUsuarioPrecio" type="text"></th>
-      <th><input id="FechaFacturaDigitals" name="FechaFacturaDigital" type="text"></th>
+      <th><input id="FechaFacturaDigital" name="FechaFacturaDigital" type="text"></th>
+      <th><input id="FechaFacturaFisica" name="FechaFacturaFisica" type="text"></th>
       <th><input id="FechaEstimadaPagos" name="FechaEstimadaPago" type="text"></th>
-      <th><input id="FechaFacturaFisicas" name="FechaFacturaFisica" type="text"></th>
-      <th><input id="FacturaPagadas" name="FacturaPagada" type="text"></th>
+      <th><input id="FacturaPagada" name="FacturaPagada" type="text"></th>
       <th>Detalle</th>
     </tr>
   </tfoot>
@@ -147,593 +148,680 @@
 <?php endif;?>
 <script>
 
-  $('#example tfoot th').each( function () {
-    var title = $('#example thead th').eq( $(this).index() ).text();
+$('#example tfoot th').each( function () {
+  var title = $('#example thead th').eq( $(this).index() ).text();
 
-    if(title != 'Detalle')
+  if(title != 'Detalle')
+  {
+    $(this).html( '<input size="5%" class="input-sm filtros" id="column_'+$(this).index()+'" type="text" placeholder="'+title+'" />' );
+  }
+  if(title == 'Detalle')
+  {
+    $(this).html( '<button id="clear" class="btn btn-default">Limpiar</button>' );
+  }
+
+} );
+
+
+var table = $('#example').DataTable({
+  "scrollX": true,
+  "processing": true,
+  "sServerMethod": "POST",
+  "serverSide": true,
+  "sScrollY": "264",
+  "sDom": 'Btrp',
+  "iDisplayLength": 100,
+  "ajax":link_servidor + "/adm/Listas/index.php?action=lista_servicios_administracion_json&IdProveedor=<?php echo $values['IdProveedor'];?>&IdGrua=<?php echo $values['IdGrua'];?>",
+  "language": {
+    "url": link_servidor + "/web/js/datatables.spanish.lang"
+  },
+
+  buttons: [
+
     {
-      $(this).html( '<input size="5%" class="input-sm filtros" id="column_'+$(this).index()+'" type="text" placeholder="'+title+'" />' );
-    }
-    if(title == 'Detalle')
-    {
-      $(this).html( '<button id="clear" class="btn btn-default">Limpiar</button>' );
-    }
-
-  } );
-
-
-  var table = $('#example').DataTable({
-    "scrollX": true,
-    "processing": true,
-    "sServerMethod": "POST",
-    "serverSide": true,
-    "sScrollY": "264",
-    "sDom": 'Btrp',
-    "ajax":link_servidor + "/adm/Listas/index.php?action=lista_servicios_administracion_json&IdProveedor=<?php echo $values['IdProveedor'];?>&IdGrua=<?php echo $values['IdGrua'];?>",
-    "language": {
-      "url": link_servidor + "/web/js/datatables.spanish.lang"
-    },
-
-    buttons: [
-
+      extend: 'colvisGroup',
+      text: 'Básicos',
+      show: [ 2,3,4,5,22,23,64 ],
+      hide: [ 1,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
+        21,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
+        41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
+      },
       {
         extend: 'colvisGroup',
-        text: 'Básicos',
-        show: [ 2,3,4,5,22,23,64 ],
-        hide: [ 1,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
-          21,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
-          41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
+        text: 'Cliente',
+        show: [ 44,45,46,47,48,49,50,51,52,53 ],
+        hide: [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
+          21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
+          41,42,43,54,55,56,57,58,59]
         },
         {
           extend: 'colvisGroup',
-          text: 'Cliente',
-          show: [ 44,45,46,47,48,49,50,51,52,53 ],
+          text: 'Gruero',
+          show: [ 31,32,33,35,36,37,38,39,64 ],
           hide: [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
-            21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
-            41,42,43,54,55,56,57,58,59]
+            21,22,23,24,25,26,27,28,29,30,34,40,
+            41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
           },
           {
             extend: 'colvisGroup',
-            text: 'Gruero',
-            show: [ 31,32,33,35,36,37,38,39,64 ],
-            hide: [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
-              21,22,23,24,25,26,27,28,29,30,34,40,
+            text: 'Averia/Condición',
+            show: [ 7,8,9,10,64 ],
+            hide: [ 1,2,3,4,5,6,11,12,13,14,15,16,17,18,19,20,
+              21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
               41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
             },
             {
               extend: 'colvisGroup',
-              text: 'Averia/Condición',
-              show: [ 7,8,9,10,64 ],
-              hide: [ 1,2,3,4,5,6,11,12,13,14,15,16,17,18,19,20,
-                21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
+              text: 'Ubicación/Distancia',
+              show: [ 13,14,15,18,19,20,21 ],
+              hide: [ 1,2,3,4,5,6,7,8,9,10,11,12,16,17,22,23,24,25,26,
+                27,28,29,30,31,32,33,34,35,36,37,38,39,40,
                 41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
               },
               {
                 extend: 'colvisGroup',
-                text: 'Ubicación/Distancia',
-                show: [ 13,14,15,18,19,20,21 ],
-                hide: [ 1,2,3,4,5,6,7,8,9,10,11,12,16,17,22,23,24,25,26,
-                  27,28,29,30,31,32,33,34,35,36,37,38,39,40,
-                  41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
+                text: 'Precios',
+                show: [ 54,55,56,57,58,59,64 ],
+                hide: [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
+                  21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
+                  41,42,43,44,45,46,47,48,49,50,51,52,53]
                 },
+
                 {
                   extend: 'colvisGroup',
-                  text: 'Precios',
-                  show: [ 54,55,56,57,58,59,64 ],
-                  hide: [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
-                    21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
-                    41,42,43,44,45,46,47,48,49,50,51,52,53]
-                  },
+                  text: 'Todos',
+                  show: ':hidden'
+                }
+              ],
+              "columns": [
+                { "data" : "CodigoServicio" },
+                { "data" : "NombreAplicacion" },
+                { "data" : "NombreServicioTipo" },
+                { "data" : "NombreEstatus" },
+                { "data" : "Agendado" },
+                { "data" : "FechaAgendado" },
+                { "data" : "NombreUsuarioServicio" },
+                { "data" : "NombreAveria" },
+                { "data" : "AveriaDetalle" },
+                { "data" : "NombreCondicionLugar" },
+                { "data" : "CondicionDetalle" },
+                { "data" : "LatitudOrigen" },
+                { "data" : "LongitudOrigen" },
+                { "data" : "NombreEstadoOrigen" },
+                { "data" : "DireccionOrigen" },
+                { "data" : "DireccionOrigenDetallada" },
+                { "data" : "LatitudDestino" },
+                { "data" : "LongitudDestino" },
+                { "data" : "NombreEstadoDestino" },
+                { "data" : "DireccionDestino" },
+                { "data" : "DireccionDestinoDetallada" },
+                { "data" : "KM" },
+                { "data" : "Inicio" },
+                { "data" : "Fin" },
+                { "data" : "Observacion" },
+                { "data" : "UltimaActCliente" },
+                { "data" : "UltimaActGruero" },
+                /************Datos ServiciosGruas, Proveedores y Gruas*******************/
+                { "data" : "IdentificacionProveedor" },
+                { "data" : "NombresProveedor" },
+                { "data" : "ApellidosProveedor" },
+                { "data" : "NombreProveedorTipo" },
+                { "data" : "PlacaGrua" },
+                { "data" : "NombreMarcaGruas" },
+                { "data" : "ModeloGrua" },
+                { "data" : "AnioGrua" },
+                { "data" : "ColorGrua" },
+                { "data" : "NombresGrua" },
+                { "data" : "ApellidosGrua" },
+                { "data" : "CedulaGrua" },
+                { "data" : "CelularGrua" },
+                { "data" : "TratoCordial" },
+                { "data" : "Presencia" },
+                { "data" : "TratoVehiculo" },
+                { "data" : "Puntual" },
+                /**********Datos ServiciosClientes****************************/
+                { "data" : "NombresCliente" },
+                { "data" : "ApellidosCliente" },
+                { "data" : "CedulaCliente" },
+                { "data" : "PlacaCliente" },
+                { "data" : "ModeloCliente" },
+                { "data" : "ColorCliente" },
+                { "data" : "AnioCliente" },
+                { "data" : "CelularCliente" },
+                { "data" : "PolizaVencida" },
+                { "data" : "NombreUsuarioCliente" },
+                /*****************ServiciosPrecios*************************************/
+                { "data" : "PrecioModificado" },
+                { "data" : "PrecioSIvaBaremo" },
+                { "data" : "PrecioCIvaBaremo" },
+                { "data" : "PrecioSIvaModificado" },
+                { "data" : "PrecioCIvaModificado" },
+                { "data" : "NombreUsuarioPrecio" },
+                { "data" : "FechaFacturaDigital" },
+                { "data" : "FechaFacturaFisica" },
+                { "data" : "FechaEstimadaPago" },
+                { "data" : "FacturaPagada" },
+                { "data" : "actions" },
+              ],
+              "aoColumnDefs": [
+                { "visible": false, "targets": [ 1,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
+                  21,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
+                  41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
+                },
+                { 'bSortable': false, 'aTargets': [ 64 ] }
+              ]
+            });
+            $('#example').css( 'display', 'table' );
 
-                  {
-                    extend: 'colvisGroup',
-                    text: 'Todos',
-                    show: ':hidden'
-                  }
-                ],
-                "columns": [
-                  { "data" : "CodigoServicio" },
-                  { "data" : "NombreAplicacion" },
-                  { "data" : "NombreServicioTipo" },
-                  { "data" : "NombreEstatus" },
-                  { "data" : "Agendado" },
-                  { "data" : "FechaAgendado" },
-                  { "data" : "NombreUsuarioServicio" },
-                  { "data" : "NombreAveria" },
-                  { "data" : "AveriaDetalle" },
-                  { "data" : "NombreCondicionLugar" },
-                  { "data" : "CondicionDetalle" },
-                  { "data" : "LatitudOrigen" },
-                  { "data" : "LongitudOrigen" },
-                  { "data" : "NombreEstadoOrigen" },
-                  { "data" : "DireccionOrigen" },
-                  { "data" : "DireccionOrigenDetallada" },
-                  { "data" : "LatitudDestino" },
-                  { "data" : "LongitudDestino" },
-                  { "data" : "NombreEstadoDestino" },
-                  { "data" : "DireccionDestino" },
-                  { "data" : "DireccionDestinoDetallada" },
-                  { "data" : "KM" },
-                  { "data" : "Inicio" },
-                  { "data" : "Fin" },
-                  { "data" : "Observacion" },
-                  { "data" : "UltimaActCliente" },
-                  { "data" : "UltimaActGruero" },
-                  /************Datos ServiciosGruas, Proveedores y Gruas*******************/
-                  { "data" : "IdentificacionProveedor" },
-                  { "data" : "NombresProveedor" },
-                  { "data" : "ApellidosProveedor" },
-                  { "data" : "NombreProveedorTipo" },
-                  { "data" : "PlacaGrua" },
-                  { "data" : "NombreMarcaGruas" },
-                  { "data" : "ModeloGrua" },
-                  { "data" : "AnioGrua" },
-                  { "data" : "ColorGrua" },
-                  { "data" : "NombresGrua" },
-                  { "data" : "ApellidosGrua" },
-                  { "data" : "CedulaGrua" },
-                  { "data" : "CelularGrua" },
-                  { "data" : "TratoCordial" },
-                  { "data" : "Presencia" },
-                  { "data" : "TratoVehiculo" },
-                  { "data" : "Puntual" },
-                  /**********Datos ServiciosClientes****************************/
-                  { "data" : "NombresCliente" },
-                  { "data" : "ApellidosCliente" },
-                  { "data" : "CedulaCliente" },
-                  { "data" : "PlacaCliente" },
-                  { "data" : "ModeloCliente" },
-                  { "data" : "ColorCliente" },
-                  { "data" : "AnioCliente" },
-                  { "data" : "CelularCliente" },
-                  { "data" : "PolizaVencida" },
-                  { "data" : "NombreUsuarioCliente" },
-                  /*****************ServiciosPrecios*************************************/
-                  { "data" : "PrecioModificado" },
-                  { "data" : "PrecioSIvaBaremo" },
-                  { "data" : "PrecioCIvaBaremo" },
-                  { "data" : "PrecioSIvaModificado" },
-                  { "data" : "PrecioCIvaModificado" },
-                  { "data" : "NombreUsuarioPrecio" },
-                  { "data" : "FechaFacturaDigital" },
-                  { "data" : "FechaEstimadaPago" },
-                  { "data" : "FechaFacturaFisica" },
-                  { "data" : "FacturaPagada" },
-                  { "data" : "actions" },
-                ],
-                "aoColumnDefs": [
-                  { "visible": false, "targets": [ 1,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
-                    21,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
-                    41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
-                  },
-                  { 'bSortable': false, 'aTargets': [ 64 ] }
-                ]
+            table.responsive.recalc();
+
+            $('#column_0').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(0)).search($(this).val()).draw();
+              }
+            });
+            $('#column_1').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(1)).search($(this).val()).draw();
+              }
+            });
+            $('#column_2').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(2)).search($(this).val()).draw();
+              }
+            });
+            $('#column_3').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(3)).search($(this).val()).draw();
+              }
+            });
+            $('#column_4').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(4)).search($(this).val()).draw();
+              }
+            });
+            $('#column_5').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(5)).search($(this).val()).draw();
+              }
+            });
+            $('#column_6').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(6)).search($(this).val()).draw();
+              }
+            });
+            $('#column_7').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(7)).search($(this).val()).draw();
+              }
+            });
+            $('#column_8').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(8)).search($(this).val()).draw();
+              }
+            });
+            $('#column_9').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(9)).search($(this).val()).draw();
+              }
+            });
+            $('#column_10').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(10)).search($(this).val()).draw();
+              }
+            });
+            $('#column_11').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(11)).search($(this).val()).draw();
+              }
+            });
+            $('#column_12').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(12)).search($(this).val()).draw();
+              }
+            });
+            $('#column_13').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(13)).search($(this).val()).draw();
+              }
+            });
+            $('#column_14').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(14)).search($(this).val()).draw();
+              }
+            });
+            $('#column_15').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(15)).search($(this).val()).draw();
+              }
+            });
+            $('#column_16').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(16)).search($(this).val()).draw();
+              }
+            });
+            $('#column_17').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(17)).search($(this).val()).draw();
+              }
+            });
+            $('#column_18').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(18)).search($(this).val()).draw();
+              }
+            });
+            $('#column_19').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(19)).search($(this).val()).draw();
+              }
+            });
+            $('#column_20').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(20)).search($(this).val()).draw();
+              }
+            });
+            $('#column_21').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(21)).search($(this).val()).draw();
+              }
+            });
+            $('#column_22').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(22)).search($(this).val()).draw();
+              }
+            });
+            $('#column_23').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(23)).search($(this).val()).draw();
+              }
+            });
+            $('#column_24').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(24)).search($(this).val()).draw();
+              }
+            });
+            $('#column_25').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(25)).search($(this).val()).draw();
+              }
+            });
+            $('#column_26').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(26)).search($(this).val()).draw();
+              }
+            });
+            $('#column_27').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(27)).search($(this).val()).draw();
+              }
+            });
+            $('#column_28').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(28)).search($(this).val()).draw();
+              }
+            });
+            $('#column_29').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(29)).search($(this).val()).draw();
+              }
+            });
+            $('#column_30').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(30)).search($(this).val()).draw();
+              }
+            });
+            $('#column_31').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(31)).search($(this).val()).draw();
+              }
+            });
+            $('#column_32').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(32)).search($(this).val()).draw();
+              }
+            });
+            $('#column_33').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(33)).search($(this).val()).draw();
+              }
+            });
+            $('#column_34').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(34)).search($(this).val()).draw();
+              }
+            });
+            $('#column_35').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(35)).search($(this).val()).draw();
+              }
+            });
+            $('#column_36').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(36)).search($(this).val()).draw();
+              }
+            });
+            $('#column_37').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(37)).search($(this).val()).draw();
+              }
+            });
+            $('#column_38').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(38)).search($(this).val()).draw();
+              }
+            });
+            $('#column_39').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(39)).search($(this).val()).draw();
+              }
+            });
+            $('#column_40').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(40)).search($(this).val()).draw();
+              }
+            });
+            $('#column_41').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(41)).search($(this).val()).draw();
+              }
+            });
+            $('#column_42').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(42)).search($(this).val()).draw();
+              }
+            });
+            $('#column_43').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(43)).search($(this).val()).draw();
+              }
+            });
+            $('#column_44').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(44)).search($(this).val()).draw();
+              }
+            });
+            $('#column_45').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(45)).search($(this).val()).draw();
+              }
+            });
+            $('#column_46').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(46)).search($(this).val()).draw();
+              }
+            });
+            $('#column_47').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(47)).search($(this).val()).draw();
+              }
+            });
+            $('#column_48').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(48)).search($(this).val()).draw();
+              }
+            });
+            $('#column_49').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(49)).search($(this).val()).draw();
+              }
+            });
+            $('#column_50').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(50)).search($(this).val()).draw();
+              }
+            });
+            $('#column_51').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(51)).search($(this).val()).draw();
+              }
+            });
+            $('#column_52').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(52)).search($(this).val()).draw();
+              }
+            });
+            $('#column_53').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(53)).search($(this).val()).draw();
+              }
+            });
+            $('#column_54').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(54)).search($(this).val()).draw();
+              }
+            });
+            $('#column_55').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(55)).search($(this).val()).draw();
+              }
+            });
+            $('#column_56').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(56)).search($(this).val()).draw();
+              }
+            });
+            $('#column_57').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(57)).search($(this).val()).draw();
+              }
+            });
+            $('#column_58').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(58)).search($(this).val()).draw();
+              }
+            });
+            $('#column_59').on ('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(59)).search($(this).val()).draw();
+              }
+            });
+            $('#column_64').on('keypress', function(e){
+              if(e.which == 13) {
+                table.column(table.column(64)).search($(this).val()).draw();
+              }
+            });
+            $('#clear').click(function(){
+              table.search( '' ).columns().search( '' ).draw();
+              $('.filtros').val('');
+            });
+
+
+
+            $("#Seleccionador").click(function(){
+              ManejarSeleccion($(this));
+            });
+            function ManejarSeleccion(e){
+              if ($(e).is(':checked')) {
+                $(".selec").prop("checked",true);
+              }else{
+                $(".selec").prop("checked",false);
+              }
+            }
+            function CambiarFechaFacturaDigital(e,IdServicioPadre){
+              var FechaFacturaDigital = $(e).val();
+              var IdServicio = "";
+              var varios = false;
+              $('.selec').each(function (i,v) {
+
+                if ($(v).is(':checked')) {
+                  varios = true;
+                  IdServicio = $(v).val();
+                  $(".FechaFacturaDigital_"+IdServicio).val(FechaFacturaDigital);
+                  //$('input[name=FechaFacturaDigital_'+ IdServicio+'][value="'+ FechaFacturaDigital +'"]');
+                  console.log(IdServicio);
+                  var parametros = {
+                    "IdServicio" : IdServicio,
+                    "FechaFacturaDigital" : FechaFacturaDigital,
+                  };
+
+                  var actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, null, null,null);
+                }
+
               });
-                $('#example').css( 'display', 'table' );
 
-                table.responsive.recalc();
+              if(varios == false){
 
-        $('#column_0').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(0)).search($(this).val()).draw();
-          }
-        });
-        $('#column_1').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(1)).search($(this).val()).draw();
-          }
-        });
-        $('#column_2').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(2)).search($(this).val()).draw();
-          }
-        });
-        $('#column_3').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(3)).search($(this).val()).draw();
-          }
-        });
-        $('#column_4').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(4)).search($(this).val()).draw();
-          }
-        });
-        $('#column_5').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(5)).search($(this).val()).draw();
-          }
-        });
-        $('#column_6').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(6)).search($(this).val()).draw();
-          }
-        });
-        $('#column_7').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(7)).search($(this).val()).draw();
-          }
-        });
-        $('#column_8').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(8)).search($(this).val()).draw();
-          }
-        });
-        $('#column_9').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(9)).search($(this).val()).draw();
-          }
-        });
-        $('#column_10').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(10)).search($(this).val()).draw();
-          }
-        });
-        $('#column_11').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(11)).search($(this).val()).draw();
-          }
-        });
-        $('#column_12').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(12)).search($(this).val()).draw();
-          }
-        });
-        $('#column_13').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(13)).search($(this).val()).draw();
-          }
-        });
-        $('#column_14').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(14)).search($(this).val()).draw();
-          }
-        });
-        $('#column_15').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(15)).search($(this).val()).draw();
-          }
-        });
-        $('#column_16').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(16)).search($(this).val()).draw();
-          }
-        });
-        $('#column_17').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(17)).search($(this).val()).draw();
-          }
-        });
-        $('#column_18').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(18)).search($(this).val()).draw();
-          }
-        });
-        $('#column_19').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(19)).search($(this).val()).draw();
-          }
-        });
-        $('#column_20').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(20)).search($(this).val()).draw();
-          }
-        });
-        $('#column_21').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(21)).search($(this).val()).draw();
-          }
-        });
-        $('#column_22').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(22)).search($(this).val()).draw();
-          }
-        });
-        $('#column_23').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(23)).search($(this).val()).draw();
-          }
-        });
-        $('#column_24').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(24)).search($(this).val()).draw();
-          }
-        });
-        $('#column_25').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(25)).search($(this).val()).draw();
-          }
-        });
-        $('#column_26').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(26)).search($(this).val()).draw();
-          }
-        });
-        $('#column_27').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(27)).search($(this).val()).draw();
-          }
-        });
-        $('#column_28').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(28)).search($(this).val()).draw();
-          }
-        });
-        $('#column_29').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(29)).search($(this).val()).draw();
-          }
-        });
-        $('#column_30').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(30)).search($(this).val()).draw();
-          }
-        });
-        $('#column_31').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(31)).search($(this).val()).draw();
-          }
-        });
-        $('#column_32').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(32)).search($(this).val()).draw();
-          }
-        });
-        $('#column_33').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(33)).search($(this).val()).draw();
-          }
-        });
-        $('#column_34').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(34)).search($(this).val()).draw();
-          }
-        });
-        $('#column_35').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(35)).search($(this).val()).draw();
-          }
-        });
-        $('#column_36').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(36)).search($(this).val()).draw();
-          }
-        });
-        $('#column_37').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(37)).search($(this).val()).draw();
-          }
-        });
-        $('#column_38').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(38)).search($(this).val()).draw();
-          }
-        });
-        $('#column_39').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(39)).search($(this).val()).draw();
-          }
-        });
-        $('#column_40').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(40)).search($(this).val()).draw();
-          }
-        });
-        $('#column_41').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(41)).search($(this).val()).draw();
-          }
-        });
-        $('#column_42').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(42)).search($(this).val()).draw();
-          }
-        });
-        $('#column_43').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(43)).search($(this).val()).draw();
-          }
-        });
-        $('#column_44').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(44)).search($(this).val()).draw();
-          }
-        });
-        $('#column_45').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(45)).search($(this).val()).draw();
-          }
-        });
-        $('#column_46').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(46)).search($(this).val()).draw();
-          }
-        });
-        $('#column_47').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(47)).search($(this).val()).draw();
-          }
-        });
-        $('#column_48').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(48)).search($(this).val()).draw();
-          }
-        });
-        $('#column_49').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(49)).search($(this).val()).draw();
-          }
-        });
-        $('#column_50').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(50)).search($(this).val()).draw();
-          }
-        });
-        $('#column_51').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(51)).search($(this).val()).draw();
-          }
-        });
-        $('#column_52').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(52)).search($(this).val()).draw();
-          }
-        });
-        $('#column_53').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(53)).search($(this).val()).draw();
-          }
-        });
-        $('#column_54').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(54)).search($(this).val()).draw();
-          }
-        });
-        $('#column_55').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(55)).search($(this).val()).draw();
-          }
-        });
-        $('#column_56').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(56)).search($(this).val()).draw();
-          }
-        });
-        $('#column_57').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(57)).search($(this).val()).draw();
-          }
-        });
-        $('#column_58').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(58)).search($(this).val()).draw();
-          }
-        });
-        $('#column_59').on ('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(59)).search($(this).val()).draw();
-          }
-        });
-        $('#column_64').on('keypress', function(e){
-          if(e.which == 13) {
-            table.column(table.column(64)).search($(this).val()).draw();
-          }
-        });
-        $('#clear').click(function(){
-          table.search( '' ).columns().search( '' ).draw();
-          $('.filtros').val('');
-        });
+                var parametros = {
+                  "IdServicio" : IdServicioPadre,
+                  "FechaFacturaDigital" : $(e).val(),
+                };
+                actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, null, null,null);
 
+              }
+              var popup = {
+                "popup": "popupSuccess",
+                "imagen": "none",
+                "mensaje": "Registro(s) actualizado(s) satisfactoriamente.",
+                "displaybarra": ['none'],
+                "displaysBotones": ['none', 'none', 'none', 'inline'],
+                "text": ['', '', '', 'Aceptar'],
+                "onClick": ["", "", "", "closePops()"]
 
+              };
+              genericPop(popup);
 
-   $("#Seleccionador").click(function(){
-       ManejarSeleccion($(this));   
-    });
-function ManejarSeleccion(e){
-   if ($(e).is(':checked')) {
-       $(".selec").prop("checked",true);
-   }else{
-       $(".selec").prop("checked",false);
-   }
-}
-function CambiarFechaFacturaDigital(e,IdServicioPadre){
-        var FechaFacturaDigital = $(e).val();
-        var IdServicio = "";
-        var varios = false;
-        $('.selec').each(function (i,v) {
-                
+            }
+            function CambiarFechaEstimadaPago(e,IdServicioPadre){
+              var FechaEstimadaPago = $(e).val();
+              var IdServicio = "";
+              var varios = false;
+
+              $('.selec').each(function (i,v) {
+
                 if ($(v).is(':checked')) {
-                    varios = true;
-                    IdServicio = $(v).val();
-                    $(".FechaFacturaDigital_"+IdServicio).val(FechaFacturaDigital);
-                    //$('input[name=FechaFacturaDigital_'+ IdServicio+'][value="'+ FechaFacturaDigital +'"]');
-                    console.log(IdServicio);
-                    var parametros = {
-                        "IdServicio" : IdServicio,
-                        "FechaFacturaDigital" : FechaFacturaDigital,
-                    };
-                        
-                    var actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, actualizarSuccess, MensajeError);
+                  varios = true;
+                  IdServicio = $(v).val();
+                  $(".FechaEstimadaPago_"+IdServicio).val(FechaEstimadaPago);
+                  console.log(IdServicio);
+                  var parametros = {
+                    "IdServicio" : IdServicio,
+                    "FechaEstimadaPago" : FechaEstimadaPago,
+                  };
+
+                  var actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, null, null,null);
                 }
-                
-        });
-        
-        if(varios == false){
-           
-        var parametros = {
-            "IdServicio" : IdServicioPadre,
-            "FechaFacturaDigital" : $(e).val(),
-        };
-        actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, actualizarSuccess, MensajeError);
-        
-        }    
-        //table.search( '' ).columns().search( '' ).draw();
-        //$('.filtros').val('');
-    
-}
-function CambiarFechaEstimadaPago(e,IdServicioPadre){
-        var FechaEstimadaPago = $(e).val();
-        var IdServicio = "";
-        var varios = false;
-        
-        $('.selec').each(function (i,v) {
-                
+
+              });
+              if(varios == false){
+                var parametros = {
+                  "IdServicio" : IdServicioPadre,
+                  "FechaEstimadaPago" : $(e).val(),
+                };
+                actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, null, null,null);
+              }
+              var popup = {
+                "popup": "popupSuccess",
+                "imagen": "none",
+                "mensaje": "Registro(s) actualizado(s) satisfactoriamente.",
+                "displaybarra": ['none'],
+                "displaysBotones": ['none', 'none', 'none', 'inline'],
+                "text": ['', '', '', 'Aceptar'],
+                "onClick": ["", "", "", "closePops()"]
+
+              };
+              genericPop(popup);
+
+            }
+            function CambiarFechaFacturaFisica(e,IdServicioPadre){
+              var FechaFacturaFisica = $(e).val();
+              var IdServicio = "";
+              var varios = false;
+              $('.selec').each(function (i,v) {
+
                 if ($(v).is(':checked')) {
-                    varios = true;
-                    IdServicio = $(v).val();
-                    $(".FechaEstimadaPago_"+IdServicio).val(FechaEstimadaPago);
-                    console.log(IdServicio);
-                    var parametros = {
-                        "IdServicio" : IdServicio,
-                        "FechaEstimadaPago" : FechaEstimadaPago,
-                    };
-                        
-                    var actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, actualizarSuccess, MensajeError);
+                  varios = true;
+                  IdServicio = $(v).val();
+                  $(".FechaFacturaFisica_"+IdServicio).val(FechaFacturaFisica);
+                  //console.log(IdServicio);
+                  var parametros = {
+                    "IdServicio" : IdServicio,
+                    "FechaFacturaFisica" : FechaFacturaFisica,
+                  };
+
+                  var actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, null, null,null);
+                  $(".FechaEstimadaPago_"+IdServicio).val(actualizarServicioGrua.FechaEstimadaPago);
                 }
-                
-        });
-        if(varios == false){
-        var parametros = {
-            "IdServicio" : IdServicioPadre,
-            "FechaEstimadaPago" : $(e).val(),
-        };
-        actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, actualizarSuccess, MensajeError);
-        }    
-        //table.search( '' ).columns().search( '' ).draw();
-        //$('.filtros').val('');
-    
-}
-function CambiarFechaFacturaFisica(e,IdServicioPadre){
-        var FechaFacturaFisica = $(e).val();
-        var IdServicio = "";
-        var varios = false;
-        $('.selec').each(function (i,v) {
-                
-                if ($(v).is(':checked')) {
+              });
+              if(varios == false){
+                var parametros = {
+                  "IdServicio" : IdServicioPadre,
+                  "FechaFacturaFisica" : $(e).val(),
+                };
+                actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, null, null,null);
+                $(".FechaEstimadaPago_"+IdServicioPadre).val(actualizarServicioGrua.FechaEstimadaPago);
+              }
+              var popup = {
+                "popup": "popupSuccess",
+                "imagen": "none",
+                "mensaje": "Registro(s) actualizado(s) satisfactoriamente.",
+                "displaybarra": ['none'],
+                "displaysBotones": ['none', 'none', 'none', 'inline'],
+                "text": ['', '', '', 'Aceptar'],
+                "onClick": ["", "", "", "closePops()"]
+
+              };
+              genericPop(popup);
+            }
+            function CambiarFacturaPagada(e,IdServicioPadre){
+
+
+              var Pagada = 0;
+              var IdServicio = "";
+              var varios = false;
+
+              if ($(e).is(':checked')) {
+                Pagada = 1;
+              }else{
+                Pagada = 0;
+              }
+
+                $('.selec').each(function (i,v) {
+
+                  if ($(v).is(':checked')) {
                     varios = true;
                     IdServicio = $(v).val();
-                    $(".FechaFacturaFisica_"+IdServicio).val(FechaFacturaFisica);
+                    $(".FacturaPagada_"+IdServicio).val(Pagada);
+                    if(Pagada){
+                      $(".FacturaPagada_"+IdServicio).prop("checked","checked");
+                    }else{
+                      $(".FacturaPagada_"+IdServicio).prop("checked",false);
+                    }
+
                     //console.log(IdServicio);
                     var parametros = {
-                        "IdServicio" : IdServicio,
-                        "FechaFacturaFisica" : FechaFacturaFisica,
+                      "IdServicio" : IdServicio,
+                      "FacturaPagada" : Pagada,
                     };
-                        
-                    var actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, actualizarSuccess, MensajeError);
+
+                    var actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros,null,null,null);
+                    //closePops();
+                  }
+                });
+                if(varios == false){
+                  var parametros = {
+                    "IdServicio" : IdServicioPadre,
+                    "FacturaPagada" : Pagada,
+                  };
+                  actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, null, null,null);
+                  //closePops();
                 }
-        });
-        if(varios == false){
-        var parametros = {
-            "IdServicio" : IdServicioPadre,
-            "FechaFacturaFisica" : $(e).val(),
-        };
-        actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, actualizarSuccess, MensajeError);
-        }    
-        //table.search( '' ).columns().search( '' ).draw();
-        //$('.filtros').val('');
-    
-} 
+
+                var popup = {
+                  "popup": "popupSuccess",
+                  "imagen": "none",
+                  "mensaje": "Registro(s) actualizado(s) satisfactoriamente.",
+                  "displaybarra": ['none'],
+                  "displaysBotones": ['none', 'none', 'none', 'inline'],
+                  "text": ['', '', '', 'Aceptar'],
+                  "onClick": ["", "", "", "closePops()"]
+
+                };
+                genericPop(popup);
 
 
 
-      </script>
-<script src="<?php echo full_url;?>/web/js/Administracion.js"></script>
+            }
+
+
+            </script>
+            <script src="<?php echo full_url;?>/web/js/Administracion.js"></script>

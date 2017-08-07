@@ -70,4 +70,11 @@
 
 
 		}
+		function calculaFechaEstimadaPago($Fecha,$Dias){
+			$query = "SELECT sumaDiasHabiles('".$Fecha."',".$Dias.") as FechaEstimadaPago";
+			$ConnectionORM = new ConnectionORM();
+			$q = $ConnectionORM->ejecutarPreparado($query);
+			$q = $q->fetch();
+			return $q['FechaEstimadaPago'];
+		}
 	}

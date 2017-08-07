@@ -322,9 +322,14 @@ function AjaxCall(URL, parametros, exito, fallo, extra) {
     async:false,
     success: function(data) {
       if(data.Error == "1"){
-        MensajeErrorJson(data);
+        if(fallo === undefined || fallo =="" || fallo == null){
+
+        }else{
+          MensajeErrorJson(data);
+        }
+
       }else{
-        if (exito === undefined || exito =="") {
+        if (exito === undefined || exito =="" || exito == null ) {
 
         }else{
           exito(data);

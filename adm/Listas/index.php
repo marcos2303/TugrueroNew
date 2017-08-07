@@ -331,6 +331,10 @@ function executeListaServiciosAdministracionJson($values)
 		{
 
 			$IdServicio = $list['IdServicio'];
+			$checked = "";
+			if($list['FacturaPagada']==1){
+				$checked = 'checked="checked"';
+			}
 			$array_json['data'][] = array(
 				"CodigoServicio" =>  '<input type="checkbox" name="" class="selec" value="'.$IdServicio.'" id="CodigoServicio['.$list['IdServicio'].']"> ['.$list['CodigoServicio']."]",
 				"NombreAplicacion" =>  $list['NombreAplicacion'],
@@ -396,22 +400,28 @@ function executeListaServiciosAdministracionJson($values)
 				"PrecioCIvaModificado" =>  $list['PrecioCIvaModificado'],
 				"NombreUsuarioPrecio" =>  $list['NombreUsuarioPrecio'],
                 "FechaFacturaDigital" =>  '<input type="date" value="'.$list['FechaFacturaDigital'].'" class="bloquear FechaFacturaDigital_'.$list['IdServicio'].'" onchange="CambiarFechaFacturaDigital(this,'.$list['IdServicio'].');" id="FechaFacturaDigital_'.$list['IdServicio'].'">',
-                "FechaEstimadaPago" =>  "<input type='date' value='".$list['FechaEstimadaPago']."' class=' bloquear FechaEstimadaPago_".$list['IdServicio']."' onchange='CambiarFechaEstimadaPago(this,".$list['IdServicio'].");' id='FechaEstimadaPago[".$list['IdServicio']."]'>",
                 "FechaFacturaFisica" =>  "<input type='date' value='".$list['FechaFacturaFisica']."' class='bloquear FechaFacturaFisica_".$list['IdServicio']."'  onchange='CambiarFechaFacturaFisica(this,".$list['IdServicio'].");' id='FechaFacturaFisica[".$list['IdServicio']."]'>",
-                "FacturaPagada" =>  "<input type='checkbox' value='".$list['FacturaPagada']."' class='bloquear FacturaPagada_".$list['IdServicio']."' onchange='CambiarFacturaPagada(this,".$list['IdServicio'].");' id='FacturaPagada[".$list['IdServicio']."]'>",
+								"FechaEstimadaPago" =>  "<input type='date' readonly='readonly' value='".$list['FechaEstimadaPago']."' class=' bloquear FechaEstimadaPago_".$list['IdServicio']."' onchange='CambiarFechaEstimadaPago(this,".$list['IdServicio'].");' id='FechaEstimadaPago[".$list['IdServicio']."]'>",
+								"FacturaPagada" =>  "<input type='checkbox' $checked value='".$list['FacturaPagada']."' class='bloquear FacturaPagada_".$list['IdServicio']."' onchange='CambiarFacturaPagada(this,".$list['IdServicio'].");' id='FacturaPagada[".$list['IdServicio']."]'>",
                 /*"FechaFacturaDigital" =>  $list['FechaFacturaDigital'],
                 "FechaEstimadaPago" =>  $list['FechaEstimadaPago'],
                 "FechaFacturaFisica" =>  $list['FechaFacturaFisica'],
                 "FacturaPagada" =>  $list['FacturaPagada'],*/
                 "actions" => '
-				<div class="btn-group">
-				<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<i class="fa fa-gear"></i> <span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu dropdown-menu-right">
-				<li><a href="#" onclick="DetalleServicio('.$list['IdServicio'].')"> Detalle servicio</a></li>
-				</ul>
-				</div>'
+								<div class="btn-group">
+									<button type="button" class="btn btn-default">Action</button>
+									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+										<span class="caret"></span>
+										<span class="sr-only">Toggle Dropdown</span>
+									</button>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="#">Action</a></li>
+										<li><a href="#">Another action</a></li>
+										<li><a href="#">Something else here</a></li>
+										<li class="divider"></li>
+										<li><a href="#">Separated link</a></li>
+									</ul>
+								</div>'
 			);
 		}
 	}else{
