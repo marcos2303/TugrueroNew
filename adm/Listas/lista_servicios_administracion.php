@@ -161,8 +161,6 @@ $('#example tfoot th').each( function () {
   }
 
 } );
-
-
 var table = $('#example').DataTable({
   "scrollX": true,
   "processing": true,
@@ -625,8 +623,6 @@ var table = $('#example').DataTable({
               $('.filtros').val('');
             });
 
-
-
             $("#Seleccionador").click(function(){
               ManejarSeleccion($(this));
             });
@@ -640,75 +636,21 @@ var table = $('#example').DataTable({
             function CambiarFechaFacturaDigital(e,IdServicioPadre){
               var FechaFacturaDigital = $(e).val();
               var IdServicio = "";
-              var varios = false;
+              var parametros = {
+                  "IdServicio" : [],
+                  "FechaFacturaDigital" : FechaFacturaDigital
+              };
+              parametros["IdServicio"].push(IdServicioPadre);
               $('.selec').each(function (i,v) {
 
                 if ($(v).is(':checked')) {
-                  varios = true;
                   IdServicio = $(v).val();
                   $(".FechaFacturaDigital_"+IdServicio).val(FechaFacturaDigital);
-                  //$('input[name=FechaFacturaDigital_'+ IdServicio+'][value="'+ FechaFacturaDigital +'"]');
-                  console.log(IdServicio);
-                  var parametros = {
-                    "IdServicio" : IdServicio,
-                    "FechaFacturaDigital" : FechaFacturaDigital,
-                  };
-
-                  var actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, null, null,null);
+                  parametros["IdServicio"].push(IdServicio);     
                 }
-
               });
+              var actualizarServicioPrecio = AjaxCall("servicios/clienteapp/actualizarServicioPrecioArray.php", parametros, null, null,null);
 
-              if(varios == false){
-
-                var parametros = {
-                  "IdServicio" : IdServicioPadre,
-                  "FechaFacturaDigital" : $(e).val(),
-                };
-                actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, null, null,null);
-
-              }
-              var popup = {
-                "popup": "popupSuccess",
-                "imagen": "none",
-                "mensaje": "Registro(s) actualizado(s) satisfactoriamente.",
-                "displaybarra": ['none'],
-                "displaysBotones": ['none', 'none', 'none', 'inline'],
-                "text": ['', '', '', 'Aceptar'],
-                "onClick": ["", "", "", "closePops()"]
-
-              };
-              genericPop(popup);
-
-            }
-            function CambiarFechaEstimadaPago(e,IdServicioPadre){
-              var FechaEstimadaPago = $(e).val();
-              var IdServicio = "";
-              var varios = false;
-
-              $('.selec').each(function (i,v) {
-
-                if ($(v).is(':checked')) {
-                  varios = true;
-                  IdServicio = $(v).val();
-                  $(".FechaEstimadaPago_"+IdServicio).val(FechaEstimadaPago);
-                  console.log(IdServicio);
-                  var parametros = {
-                    "IdServicio" : IdServicio,
-                    "FechaEstimadaPago" : FechaEstimadaPago,
-                  };
-
-                  var actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, null, null,null);
-                }
-
-              });
-              if(varios == false){
-                var parametros = {
-                  "IdServicio" : IdServicioPadre,
-                  "FechaEstimadaPago" : $(e).val(),
-                };
-                actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, null, null,null);
-              }
               var popup = {
                 "popup": "popupSuccess",
                 "imagen": "none",
@@ -725,32 +667,27 @@ var table = $('#example').DataTable({
             function CambiarFechaFacturaFisica(e,IdServicioPadre){
               var FechaFacturaFisica = $(e).val();
               var IdServicio = "";
-              var varios = false;
+              var parametros = {
+                  "IdServicio" : [],
+                  "FechaFacturaFisica" : FechaFacturaFisica
+              };
+              parametros["IdServicio"].push(IdServicioPadre);
               $('.selec').each(function (i,v) {
 
                 if ($(v).is(':checked')) {
-                  varios = true;
                   IdServicio = $(v).val();
                   $(".FechaFacturaFisica_"+IdServicio).val(FechaFacturaFisica);
-                  //console.log(IdServicio);
-                  var parametros = {
-                    "IdServicio" : IdServicio,
-                    "FechaFacturaFisica" : FechaFacturaFisica,
-                  };
-
-                  var actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, null, null,null);
-                  $(".FechaEstimadaPago_"+IdServicio).val(actualizarServicioGrua.FechaEstimadaPago);
+                  parametros["IdServicio"].push(IdServicio);                
                 }
               });
-              if(varios == false){
-                var parametros = {
-                  "IdServicio" : IdServicioPadre,
-                  "FechaFacturaFisica" : $(e).val(),
-                };
-                actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, null, null,null);
-                $(".FechaEstimadaPago_"+IdServicioPadre).val(actualizarServicioGrua.FechaEstimadaPago);
-              }
-              var popup = {
+              
+              var actualizarServicioPrecio = AjaxCall("servicios/clienteapp/actualizarServicioPrecioArray.php", parametros, null, null,null);
+              $(actualizarServicioPrecio.IdServicio).each(function (i,v) {
+                  $(".FechaEstimadaPago_"+ v).val(actualizarServicioPrecio.FechaEstimadaPago);
+
+              });
+            
+            var popup = {
                 "popup": "popupSuccess",
                 "imagen": "none",
                 "mensaje": "Registro(s) actualizado(s) satisfactoriamente.",
@@ -767,18 +704,19 @@ var table = $('#example').DataTable({
 
               var Pagada = 0;
               var IdServicio = "";
-              var varios = false;
-
               if ($(e).is(':checked')) {
                 Pagada = 1;
               }else{
                 Pagada = 0;
               }
-
+              var parametros = {
+                  "IdServicio" : [],
+                  "FacturaPagada" : Pagada
+              };
+              parametros["IdServicio"].push(IdServicioPadre);
                 $('.selec').each(function (i,v) {
 
                   if ($(v).is(':checked')) {
-                    varios = true;
                     IdServicio = $(v).val();
                     $(".FacturaPagada_"+IdServicio).val(Pagada);
                     if(Pagada){
@@ -787,24 +725,20 @@ var table = $('#example').DataTable({
                       $(".FacturaPagada_"+IdServicio).prop("checked",false);
                     }
 
-                    //console.log(IdServicio);
-                    var parametros = {
-                      "IdServicio" : IdServicio,
-                      "FacturaPagada" : Pagada,
-                    };
-
-                    var actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros,null,null,null);
+                    parametros["IdServicio"].push(IdServicio);    
                     //closePops();
                   }
                 });
-                if(varios == false){
+                var actualizarServicioPrecio = AjaxCall("servicios/clienteapp/actualizarServicioPrecioArray.php", parametros,null,null,null);
+
+                /*if(varios == false){
                   var parametros = {
                     "IdServicio" : IdServicioPadre,
                     "FacturaPagada" : Pagada,
                   };
                   actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros, null, null,null);
                   //closePops();
-                }
+                }*/
 
                 var popup = {
                   "popup": "popupSuccess",

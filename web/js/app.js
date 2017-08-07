@@ -1,6 +1,7 @@
 var Servidor = "http://localhost/";
 var Proyecto = "TugrueroNew/";
 var link_servidor = Servidor + Proyecto;
+$('.dropdown-toggle').dropdown();
 function listaProveedoresTipo(IdProveedorTipo){
   //$('#IdProveedorTipo').find('option').remove().end().append('<option value="">Seleccione...</option>');
   $('#IdProveedorTipo').find('option').remove().end();
@@ -486,7 +487,7 @@ function hideShow(elementos, parametros) {
   for (var i = 0; i < elementos.length; i++) {
     elementos[i].style.display = parametros.displaysBotones[i];
     elementos[i].setAttribute('onClick', parametros.onClick[i]);
-    elementos[i].innerHTML = parametros.text[i] + "2";
+    elementos[i].innerHTML = parametros.text[i];
   }
 }
 function clearInputs(Form){

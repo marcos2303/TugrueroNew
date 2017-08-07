@@ -408,20 +408,17 @@ function executeListaServiciosAdministracionJson($values)
                 "FechaFacturaFisica" =>  $list['FechaFacturaFisica'],
                 "FacturaPagada" =>  $list['FacturaPagada'],*/
                 "actions" => '
-								<div class="btn-group">
-									<button type="button" class="btn btn-default">Action</button>
-									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-										<span class="caret"></span>
-										<span class="sr-only">Toggle Dropdown</span>
-									</button>
-									<ul class="dropdown-menu" role="menu">
-										<li><a href="#">Action</a></li>
-										<li><a href="#">Another action</a></li>
-										<li><a href="#">Something else here</a></li>
-										<li class="divider"></li>
-										<li><a href="#">Separated link</a></li>
-									</ul>
-								</div>'
+                    <div class="btn-group">
+					<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<i class="fa fa-gear"></i> <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu dropdown-menu-right">
+					<li><a href="#" onclick="editarDatatable('."'".$list['Placa']."'".')"> Editar</a></li>
+					<li><a href="#" onclick="ListarServiciosGrua(1,1)"> Historial de servicios</a></li>
+					<li><a href="#"> Conexiones</a></li>
+					<li><a href="#"> Reiniciar dispositivo</a></li>
+					</ul>
+					</div>'
 			);
 		}
 	}else{
