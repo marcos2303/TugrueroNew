@@ -29,7 +29,7 @@ $(document).ready(function(){
   //crear servicio
   var parametros_iniciales = {
     "IdServicioTipo" : $("#IdServicioTipo").val(),
-    "IdAplicacion" : 2,
+    "IdAplicacion" : 3,
     "IdEstatus" : 1,
     "IdUsuario" : $("#IdUsuario").val(),
   };

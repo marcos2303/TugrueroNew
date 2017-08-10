@@ -279,6 +279,16 @@ function ListarServicios(IdProveedor){
 			}
 		});
 }
+
+function ListarConexionesGrua(IdProveedor,IdUsuario){
+		$.ajax({
+			url: link_servidor + "adm/Listas/index.php?action=lista_conexiones&IdProveedor=" +IdProveedor + "&IdUsuario="+ IdUsuario+ "&regresar=1&services_regresar=lista_gruas",
+			success: function(html){
+				$('#popupListas .modal-body').html(html);
+				$('#popupListas').modal('show');
+			}
+		});
+}
 function DetalleServicio(IdServicio){
 		$.ajax({
 			url: link_servidor + "adm/Listas/index.php?action=detalle_servicio&IdServicio="+ IdServicio,

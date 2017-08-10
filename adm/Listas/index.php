@@ -20,6 +20,12 @@ switch ($action) {
 	case "lista_gruas_json":
 	executeListaGruasJson($values);
 	break;
+	case "lista_conexiones":
+	executeListaConexiones($values);
+	break;
+	case "lista_conexiones_json":
+	executeListaConexionesJson($values);
+	break;
 	case "lista_servicios":
 	executeListaServicios($values);
 	break;
@@ -67,6 +73,7 @@ function executeListaGruasJson($values)
 		{
 
 			$IdGrua = $list['IdGrua'];
+            $IdProveedor = $list['IdProveedor'];
 			$array_json['data'][$i] = array(
 				"IdProveedor" => $IdProveedor,
 				"Placa" => $list['Placa'],
@@ -86,7 +93,7 @@ function executeListaGruasJson($values)
 				"Celular3" => $list['Celular3'],
 				"Disponible" => $list['Disponible']);
 
-				if(!isset($values['opcion'])){
+				if(!isset($values['opcion']) or $values['opcion']==''){
 					$array_json['data'][$i]['actions'] = '
 					<div class="btn-group">
 					<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -94,8 +101,8 @@ function executeListaGruasJson($values)
 					</button>
 					<ul class="dropdown-menu dropdown-menu-right">
 					<li><a href="#" onclick="editarDatatable('."'".$list['Placa']."'".')"> Editar</a></li>
-					<li><a href="#" onclick="ListarServiciosGrua(1,1)"> Historial de servicios</a></li>
-					<li><a href="#"> Conexiones</a></li>
+					<li><a href="#" onclick="ListarServiciosGrua('.$IdProveedor.',1)"> Historial de servicios</a></li>
+					<li><a href="#" onclick="ListarConexionesGrua('.$IdProveedor.','.$IdGrua.')"> Conexiones</a></li>
 					<li><a href="#"> Reiniciar dispositivo</a></li>
 					</ul>
 					</div>';
@@ -147,6 +154,38 @@ function executeListaGruasJson($values)
 }
 function executeListaServicios($values){
 	require("lista_servicios.php");
+}
+function executeListaConexiones($values){
+	require("lista_conexiones.php");
+}
+function executeListaConexionesJson($values){
+	$Conexiones = new Conexiones();
+	$list_json = $Conexiones ->getListConexionesGruas($values);
+	$list_json_cuenta = $Conexiones ->getCountListConexionesGruas($values);
+	$array_json = array();
+	$array_json['recordsTotal'] = $list_json_cuenta;
+	$array_json['recordsFiltered'] = $list_json_cuenta;
+	if(count($list_json)>0)
+	{
+		foreach ($list_json as $list)
+		{
+
+			$IdConexion = $list['IdConexion'];
+			$array_json['data'][] = array(
+				"NombreAplicacion" => $list['NombreAplicacion'],
+                "NombreConexionTipo" => $list['NombreConexionTipo'],
+				"Fecha" => $list['Fecha']
+                );
+		}
+	}else{
+			
+			$array_json['data'][] = array(
+				"NombreAplicacion" => null,
+                "NombreConexionTipo" => null,
+				"Fecha" => null
+                );
+    }
+    echo json_encode($array_json);die;
 }
 function executeListaServiciosCorta($values){
 	require("lista_servicios_corta.php");

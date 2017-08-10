@@ -108,7 +108,6 @@ class Gruas {
 		$columns[13] = 'p.Celular2';
 		$columns[14] = 'p.Celular3';
 		$columns[15] = 'Disponible';
-		$columns[6] = 'Clave';
 		$column_order = $columns[0];
 		$where = '1 = 1';
 		$order = 'asc';

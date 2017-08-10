@@ -3,7 +3,7 @@
 <div class="col-xs-12">
 
 
-        <div class="col-xs-4">
+        <div class="col-xs-offset-4 col-xs-4">
 
           <!-- Profile Image -->
           <div class="box box-primary">
@@ -14,6 +14,12 @@
               <p class="text-muted text-center"><?php echo $_SESSION['Perfil']?></p>
 
               <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                  <b>Última conexión </b> <a class="pull-right"><?php echo $_SESSION['UltimaConexion']?></a>
+                </li>
+                <li class="list-group-item">
+                  <b>Cantidad de conexiones </b> <a class="pull-right"><?php echo $_SESSION['CuentaConexiones']?></a>
+                </li>
                 <li class="list-group-item">
                   <b>Servicios ultimos 3 dias</b> <a class="pull-right">1,322</a>
                 </li>

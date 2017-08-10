@@ -11,7 +11,7 @@ $response = array("Error"=>1,"MensajeError"=>"No actualizado.","MensajeSuccess"=
 /*************************Actualizamos el Servicio************************************/
 
 if(isset($values['FechaFacturaFisica']) and $values['FechaFacturaFisica']!=''){
-	$values['FechaEstimadaPago'] = $ServiciosPrecios->calculaFechaEstimadaPago($values['FechaFacturaFisica'],10);
+	$values['FechaEstimadaPago'] = $ServiciosPrecios->calculaFechaEstimadaPago($values['FechaFacturaFisica']);
 }
 
 if(isset($values['IdServicio']) and count($values['IdServicio'])>0){

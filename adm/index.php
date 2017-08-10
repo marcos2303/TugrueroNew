@@ -59,6 +59,14 @@ $values = $_REQUEST;
 					require('login.php');die;
 				}else{
 					
+                    $cuenta_conexiones = 0;
+                    $ultima_conexion = date('Y-m-d h:i:s');
+                    $usuario_data['IdAplicacion'] = 3;
+                    $usuario_data['IdConexionTipo'] = 3;
+                    $Conexiones = new Conexiones();
+                    $ultima_conexion = $Conexiones->getUltimaConexion($usuario_data);
+                    $Conexiones->addConexion($usuario_data);                   
+                    $cuenta_conexiones = $Conexiones->getCuentaConexionesUsuario($usuario_data);
 					$_SESSION['IdUsuario'] = $usuario_data['IdUsuario'];
 					$_SESSION['Usuario'] = $usuario_data['Login'];
 					$_SESSION['AutorizarPagos'] = $usuario_data['AutorizarPagos'];
@@ -66,6 +74,8 @@ $values = $_REQUEST;
 					$_SESSION['Nombres'] = $usuario_data['Nombres'];
 					$_SESSION['Apellidos'] = $usuario_data['Apellidos'];
 					$_SESSION['Perfil'] = $usuario_data['Perfil'];
+                    $_SESSION['CuentaConexiones'] = $cuenta_conexiones;
+                    $_SESSION['UltimaConexion'] = $ultima_conexion;
 					require('bienvenida.php');die;
 					
 				}

@@ -296,8 +296,6 @@ $(document).ready(function() {
               });
                 $('#example').css( 'display', 'table' );
 
-                table.responsive.recalc();
-
               /*for(i=0; i< table.columns()[0].length;i++){
 
               $('#column_'+ i).on('keypress', function(e){

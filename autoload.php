@@ -77,3 +77,4 @@ include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Marcas.class.php")
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Seguros.class.php");
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Push.class.php");
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/ServiciosEstatus.class.php");
+include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Conexiones.class.php");
