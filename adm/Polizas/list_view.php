@@ -28,9 +28,8 @@
 				</tr>
 			</tfoot>
 		</table>
-	<a class="btn btn-default"  href="<?php echo full_url."/adm/solicitud/index.php";?>"><i class="fa fa-arrow-left  fa-pull-left fa-border"></i> Regresar</a>
 
-	<a class="btn btn-default"  href="<?php echo full_url."/adm/Polizas/index.php?action=new"?>"><i class="fa fa-file-o fa-pull-left fa-border"></i>Agregar</a>
+        <a class="btn btn-primary"  href="<?php echo full_url."/adm/Polizas/index.php?action=add"?>"><i class="fa fa-plus"></i> Agregar</a>
 	<?php include('../../view_footer_admin.php')?>
 <script>
 
@@ -56,7 +55,7 @@ $(document).ready(function() {
         "scrollX": true,
         "processing": true,
         "serverSide": true,
-		 "sDom": 'ltrip',
+        "sDom": 'trp',
         "ajax": "<?php echo full_url."/adm/Polizas/index.php?action=list_json"?>",
 		"language": {
                 "url": "<?php echo full_url."/web/js/"?>datatables.spanish.lang"

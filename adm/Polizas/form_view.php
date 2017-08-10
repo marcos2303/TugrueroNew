@@ -15,7 +15,7 @@
 
 	<h1 class="text-center big_title">Pólizas</h1>
 	<form class="" action="" name="DataForm" method="POST" id="DataForm">
-		<input autocomplete="off" type="text" id="action" name='action' value='<?php if(isset($values['action']))echo $values['action'];?>'>
+		<input autocomplete="off" type="hidden" id="action" name='action' value='<?php if(isset($values['action']))echo $values['action'];?>'>
 		<input autocomplete="off" class="DatosPoliza" type="hidden" id='IdPoliza' name='IdPoliza' value='<?php if(isset($values['IdPoliza']))echo $values['IdPoliza'];?>'>
 
 	<?php //if($values['action'] == "add"):?>
@@ -205,7 +205,7 @@
 		
 	</div>
 		<a class="btn btn-default"  href="<?php echo full_url."/adm/Polizas/index.php"?>"><i class="fa fa-arrow-left  fa-pull-left fa-border"></i> Regresar</a>
-		<button type="submit" class="btn btn-default"><i class="fa fa-save fa-pull-left fa-border"></i> Guardar</button>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Aceptar</button>
     <?php if(isset($values['msg']) and $values['msg']!=''):?>
 		
 		<script>
