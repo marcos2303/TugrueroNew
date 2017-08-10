@@ -10,5 +10,12 @@
 			return $q;
 		}
 
-
+		public function getEstadosListSelect(){
+			$ConnectionORM = new ConnectionORM();
+			$q = $ConnectionORM->getConnect()->Estados
+			->select("*")
+			->where("Estatus=?",1);
+			return $q; 				
+			
+		}
 	}
