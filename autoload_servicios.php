@@ -48,7 +48,13 @@ define("image_url",full_url."/web/images/");
  define('IVA',1.12);
 
 /******************** definicion de clases *************/
-include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/notorm-master/NotORM.php");//se debe incluir una sola vez en todo el cms
+ spl_autoload_register(function ($nombre_clase) {
+    include $_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/".$nombre_clase . '.class.php';
+	include $_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/notorm-master/".$nombre_clase . '.php';
+	include $_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/".$nombre_clase . '.class.php';
+
+});
+/*include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/notorm-master/NotORM.php");//se debe incluir una sola vez en todo el cms
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/ConnectionORM.class.php");
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Usuarios.class.php");
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Servicios.class.php");
@@ -67,6 +73,4 @@ include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/GruasTipos.class.p
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Marcas.class.php");
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Seguros.class.php");
 include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Push.class.php");
-include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/ServiciosEstatus.class.php");
-include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Conexiones.class.php");
-
+include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/ServiciosEstatus.class.php");*/

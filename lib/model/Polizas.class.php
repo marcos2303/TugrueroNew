@@ -12,7 +12,15 @@
 	 * @author marcos
 	 */
 	class Polizas {
+		public $IdPoliza;
 
+		function getIdPoliza() {
+		  return $this->IdPoliza;
+		}
+
+		function setIdPoliza($IdPoliza) {
+		  $this->IdPoliza = $IdPoliza;
+		}
 		public function __construct()
 		{
 
@@ -20,11 +28,11 @@
 		public function getPolizasList($values)
 		{
 			$columns = array();
-			$columns[0] = 'idPoliza';
+			$columns[0] = 'IdPoliza';
 			$columns[1] = 'Placa';
 			$columns[2] = 'Cedula';
-			$columns[3] = 'Nombre';
-			$columns[4] = 'Apellido';
+			$columns[3] = 'Nombres';
+			$columns[4] = 'Apellidos';
             $columns[5] = 'Vencimiento';
             $columns[6] = 'Seguro';
 			$column_order = $columns[0];
@@ -37,15 +45,15 @@
 				$str = $values['search']['value'];
 				$where = "upper(Placa) like upper('%$str%')"
 					. "OR upper(Cedula) like upper('%".$str."%')"
-					. "OR upper(Nombre) like upper('%".$str."%')"
+					. "OR upper(Nombres) like upper('%".$str."%')"
 					. "OR upper(NumPoliza) like upper('%".$str."%')"
-					. "OR upper(Apellido) like upper('%".$str."%')"
+					. "OR upper(Apellidos) like upper('%".$str."%')"
 					. "OR upper(Seguro) like upper('%".$str."%')";
 			}
 
 			if(isset($values['columns'][0]['search']['value']) and $values['columns'][0]['search']['value']!='')
 			{
-				$where.=" AND idPoliza = ".$values['columns'][0]['search']['value']."";
+				$where.=" AND IdPoliza = ".$values['columns'][0]['search']['value']."";
 				//echo $values['columns'][0]['search']['value'];die;
 			}
 			if(isset($values['columns'][1]['search']['value']) and $values['columns'][1]['search']['value']!='')
@@ -70,7 +78,7 @@
 			}
 			if(isset($values['columns'][5]['search']['value']) and $values['columns'][5]['search']['value']!='')
 			{
-				$where.=" AND CONCAT(upper(Nombre),' ',upper(Apellido) ) like ('%".$values['columns'][5]['search']['value']."%')";
+				$where.=" AND CONCAT(upper(Nombres),' ',upper(Apellidos) ) like ('%".$values['columns'][5]['search']['value']."%')";
 				//echo $values['columns'][0]['search']['value'];die;
 			}
 			if(isset($values['columns'][6]['search']['value']) and $values['columns'][6]['search']['value']!='')
@@ -116,7 +124,7 @@
 			$ConnectionORM = new ConnectionORM();
 			$q = $ConnectionORM->getConnect()->Polizas
 			->select("*,DATE_FORMAT(Vencimiento, '%d/%m/%Y') as Vencimiento,DATE_FORMAT(DesdeVigencia, '%d/%m/%Y') as DesdeVigencia")
-			->where("idPoliza=?",$values['idPoliza'])->fetch();
+			->where("IdPoliza=?",$values['IdPoliza'])->fetch();
 			return $q;
 
 		}
@@ -131,145 +139,53 @@
 		function deletePolizas($id){
 			unset($values['action']);
 			$ConnectionORM = new ConnectionORM();
-			$q = $ConnectionORM->getConnect()->Polizas("idPoliza", $id)->delete();
+			$q = $ConnectionORM->getConnect()->Polizas("IdPoliza", $id)->delete();
 
 
 		}
-		function savePolizas($values){
-			$Utilitarios = new Utilitarios();
-            if(isset($values['Vencimiento']) and $values['Vencimiento']!='')
-            {
-				$values['Vencimiento'] = $Utilitarios->formatFechaInput($values['Vencimiento']);
-
-            }else
-            {
-				$values['Vencimiento']=null;
-            }
-            if(isset($values['DesdeVigencia']) and $values['DesdeVigencia']!='')
-            {
-				$values['DesdeVigencia'] = $Utilitarios->formatFechaInput($values['DesdeVigencia']);
-
-            }else
-            {
-				$values['DesdeVigencia']=null;
-            }
-			$hora = date(gmdate('Y-m-d H:i:s', time() - (4 * 3600)));
-			$array_poliza = array(
-				'Placa' => $values['Placa'],
-				'Cedula' => $values['Nacionalidad'].'-'.$values['Cedula'],
-				'Nombre' => $values['Nombre'],
-				'Apellido' => $values['Apellido'],
-				'Marca' => $values['Marca'],
-				'Modelo' => $values['Modelo'],
-				'Tipo' => $values['Tipo'],
-				'Color' => $values['Color'],
-				'Año' => $values['Año'],
-				'Serial' => $values['Serial'],
-				'Seguro' => $values['concatenado_plan'],
-				'NumPoliza' => $values['NumPoliza'],
-				'DireccionEDO' => $values['DireccionEDO'],
-				'Domicilio' => $values['Domicilio'],
-				'DireccionFiscal' => $values['DireccionFiscal'],
-				'Vencimiento' => $values['Vencimiento'],
-				'DesdeVigencia' => $values['DesdeVigencia'],
-				'date_created' => $hora,
-				'date_updated' => $hora,
-				'created_by' => 1,
-				'updated_by' => 1,
-				'EstatusPoliza' => $values['EstatusPoliza'],
-			);
-
-			$ConnectionORM = new ConnectionORM();
-			$q = $ConnectionORM->getConnect()->Polizas()->insert($array_poliza);
-			$values['idPoliza'] = $ConnectionORM->getConnect()->Polizas()->insert_id();
-			$array_poliza['idPoliza'] = $values['idPoliza'];
-			//preparo datos para el AWS
-			unset(
-				$array_poliza['date_created'],
-				$array_poliza['date_updated'],
-				$array_poliza['NumPoliza'],
-				$array_poliza['DireccionFiscal'],
-				$array_poliza['Domicilio'],
-				$array_poliza['Serial'],
-				$array_poliza['created_by'],
-				$array_poliza['updated_by']
-				);
-			//inserto en aws
-
-			$ConnectionAws= new ConnectionAws();
-			$q = $ConnectionAws->getConnect()->Polizas()->insert($array_poliza);
-
-
-			return $values;
-
+		function addPoliza($values){
+		  $array = array(
+			'IdSeguro' => $values['IdSeguro'],
+			'IdEstado' => $values['IdEstado'],
+			'IdMarca' => $values['IdMarca'],
+			'NumPoliza' => $values['NumPoliza'],
+			'Placa' => $values['Placa'],
+			'Cedula' => $values['Cedula'],
+			'Nombres' => $values['Nombres'],
+			'Apellidos' => $values['Apellidos'],
+			'Modelo' => $values['Modelo'],
+			'Clase' => $values['Clase'],
+			'Tipo' => $values['Tipo'],
+			'Color' => $values['Color'],
+			'Anio' => $values['Anio'],
+			'Serial' => $values['Serial'],
+			'Domicilio' => $values['Domicilio'],
+			'DireccionFiscal' => $values['DireccionFiscal'],
+			'DesdeVigencia' => $values['DesdeVigencia'],
+			'Vencimiento' => $values['Vencimiento'],
+			'FechaCreado' => date('Y-m-d h:i:s'),
+			'CreadoPor' => $_SESSION['IdUsuario'],
+			'Celular' => $values['Celular'],
+			'Email' => $values['Email'],
+			'Estatus' => $values['Estatus'],
+		  );
+		  $ConnectionORM = new ConnectionORM();
+		  $q = $ConnectionORM->getConnect()->Polizas()->insert($array);
+		  $this->SetIdPoliza($ConnectionORM->getConnect()->Polizas()->insert_id());
+		  return $q;
 		}
 		function updatePolizas($values){
-			$Utilitarios = new Utilitarios();
-            if(isset($values['Vencimiento']) and $values['Vencimiento']!='')
-            {
-				$values['Vencimiento'] = $Utilitarios->formatFechaInput($values['Vencimiento']);
 
-            }else
-            {
-				$values['Vencimiento']=null;
-            }
-
-            if(isset($values['DesdeVigencia']) and $values['DesdeVigencia']!='')
-            {
-				$values['DesdeVigencia'] = $Utilitarios->formatFechaInput($values['DesdeVigencia']);
-
-            }else
-            {
-				$values['DesdeVigencia']=null;
-            }
-
- 			$hora = date(gmdate('Y-m-d H:i:s', time() - (4 * 3600)));
-			$array_poliza = array(
-				'Placa' => $values['Placa'],
-				'Cedula' => $values['Nacionalidad'].'-'.$values['Cedula'],
-				'Nombre' => $values['Nombre'],
-				'Apellido' => $values['Apellido'],
-				'Marca' => $values['Marca'],
-				'Modelo' => $values['Modelo'],
-				'Tipo' => $values['Tipo'],
-				'Color' => $values['Color'],
-				'Año' => $values['Año'],
-				'Serial' => $values['Serial'],
-				'Seguro' => $values['Seguro'],
-				'NumPoliza' => $values['NumPoliza'],
-				'DireccionEDO' => $values['DireccionEDO'],
-				'Domicilio' => $values['Domicilio'],
-				'DireccionFiscal' => $values['DireccionFiscal'],
-				'Vencimiento' => $values['Vencimiento'],
-				'DesdeVigencia' => $values['DesdeVigencia'],
-				'date_updated' => $hora,
-				'created_by' => 1,
-				'updated_by' => 1,
-				'EstatusPoliza' => $values['EstatusPoliza'],
-			);
-			$idPoliza = $values['idPoliza'];
-			$ConnectionORM = new ConnectionORM();
-			$q = $ConnectionORM->getConnect()->Polizas("idPoliza", $idPoliza)->update($array_poliza);
-
-			//preparo datos para el AWS
-			unset(
-				$array_poliza['date_created'],
-				$array_poliza['date_updated'],
-				$array_poliza['NumPoliza'],
-				$array_poliza['DireccionFiscal'],
-				$array_poliza['Domicilio'],
-				$array_poliza['Serial'],
-				$array_poliza['created_by'],
-				$array_poliza['updated_by']
-				);
-			//actualizo en aws
-			$ConnectionAws= new ConnectionAws();
-			$q = $ConnectionAws->getConnect()->Polizas("idPoliza", $idPoliza)->update($array_poliza);
-
-
-
-
-
+			$array = array();
+			if(count($values)>0){
+			  foreach($values as $key => $val){
+				if(strlen($val)>0){
+				  $array[$key] = $val;
+				}
+			  }
+			}
+			$ConnectionORM= new ConnectionORM();
+			$q = $ConnectionORM->getConnect()->Polizas("IdPoliza", $values['IdPoliza'])->update($array);
 			return $q;
 
 		}
@@ -278,7 +194,7 @@
 			$ConnectionORM = new ConnectionORM();
 			$q = $ConnectionORM->getConnect()->Polizas
 			->select("count(*) as cuenta")
-			->where("users_Polizas_company.id_Polizas=?",$values['idPoliza'])->fetch();
+			->where("users_Polizas_company.id_Polizas=?",$values['IdPoliza'])->fetch();
 			return $q;
 
 		}
@@ -307,25 +223,25 @@
 						}
 
 
-						if(!isset($q['idPoliza']) or $q['idPoliza'] =='' or $q['idPoliza'] == null)//si no existe la poliza
+						if(!isset($q['IdPoliza']) or $q['IdPoliza'] =='' or $q['IdPoliza'] == null)//si no existe la poliza
 						{
 							//print_r($arr).$i."<br>";
 							//echo "aqui";die;
 							//inserto
 							$insert_orm = $ConnectionORM->getConnect()->Polizas()->insert($arr);
-							@$arr['idPoliza'] = $ConnectionORM->getConnect()->Polizas()->insert_id();//obtengo el idPoliza nuevo
+							@$arr['IdPoliza'] = $ConnectionORM->getConnect()->Polizas()->insert_id();//obtengo el IdPoliza nuevo
 							//quito campos que no estan en el aws
 							unset($arr['NumPoliza'],$arr['Domicilio'],$arr['Nacionalidad']);
 							$insert_aws = $ConnectionAws->getConnect()->Polizas()->insert($arr);
 						}
-						if(isset($q['idPoliza']) and $q['idPoliza'] !='' and $q['idPoliza'] != null)//si existe la poliza
+						if(isset($q['IdPoliza']) and $q['IdPoliza'] !='' and $q['IdPoliza'] != null)//si existe la poliza
 						{
 							//actualizo
-							$arr['idPoliza'] = $q['idPoliza'];//obtengo el idPoliza que se encuentra almacenado
-							$update_orm = $ConnectionORM->getConnect()->Polizas("idPoliza", $q['idPoliza'])->update($arr);
+							$arr['IdPoliza'] = $q['IdPoliza'];//obtengo el IdPoliza que se encuentra almacenado
+							$update_orm = $ConnectionORM->getConnect()->Polizas("IdPoliza", $q['IdPoliza'])->update($arr);
 							//quito campos que no estan en el aws
 							unset($arr['NumPoliza'],$arr['Domicilio'],$arr['Nacionalidad']);
-							$update_aws = $ConnectionAws->getConnect()->Polizas("idPoliza", $q['idPoliza'])->update($arr);
+							$update_aws = $ConnectionAws->getConnect()->Polizas("IdPoliza", $q['IdPoliza'])->update($arr);
 
 						}
 						//$ConnectionORM->transaction = "COMMIT";
@@ -336,11 +252,6 @@
 					//echo "termino";die;
 					return true;
 
-		}
-		public function updatePoliza($array){
-			//print_r($array);die;
-			$ConnectionORM = new ConnectionORM();
-			$q = $ConnectionORM->getConnect()->Polizas()->insert($array);
 		}
 		public function getPolizasByDocumento($values){
 
@@ -355,13 +266,21 @@
 		}
 		public function getLoginPoliza($values){
 
-
+			if(isset($values['IdPoliza']) and $values['IdPoliza']!=''){
+			$ConnectionORM = new ConnectionORM();
+			$q = $ConnectionORM->getConnect()->Polizas
+			->select("*")
+			->where("IdPoliza=?",strtoupper($values['IdPoliza']))
+			->fetch();	
+			}else{
 			$ConnectionORM = new ConnectionORM();
 			$q = $ConnectionORM->getConnect()->Polizas
 			->select("*")
 			->where("upper(Cedula)=?",strtoupper($values['Cedula']))
 			->and('upper(Placa)=?',strtoupper($values['Placa']))
-      ->fetch();
+			->fetch();
+			}
+
 			return $q;
 
 		}
