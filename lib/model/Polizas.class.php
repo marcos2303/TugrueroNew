@@ -155,7 +155,7 @@
 			'Apellidos' => $values['Apellidos'],
 			'Modelo' => $values['Modelo'],
 			'Clase' => $values['Clase'],
-			'Tipo' => $values['Tipo'],
+			'IdVehiculoTipo' => $values['IdVehiculoTipo'],
 			'Color' => $values['Color'],
 			'Anio' => $values['Anio'],
 			'Serial' => $values['Serial'],

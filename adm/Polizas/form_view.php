@@ -1,5 +1,3 @@
-<?php $Seguros = new Seguros(); $list_seguros = $Seguros->getSegurosListSelect()?>
-<?php $Estados = new Estados(); $list_estados = $Estados->getEstadosListSelect()?>
 <?php include('../../view_header_admin.php')?>
 <?php include('../menu.php')?>
 <?php 
@@ -169,8 +167,10 @@
                         <div class="col-sm-4">
                             <label for="">Tipo</label>
                             <div class="input-group">
-                                    <input autocomplete="off" type="text" id="Tipo" class="form-control input-sm" name="Tipo" maxlength="40"  value="<?php if(isset($values['Tipo'])) echo $values['Tipo']?>">
-                                    <span class="input-group-addon" id="basic-addon2">(*)</span>
+								<select name="IdVehiculoTipo" class="form-control input-sm DatosPoliza" id="IdVehiculoTipo">
+									
+								</select>  
+								<span class="input-group-addon" id="basic-addon2">(*)</span>
                             </div> 
                         </div>
                         <div class="col-sm-4" id="SeriallContenedor">
@@ -207,25 +207,9 @@
 		<a class="btn btn-default"  href="<?php echo full_url."/adm/Polizas/index.php"?>"><i class="fa fa-arrow-left  fa-pull-left fa-border"></i> Regresar</a>
         <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Aceptar</button>
     <?php if(isset($values['msg']) and $values['msg']!=''):?>
-		
-		<script>
-			$(document).ready(function(){
-			$('.modal-body').html('<div class="alert alert-success" role="alert"><?php echo $values['msg'];?></div>');
-			$('#myModal').modal('show');	
-			});
 
-		
-		</script>
         
     <?php endif;?>
 	</form>
 <?php include('../../view_footer_admin.php')?>
 <script src="<?php echo full_url;?>/web/js/Polizas.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-
-		
-
-		
-	});
-</script>

@@ -1,5 +1,9 @@
 $(document).ready(function(){
-    
+		listaEstados();
+		listaMarcas();
+                listaSeguros();
+                listaVehiculosTipos();
+		listaAnios();    
 		//datos personales
 		$('#Letra').attr('required', 'required');
 		$('#Cedula').attr('required', 'required');
@@ -18,12 +22,6 @@ $(document).ready(function(){
     
     
 	var respuesta = {};
-	if($('#action').val()=='add'){
-		listaEstados();
-		listaMarcas();
-                listaSeguros();
-		listaAnios();
-	}
 	if($('#action').val()=='update'){
 		var parametros = {
 			IdPoliza : $('#IdPoliza').val()
@@ -34,6 +32,7 @@ $(document).ready(function(){
 		if(datos.IdMarca != '') listaMarcas(datos.IdMarca);
                 if(datos.IdSeguro != '') listaSeguros(datos.IdSeguro);
 		if(datos.Anio != '') listaAnios(datos.Anio);
+                if(datos.IdVehiculoTipo != '') listaAnios(datos.IdVehiculoTipo);
 	}
         
 	$('#DataForm').submit(function(event){

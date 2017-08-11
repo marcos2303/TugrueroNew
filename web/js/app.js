@@ -23,9 +23,7 @@ function listaProveedoresTipo(IdProveedorTipo){
   });
 }
 function listaEstados(IdEstado){
-  //$('#IdEstado').find('option').remove().end().append('<option value="">Seleccione...</option>');
   $('#IdEstado').find('option').remove().end();
-
   var selected = "";
   var jqxhr = $.get( link_servidor + "/servicios/adminapp/listaEstados.php", function(datos) {
   })
@@ -248,6 +246,39 @@ function listaCondicionLugar(IdCondicionLugar){
           }
         }
         $("#IdCondicionLugar").append('<option value="'+ item.IdCondicionLugar +'" '+selected+'>' + item.Nombre + '</option>');
+      });
+    },
+    error: function(jqXHR, textStatus) {
+      if (textStatus !== "abort") {
+        console.log("error");
+      }
+    }
+
+  }).responseJSON;
+}
+function listaVehiculosTipos(IdVehiculoTipo){
+  $('#IdVehiculoTipo').find('option').remove().end();
+  var selected = "";
+  var parametros = {
+
+  };
+  var jqxhr = $.ajax({
+    url:  link_servidor + "/servicios/adminapp/listaVehiculosTipos.php",
+    type: "POST",
+    data: JSON.stringify(parametros),
+    dataType: "json",
+    timeout: 20000,
+    global: false,
+    async:false,
+    success: function(datos) {
+      $.each(datos.data, function(i, item) {
+        selected = "";
+        if(typeof(IdVehiculoTipo) != 'undefined'){
+          if(parseInt(IdVehiculoTipo) === parseInt(item.IdVehiculoTipo)){
+            selected = 'selected = "selected"';
+          }
+        }
+        $("#IdVehiculoTipo").append('<option value="'+ item.IdVehiculoTipo +'" '+selected+'>' + item.Nombre + '</option>');
       });
     },
     error: function(jqXHR, textStatus) {
