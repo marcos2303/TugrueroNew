@@ -110,7 +110,7 @@
 		public function getUltimaConexion($values){
 			$ConnectionORM = new ConnectionORM();
 			$q = $ConnectionORM->getConnect()->Conexiones
-			->select("*")
+			->select("DATE_FORMAT(Fecha, '%d/%m/%Y %H:%i:%s') as Fecha")
 			->where("IdConexionTipo=?",$values['IdConexionTipo'])
             ->and("IdUsuario=?",$values["IdUsuario"])
             ->and("IdAplicacion=?",$values["IdAplicacion"])
@@ -124,7 +124,8 @@
 
                 'IdConexionTipo' => $values['IdConexionTipo'],
                 'IdAplicacion' => $values['IdAplicacion'],
-                'IdUsuario' => $values['IdUsuario']
+                'IdUsuario' => $values['IdUsuario'],
+                'Fecha' => date('Y-m-d h:i:s')
             );
 
             $ConnectionORM = new ConnectionORM();

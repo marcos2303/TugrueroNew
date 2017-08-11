@@ -70,13 +70,7 @@ $(document).ready(function() {
             { "data": "Vencimiento" },
             { "data": "actions" }
         ],"rowCallback": function( row, data, index ) {
-            //alert(data.Status);
-            /*if ( data.idSolicitud == "10" ) {
-				$(row).css("background-color","red");
-				$("td:eq(3)", row).css("background-color","red");
-			 
-            }*/
-            if ( data.EstatusPoliza == "Vencido" ) {
+            if ( data.Estatus == "2" ||  data.Estatus == "0") {
 				$(row).css("background-color","red");
             }
         },

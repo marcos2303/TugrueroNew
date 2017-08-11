@@ -1,38 +1,31 @@
 $(document).ready(function(){
+    
+    
+	var respuesta = {};
+	if($('#action').val()=='add'){
+                $('input:radio[name="Estatus"][value="1"]').attr('checked',true);
 		listaEstados();
 		listaMarcas();
                 listaSeguros();
                 listaVehiculosTipos();
 		listaAnios();    
-		//datos personales
-		$('#Letra').attr('required', 'required');
-		$('#Cedula').attr('required', 'required');
-		$('#Nombres').attr('required', 'required');	
-		$('#Apellidos').attr('required', 'required');	
-		//datos poliza
-		$('#IdSeguro').attr('required', 'required');	
-		$('#IdEstado').attr('required', 'required');	
-		//datos vehiculo
-		$('#Placa').attr('required', 'required');
-		$('#Marca').attr('required', 'required');
-		$('#Modelo').attr('required', 'required');	
-		$('#Año').attr('required', 'required');	
-		$('#Color').attr('required', 'required');	
-		$('#Tipo').attr('required', 'required');	    
-    
-    
-	var respuesta = {};
+	}
 	if($('#action').val()=='update'){
 		var parametros = {
 			IdPoliza : $('#IdPoliza').val()
 		};
 		var datos = AjaxCall("servicios/adminapp/datosPoliza.php", parametros, CargaSuccess, MensajeError);
+                if(datos.Estatus){
+                    $('input:radio[name="Estatus"][value="'+ datos.Estatus +'"]').attr('checked',true);
+                    $("#Estatus").val([datos.Estatus]);                    
+                }
+
 		convertiraAInputs(datos);
 		if(datos.IdEstado != '') listaEstados(datos.IdEstado);
 		if(datos.IdMarca != '') listaMarcas(datos.IdMarca);
                 if(datos.IdSeguro != '') listaSeguros(datos.IdSeguro);
 		if(datos.Anio != '') listaAnios(datos.Anio);
-                if(datos.IdVehiculoTipo != '') listaAnios(datos.IdVehiculoTipo);
+                if(datos.IdVehiculoTipo != '') listaVehiculosTipos(datos.IdVehiculoTipo);
 	}
         
 	$('#DataForm').submit(function(event){
@@ -60,6 +53,7 @@ $(document).ready(function(){
 
 		var DataForm = $('#DataForm .DatosPoliza').serializeArray();
 		var parametros = convertiraAJson(DataForm);
+                parametros.Estatus = $("input[name='Estatus']:checked").val()
 		if($("#IdPoliza").val()==''){
 			var respuesta = AjaxCall("servicios/adminapp/agregarPoliza.php", parametros, agregarSuccess, MensajeError);
 			$("#IdPoliza").val(respuesta.IdPoliza);

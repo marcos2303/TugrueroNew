@@ -54,23 +54,3 @@ define("image_url",full_url."/web/images/");
 	include $_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/".$nombre_clase . '.class.php';
 
 });
-/*include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/notorm-master/NotORM.php");//se debe incluir una sola vez en todo el cms
-include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/ConnectionORM.class.php");
-include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Usuarios.class.php");
-include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Servicios.class.php");
-include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/ServiciosClientes.class.php");
-include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/ServiciosPrecios.class.php");
-include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/ServiciosGruas.class.php");
-include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Baremo.class.php");
-include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Averias.class.php");
-include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/CondicionLugar.class.php");
-include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Polizas.class.php");
-include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Gruas.class.php");
-include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Proveedores.class.php");
-include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/ProveedoresTipos.class.php");
-include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Estados.class.php");
-include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/GruasTipos.class.php");
-include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Marcas.class.php");
-include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Seguros.class.php");
-include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/Push.class.php");
-include($_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/ServiciosEstatus.class.php");*/

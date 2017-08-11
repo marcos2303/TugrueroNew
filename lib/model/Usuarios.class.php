@@ -12,7 +12,13 @@
 	 * @author marcos
 	 */
 	class Usuarios {
-		
+		function getIdUsuario() {
+		  return $this->IdUsuario;
+		}
+
+		function setIdUsuario($IdUsuario) {
+		  $this->IdUsuario = $IdUsuario;
+		}
 		public function __construct() 
 		{
 			
@@ -52,6 +58,39 @@
 			->where("users.id_user=?",$values['id_user'])->fetch();
 			return $q; 				
 			
+		}
+		public function getDatosUsuario($values){
+			$ConnectionORM = new ConnectionORM();
+			$q = $ConnectionORM->getConnect()->Usuarios
+			->select("*")
+			->where("IdUsuario=?",$values['IdUsuario'])->fetch();
+			return $q;
+
+		}
+		function addUsuario($values){
+		  $array = array(
+			'Nombres' => $values['Nombres'],
+			'Apellidos' => $values['Apellidos'],
+		  );
+		  $ConnectionORM = new ConnectionORM();
+		  $q = $ConnectionORM->getConnect()->Usuarios()->insert($array);
+		  $this->SetIdUsuario($ConnectionORM->getConnect()->Usuarios()->insert_id());
+		  return $q;
+		}
+		function updateUsuario($values){
+
+			$array = array();
+			if(count($values)>0){
+			  foreach($values as $key => $val){
+				if(strlen($val)>0){
+				  $array[$key] = $val;
+				}
+			  }
+			}
+			$ConnectionORM= new ConnectionORM();
+			$q = $ConnectionORM->getConnect()->Usuarios("IdUsuario", $values['IdUsuario'])->update($array);
+			return $q;
+
 		}
 		
 

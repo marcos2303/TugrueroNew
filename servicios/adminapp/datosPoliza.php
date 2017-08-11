@@ -35,10 +35,13 @@ if($datos_poliza){
 				"NumPoliza"=> $datos_poliza['NumPoliza'],
 				"IdEstado"=> $datos_poliza['IdEstado'],
 				"Celular"=> $datos_poliza['Celular'],
+                "Email"=> $datos_poliza['Email'],
 				"DesdeVigencia"=> $datos_poliza['DesdeVigencia'],
 				"Vencimiento"=> $datos_poliza['Vencimiento'],
 				"Domicilio"=> $datos_poliza['Domicilio'],
-				"IdEstatus"=> $datos_poliza['IdEstatus'],
+                "DireccionFiscal"=> $datos_poliza['DireccionFiscal'],
+				"Estatus"=> $datos_poliza['Estatus'],
+                "IdVehiculoTipo"=> $datos_poliza['IdVehiculoTipo'],
 
 				);
 }else{

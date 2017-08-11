@@ -256,6 +256,41 @@ function listaCondicionLugar(IdCondicionLugar){
 
   }).responseJSON;
 }
+
+function listaAnios(Anio){
+  $('#Anio').find('option').remove().end().append('<option value="">Seleccione...</option>');
+  var selected = "";
+  var fecha_actual = new Date();
+  var anio = fecha_actual.getFullYear();
+  var anio_inicio = (parseInt(anio) - 50);
+  //console.log(anio);
+  for(i = anio; i>=anio_inicio;i--){
+    selected = "";
+    if(typeof(Anio) != 'undefined'){
+      if(parseInt(Anio) === parseInt(i)){
+        selected = 'selected = "selected"';
+      }
+    }
+    $("#Anio").append('<option value="'+ i +'" '+selected+'>' + i + '</option>');
+  }
+
+  /*var jqxhr = $.get( link_servidor + "/servicios/adminapp/listaMarcas.php", function(datos) {
+  })
+  .done(function(datos) {
+    $.each(datos.data, function(i, item) {
+      selected = "";
+      if(typeof(IdMarca) != 'undefined'){
+        if(parseInt(IdMarca) === parseInt(item.IdMarca)){
+          selected = 'selected = "selected"';
+        }
+      }
+      $("#IdMarca").append('<option value="'+ item.IdMarca +'" '+selected+'>' + item.Nombre + '</option>');
+    });
+  })
+  .fail(function() {
+    alert( "error" );
+  });*/
+}
 function listaVehiculosTipos(IdVehiculoTipo){
   $('#IdVehiculoTipo').find('option').remove().end();
   var selected = "";
@@ -288,41 +323,6 @@ function listaVehiculosTipos(IdVehiculoTipo){
     }
 
   }).responseJSON;
-}
-function listaAnios(Anio){
-  $('#Anio').find('option').remove().end().append('<option value="">Seleccione...</option>');
-  var selected = "";
-
-  var fecha_actual = new Date();
-  var anio = fecha_actual.getFullYear();
-  var anio_inicio = (parseInt(anio) - 50);
-  //console.log(anio);
-  for(i = anio; i>=anio_inicio;i--){
-    selected = "";
-    if(typeof(Anio) != 'undefined'){
-      if(parseInt(Anio) === parseInt(i)){
-        selected = 'selected = "selected"';
-      }
-    }
-    $("#Anio").append('<option value="'+ i +'" '+selected+'>' + i + '</option>');
-  }
-
-  /*var jqxhr = $.get( link_servidor + "/servicios/adminapp/listaMarcas.php", function(datos) {
-  })
-  .done(function(datos) {
-    $.each(datos.data, function(i, item) {
-      selected = "";
-      if(typeof(IdMarca) != 'undefined'){
-        if(parseInt(IdMarca) === parseInt(item.IdMarca)){
-          selected = 'selected = "selected"';
-        }
-      }
-      $("#IdMarca").append('<option value="'+ item.IdMarca +'" '+selected+'>' + item.Nombre + '</option>');
-    });
-  })
-  .fail(function() {
-    alert( "error" );
-  });*/
 }
 function convertiraAJson(DataForm){
   var parametros = {};
