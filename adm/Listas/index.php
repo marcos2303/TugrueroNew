@@ -41,6 +41,12 @@ switch ($action) {
 	case "lista_servicios_corta":
 	executeListaServiciosCorta($values);
 	break;
+	case "lista_usuarios":
+	executeListaUsuarios($values);
+	break;
+	case "lista_usuarios_json":
+	executeListaUsuariosJson($values);
+	break;
 	case "detalle_servicio":
 	executeDetalleServicio($values);
 	break;
@@ -620,4 +626,58 @@ function executeDetalleServicioJson($values)
 
 	}
 	echo json_encode($response,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+}
+function executeListaUsuarios($values){
+	require("lista_usuarios.php");
+}
+function executeListaUsuariosJson($values)
+{
+	$Usuarios = new Usuarios();
+	$list_json = $Usuarios ->getList($values);
+	$list_json_cuenta = $Usuarios ->getCountList($values);
+	$array_json = array();
+	$array_json['recordsTotal'] = $list_json_cuenta;
+	$array_json['recordsFiltered'] = $list_json_cuenta;
+	if($list_json_cuenta['cuenta']>0)
+	{
+		foreach ($list_json as $list)
+		{
+
+			$IdServicio = $list['IdServicio'];
+			$array_json['data'][] = array(
+				"Login" =>  $list['CodigoServicio'],
+				"Nombres" =>  $list['NombreAplicacion'],
+				"Apellidos" =>  $list['NombreServicioTipo'],
+				"Celular" =>  $list['NombreEstatus'],
+				"Email" =>  $list['Agendado'],
+				"Estatus" =>  $list['FechaAgendado'],
+                "Perfil" =>  $list['Perfil'],
+				"actions" => '
+				<div class="btn-group">
+				<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<i class="fa fa-gear"></i> <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu dropdown-menu-right">
+				<li><a href="#" onclick="DetalleServicio('.$list['IdUsuario'].')"> Detalle servicio</a></li>
+				</ul>
+				</div>'
+			);
+		}
+	}else{
+		$array_json['recordsTotal'] = 0;
+		$array_json['recordsFiltered'] = 0;
+		$array_json['data'][] = array(
+				"Login" =>  null,
+				"Nombres" =>  null,
+				"Apellidos" =>  null,
+				"Celular" =>  null,
+				"Email" =>  null,
+				"Estatus" => null,
+                "Perfil" =>  null,
+				"actions" => null
+		);
+	}
+
+	echo json_encode($array_json);die;
+
 }
