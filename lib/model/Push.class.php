@@ -1,7 +1,7 @@
 <?php
 class Push{
 
-  function sendGoogleCloudMessage( $ids,$notification )
+  function sendGoogleCloudMessage( $values,$ids,$notification )
   {
 
       //------------------------------
@@ -26,7 +26,8 @@ class Push{
 
       $post = array(
                       'registration_ids'  => $ids,
-                      'notification' => $notification
+                      'notification' => $notification,
+					  'data' => array("IdServicio" => $values['IdServicio'])
 
                       );
 

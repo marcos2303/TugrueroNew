@@ -344,7 +344,7 @@ function AjaxCall(URL, parametros, exito, fallo, extra) {
   var data;
 
   var jqxhr = $.ajax({
-    url:  "http://localhost/TugrueroNew/" + URL,
+    url:  link_servidor + URL,
     type: "POST",
     data: JSON.stringify(parametros),
     dataType: "json",

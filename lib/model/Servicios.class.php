@@ -847,7 +847,7 @@ class Servicios {
 			foreach ($gruas_disponibles as $grua) {
 				$tokens[] = $grua["Token"];
 			}
-			$resultado_envio = $Push->sendGoogleCloudMessage( $tokens,$values["notification"] );
+			$resultado_envio = $Push->sendGoogleCloudMessage( $values,$tokens,$values["notification"] );
 			return $resultado_envio;
 	}
 

@@ -5,13 +5,13 @@ $values = json_decode($values, true);
 include('../../autoload_servicios.php');
 /************* Clases a utilizar *******************/
 
-$ServiciosGruas = new ServiciosGruas();
+$ServiciosClientes = new ServiciosClientes();
 /****************Seteo y comprobacion de valores*******************/
 
 $response = array("Error"=>0,"MensajeError"=>"","MensajeSuccess"=> '');
 /*************************Actualizamos el Servicio************************************/
 
-if($ServiciosClientes->updateServiciosGruas($values)){
+if($ServiciosClientes->updateServiciosClientes($values)){
 $response = array("Error"=>0,"MensajeError"=>"","MensajeSuccess"=> 'Ok',"IdServicio"=>$values['IdServicio']);
 
 }
