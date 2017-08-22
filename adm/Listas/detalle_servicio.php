@@ -1,14 +1,14 @@
 <h1 class="text-center">Servicio</h1>
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingOne">
+<div class="panel-group" id="accordion_servicios" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-tugruero">
+    <div class="panel-heading" role="tab" id="headingServiciosOne">
       <h4 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <a role="button" data-toggle="collapse" data-parent="#accordion_servicios" href="#collapseServiciosOne" aria-expanded="true" aria-controls="collapseServiciosOne">
           Servicio
         </a>
       </h4>
     </div>
-    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+    <div id="collapseServiciosOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingServiciosOne">
       <div class="panel-body">
         <div class="row">
           <div class="col-sm-2">
@@ -53,15 +53,15 @@
       </div>
     </div>
   </div>
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingTwo">
+  <div class="panel panel-tugruero">
+    <div class="panel-heading" role="tab" id="headingServiciosTwo">
       <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_servicios" href="#collapseServiciosTwo" aria-expanded="false" aria-controls="collapseServiciosTwo">
           Cliente
         </a>
       </h4>
     </div>
-    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+    <div id="collapseServiciosTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingServiciosTwo">
       <div class="panel-body">
         <div class="row">
           <div class="col-sm-2">
@@ -86,15 +86,15 @@
       </div>
     </div>
   </div>
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingThree">
+  <div class="panel panel-tugruero">
+    <div class="panel-heading" role="tab" id="headingServiciosThree">
       <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_servicios" href="#collapseServiciosThree" aria-expanded="false" aria-controls="collapseServiciosThree">
           Gruero
         </a>
       </h4>
     </div>
-    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+    <div id="collapseServiciosThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingServiciosThree">
       <div class="panel-body">
         <div class="row">
           <div class="col-sm-2">
@@ -139,15 +139,15 @@
       </div>
     </div>
   </div>
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingFour">
+  <div class="panel panel-tugruero">
+    <div class="panel-heading" role="tab" id="headingServiciosFour">
       <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_servicios" href="#collapseServiciosFour" aria-expanded="false" aria-controls="collapseServiciosFour">
           Precios
         </a>
       </h4>
     </div>
-    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+    <div id="collapseServiciosFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingServiciosFour">
       <div class="panel-body">
         <div class="row">
           <div class="col-sm-2">

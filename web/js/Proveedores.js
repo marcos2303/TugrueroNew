@@ -289,12 +289,3 @@ function ListarConexionesGrua(IdProveedor,IdUsuario){
 			}
 		});
 }
-function DetalleServicio(IdServicio){
-		$.ajax({
-			url: link_servidor + "adm/Listas/index.php?action=detalle_servicio&IdServicio="+ IdServicio,
-			success: function(html){
-				$('#popupListas .modal-body').html(html);
-				$('#popupListas').modal('show');
-			}
-		});
-}

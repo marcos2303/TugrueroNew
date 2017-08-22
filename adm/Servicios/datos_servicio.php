@@ -34,13 +34,16 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-12 alert alert-tugruero text-center"><label class="">Origen</label></div>
+            <hr>
+            <div class="col-sm-12 text-center"><label class="">Origen</label></div>
         </div>
         <div class="row">
           <div class="col-sm-4">
             <div class="form-group">
               <label> Estado</label>
-              <select class="form-control SaveAutomaticoServicio input-sm " id="IdEstadoOrigen" name="IdEstadoOrigen" style="width: 100%;"></select>
+              <select class="form-control SaveAutomaticoServicio input-sm " id="IdEstadoOrigen" name="IdEstadoOrigen" style="width: 100%;">
+                  <option value="0">Seleccione...</option>
+              </select>
             </div>
           </div>
           <div class="col-sm-4">
@@ -59,13 +62,16 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-12 alert alert-tugruero text-center"><label class="">Destino</label></div>
+          <hr>
+          <div class="col-sm-12 text-center"><label class="">Destino</label></div>
         </div>
         <div class="row">
           <div class="col-sm-4">
             <div class="form-group">
               <label> Estado</label>
-              <select class="form-control SaveAutomaticoServicio input-sm " id="IdEstadoDestino" name="IdEstadoDestino" style="width: 100%;"></select>
+              <select class="form-control SaveAutomaticoServicio input-sm " id="IdEstadoDestino" name="IdEstadoDestino" style="width: 100%;">
+                  <option value="0">Seleccione...</option>              
+              </select>
             </div>
           </div>
           <div class="col-sm-4">
@@ -92,13 +98,16 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-12 alert alert-tugruero text-center"><label class="">¿Qué ocurre?</label></div>
+          <hr>
+          <div class="col-sm-12"><label class="">¿Qué ocurre?</label></div>
         </div>
         <div class="row">
           <div class="col-sm-4">
             <div class="form-group">
               <label> Averia</label>
-              <select class="form-control SaveAutomaticoServicio input-sm " id="IdAveria" name="IdAveria" style="width: 100%;"></select>
+              <select class="form-control SaveAutomaticoServicio input-sm " id="IdAveria" name="IdAveria" style="width: 100%;">
+                  <option value="0">Seleccione...</option>                  
+              </select>
             </div>
           </div>
           <div class="col-sm-4" class="Averias">
@@ -116,13 +125,16 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-12 alert alert-tugruero text-center"><label class="">Detalles importantes</label></div>
+          <hr>
+          <div class="col-sm-12"><label class="">Detalles importantes</label></div>
         </div>
         <div class="row">
           <div class="col-sm-8">
             <div class="form-group">
               <label> Condición lugar</label>
-              <select class="form-control SaveAutomaticoServicio input-sm " id="IdCondicionLugar" name="IdCondicionLugar" style="width: 100%;"></select>
+              <select class="form-control SaveAutomaticoServicio input-sm " id="IdCondicionLugar" name="IdCondicionLugar" style="width: 100%;">
+                  <option value="0">Seleccione...</option>                  
+              </select>
             </div>
           </div>
           <div class="col-sm-4">

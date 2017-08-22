@@ -9,7 +9,6 @@ $Servicios = new Servicios();
 /****************Seteo y comprobacion de valores*******************/
 $response = array("Error"=>0,"Actualizado"=>"0","MensajeError"=>"","MensajeSuccess"=> '');
 /*************************Actualizamos el Servicio************************************/
-
 if($Servicios->updateServicios($values)){
 
   $response = array("Error"=>0,

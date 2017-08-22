@@ -15,7 +15,7 @@
 				$q = $ConnectionORM->getConnect()->Averias
 				->select("*")
 	      ->where("Estatus=?",1)
-				->and("IdAveriaPadre=?",$values['IdAveriaPadre'])
+				->and("IdAveriaPadre=?",$values['IdAveriaPadre'])                
 				->order('Nombre');
 			}else{
 				$q = $ConnectionORM->getConnect()->Averias

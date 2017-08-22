@@ -107,9 +107,9 @@ function executeListaGruasJson($values)
 					</button>
 					<ul class="dropdown-menu dropdown-menu-right">
 					<li><a href="#" onclick="editarDatatable('."'".$list['Placa']."'".')"> Editar</a></li>
-					<li><a href="#" onclick="ListarServiciosGrua('.$IdProveedor.',1)"> Historial de servicios</a></li>
+					<li><a href="#" onclick="ListarServiciosGrua('.$IdProveedor.','.$IdGrua.')"> Historial de servicios</a></li>
 					<li><a href="#" onclick="ListarConexionesGrua('.$IdProveedor.','.$IdGrua.')"> Conexiones</a></li>
-					<li><a href="#"> Reiniciar dispositivo</a></li>
+					<li><a href="#"  onclick="ReiniciarDatosDispositivo('.$IdGrua.')"> Reiniciar dispositivo</a></li>
 					</ul>
 					</div>';
 				}
@@ -194,6 +194,11 @@ function executeListaConexionesJson($values){
     echo json_encode($array_json);die;
 }
 function executeListaServiciosCorta($values){
+	$Servicios = new Servicios();
+    $values['order'][0]['column'] = 0;
+    $values["filtro_status"] = 1;
+    $values['order'][0]['dir'] = "desc";
+	$servicios_list = $Servicios ->getList($values);
 	require("lista_servicios_corta.php");
 }
 function executeListaServiciosAdministracion($values){

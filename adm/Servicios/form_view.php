@@ -22,7 +22,7 @@
 			<div id="map-canvas"></div>
 		</div>
     </aside>
-    <div class="content-wrapper bg-body-tugruero">
+    <div class="content-wrapper">
       <div class="text-right" style="margin:5px;">
         <a href="#" class="btn btn-tugruero" data-toggle="push-menu" role="button"><i class="fa fa-map-marker"></i> Mapa</a>
         <a class="btn btn-tugruero"  href="<?php echo full_url."/adm/Servicios/index.php";?>"><i class="fa fa-arrow-circle-left"></i> Regresar</a>

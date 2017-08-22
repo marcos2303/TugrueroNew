@@ -186,9 +186,15 @@ class Servicios {
 		$order = 'asc';
 		$limit = $values['length'];
 		$offset = $values['start'];
+        if($limit == ""){
+            $limit = 100;
+        }
+        if($offset == ""){
+            $offset = 0;
+        }
 
 		if(isset($values['IdProveedor']) and $values['IdProveedor']!=''){
-      $where.=" AND p.IdProveedor = ".$values['IdProveedor']."";
+      $where.=" AND sg.IdProveedor = ".$values['IdProveedor']."";
     }
     if(isset($values['IdGrua']) and $values['IdGrua']!=''){
       $where.=" AND sg.IdGrua = ".$values['IdGrua']."";
@@ -198,6 +204,9 @@ class Servicios {
     }
 		if(isset($values['Cedula']) and $values['Cedula']!=''){
       $where.=" AND sc.Cedula = '".$values['Cedula']."'";
+    }
+    if(isset($values['filtro_status']) and $values['filtro_status']!=''){
+        $where.=" AND Servicios.IdEstatus <> 1";
     }
 		if(isset($values['columns'][0]['search']['value']) and $values['columns'][0]['search']['value']!='')
 		{
@@ -506,7 +515,7 @@ class Servicios {
 	{
 		$where = '1 = 1';
 		if(isset($values['IdProveedor']) and $values['IdProveedor']!=''){
-      $where.=" AND p.IdProveedor = ".$values['IdProveedor']."";
+      $where.=" AND sg.IdProveedor = ".$values['IdProveedor']."";
     }
     if(isset($values['IdGrua']) and $values['IdGrua']!=''){
       $where.=" AND sg.IdGrua = ".$values['IdGrua']."";

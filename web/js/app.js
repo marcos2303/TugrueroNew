@@ -43,8 +43,8 @@ function listaEstados(IdEstado){
   });
 }
 function listaEstadosOrigen(IdEstado){
-  //$('#IdEstadoOrigen').find('option').remove().end().append('<option value="">Seleccione...</option>');
-  $('#IdEstadoOrigen').find('option').remove().end();
+  $('#IdEstadoOrigen').find('option').remove().end().append('<option value="0">Seleccione...</option>');
+  //$('#IdEstadoOrigen').find('option').remove().end();
 
   var selected = "";
   var jqxhr = $.get( link_servidor + "/servicios/adminapp/listaEstados.php", function(datos) {
@@ -65,8 +65,8 @@ function listaEstadosOrigen(IdEstado){
   });
 }
 function listaEstadosDestino(IdEstado){
-  //$('#IdEstadoDestino').find('option').remove().end().append('<option value="">Seleccione...</option>');
-  $('#IdEstadoDestino').find('option').remove().end();
+  $('#IdEstadoDestino').find('option').remove().end().append('<option value="0">Seleccione...</option>');
+  //$('#IdEstadoDestino').find('option').remove().end();
   var selected = "";
   var jqxhr = $.get( link_servidor + "/servicios/adminapp/listaEstados.php", function(datos) {
   })
@@ -86,8 +86,8 @@ function listaEstadosDestino(IdEstado){
   });
 }
 function listaGruasTipos(IdGruaTipo){
-  //$('#IdGruaTipo').find('option').remove().end().append('<option value="">Seleccione...</option>');
-  $('#IdGruaTipo').find('option').remove().end();
+  $('#IdGruaTipo').find('option').remove().end().append('<option value="0">Seleccione...</option>');
+  //$('#IdGruaTipo').find('option').remove().end();
 
   var selected = "";
   var jqxhr = $.get( link_servidor + "/servicios/adminapp/listaGruasTipos.php", function(datos) {
@@ -108,8 +108,8 @@ function listaGruasTipos(IdGruaTipo){
   });
 }
 function listaMarcas(IdMarca){
-  //$('#IdMarca').find('option').remove().end().append('<option value="">Seleccione...</option>');
-  $('#IdMarca').find('option').remove().end();
+  $('#IdMarca').find('option').remove().end().append('<option value="0">Seleccione...</option>');
+  //$('#IdMarca').find('option').remove().end();
 
   var selected = "";
   var jqxhr = $.get( link_servidor + "/servicios/adminapp/listaMarcas.php", function(datos) {
@@ -130,8 +130,8 @@ function listaMarcas(IdMarca){
   });
 }
 function listaSeguros(IdSeguro){
-  //$('#IdSeguro').find('option').remove().end().append('<option value="">Seleccione...</option>');
-  $('#IdSeguro').find('option').remove().end();
+  $('#IdSeguro').find('option').remove().end().append('<option value="0">Seleccione...</option>');
+  //$('#IdSeguro').find('option').remove().end();
   var selected = "";
   var jqxhr = $.get( link_servidor + "/servicios/adminapp/listaSeguros.php", function(datos) {
   })
@@ -151,8 +151,8 @@ function listaSeguros(IdSeguro){
   });
 }
 function listaAverias(IdAveria){
-  //$('#IdAveria').find('option').remove().end().append('<option value="">Seleccione...</option>');
-  $('#IdAveria').find('option').remove().end();
+  $('#IdAveria').find('option').remove().end().append('<option value="0">Seleccione...</option>');
+  //$('#IdAveria').find('option').remove().end();
 
   var selected = "";
   var parametros = {
@@ -186,8 +186,8 @@ function listaAverias(IdAveria){
   }).responseJSON;
 }
 function listaAveriasHijo(IdAveria,IdAveriaPadre){
-  //$('#IdAveria').find('option').remove().end().append('<option value="">Seleccione...</option>');
-  $('#IdAveriaHijo').find('option').remove().end();
+  $('#IdAveriaHijo').find('option').remove().end().append('<option value="0">Seleccione...</option>');
+  //$('#IdAveriaHijo').find('option').remove().end();
 
   var selected = "";
   var parametros = {
@@ -222,8 +222,8 @@ function listaAveriasHijo(IdAveria,IdAveriaPadre){
 
 }
 function listaCondicionLugar(IdCondicionLugar){
-  //$('#IdAveria').find('option').remove().end().append('<option value="">Seleccione...</option>');
-  $('#IdCondicionLugar').find('option').remove().end();
+  $('#IdCondicionLugar').find('option').remove().end().append('<option value="0">Seleccione...</option>');
+  //$('#IdCondicionLugar').find('option').remove().end();
 
   var selected = "";
   var parametros = {
@@ -324,6 +324,33 @@ function listaVehiculosTipos(IdVehiculoTipo){
 
   }).responseJSON;
 }
+function DetalleServicio(IdServicio){
+		$.ajax({
+			url: link_servidor + "adm/Listas/index.php?action=detalle_servicio&IdServicio="+ IdServicio,
+			success: function(html){
+				$('#popupListas .modal-body').html(html);
+				$('#popupListas').modal('show');
+			}
+		});
+}
+function ReiniciarDatosDispositivo(IdGrua){
+    
+        var parametros = {
+		"IdGrua": IdGrua,
+                "Disponible": 0,
+                "Token": 0,
+                "DeviceId": 0,
+                "Latitud" : 0,
+                "Longitud" : 0,
+                "IdEstado" : 0,
+                "Cedula" : "---",
+                "Nombres" : "---",
+                "Apellidos" : "---",
+                "Celular" : "---",
+	};
+	var respuesta = AjaxCall("servicios/grueroapp/actualizarDatosGrua.php", parametros, actualizarSuccess, MensajeError);
+}
+
 function convertiraAJson(DataForm){
   var parametros = {};
 

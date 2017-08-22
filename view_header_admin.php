@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="<?php echo full_url;?>/web/css/style.css">
   <link rel="stylesheet" href="<?php echo full_url;?>/web/css/maps.css">
   <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">-->
-
+  <link rel="icon" href="<?php echo full_url;?>/web/img_admin/favicon.ico" type="image/x-icon"/>
 </head>
 
 <body class="hold-transition sidebar-collapse">
