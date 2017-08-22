@@ -8,7 +8,7 @@
   </div>
   <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
     <div class="panel-body">
-      <div class="" id="DivAsignacionGruero">
+      <div class="" id="DivMetodoPago">
         fsdfsd
       </div>
     </div>
