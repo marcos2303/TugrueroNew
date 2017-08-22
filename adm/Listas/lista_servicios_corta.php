@@ -1,4 +1,4 @@
-<table id="example" class="table-small table table-striped table-bordered table-responsive" width="100%" cellspacing="0">
+<table id="Servicios" class="table-small table table-striped table-bordered table-responsive" width="100%" cellspacing="0">
   <thead>
     <tr>
       <th>Código</th>
@@ -136,8 +136,8 @@
 <?php endif;?>
 <script>
 $(document).ready(function() {
-  $('#example tfoot th').each( function () {
-    var title = $('#example thead th').eq( $(this).index() ).text();
+  $('#Servicios tfoot th').each( function () {
+    var title = $('#Servicios thead th').eq( $(this).index() ).text();
 
     if(title != 'Detalle')
     {
@@ -151,7 +151,7 @@ $(document).ready(function() {
   } );
 
 
-  var table = $('#example').DataTable({
+  var table = $('#Servicios').DataTable({
     "scrollX": true,
     "processing": true,
     "sServerMethod": "POST",
@@ -287,7 +287,7 @@ $(document).ready(function() {
                   { "data" : "actions" },
                 ],
                 "fnInitComplete": function() {
-                  this.fnAdjustColumnSizing();
+                  //this.fnAdjustColumnSizing();
                 },
                 "aoColumnDefs": [
                   { "visible": false, "targets": [ 1,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
@@ -297,7 +297,7 @@ $(document).ready(function() {
                   { 'bSortable': false, 'aTargets': [ 60 ] }
                 ]
               });
-                $('#example').css( 'display', 'table' );
+                //$('#Servicios').css( 'display', 'table' );
 
                 //table.responsive.recalc();
 

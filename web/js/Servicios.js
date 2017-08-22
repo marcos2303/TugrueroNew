@@ -1,11 +1,4 @@
 $(document).ready(function(){
-  $.ajax({
-    url: link_servidor + "/adm/Mapas/index.php?action=mapa_servicio",
-    success: function(html){
-      $('#MapaServicio').html(html);
-    }
-  });
-
   listaMarcas();
   listaEstadosOrigen();
   listaEstadosDestino();
@@ -75,6 +68,9 @@ $(document).ready(function(){
     
     GuardarAutomaticoServicioGrua();
   });
+  
+ 
+  
 });//end document ready
 
 function GuardarAutomaticoServicio(){
@@ -449,3 +445,4 @@ function calculaTiempoDeEspera(){
   $("#TiempoEstimadoEspera").val(horasumada + ":" + minutosumado);
     GuardarAutomaticoServicioGrua();
 }
+
