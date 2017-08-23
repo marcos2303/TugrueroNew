@@ -5,7 +5,11 @@ $(document).ready(function(){
   listaSeguros();
   listaAverias();
   listaCondicionLugar();
+  listaBancos();
   $("#IdAveriaHijo").hide();
+  $("#DivBancos").hide();
+  $("#DivTDC").hide();
+  
   //listaAveriasHijo();
   if($("#IdServicioTipo").val()=="1"){
     $(".asegurado").show();
@@ -16,6 +20,8 @@ $(document).ready(function(){
     $('#Modelo').prop('readonly', true);
     $('#Color').prop('readonly', true);
     $('#IdSeguro').prop('disabled', true);
+    $('input[name=IdMetodoPago][value=3]').prop('checked', 'checked'); 
+    
   }else{
     $(".asegurado").hide();
   }
@@ -69,6 +75,19 @@ $(document).ready(function(){
     GuardarAutomaticoServicioGrua();
   });
   
+  $(".SaveAutomaticoServicioPrecio").change(function(){
+    if($(this).attr('name') == "IdMetodoPago"){
+            if($(this).val()== 1){
+                $("#DivBancos").show();
+                $("#DivTDC").hide();
+            }
+            if($(this).val()== 2){
+                $("#DivBancos").hide();
+                $("#DivTDC").show();
+            }
+    }  
+    GuardarAutomaticoServicioPrecio();
+  });  
  
   
 });//end document ready
@@ -107,6 +126,13 @@ function GuardarAutomaticoServicioGrua(){
   var DataForm = $('#DataForm .SaveAutomaticoServicioGrua').serializeArray();
   var parametros_servicio_grua = convertiraAJson(DataForm);
     var actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioGrua.php", parametros_servicio_grua, agregarSuccess, MensajeError);
+
+
+}
+function GuardarAutomaticoServicioPrecio(){
+  var DataForm = $('#DataForm .SaveAutomaticoServicioPrecio').serializeArray();
+  var parametros_servicio_precio = convertiraAJson(DataForm);
+    var actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros_servicio_precio, agregarSuccess, MensajeError);
 
 
 }

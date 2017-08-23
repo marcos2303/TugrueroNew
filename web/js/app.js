@@ -256,7 +256,76 @@ function listaCondicionLugar(IdCondicionLugar){
 
   }).responseJSON;
 }
+function listaBancos(IdBanco){
+  $('#IdBanco').find('option').remove().end().append('<option value="0">Seleccione...</option>');
+  //$('#IdBanco').find('option').remove().end();
 
+  var selected = "";
+  var parametros = {
+
+  };
+  var jqxhr = $.ajax({
+    url:  link_servidor + "/servicios/adminapp/listaBancos.php",
+    type: "POST",
+    data: JSON.stringify(parametros),
+    dataType: "json",
+    timeout: 20000,
+    global: false,
+    async:false,
+    success: function(datos) {
+      $.each(datos.data, function(i, item) {
+        selected = "";
+        if(typeof(IdBanco) != 'undefined'){
+          if(parseInt(IdBanco) === parseInt(item.IdBanco)){
+            selected = 'selected = "selected"';
+          }
+        }
+        $("#IdBanco").append('<option value="'+ item.IdBanco +'" '+selected+'>' + item.Nombre + '</option>');
+      });
+    },
+    error: function(jqXHR, textStatus) {
+      if (textStatus !== "abort") {
+        console.log("error");
+      }
+    }
+
+  }).responseJSON;
+}
+function listaServiciosTipos(IdServicioTipo){
+  $('#IdServicioTipo').find('option').remove().end().append('<option value="0">Seleccione...</option>');
+  //$('#IdServicioTipo').find('option').remove().end();
+
+  var selected = "";
+  var parametros = {
+
+  };
+  var jqxhr = $.ajax({
+    url:  link_servidor + "/servicios/adminapp/listaServiciosTipos.php",
+    type: "POST",
+    data: JSON.stringify(parametros),
+    dataType: "json",
+    timeout: 20000,
+    global: false,
+    async:false,
+    success: function(datos) {
+      $.each(datos.data, function(i, item) {
+        selected = "";
+        if(typeof(IdServicioTipo) != 'undefined'){
+          if(parseInt(IdServicioTipo) === parseInt(item.IdServicioTipo)){
+            selected = 'selected = "selected"';
+          }
+        }
+        $("#IdServicioTipo").append('<option value="'+ item.IdServicioTipo +'" '+selected+'>' + item.Nombre + '</option>');
+      });
+    },
+    error: function(jqXHR, textStatus) {
+      if (textStatus !== "abort") {
+        console.log("error");
+      }
+    }
+
+  }).responseJSON;
+}
 function listaAnios(Anio){
   $('#Anio').find('option').remove().end().append('<option value="">Seleccione...</option>');
   var selected = "";

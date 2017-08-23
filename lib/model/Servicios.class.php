@@ -12,7 +12,6 @@ class Servicios {
 	public function setIdServicio($IdServicio) {
 		$this->IdServicio = $IdServicio;
 	}
-
 	public function getIdAplicacion() {
 		return $this->IdAplicacion;
 	}
