@@ -20,9 +20,12 @@ $(document).ready(function(){
     $('#Modelo').prop('readonly', true);
     $('#Color').prop('readonly', true);
     $('#IdSeguro').prop('disabled', true);
-    $('input[name=IdMetodoPago][value=3]').prop('checked', 'checked'); 
+    $('input[name=IdMetodoPago][value=3]').prop('checked', 'checked');
+    $('input[name=IdMetodoPago][value=2]').prop('disabled', 'disabled');
+    $('input[name=IdMetodoPago][value=1]').prop('disabled', 'disabled');
     
   }else{
+     
     $(".asegurado").hide();
   }
   //crear servicio

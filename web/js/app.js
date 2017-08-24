@@ -326,6 +326,41 @@ function listaServiciosTipos(IdServicioTipo){
 
   }).responseJSON;
 }
+function listaEstatusFinales(IdEstatusFinal){
+  $('#IdEstatusFinal').find('option').remove().end().append('<option value="0">Seleccione...</option>');
+  //$('#IdServicioTipo').find('option').remove().end();
+
+  var selected = "";
+  var parametros = {
+
+  };
+  var jqxhr = $.ajax({
+    url:  link_servidor + "/servicios/adminapp/listaEstatusFinales.php",
+    type: "POST",
+    data: JSON.stringify(parametros),
+    dataType: "json",
+    timeout: 20000,
+    global: false,
+    async:false,
+    success: function(datos) {
+      $.each(datos.data, function(i, item) {
+        selected = "";
+        if(typeof(IdEstatusFinal) != 'undefined'){
+          if(parseInt(IdEstatusFinal) === parseInt(item.IdEstatus)){
+            selected = 'selected = "selected"';
+          }
+        }
+        $("#IdEstatusFinal").append('<option value="'+ item.IdEstatus +'" '+selected+'>' + item.Nombre + '</option>');
+      });
+    },
+    error: function(jqXHR, textStatus) {
+      if (textStatus !== "abort") {
+        console.log("error");
+      }
+    }
+
+  }).responseJSON;
+}
 function listaAnios(Anio){
   $('#Anio').find('option').remove().end().append('<option value="">Seleccione...</option>');
   var selected = "";
