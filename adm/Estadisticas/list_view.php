@@ -1,6 +1,10 @@
 <?php include('../../view_header_admin.php')?>
 <?php include('../menu.php')?>
+
+    
 <div class="">
+<form id="DataForm" action="index.php" method="">
+<input type="hidden" name="action" value="resumen_general">
 <h1 class="text-center">Estadísticas</h1>	
         <div class="row">
           <div class="col-sm-2">
@@ -8,7 +12,7 @@
               <label>Tipo de cliente</label>
 				<div class="input-group">
 					<span class="input-group-addon">
-						<input type="checkbox" value="1" name="activaIdServicioTipo" id="activaIdServicioTipo"  class="activaInputs DatosEstadistica">
+						<input type="checkbox" value="1" id="activaIdServicioTipo"  class="activaInputs">
 					</span>
 					<select class="form-control DatosEstadistica input-sm" id="IdServicioTipo" name="IdServicioTipo" style="width: 100%;" disabled="disabled"></select>
 			
@@ -20,7 +24,7 @@
               <label>Seguro</label>
 				<div class="input-group">
 					<span class="input-group-addon">
-						<input type="checkbox" value="1" name="activaIdSeguro" id="activaIdSeguro"  class="activaInputs DatosEstadistica">
+						<input type="checkbox" value="1" id="activaIdSeguro"  class="activaInputs">
 					</span>
 					<select class="form-control DatosEstadistica input-sm" id="IdSeguro" name="IdSeguro" style="width: 100%;" disabled="disabled"></select>
 			
@@ -32,10 +36,10 @@
               <label>Rango de fechas</label>   
 				<div class="input-group">
 					<span class="input-group-addon">
-						<input type="checkbox" name="activaFechasRango" id="activaFechasRango" value="1" class="activaInputs DatosEstadistica">
+						<input type="checkbox" id="activaFechasRango" value="1" class="activaInputs">
 					</span>
-					<input type="date" class="form-control input-sm DatosEstadistica" id="FechaDesde" readonly="readonly">
-					<input type="date" class="form-control input-sm DatosEstadistica" id="FechaHasta" readonly="readonly">
+					<input type="date" class="form-control input-sm DatosEstadistica" name="FechaDesde" id="FechaDesde" disabled="disabled">
+					<input type="date" class="form-control input-sm DatosEstadistica" name="FechaHasta" id="FechaHasta" disabled="disabled">
 				</div>
             </div>
           </div>
@@ -44,19 +48,19 @@
               <label>Fecha específica</label>   
 				<div class="input-group">
 					<span class="input-group-addon">
-					  <input type="checkbox" name="activaFechaEspecifica" id="activaFechaEspecifica" value="2" class="activaInputs DatosEstadistica">
+					  <input type="checkbox" id="activaFechaEspecifica" value="2" class="activaInputs">
 					</span>
-					<input type="date" class="form-control DatosEstadistica input-sm" id="FechaEspecifica" readonly="readonly">
+					<input type="date" class="form-control DatosEstadistica input-sm" name="FechaEspecifica" id="FechaEspecifica" disabled="disabled">
 				</div>
             </div>
 		  </div>			
        
           <div class="col-sm-2">
             <div class="form-group">
-              <label>Tipo de cliente</label> 
+              <label>Estatus</label> 
 				<div class="input-group">
 					<span class="input-group-addon">
-						<input type="checkbox" value="1" name="activaIdEstatusFinal" id="activaIdEstatusFinal" class="activaInputs DatosEstadistica">
+						<input type="checkbox" value="1" id="activaIdEstatusFinal" class="activaInputs">
 					</span>
 					<select class="form-control DatosEstadistica input-sm" name="IdEstatusFinal" id="IdEstatusFinal"  style="width: 100%;" disabled="disabled"></select>
 				</div>
@@ -68,7 +72,7 @@
               <label>Base de datos</label>
 				<div class="input-group">
 					<span class="input-group-addon">
-						<input type="checkbox" value="1" name="activaBaseDatos" id="activaBaseDatos"  class="activaInputs DatosEstadistica">
+						<input type="checkbox" value="1" name="activaBaseDatos" id="activaBaseDatos"  class="activaInputs">
 					</span>
 					<select class="form-control DatosEstadistica input-sm" id="BaseDatos" name="BaseDatos" style="width: 100%;" disabled="disabled">
 						<option value="0">Seleccione...</option>
@@ -86,8 +90,10 @@
           </div>
 		</div>
 
+</form>
+</div>      
 
-</div>
+
 
 <?php include('../../view_footer_admin.php')?>
 <script src="<?php echo full_url;?>/web/js/Estadisticas.js"></script>

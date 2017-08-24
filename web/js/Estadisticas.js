@@ -1,10 +1,9 @@
+  var datos = {};
   listaSeguros();
   listaServiciosTipos();
   listaEstatusFinales();
+  
 $(document).ready(function(){
-
-
-
   $('#IdServicioTipo').append('<option value="Todos">Todos</option>');
   //$("#IdSeguro option").eq(-1).before("<option>hi</option")
   $('#IdSeguro').append('<option value="Todos">Todos</option>');
@@ -12,75 +11,88 @@ $(document).ready(function(){
 
 
   $(".activaInputs").change(function(){
-    if($(this).attr('name') == "activaIdServicioTipo"){
+    if($(this).attr('id') == "activaIdServicioTipo"){
         if ($(this).is(':checked')) {
             $("#IdServicioTipo").attr("disabled",false);
         }else{
             $("#IdServicioTipo").attr("disabled","disabled");
         }        
     }
-    if($(this).attr('name') == "activaIdSeguro"){
+    if($(this).attr('id') == "activaIdSeguro"){
         if ($(this).is(':checked')) {
             $("#IdSeguro").attr("disabled",false);
         }else{
             $("#IdSeguro").attr("disabled","disabled");
         }        
     }
-    if($(this).attr('name') == "activaFechasRango"){
+    if($(this).attr('id') == "activaFechasRango"){
         if ($(this).is(':checked')) {
-          $("#FechaDesde").prop("readonly",false);
-          $("#FechaHasta").prop("readonly",false);
+          $("#FechaDesde").prop("disabled",false);
+          $("#FechaHasta").prop("disabled",false);
           if ($("#activaFechasRango").is(':checked')) {
                 $("#activaFechaEspecifica").prop("checked",false);
-                $("#FechaEspecifica").prop("readonly","readonly");
+                $("#FechaEspecifica").prop("disabled","disabled");
                 $("#FechaEspecifica").val(null);
+
+          }else{
 
           }
         }else{
-          $("#FechaDesde").prop("readonly","readonly");
-          $("#FechaHasta").prop("readonly","readonly");
+          $("#FechaDesde").prop("disabled","disabled");
+          $("#FechaHasta").prop("disabled","disabled");
           $("#FechaDesde").val(null);
-          $("#FechaHasta").val(null);
+          $("#FechaHasta").val(null);          
         }  
-          
-
-          //$("#FechaEspecifica").val(null);
 
     }
-    if($(this).attr('name') == "activaFechaEspecifica"){
+    if($(this).attr('id') == "activaFechaEspecifica"){
 
         
         if ($(this).is(':checked')) {
-          $("#FechaEspecifica").prop("readonly",false);
+          $("#FechaEspecifica").prop("disabled",false);
           if ($("#activaFechasRango").is(':checked')) {
                 $("#activaFechasRango").prop("checked",false);
-                $("#FechaDesde").prop("readonly","readonly");
-                $("#FechaHasta").prop("readonly","readonly");
+                $("#FechaDesde").prop("disabled","disabled");
+                $("#FechaHasta").prop("disabled","disabled");
                 $("#FechaDesde").val(null);
                 $("#FechaHasta").val(null);
           }     
 
         }else{
-          $("#FechaEspecifica").prop("readonly","readonly");
+          $("#FechaEspecifica").prop("disabled","disabled");
           $("#FechaEspecifica").val(null);
+          delete datos[$("#activaFechaEspecifica").attr("id")];
+          delete datos[$("#FechaEspecifica").attr("id")];
         }  
           
  
     }
-    if($(this).attr('name') == "activaIdEstatusFinal"){
+    if($(this).attr('id') == "activaIdEstatusFinal"){
         if ($(this).is(':checked')) {
             $("#IdEstatusFinal").attr("disabled",false);
         }else{
             $("#IdEstatusFinal").attr("disabled","disabled");
+            delete datos[$("#activaIdEstatusFinal").attr("id")];
+            delete datos[$("#IdEstatusFinal").attr("id")];
         }        
     }
-    if($(this).attr('name') == "activaBaseDatos"){
+    if($(this).attr('id') == "activaBaseDatos"){
         if ($(this).is(':checked')) {
             $("#BaseDatos").attr("disabled",false);
         }else{
-            $("#BaseDatos  ").attr("disabled","disabled");
+            $("#BaseDatos").attr("disabled","disabled");
+            delete datos[$("#activaBaseDatos").attr("id")];
+            delete datos[$("#BaseDatos").attr("id")];
         }        
     }
   });
+  
+  $(".DatosEstadistica").change(function(){
+        
+        //datos[$(this).attr("id" )] = $(this).val();
+        console.log(datos);
+  });
 });//end document ready
+
+
 

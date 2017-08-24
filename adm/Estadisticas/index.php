@@ -14,27 +14,9 @@ $values = array_merge($values,$_FILES);
 		case "index":
 			executeIndex($values);	
 		break;
-		case "new":
-			executeNew($values);	
+		case "resumen_general":
+			executeResumenGeneral($values);	
 		break;
-		case "add":
-			executeSave($values);	
-		break;
-		case "edit":
-			executeEdit($values);	
-		break;
-		case "update":
-			executeUpdate($values);	
-		break;		
-		case "list_json":
-			executeListJson($values);	
-		break;
-		case "poliza_masiva":
-			executePolizaMasiva($values);	
-		break;
-		case "subir_polizas":
-			executeSubirPolizas($values);	
-		break;		
 		default:
 			executeIndex($values);
 		break;
@@ -43,12 +25,10 @@ $values = array_merge($values,$_FILES);
 	{
 		require('list_view.php');
 	}
-	function executeNew($values = null)
-	{       
-        $values['Estatus'] = '1';
-		$values['action'] = 'add';
-		$values['EstatusPoliza'] = 'Activo';
-		require('form_view.php');
+	function executeResumenGeneral($values = null)
+	{   
+        print_r($values);die;    
+		require('resumen_general.php');
 	}
 	function executeSave($values = null)
 	{
