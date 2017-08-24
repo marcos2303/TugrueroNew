@@ -53,6 +53,12 @@ switch ($action) {
 	case "detalle_servicio_json":
 	executeDetalleServicioJson($values);
 	break;
+	case "mercadopago":
+		executeMercadoPago($values);
+	break;
+	case "mercadopagolink":
+		executeMercadoPagoLink($values);
+	break;
 	default:
 	executeIndex($values);
 	break;
@@ -686,3 +692,14 @@ function executeListaUsuariosJson($values)
 	echo json_encode($array_json);die;
 
 }
+	function executeMercadoPago($values){
+		require('mercadopago.php');
+	}
+	function executeMercadoPagoLink($values){
+		
+		$Parametros = new Parametros();
+		$valor_parametro = $Parametros->getValor(2);
+		$values["Link"] = $valor_parametro['Valor'];
+		echo json_encode($values);
+		
+	}

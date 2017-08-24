@@ -7,7 +7,7 @@ include('../../autoload_servicios.php');
 
 $ServiciosPrecios = new ServiciosPrecios();
 /****************Seteo y comprobacion de valores*******************/
-$response = array("Error"=>1,"Actualizado" => 0,"MensajeError"=>"No actualizado.","MensajeSuccess"=> '');
+$response = array("Error"=>1,"Actualizado" => 0,"MensajeError"=>"","MensajeSuccess"=> '');
 /*************************Actualizamos el Servicio************************************/
 
 if(isset($values['FechaFacturaFisica']) and $values['FechaFacturaFisica']!=''){

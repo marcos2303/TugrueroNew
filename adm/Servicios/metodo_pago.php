@@ -37,20 +37,21 @@
             </div>
         </div>
         <div class="row" id="DivTDC">
-            <div class="col-sm-4">
+            <div class="col-sm-12">
               <div class="form-group">
-                <label></label>
-                <select class="form-control input-sm" id="" name="" style="width: 100%;">
-                    <option>Link</option> 
-                </select>
+                <label>Pago</label>
+                <select class="form-control input-sm SaveAutomaticoServicioPrecio" id="IdTipoPagoElectronico" name="IdTipoPagoElectronico" style="width: 100%;"></select>
               </div>
             </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label> Referencia</label>
-                    <input class="form-control SaveAutomaticoServicioPrecio input-sm " id="Referencia" name="Referencia" type="text" placeholder=""  autocomplete="off">
-              </div>
-            </div>
+            <div class="panel-body" id="MercadopagoDiv"></div> 
+			<div class="panel-body" id="MercadopagoLinkDiv">
+				
+				  <div class="form-group">
+					<label> Link</label>
+						<input class="form-control SaveAutomaticoServicioPrecio input-sm " id="Link" name="Link" type="text" placeholder=""  autocomplete="off">
+				  </div>
+				
+			</div> 
         </div>
       </div>
     </div>

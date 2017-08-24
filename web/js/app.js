@@ -361,6 +361,41 @@ function listaEstatusFinales(IdEstatusFinal){
 
   }).responseJSON;
 }
+function listaTiposPagosElectronicos(IdTipoPagoElectronico){
+  $('#IdTipoPagoElectronico').find('option').remove().end().append('<option value="0">Seleccione...</option>');
+  //$('#IdBanco').find('option').remove().end();
+
+  var selected = "";
+  var parametros = {
+
+  };
+  var jqxhr = $.ajax({
+    url:  link_servidor + "/servicios/adminapp/listaTiposPagosElectronicos.php",
+    type: "POST",
+    data: JSON.stringify(parametros),
+    dataType: "json",
+    timeout: 20000,
+    global: false,
+    async:false,
+    success: function(datos) {
+      $.each(datos.data, function(i, item) {
+        selected = "";
+        if(typeof(IdTipoPagoElectronico) != 'undefined'){
+          if(parseInt(IdTipoPagoElectronico) === parseInt(item.IdBanco)){
+            selected = 'selected = "selected"';
+          }
+        }
+        $("#IdTipoPagoElectronico").append('<option value="'+ item.IdTipoPagoElectronico +'" '+selected+'>' + item.Nombre + '</option>');
+      });
+    },
+    error: function(jqXHR, textStatus) {
+      if (textStatus !== "abort") {
+        console.log("error");
+      }
+    }
+
+  }).responseJSON;
+}
 function listaAnios(Anio){
   $('#Anio').find('option').remove().end().append('<option value="">Seleccione...</option>');
   var selected = "";
@@ -598,7 +633,12 @@ function MensajeErrorJson(data){
     "onClick": ["", "", "", "closePops()"]
 
   };
-  genericPop(parametros);
+  if(data.MensajeError!=""){
+    genericPop(parametros);  
+  }else{
+      return false;
+  }
+  
 }
 
 function genericPop(parametros) {

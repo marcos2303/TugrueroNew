@@ -6,9 +6,11 @@ $(document).ready(function(){
   listaAverias();
   listaCondicionLugar();
   listaBancos();
+  listaTiposPagosElectronicos();
   $("#IdAveriaHijo").hide();
   $("#DivBancos").hide();
   $("#DivTDC").hide();
+  $("#MercadopagoLinkDiv").hide();
   
   //listaAveriasHijo();
   if($("#IdServicioTipo").val()=="1"){
@@ -88,7 +90,19 @@ $(document).ready(function(){
                 $("#DivBancos").hide();
                 $("#DivTDC").show();
             }
-    }  
+    }
+    if($(this).attr('name') == "IdTipoPagoElectronico"){
+            $("#MercadopagoDiv").html("");
+            $("#MercadopagoLinkDiv").hide();    
+            if($(this).val()== 2){
+                CargarMercadoPago();
+            }
+            if($(this).val() == 1){
+                $("#MercadopagoLinkDiv").show();                
+                CargarLinkMercadoPago();
+                
+            }
+    } 
     GuardarAutomaticoServicioPrecio();
   });  
  
@@ -415,6 +429,24 @@ function actualizarServiciosEstatusLlegada(){
     var eliminarServicioEstatus = AjaxCall("servicios/clienteapp/eliminarServiciosEstatus.php", parametros);
   }
 
+}
+function CargarMercadoPago(){
+  $.ajax({
+    url: link_servidor + "/adm/Listas/index.php?action=mercadopago",
+    success: function(html){
+      $("#MercadopagoDiv").html(html);
+    }
+  });
+}
+function CargarLinkMercadoPago(){
+  $.ajax({
+    url: link_servidor + "/adm/Listas/index.php?action=mercadopagolink",
+    success: function(data){
+      $("#Link").val(data.Link);
+      GuardarAutomaticoServicioPrecio();
+    },
+    dataType: "json"
+  });
 }
 function calculaTiempoDeEspera(){
     
