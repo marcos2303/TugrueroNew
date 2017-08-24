@@ -164,7 +164,10 @@ $(document).ready(function() {
     },
 
     buttons: [
-
+            {
+                extend: 'colvis',
+                collectionLayout: 'fixed two-column'
+            },
       {
         extend: 'colvisGroup',
         text: 'Básicos',
