@@ -439,8 +439,10 @@ function CargarMercadoPago(){
   });
 }
 function CargarLinkMercadoPago(){
+  var PrecioClienteCIva = $("#PrecioClienteCIva").val(); 
+  console.log($("#PrecioClienteCIva").val());
   $.ajax({
-    url: link_servidor + "/adm/Listas/index.php?action=mercadopagolink",
+    url: link_servidor + "/adm/Listas/index.php?action=mercadopagolink&PrecioClienteCIva=" + PrecioClienteCIva,
     success: function(data){
       $("#Link").val(data.Link);
       GuardarAutomaticoServicioPrecio();

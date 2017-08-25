@@ -412,56 +412,40 @@ function listaAnios(Anio){
     }
     $("#Anio").append('<option value="'+ i +'" '+selected+'>' + i + '</option>');
   }
-
-  /*var jqxhr = $.get( link_servidor + "/servicios/adminapp/listaMarcas.php", function(datos) {
-  })
-  .done(function(datos) {
-    $.each(datos.data, function(i, item) {
-      selected = "";
-      if(typeof(IdMarca) != 'undefined'){
-        if(parseInt(IdMarca) === parseInt(item.IdMarca)){
-          selected = 'selected = "selected"';
-        }
-      }
-      $("#IdMarca").append('<option value="'+ item.IdMarca +'" '+selected+'>' + item.Nombre + '</option>');
-    });
-  })
-  .fail(function() {
-    alert( "error" );
-  });*/
 }
-function listaVehiculosTipos(IdVehiculoTipo){
-  $('#IdVehiculoTipo').find('option').remove().end();
+function listaAnios(Anio){
+  $('#Anio').find('option').remove().end().append('<option value="">Seleccione...</option>');
   var selected = "";
-  var parametros = {
-
-  };
-  var jqxhr = $.ajax({
-    url:  link_servidor + "/servicios/adminapp/listaVehiculosTipos.php",
-    type: "POST",
-    data: JSON.stringify(parametros),
-    dataType: "json",
-    timeout: 20000,
-    global: false,
-    async:false,
-    success: function(datos) {
-      $.each(datos.data, function(i, item) {
-        selected = "";
-        if(typeof(IdVehiculoTipo) != 'undefined'){
-          if(parseInt(IdVehiculoTipo) === parseInt(item.IdVehiculoTipo)){
-            selected = 'selected = "selected"';
-          }
-        }
-        $("#IdVehiculoTipo").append('<option value="'+ item.IdVehiculoTipo +'" '+selected+'>' + item.Nombre + '</option>');
-      });
-    },
-    error: function(jqXHR, textStatus) {
-      if (textStatus !== "abort") {
-        console.log("error");
+  var fecha_actual = new Date();
+  var anio = fecha_actual.getFullYear();
+  var anio_inicio = (parseInt(anio) - 50);
+  //console.log(anio);
+  for(i = anio; i>=anio_inicio;i--){
+    selected = "";
+    if(typeof(Anio) != 'undefined'){
+      if(parseInt(Anio) === parseInt(i)){
+        selected = 'selected = "selected"';
       }
     }
-
-  }).responseJSON;
+    $("#Anio").append('<option value="'+ i +'" '+selected+'>' + i + '</option>');
+  }
+}
+function listaAnioTarjeta(AnioTarjeta){
+  $('#AnioTarjeta').find('option').remove().end().append('<option value="">Seleccione...</option>');
+  var selected = "";
+  var fecha_actual = new Date();
+  var anio = fecha_actual.getFullYear();
+  var anio_inicio = (parseInt(anio) + 10);
+  //console.log(anio);
+  for(i = anio; i<=anio_inicio;i++){
+    selected = "";
+    if(typeof(Anio) != 'undefined'){
+      if(parseInt(AnioTarjeta) === parseInt(i)){
+        selected = 'selected = "selected"';
+      }
+    }
+    $("#AnioTarjeta").append('<option value="'+ i +'" '+selected+'>' + i + '</option>');
+  }
 }
 function DetalleServicio(IdServicio){
 		$.ajax({

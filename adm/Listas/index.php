@@ -700,6 +700,7 @@ function executeListaUsuariosJson($values)
 		$Parametros = new Parametros();
 		$valor_parametro = $Parametros->getValor(2);
 		$values["Link"] = $valor_parametro['Valor'];
+        $values["Link"] = $values["Link"].$values["PrecioClienteCIva"];
 		echo json_encode($values);
 		
 	}

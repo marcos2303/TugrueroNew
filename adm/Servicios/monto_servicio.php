@@ -74,7 +74,7 @@
           <div class="col-sm-4">
             <div class="form-group">
               <label> Pago total cliente</label>
-              <input class="form-control SaveAutomaticoServicioPrecio input-sm " name="PrecioClienteCIva" id="PrecioClienteCIva" type="text" placeholder="" autocomplete="off" readonly="readonly">
+              <input class="form-control SaveAutomaticoServicioPrecio input-sm " name="PrecioClienteCIva" id="PrecioClienteCIva" type="text" placeholder="" value="0.00" autocomplete="off" readonly="readonly">
             </div>
           </div>
         </div>
