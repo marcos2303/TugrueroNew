@@ -12,13 +12,13 @@
         <div class="row">
           <div class="col-sm-12">
                 <label class="radio-inline">
-                    <input type="radio" name="IdMetodoPago" id="" class="SaveAutomaticoServicioPrecio" value="1"> Bancos
+                    <input type="radio" name="IdMetodoPago" id="" class="SaveAutomaticoServicioPrecio MP" value="1"> Bancos
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="IdMetodoPago" class="SaveAutomaticoServicioPrecio" value="2"> TDC
+                  <input type="radio" name="IdMetodoPago" class="SaveAutomaticoServicioPrecio MP" value="2"> TDC
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" name="IdMetodoPago" class="SaveAutomaticoServicioPrecio" value="3" disabled="disabled"> Asegurado
+                    <input type="radio" name="IdMetodoPago" class="SaveAutomaticoServicioPrecio MP" value="3" disabled="disabled"> Asegurado
                 </label>
           </div>
         </div>
@@ -40,7 +40,7 @@
             <div class="col-sm-12">
               <div class="form-group">
                 <label>Pago</label>
-                <select class="form-control input-sm SaveAutomaticoServicioPrecio" id="IdTipoPagoElectronico" name="IdTipoPagoElectronico" style="width: 100%;"></select>
+                <select class="form-control input-sm SaveAutomaticoServicioPrecio MP" id="IdTipoPagoElectronico" name="IdTipoPagoElectronico" style="width: 100%;"></select>
               </div>
             </div>
             <div class="panel-body" id="MercadopagoDiv"></div> 

@@ -1,8 +1,10 @@
 <div class="row">
+	
 	<div class="col-sm-4">
 		  <div class="form-group">
 			<label for="docType">Tipo de documento</label> <label class="text-danger"> * </label>
-				<select required  id="TipoDocumento" data-checkout="docType"  data-checkout="docType" class="form-control input-sm SaveAutomaticoServicioPrecio">
+				<select required  id="TipoDocumento" data-checkout="docType"  data-checkout="docType" class="form-control input-sm SaveAutomaticoServicioPrecio MP">
+					<option value="">Seleccione...</option>
 					<option value="CI-V">CI-V</option>
 					<option value="CI-E">CI-E</option>
 					<option value="RIF-J">RIF-J</option>
@@ -57,6 +59,7 @@
 		  <div class="form-group">
 			<label for="MesTarjeta" >Mes de vencimiento</label> <label class="text-danger"> * </label>
 				<select required id="MesTarjeta" data-checkout="cardExpirationMonth" class="MP form-control input-sm SaveAutomaticoServicioPrecio">
+					<option value="">Seleccione...</option>
 					<option value="01">01</option>
 					<option value="02">02</option>
 					<option value="03">03</option>
@@ -77,9 +80,21 @@
     
 </div>
 <div class="row">
+	<div class="col-sm-12" id="ErroresMP">
+		
+
+	</div>	
+</div>
+<div class="row">
+	<div class="col-sm-12" id="SuccessMP">
+		
+
+	</div>	
+</div>
+<div class="row">
 	<div class="col-sm-4">
 		  <div class="form-group">
-			<button class="btn btn-success" id="Pagar" >Procesar Pago</button>      
+			  <button type="button" class="btn btn-success" id="Pagar" >Procesar Pago</button>      
 		  </div>	
 
 	</div>	
