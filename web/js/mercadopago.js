@@ -141,9 +141,5 @@ function sdkResponseHandler(status, response) {
                 }                          
             }
         });
-
-
-
-
     }
 };

@@ -431,10 +431,16 @@ function actualizarServiciosEstatusLlegada(){
 
 }
 function CargarMercadoPago(){
+/*$( "#MercadopagoDiv" ).load( link_servidor + "/adm/Listas/index.php?action=mercadopago", function() {
+  alert( "Load was performed." );
+});*/
+    
   $.ajax({
     url: link_servidor + "/adm/Listas/index.php?action=mercadopago",
     success: function(html){
-      $("#MercadopagoDiv").html(html);
+      $("#MercadopagoDiv").append(html);
+      //document.getElementById("MercadopagoDiv").appendChild(html);
+
     }
   });
 }

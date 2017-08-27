@@ -103,4 +103,11 @@
 <script>
     listaAnioTarjeta();
     initializeMP();
+$(document).ready(function(){
+    alert(1);
+  $(".SaveAutomaticoServicioPrecio").change(function(){
+    
+    GuardarAutomaticoServicioPrecio();
+  });   
+});
 </script>
