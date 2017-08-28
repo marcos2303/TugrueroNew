@@ -35,12 +35,12 @@
       <form action="" name="DataForm" id="DataForm" class="">
         <input type="hidden" class="" id="IdUsuario" name="IdUsuario" value="<?php if(isset($_SESSION['IdUsuario']) and $_SESSION['IdUsuario']!='') echo $_SESSION['IdUsuario'];?>">
         <input type="hidden" class="SaveAutomaticoServicio" id="IdServicioTipo" name="IdServicioTipo" value="<?php if(isset($values['IdServicioTipo']) and $values['IdServicioTipo']!='') echo $values['IdServicioTipo'];?>">
-        <input type="hidden" class="SaveAutomaticoServicioCliente SaveAutomaticoServicio SaveAutomaticoServicioPrecio SaveAutomaticoServicioGrua" id="IdServicio" name="IdServicio" value="<?php if(isset($values['IdServicio']) and $values['IdServicio']!='') echo $values['IdServicio'];?>">
+		<input type="text" class="SaveAutomaticoServicioCliente SaveAutomaticoServicio SaveAutomaticoServicioPrecio SaveAutomaticoServicioGrua" id="IdServicio" name="IdServicio" value="<?php if(isset($values['IdServicio']) and $values['IdServicio']!='') echo $values['IdServicio'];?>">
         <input type="hidden" class="form-control SaveAutomaticoServicioCliente" name="IdPoliza" id="IdPoliza">
         <input type="hidden" class="form-control SaveAutomaticoServicio" name="Inicio" id="Inicio">
 
 
-        <input type="hidden" id="action" value="<?php echo $values['action'];?>">
+        <input type="text" id="action" value="<?php echo $values['action'];?>">
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
           <?php include('datos_cliente.php');?>
           <?php include('historial_servicios.php');?>
@@ -61,6 +61,8 @@
 
 <?php include('../../view_footer_admin.php');?>
 <script src="<?php echo full_url;?>/web/js/Servicios.js"></script>
+<script src="<?php echo full_url;?>/web/js/mercadopago.js"></script>
+
 <script>
 var map;
 var geocoder = new google.maps.Geocoder;

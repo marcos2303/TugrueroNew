@@ -1,10 +1,11 @@
 var key = "TEST-6d4e759f-3000-4816-bb77-45ce06df576e";
 Mercadopago.setPublishableKey(key);  
+initializeMP();
 function initializeMP(){
     Mercadopago.setPublishableKey(key);  
-    $('#NumeroTarjeta').on('change', function() {
+    /*$('#NumeroTarjeta').on('change', function() {
         guessingPaymentMethod('change',this);
-    });
+    });*/
     $('#NumeroTarjeta').on('keyup', function() {
         guessingPaymentMethod("keyup",this);
     });
@@ -118,6 +119,9 @@ function sdkResponseHandler(status, response) {
             error: function(response){
                 $('#ErroresMP').append("<label class='alert alert-danger'>"+ "Error de comunicación con API en servidor www.tugruero.com" + "</label>");
                 $("#Pagar").attr("disabled",false);
+                $("#token").remove();
+                Mercadopago.clearSession();
+                
             },
             success: function(data){
                 if (typeof data.error == 'undefined') { 
@@ -133,11 +137,15 @@ function sdkResponseHandler(status, response) {
                         //console.log(data.response);
                         $('#ErroresMP').append("<label class='alert alert-danger'>"+ status + "</label>"); 
                         $("#Pagar").attr("disabled",false);
+                        $("#token").remove();
+                        Mercadopago.clearSession();
                     }
   
                 }else{
                     $('#ErroresMP').append("<label class='alert alert-danger'>"+ data.error + "</label>"); 
                     $("#Pagar").attr("disabled",false);
+                    $("#token").remove();
+                    Mercadopago.clearSession();
                 }                          
             }
         });

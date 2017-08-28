@@ -1,16 +1,88 @@
 $(document).ready(function(){
-  listaMarcas();
-  listaEstadosOrigen();
-  listaEstadosDestino();
-  listaSeguros();
-  listaAverias();
-  listaCondicionLugar();
-  listaBancos();
-  listaTiposPagosElectronicos();
-  $("#IdAveriaHijo").hide();
+    Inicializa();
+    if($("#action").val()=='new'){
+        CrearServicio();//se crea el servicio
+    }else{
+        EditarDatosServicio();//se cargan los datos en los inputs
+    }
+
+
+  //activar el onchange de los campos
+  $(".SaveAutomaticoServicio").change(function(){
+    //console.log("SaveAutomaticoServicio");
+    AccionesChange(this);
+    GuardarAutomaticoServicio();
+  });
+  $(".SaveAutomaticoServicioCliente").change(function(){
+    //console.log("SaveAutomaticoServicioCliente");
+    AccionesChange(this);
+    GuardarAutomaticoServicioCliente();
+  });
+  $(".SaveAutomaticoServicioGrua").change(function(){
+    //console.log("SaveAutomaticoServicioGrua");
+    AccionesChange(this);
+    GuardarAutomaticoServicioGrua();
+  });
+  
+  $(".SaveAutomaticoServicioPrecio").change(function(){
+    //console.log("SaveAutomaticoServicioPrecio");
+    AccionesChange(this);
+    GuardarAutomaticoServicioPrecio();
+  });  
+ 
+  
+});//end document ready
+function AccionesChange(e){
+    //console.log("acciones change");
+    if($(e).attr('name') == "IdMetodoPago"){
+            if($(e).val()== 1){
+                $("#DivBancos").show();
+                $("#DivTDC").hide();
+            }
+            if($(e).val()== 2){
+                $("#DivBancos").hide();
+                $("#DivTDC").show();
+            }
+    }
+    if($(e).attr('name') == "IdTipoPagoElectronico"){
+            $("#MercadopagoDiv").hide();
+            $("#MercadopagoLinkDiv").hide();    
+            if($(e).val()== 2){
+                $("#MercadopagoDiv").show();
+            }
+            if($(e).val() == 1){
+                $("#MercadopagoLinkDiv").show();                
+                CargarLinkMercadoPago();
+                
+            }
+    }
+    if($(e).attr('name') == "HoraTiempoEstimadoEspera" || $(e).attr('name') == "MinutosTiempoEstimadoEspera"){
+            calculaTiempoDeEspera();
+    }
+    if($(e).attr('name') == "Cedula" || $(e).attr('name') == "Placa"){
+      CargaHistorialServicios();
+    }
+    if($(e).attr('name') == "Cedula" || $(e).attr('name') == "Placa"){
+      CargaHistorialServicios();
+    }
+    if($(e).attr('name') == "IdAveria"){
+
+      listaAveriasHijo($("#IdAveriaHijo").val(),$(e).val());
+      if($('#IdAveria option:selected').val()==1 || $('#IdAveria option:selected').val()==4){
+        $("#IdAveriaHijo").show();
+        $("#IdAveriaHijo").css("display", "block");
+      }else{
+        $(".Averias").hide();
+        $(".Averias").css("display", "hide");
+      }
+    }
+}
+function Inicializa(){
+ $("#IdAveriaHijo").hide();
   $("#DivBancos").hide();
   $("#DivTDC").hide();
   $("#MercadopagoLinkDiv").hide();
+  $("#MercadopagoDiv").hide();
   
   //listaAveriasHijo();
   if($("#IdServicioTipo").val()=="1"){
@@ -27,10 +99,20 @@ $(document).ready(function(){
     $('input[name=IdMetodoPago][value=1]').prop('disabled', 'disabled');
     
   }else{
-     
+    
     $(".asegurado").hide();
   }
-  //crear servicio
+}
+function CrearServicio(){
+ listaMarcas();
+  listaEstadosOrigen();
+  listaEstadosDestino();
+  listaSeguros();
+  listaAverias();
+  listaCondicionLugar();
+  listaBancos();
+  listaTiposPagosElectronicos();
+  listaAnioTarjeta();  
   var parametros_iniciales = {
     "IdServicioTipo" : $("#IdServicioTipo").val(),
     "IdAplicacion" : 3,
@@ -41,74 +123,40 @@ $(document).ready(function(){
   $("#IdServicio").val(RespuestaServicio.IdServicio);
   $("#CodigoServicio").val(RespuestaServicio.CodigoServicio);
   $("#Inicio").val(RespuestaServicio.DatosServicio.Inicio);
-  //cargar historial de servicios
+}
+function EditarDatosServicio(){
+  var parametros_servicio = {
+    "IdServicio" : $("#IdServicio").val()
+  }
+  var DatosServicio = AjaxCall("servicios/clienteapp/datosServicio.php", parametros_servicio, agregarSuccess, MensajeError);
+  console.log(DatosServicio);
+    $.each(DatosServicio, function(index, item) {
+        $("#" + index).val(item);
+        
+        
+        //console.log( $("#" + index).prop("type"));
+        if ($('input[name=' + index + ']').is(":radio")) {
+            console.log( index);
+            $('input[name='+index+'][value='+item+']').prop('checked', 'checked');
+            AccionesChange($('input[name='+index+'][value='+item+']'));
+        }else{
+            if(index == 'IdMarca') listaMarcas(item);
+            if(index == 'IdEstadoOrigen') listaEstadosOrigen(item);
+            if(index == 'IdEstadoDestino') listaEstadosDestino(item);
+            if(index == 'IdSeguro') listaSeguros(item);
+            if(index == 'IdAveria') listaAverias(item);
+            if(index == 'IdAveriaHijo') listaAveriasHijo(item);
+            if(index == 'IdCondicionLugar') listaCondicionLugar(item);
+            if(index == 'IdBanco') listaBancos(item);
+            if(index == 'IdTipoPagoElectronico') listaTiposPagosElectronicos(item);
+            if(index == 'AnioTarjeta') listaAnioTarjeta(item); 
+            AccionesChange($('input[name='+index+']'));
+        }
 
-
-  //activar el onchange de los campos
-  $(".SaveAutomaticoServicio").change(function(){
-
-    if($(this).attr('name') == "Cedula" || $(this).attr('name') == "Placa"){
-      CargaHistorialServicios();
-    }
-    if($(this).attr('name') == "IdAveria"){
-
-      listaAveriasHijo($("#IdAveriaHijo").val(),$(this).val());
-      console.log($('#IdAveria option:selected').val());
-      if($('#IdAveria option:selected').val()==1 || $('#IdAveria option:selected').val()==4){
-        $("#IdAveriaHijo").show();
-        $("#IdAveriaHijo").css("display", "block");
-      }else{
-        $(".Averias").hide();
-        $(".Averias").css("display", "hide");
-      }
-    }
-
-    GuardarAutomaticoServicio();
-  });
-  $(".SaveAutomaticoServicioCliente").change(function(){
-    GuardarAutomaticoServicioCliente();
-
-    if($(this).attr('name') == "Cedula" || $(this).attr('name') == "Placa"){
-      CargaHistorialServicios();
-    }
-  });
-  $(".SaveAutomaticoServicioGrua").change(function(){
-    if($(this).attr('name') == "HoraTiempoEstimadoEspera" || $(this).attr('name') == "MinutosTiempoEstimadoEspera"){
-            calculaTiempoDeEspera();
-    }  
-    
-    GuardarAutomaticoServicioGrua();
-  });
-  
-  $(".SaveAutomaticoServicioPrecio").change(function(){
-    if($(this).attr('name') == "IdMetodoPago"){
-            if($(this).val()== 1){
-                $("#DivBancos").show();
-                $("#DivTDC").hide();
-            }
-            if($(this).val()== 2){
-                $("#DivBancos").hide();
-                $("#DivTDC").show();
-            }
-    }
-    if($(this).attr('name') == "IdTipoPagoElectronico"){
-            $("#MercadopagoDiv").html("");
-            $("#MercadopagoLinkDiv").hide();    
-            if($(this).val()== 2){
-                CargarMercadoPago();
-            }
-            if($(this).val() == 1){
-                $("#MercadopagoLinkDiv").show();                
-                CargarLinkMercadoPago();
-                
-            }
-    } 
-    GuardarAutomaticoServicioPrecio();
-  });  
- 
-  
-});//end document ready
-
+        
+      
+    });
+}
 function GuardarAutomaticoServicio(){
   var DataForm = $('#DataForm .SaveAutomaticoServicio').serializeArray();
   //Servicios
@@ -149,6 +197,7 @@ function GuardarAutomaticoServicioGrua(){
 function GuardarAutomaticoServicioPrecio(){
   var DataForm = $('#DataForm .SaveAutomaticoServicioPrecio').serializeArray();
   var parametros_servicio_precio = convertiraAJson(DataForm);
+  //console.log(parametros_servicio_precio);;
     var actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros_servicio_precio, agregarSuccess, MensajeError);
 
 
@@ -429,20 +478,6 @@ function actualizarServiciosEstatusLlegada(){
     var eliminarServicioEstatus = AjaxCall("servicios/clienteapp/eliminarServiciosEstatus.php", parametros);
   }
 
-}
-function CargarMercadoPago(){
-/*$( "#MercadopagoDiv" ).load( link_servidor + "/adm/Listas/index.php?action=mercadopago", function() {
-  alert( "Load was performed." );
-});*/
-    
-  $.ajax({
-    url: link_servidor + "/adm/Listas/index.php?action=mercadopago",
-    success: function(html){
-      $("#MercadopagoDiv").append(html);
-      //document.getElementById("MercadopagoDiv").appendChild(html);
-
-    }
-  });
 }
 function CargarLinkMercadoPago(){
   var PrecioClienteCIva = $("#PrecioClienteCIva").val(); 

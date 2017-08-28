@@ -9,7 +9,7 @@
   <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
     <div class="panel-body">
       <div class="" id="DivAsignacionGruero">
-        <input type="text" class="form-control SaveAutomaticoServicioCliente SaveAutomaticoServicioGrua" name="IdGrua" id="IdGrua">
+        <input type="text" class="form-control SaveAutomaticoServicioGrua" name="IdGrua" id="IdGrua">
         <div class="row">
           <div class="col-lg-4 col-xs-4 col-xs-offset-4">
             <!-- small box -->
