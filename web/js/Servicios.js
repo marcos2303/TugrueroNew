@@ -66,7 +66,7 @@ function AccionesChange(e){
       CargaHistorialServicios();
     }
     if($(e).attr('name') == "IdAveria"){
-
+        console.log('averia');
       listaAveriasHijo($("#IdAveriaHijo").val(),$(e).val());
       if($('#IdAveria option:selected').val()==1 || $('#IdAveria option:selected').val()==4){
         $("#IdAveriaHijo").show();
@@ -145,12 +145,15 @@ function EditarDatosServicio(){
             if(index == 'IdEstadoDestino') listaEstadosDestino(item);
             if(index == 'IdSeguro') listaSeguros(item);
             if(index == 'IdAveria') listaAverias(item);
-            if(index == 'IdAveriaHijo') listaAveriasHijo(item);
             if(index == 'IdCondicionLugar') listaCondicionLugar(item);
             if(index == 'IdBanco') listaBancos(item);
-            if(index == 'IdTipoPagoElectronico') listaTiposPagosElectronicos(item);
-            if(index == 'AnioTarjeta') listaAnioTarjeta(item); 
-            AccionesChange($('input[name='+index+']'));
+            if(index == 'IdTipoPagoElectronico'){
+              listaTiposPagosElectronicos(item);
+             
+            } 
+            if(index == 'AnioTarjeta') listaAnioTarjeta(item);
+            
+            AccionesChange($("#"+index));
         }
 
         

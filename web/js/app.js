@@ -363,8 +363,7 @@ function listaEstatusFinales(IdEstatusFinal){
 }
 function listaTiposPagosElectronicos(IdTipoPagoElectronico){
   $('#IdTipoPagoElectronico').find('option').remove().end().append('<option value="0">Seleccione...</option>');
-  //$('#IdBanco').find('option').remove().end();
-
+  //$('#IdTipoPagoElectronico').find('option').remove().end();
   var selected = "";
   var parametros = {
 
@@ -378,10 +377,12 @@ function listaTiposPagosElectronicos(IdTipoPagoElectronico){
     global: false,
     async:false,
     success: function(datos) {
+      
       $.each(datos.data, function(i, item) {
         selected = "";
+        
         if(typeof(IdTipoPagoElectronico) != 'undefined'){
-          if(parseInt(IdTipoPagoElectronico) === parseInt(item.IdBanco)){
+          if(parseInt(IdTipoPagoElectronico) === parseInt(item.IdTipoPagoElectronico)){
             selected = 'selected = "selected"';
           }
         }
