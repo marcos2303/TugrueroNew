@@ -211,7 +211,7 @@ function CargaHistorialServicios(){
     success: function(html){
 
       $("#DivHistorialServicios").html(html);
-      $("#example").dataTable().fnAdjustColumnSizing();
+      //$("#example").dataTable().fnAdjustColumnSizing();
     }
   });
 
