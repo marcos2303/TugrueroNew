@@ -225,6 +225,7 @@ function executeListaServiciosJson($values)
 
 			$IdServicio = $list['IdServicio'];
 			$array_json['data'][] = array(
+                "IdServicio" =>  $list['IdServicio'],
 				"CodigoServicio" =>  $list['CodigoServicio'],
 				"NombreAplicacion" =>  $list['NombreAplicacion'],
 				"NombreServicioTipo" =>  $list['NombreServicioTipo'],
@@ -303,6 +304,7 @@ function executeListaServiciosJson($values)
 		$array_json['recordsTotal'] = 0;
 		$array_json['recordsFiltered'] = 0;
 		$array_json['data'][] = array(
+            "IdServicio" =>  "",
 			"CodigoServicio" =>  "",
 			"NombreAplicacion" =>  "",
 			"NombreServicioTipo" =>  "",

@@ -34,7 +34,7 @@
 
 <script>
 $.ajax({
-	url: link_servidor + "/adm/Listas/index.php?action=lista_servicios",
+	url: link_servidor + "/adm/Listas/index.php?action=lista_servicios&EditarServicio=1",
 	success: function(html){
 		$("#DataServicios").append(html);
 	}

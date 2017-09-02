@@ -1,6 +1,7 @@
 <table id="example" class="table table-striped table-bordered table-responsive" width="100%" cellspacing="0">
   <thead class="">
     <tr>
+      <th>IdServicio</th>
       <th>Código</th>
       <th>Aplicacion</th>
       <th>Tipo servicio</th>
@@ -66,6 +67,7 @@
   </thead>
   <tfoot>
     <tr>
+      <th><input id="IdServicio" name="IdServicio" type="text"></th>
       <th><input id="CodigoServicio" name="CodigoServicio" type="text"></th>
       <th><input id="NombreAplicacion" name="NombreAplicacion" type="text"></th>
       <th><input id="NombreServicioTipo" name="NombreServicioTipo" type="text"></th>
@@ -158,7 +160,7 @@ $(document).ready(function() {
     "serverSide": true,
     "sScrollY": "260",
     "sDom": 'Btrp',
-    "ajax":link_servidor + "/adm/Listas/index.php?action=lista_servicios_json&IdProveedor=<?php echo $values['IdProveedor'];?>&IdGrua=<?php echo $values['IdGrua'];?>",
+    "ajax":link_servidor + "/adm/Listas/index.php?action=lista_servicios_json&IdProveedor=<?php echo $values['IdProveedor'];?>&IdGrua=<?php echo $values['IdGrua'];?>&EditarServicio=<?php echo $values['EditarServicio'];?>",
     "language": {
       "url": link_servidor + "/web/js/datatables.spanish.lang"
     },
@@ -171,34 +173,34 @@ $(document).ready(function() {
       {
         extend: 'colvisGroup',
         text: 'Básicos',
-        show: [ 2,3,4,5,22,23,60 ],
-        hide: [ 1,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
+        show: [ 1,2,3,4,5,22,23,60 ],
+        hide: [ 6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
           21,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
-          41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
+          41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60]
         },
         {
           extend: 'colvisGroup',
           text: 'Cliente',
-          show: [ 44,45,46,47,48,49,50,51,52,53 ],
+          show: [ 45,46,47,48,49,50,51 ],
           hide: [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
             21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
-            41,42,43,54,55,56,57,58,59]
+            41,42,43,44,52,53,54,55,56,57,58,59,60]
           },
           {
             extend: 'colvisGroup',
             text: 'Gruero',
-            show: [ 31,32,33,35,36,37,38,39,60 ],
+            show: [ 31,32,33,35,36,37,38,39,61 ],
             hide: [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
               21,22,23,24,25,26,27,28,29,30,34,40,
-              41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
+              41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60]
             },
             {
               extend: 'colvisGroup',
               text: 'Averia/Condición',
-              show: [ 7,8,9,10,60 ],
+              show: [ 7,8,9,10,61 ],
               hide: [ 1,2,3,4,5,6,11,12,13,14,15,16,17,18,19,20,
                 21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
-                41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
+                41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60]
               },
               {
                 extend: 'colvisGroup',
@@ -206,15 +208,15 @@ $(document).ready(function() {
                 show: [ 13,14,15,18,19,20,21 ],
                 hide: [ 1,2,3,4,5,6,7,8,9,10,11,12,16,17,22,23,24,25,26,
                   27,28,29,30,31,32,33,34,35,36,37,38,39,40,
-                  41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
+                  41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60]
                 },
                 {
                   extend: 'colvisGroup',
                   text: 'Precios',
-                  show: [ 54,55,56,57,58,59,60 ],
+                  show: [ 54,55,56,57,58,59,61 ],
                   hide: [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
                     21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
-                    41,42,43,44,45,46,47,48,49,50,51,52,53]
+                    41,42,43,44,45,46,47,48,49,50,51,52,53,60]
                   },
 
                   {
@@ -224,6 +226,7 @@ $(document).ready(function() {
                   }
                 ],
                 "columns": [
+                  { "data" : "IdServicio" },
                   { "data" : "CodigoServicio" },
                   { "data" : "NombreAplicacion" },
                   { "data" : "NombreServicioTipo" },
@@ -290,11 +293,11 @@ $(document).ready(function() {
                   { "data" : "actions" },
                 ],
                 "aoColumnDefs": [
-                  { "visible": false, "targets": [ 1,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
+                  { "visible": false, "targets": [ 6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
                     21,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
-                    41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
+                    41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60]
                   },
-                  { 'bSortable': false, 'aTargets': [ 60 ] }
+                  { 'bSortable': false, 'aTargets': [ 61 ] }
                 ]
               });
                 $('#example').css( 'display', 'table' );
@@ -309,6 +312,25 @@ $(document).ready(function() {
             }
           });
         }*/
+	//click
+    $('#example tbody').on( 'click', 'tr', function () {
+        var data = table.row( this ).data();
+        if ( $(this).hasClass('seleccionado') ) {
+            $(this).removeClass('seleccionado');
+        }
+        else {
+            table.$('tr.seleccionado').removeClass('seleccionado');
+            $(this).addClass('seleccionado');
+        }
+        console.log(data);
+    } );
+	$('#example tbody').on('dblclick', 'tr', function () {
+	var data = table.row( this ).data();
+	$(this).addClass('seleccionado');
+	console.log(data.IdServicio);
+
+	$(location).attr('href', '<?php echo full_url."/adm/Servicios/index.php?action=edit&IdServicio="?>' + data.IdServicio);
+	} );
         $('#column_0').on ('keypress', function(e){
           if(e.which == 13) {
             table.column(table.column(0)).search($(this).val()).draw();
