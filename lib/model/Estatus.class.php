@@ -6,7 +6,7 @@
 			$ConnectionORM = new ConnectionORM();
 			$q = $ConnectionORM->getConnect()->Estatus
 			->select("*")
-			->where("IdEsttaus=?",$IdEstatus)->fetch();
+			->where("IdEstatus=?",$IdEstatus)->fetch();
 			return $q;
 		}
 		public function getList($values){

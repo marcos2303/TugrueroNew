@@ -106,5 +106,32 @@ class Push{
       return $result;
   }
 
+  function sendPushFirebase($values,$ids,$notification){
+//$url = "https://code.google.com/apis/console/#project:tugruero-19680";
+$url = 'https://fcm.googleapis.com/fcm/send';
+    $fields = array(
+         'registration_ids' => $ids,
+		 'notification' => $notification,
+         'data' => array("IdServicio" => $values['IdServicio'])
 
+        );
+    $headers = array(
+        'Authorization:key = AAAAov3-Dnw:APA91bHokwmlK8Qpxa6YEU0sPby5UGu66AoqrnirlkQJO62yEPJ33JNsf26V1_qeJEsg_-jdCVYnngQEvYL55CEY4UlPVxZS3kKAOL236y4XjAxYk72EtMoq_d7IrWWUw6ag6g3hBbcA',
+        'Content-Type: application/json'
+        );
+   $ch = curl_init(); 
+   curl_setopt($ch, CURLOPT_URL, $url);
+   curl_setopt($ch, CURLOPT_POST, true);
+   curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+   curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 0);  
+   curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+   curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+   $result = curl_exec($ch);           
+   if ($result === FALSE) {
+       die('Curl failed: ' . curl_error($ch));
+   }
+   curl_close($ch);
+   return $result;
+  }
 }

@@ -66,7 +66,7 @@ function AccionesChange(e){
       CargaHistorialServicios();
     }
     if($(e).attr('name') == "IdAveria"){
-        console.log('averia');
+        //console.log('averia');
       listaAveriasHijo($("#IdAveriaHijo").val(),$(e).val());
       if($('#IdAveria option:selected').val()==1 || $('#IdAveria option:selected').val()==4){
         $("#IdAveriaHijo").show();
@@ -75,6 +75,21 @@ function AccionesChange(e){
         $(".Averias").hide();
         $(".Averias").css("display", "hide");
       }
+    }
+    if($(e).attr('name') == "HoraTiempoEstimadoEspera" || $(e).attr('name') == "MinutosTiempoEstimadoEspera"){
+        calculaTiempoDeEspera();
+    }
+    if($(e).attr('name') == "EstatusGrueroCliente"){
+        actualizarServiciosEstatusClienteGruero();
+    }
+    if($(e).attr('name') == "EstatusLlegada"){
+        actualizarServiciosEstatusLlegada();
+    }
+   if($(e).attr('name') == "Pagado"){
+        if($(e).val()==1){
+           BloqueaCamposPago(); 
+        }
+        
     }
 }
 function Inicializa(){
@@ -129,14 +144,14 @@ function EditarDatosServicio(){
     "IdServicio" : $("#IdServicio").val()
   }
   var DatosServicio = AjaxCall("servicios/clienteapp/datosServicio.php", parametros_servicio, agregarSuccess, MensajeError);
-  console.log(DatosServicio);
+  //console.log(DatosServicio);
     $.each(DatosServicio, function(index, item) {
         $("#" + index).val(item);
         
         
         //console.log( $("#" + index).prop("type"));
         if ($('input[name=' + index + ']').is(":radio")) {
-            console.log( index);
+            //console.log( index);
             $('input[name='+index+'][value='+item+']').prop('checked', 'checked');
             AccionesChange($('input[name='+index+'][value='+item+']'));
         }else{
@@ -150,15 +165,33 @@ function EditarDatosServicio(){
             if(index == 'IdTipoPagoElectronico'){
               listaTiposPagosElectronicos(item);
              
-            } 
+            }
+            if(index == 'IdGrua') DatosGrua(item);
             if(index == 'AnioTarjeta') listaAnioTarjeta(item);
-            
             AccionesChange($("#"+index));
         }
 
         
       
     });
+    
+    $.each(DatosServicio.Estatus, function(index, item) {
+       if(item.IdEstatus == 4) {
+           $("#EstatusGrueroCliente").prop("checked","checked");
+           $("#FechaGrueroCliente").val(item.Fecha);
+           $("#HoraGrueroCliente").val(item.Hora);
+           AccionesChange($("#EstatusGrueroCliente"));
+       }
+       if(item.IdEstatus == 5) {
+           $("#EstatusLlegada").prop("checked","checked");
+           $("#FechaLlegada").val(item.Fecha);
+           $("#HoraLlegada").val(item.Hora);
+           AccionesChange($("#EstatusLlegada"));
+       }
+       
+    });
+    
+    
 }
 function GuardarAutomaticoServicio(){
   var DataForm = $('#DataForm .SaveAutomaticoServicio').serializeArray();
@@ -180,7 +213,7 @@ function GuardarAutomaticoServicioCliente(){
   var DataForm = $('#DataForm .SaveAutomaticoServicioCliente').serializeArray();
   //Servicios clientes
   var parametros_servicio_cliente = convertiraAJson(DataForm);
-  console.log(parametros_servicio_cliente);
+  //console.log(parametros_servicio_cliente);
   var actualizarServicio = AjaxCall("servicios/clienteapp/actualizarServicioCliente.php", parametros_servicio_cliente, agregarSuccess, MensajeError);
   var parametros_servicio = {
     "IdServicio" : $("#IdServicio").val()
@@ -229,7 +262,7 @@ function DatosPoliza(){
   }
   var datos_poliza = AjaxCall("servicios/adminapp/datosPoliza.php", parametros_poliza);
   if(datos_poliza.IdPoliza){
-    console.log("poliza");
+    //console.log("poliza");
     $('#IdServicioTipo').val(1);
     $("#IdPoliza").val(datos_poliza.IdPoliza);
     $("#IdSeguro").val(datos_poliza.IdSeguro);
@@ -484,7 +517,7 @@ function actualizarServiciosEstatusLlegada(){
 }
 function CargarLinkMercadoPago(){
   var PrecioClienteCIva = $("#PrecioClienteCIva").val(); 
-  console.log($("#PrecioClienteCIva").val());
+  //console.log($("#PrecioClienteCIva").val());
   $.ajax({
     url: link_servidor + "/adm/Listas/index.php?action=mercadopagolink&PrecioClienteCIva=" + PrecioClienteCIva,
     success: function(data){
@@ -493,6 +526,11 @@ function CargarLinkMercadoPago(){
     },
     dataType: "json"
   });
+}
+function BloqueaCamposPago(){
+    $(".BloqueoPagos").attr("disabled", "disabled");
+    $(".BloqueoPagos").attr("readonly", "readonly");
+    console.log("Bloqueo");
 }
 function calculaTiempoDeEspera(){
     
@@ -513,7 +551,7 @@ function calculaTiempoDeEspera(){
   //console.log(fecha);
   fecha.setHours(horasumada + fecha.getHours());
   fecha.setMinutes(minutosumado + fecha.getMinutes());
-  console.log(fecha);
+  //console.log(fecha);
   
   minutos2 = fecha.getMinutes();
   hora2 = fecha.getHours();
@@ -521,9 +559,9 @@ function calculaTiempoDeEspera(){
   mes2 = fecha.getMonth() + 1;
   anio2= fecha.getFullYear();
   
-  console.log("hora " + hora2);
+  //console.log("hora " + hora2);
   
-  console.log("minuto " + minutos2);
+  //console.log("minuto " + minutos2);
   
   
   if(mes2 <10){
@@ -550,6 +588,6 @@ function calculaTiempoDeEspera(){
       minutosumado = "0" + minutosumado;
   } 
   $("#TiempoEstimadoEspera").val(horasumada + ":" + minutosumado);
-    GuardarAutomaticoServicioGrua();
+    //GuardarAutomaticoServicioGrua();
 }
 

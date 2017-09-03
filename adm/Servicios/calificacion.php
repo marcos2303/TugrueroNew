@@ -47,11 +47,8 @@
                     </tr>
                     <tr>
                       <td><label>¿Recomienda nuestros servicios a otras personas?</label></td>
-                      <td><input type="radio" class="form-input SaveAutomaticoServicioGrua" name="Recomienda" id="Recomienda[]" value="1"/></td>
-                      <td><input type="radio" class="form-input SaveAutomaticoServicioGrua" name="Recomienda" id="Recomienda[]" value="2"/></td>
-                      <td><input type="radio" class="form-input SaveAutomaticoServicioGrua" name="Recomienda" id="Recomienda[]" value="3"/></td>
-                      <td><input type="radio" class="form-input SaveAutomaticoServicioGrua" name="Recomienda" id="Recomienda[]" value="4"/></td>
-                      <td><input type="radio" class="form-input SaveAutomaticoServicioGrua" name="Recomienda" id="Recomienda[]" value="5"/></td>
+                      <td colspan="2">Si <input type="radio" class="form-input SaveAutomaticoServicioGrua" name="Recomienda" id="Recomienda[]" value="1"/></td>
+                      <td colspan="3">No <input type="radio" class="form-input SaveAutomaticoServicioGrua" name="Recomienda" id="Recomienda[]" value="2"/></td>
                     </tr>
                 </table>
             </div>

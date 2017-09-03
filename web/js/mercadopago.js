@@ -132,6 +132,7 @@ function sdkResponseHandler(status, response) {
                         $("#Pagar").hide();
                         $(".MP").prop("disabled","disabled");
                         $(".MP").prop("readonly","readonly");
+                        $("#Pagado").val(1);
                         GuardarAutomaticoServicioPrecio();
                     }else{
                         //console.log(data.response);

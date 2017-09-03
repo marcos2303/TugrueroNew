@@ -61,13 +61,13 @@
           <div class="col-sm-2">
             <div class="form-group">
               <label>Hrs.Estimadas de espera</label>
-              <input type="number" size="4" min="0" max="96" value="0" class="form-control input-sm" onchange="calculaTiempoDeEspera();" id="HoraTiempoEstimadoEspera" name="HoraTiempoEstimadoEspera">
+              <input type="number" size="4" min="0" max="96" value="0" class="form-control input-sm SaveAutomaticoServicioGrua" onchange="calculaTiempoDeEspera();" id="HoraTiempoEstimadoEspera" name="HoraTiempoEstimadoEspera">
             </div>
           </div>
           <div class="col-sm-2">
             <div class="form-group">
               <label>Min.Estimados de espera</label>
-              <input type="number" size="4" min="0" max="59" value="0" class="form-control input-sm" onchange="calculaTiempoDeEspera();" id="MinutosTiempoEstimadoEspera" name="MinutosTiempoEstimadoEspera">
+              <input type="number" size="4" min="0" max="59" value="0" class="form-control input-sm SaveAutomaticoServicioGrua" onchange="calculaTiempoDeEspera();" id="MinutosTiempoEstimadoEspera" name="MinutosTiempoEstimadoEspera">
               <input type="hidden" value="00:00" class="form-control input-sm SaveAutomaticoServicioGrua" id="TiempoEstimadoEspera" name="TiempoEstimadoEspera">
             </div>
           </div>

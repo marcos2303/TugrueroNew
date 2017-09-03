@@ -10,15 +10,16 @@
     <div class="panel-body">
       <div class="" id="DivMetodoPago">
         <div class="row">
+			<input type="hidden" name="Pagado" id="Pagado" value="0">
           <div class="col-sm-12">
                 <label class="radio-inline">
-                    <input type="radio" name="IdMetodoPago" id="" class="SaveAutomaticoServicioPrecio MP" value="1"> Bancos
+                    <input type="radio" name="IdMetodoPago" id="" class="SaveAutomaticoServicioPrecio MP BloqueoPagos" value="1"> Bancos
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="IdMetodoPago" class="SaveAutomaticoServicioPrecio MP" value="2"> TDC
+                  <input type="radio" name="IdMetodoPago" class="SaveAutomaticoServicioPrecio MP BloqueoPagos" value="2"> TDC
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" name="IdMetodoPago" class="SaveAutomaticoServicioPrecio MP" value="3" disabled="disabled"> Asegurado
+                    <input type="radio" name="IdMetodoPago" class="SaveAutomaticoServicioPrecio MP BloqueoPagos" value="3" disabled="disabled"> Asegurado
                 </label>
           </div>
         </div>
@@ -26,13 +27,13 @@
             <div class="col-sm-4">
               <div class="form-group">
                 <label> Bancos</label>
-                <select class="form-control SaveAutomaticoServicioPrecio input-sm" id="IdBanco" name="IdBanco" style="width: 100%;"></select>
+                <select class="form-control SaveAutomaticoServicioPrecio input-sm BloqueoPagos" id="IdBanco" name="IdBanco" style="width: 100%;"></select>
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
                 <label> Referencia</label>
-                    <input class="form-control SaveAutomaticoServicioPrecio input-sm " id="Referencia" name="Referencia" type="text" placeholder=""  autocomplete="off">
+                    <input class="form-control SaveAutomaticoServicioPrecio input-sm BloqueoPagos" id="Referencia" name="Referencia" type="text" placeholder=""  autocomplete="off">
               </div>
             </div>
         </div>
@@ -40,7 +41,7 @@
             <div class="col-sm-12">
               <div class="form-group">
                 <label>Pago</label>
-                <select class="form-control input-sm SaveAutomaticoServicioPrecio MP" id="IdTipoPagoElectronico" name="IdTipoPagoElectronico" style="width: 100%;"></select>
+                <select class="form-control input-sm SaveAutomaticoServicioPrecio MP BloqueoPagos" id="IdTipoPagoElectronico" name="IdTipoPagoElectronico" style="width: 100%;"></select>
               </div>
             </div>
             <div class="panel-body" id="MercadopagoDiv">
@@ -49,7 +50,7 @@
 					<div class="col-sm-4">
 						  <div class="form-group">
 							<label for="docType">Tipo de documento</label> <label class="text-danger"> * </label>
-								<select required  id="TipoDocumento" data-checkout="docType" name="TipoDocumento"  data-checkout="docType" class="form-control input-sm SaveAutomaticoServicioPrecio MP">
+								<select required  id="TipoDocumento" data-checkout="docType" name="TipoDocumento"  data-checkout="docType" class="form-control input-sm SaveAutomaticoServicioPrecio MP BloqueoPagos">
 									<option value="">Seleccione...</option>
 									<option value="CI-V">CI-V</option>
 									<option value="CI-E">CI-E</option>
@@ -65,13 +66,13 @@
 					<div class="col-sm-4">
 						  <div class="form-group">
 							<label for="docNumber">Número de documento</label> <label class="text-danger"> * </label> (12345678)
-							<input required type="text" class="MP form-control input-sm SaveAutomaticoServicioPrecio" autocomplete="off" data-checkout="docNumber" name="NumeroDocumento" id="NumeroDocumento" maxlength="8" value="" placeholder=""> 
+							<input required type="text" class="MP form-control input-sm SaveAutomaticoServicioPrecio BloqueoPagos" autocomplete="off" data-checkout="docNumber" name="NumeroDocumento" id="NumeroDocumento" maxlength="8" value="" placeholder=""> 
 						  </div>	
 					</div>
 					<div class="col-sm-4">
 						  <div class="form-group">
 								<label for="cardholderName">Titular</label> 
-								<input type="text" required class="MP form-control input-sm SaveAutomaticoServicioPrecio" autocomplete="off" id="NombreTarjeta" name="NombreTarjeta" maxlength="50" data-checkout="cardholderName" maxlength="" value="APRO" Placeholder="">
+								<input type="text" required class="MP form-control input-sm SaveAutomaticoServicioPrecio BloqueoPagos" autocomplete="off" id="NombreTarjeta" name="NombreTarjeta" maxlength="50" data-checkout="cardholderName" maxlength="" value="APRO" Placeholder="">
 						  </div>	
 					</div>	
 				</div>
@@ -80,7 +81,7 @@
 						  <div class="form-group">
 							<label for="cardNumber">Número de tarjeta</label> <label class="text-danger"> * </label>
 							<div class="">
-								<input required type="text" class="MP form-control input-sm SaveAutomaticoServicioPrecio" autocomplete="off" data-checkout="cardNumber" id="NumeroTarjeta" name="NumeroTarjeta" maxlength="16" value="4966382331109310"  placeholder="">
+								<input required type="text" class="MP form-control input-sm SaveAutomaticoServicioPrecio BloqueoPagos" autocomplete="off" data-checkout="cardNumber" id="NumeroTarjeta" name="NumeroTarjeta" maxlength="16" value="4966382331109310"  placeholder="">
 							</div>
 						  </div>
 
@@ -88,7 +89,7 @@
 					<div class="col-sm-4">
 						  <div class="form-group">
 							  <label for="securityCode" >Código de seguridad</label> <label class="text-danger"> * </label> 
-							  <input required type="text" class="MP form-control input-sm SaveAutomaticoServicioPrecio" data-checkout="securityCode" autocomplete="off" id="CodigoSeguridad" name="CodigoSeguridad" maxlength="3" value="" placeholder="">
+							  <input required type="text" class="MP form-control input-sm SaveAutomaticoServicioPrecio BloqueoPagos" data-checkout="securityCode" autocomplete="off" id="CodigoSeguridad" name="CodigoSeguridad" maxlength="3" value="" placeholder="">
 						  </div>
 
 					</div>	
@@ -97,14 +98,14 @@
 					<div class="col-sm-4">
 						  <div class="form-group">
 							<label for="AnioTarjeta" >Año de vencimiento</label> <label class="text-danger"> * </label>
-							<select required id="AnioTarjeta" name="AnioTarjeta" data-checkout="cardExpirationYear" class="MP form-control input-sm SaveAutomaticoServicioPrecio"></select>
+							<select required id="AnioTarjeta" name="AnioTarjeta" data-checkout="cardExpirationYear" class="MP form-control input-sm SaveAutomaticoServicioPrecio BloqueoPagos"></select>
 						  </div>
 
 					</div>
 					<div class="col-sm-4">
 						  <div class="form-group">
 							<label for="MesTarjeta" >Mes de vencimiento</label> <label class="text-danger"> * </label>
-								<select required id="MesTarjeta" name="MesTarjeta" data-checkout="cardExpirationMonth" class="MP form-control input-sm SaveAutomaticoServicioPrecio">
+								<select required id="MesTarjeta" name="MesTarjeta" data-checkout="cardExpirationMonth" class="MP form-control input-sm SaveAutomaticoServicioPrecio BloqueoPagos">
 									<option value="">Seleccione...</option>
 									<option value="01">01</option>
 									<option value="02">02</option>
@@ -134,7 +135,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						  <div class="form-group">
-							  <button type="button" class="btn btn-success" id="Pagar" >Procesar Pago</button>      
+							  <button type="button" class="btn btn-success BloqueoPagos" id="Pagar" >Procesar Pago</button>      
 						  </div>	
 
 					</div>	
@@ -144,7 +145,7 @@
 				
 				  <div class="form-group">
 					<label> Link</label>
-						<input class="form-control SaveAutomaticoServicioPrecio input-sm " id="Link" name="Link" type="text" placeholder=""  autocomplete="off">
+						<input class="form-control SaveAutomaticoServicioPrecio input-sm BloqueoPagos" id="Link" name="Link" type="text" placeholder=""  autocomplete="off">
 				  </div>
 				
 			</div> 

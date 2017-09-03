@@ -484,11 +484,12 @@ class Servicios {
 		Servicios.LatitudDestino,Servicios.LongitudDestino,Servicios.IdEstadoDestino,Servicios.DireccionDestino,Servicios.DireccionDestinoDetallada,
 		Servicios.Agendado,Servicios.FechaAgendado,Servicios.IdAveria,Servicios.IdAveriaHijo,Servicios.AveriaDetalle,Servicios.IdCondicionLugar,Servicios.CondicionDetalle,Servicios.KM,Servicios.Inicio,Servicios.Fin,Servicios.Inicio,Servicios.Fin,Servicios.Observacion,Servicios.UltimaActCliente,Servicios.UltimaActGruero,
 		c.Nombres, c.Apellidos,c.Cedula,c.Placa,c.IdMarca, c.Modelo,c.Color,c.Anio,c.Celular,
-		g.IdGrua,g.IdProveedor,g.Nombres as NombresGruero,g.Apellidos as ApellidosGruero,g2.Placa as PlacaGruero,
+		g.IdGrua,g.IdProveedor,g.Nombres as NombresGruero,g.Apellidos as ApellidosGruero,g2.Placa as PlacaGruero,g.ServicioGeneral, g.TratoCordial, g.TratoVehiculo, g.Presencia, g.Recomienda,
+		g.FechaAsignacion, g.HoraAsignacion, g.TiempoEstimadoEspera, g.FechaEstimadaLlegada, g.HoraEstimadaLlegada,g.HoraTiempoEstimadoEspera,g.MinutosTiempoEstimadoEspera,
 		g2.IdGruaTipo  as IdGruaTipo,g2.IdMarca  as IdMarcaGruero,g2.Modelo as ModeloGruero,g2.Color as ColorGruero,g2.Anio as AnioGruero,g.Celular as CelularGruero,g.Cedula as CedulaGruero,g2.Latitud as LatitudGruero,g2.Longitud as LongitudGruero,
 		p.PrecioSIvaBaremo,p.IvaBaremo, p.PrecioCIvaBaremo, p.PrecioSIvaBaremoModificado, p.IvaBaremoModificado, p.PrecioCIvaBaremoModificado, p.PrecioClienteSIva,
 		p.IvaCliente, p.PrecioClienteCIva, p.PrecioClienteSIvaModificado, p.IvaClienteModificado,p.PrecioClienteCIvaModificado, p.IdUsuarioPermiso, p.FechaFacturaDigital, p.FechaFacturaFisica, p.FechaEstimadaPago, p.FacturaPagada,
-		p.IdMetodoPago, p.IdBanco,p.Referencia,p.IdTipoPagoElectronico,p.TipoDocumento,p.NumeroDocumento,p.NumeroTarjeta,p.CodigoSeguridad,p.AnioTarjeta,p.TipoTarjeta,p.Link,p.NumeroTarjeta
+		p.IdMetodoPago, p.IdBanco,p.Referencia,p.IdTipoPagoElectronico,p.TipoDocumento,p.NumeroDocumento,p.NumeroTarjeta,p.CodigoSeguridad,p.AnioTarjeta,p.TipoTarjeta,p.Link,p.NumeroTarjeta,p.Pagado
 		")
 		->join("ServiciosClientes","LEFT JOIN ServiciosClientes c on c.IdServicio = Servicios.IdServicio")
 		->join("ServiciosPrecios","LEFT JOIN ServiciosPrecios p on p.IdServicio = Servicios.IdServicio")
@@ -501,6 +502,7 @@ class Servicios {
 		->join("Estados","LEFT JOIN Estados e on e.IdEstado = Servicios.IdEstadoOrigen")
 		->join("Estados","LEFT JOIN Estados e2 on e2.IdEstado = Servicios.IdEstadoDestino")
 		->where("Servicios.IdServicio=?",$values['IdServicio'])
+		//echo $q;die;
 		->fetch();
 		return $q;
 	}
@@ -895,8 +897,9 @@ class Servicios {
 			$gruas_disponibles = $Gruas->getGruasServicio($values, 0.10);
 			foreach ($gruas_disponibles as $grua) {
 				$tokens[] = $grua["Token"];
+				
 			}
-			$resultado_envio = $Push->sendGoogleCloudMessage( $values,$tokens,$values["notification"] );
+			$resultado_envio = $Push->sendPushFirebase( $values,$tokens,$values["notification"] );
 			return $resultado_envio;
 	}
 

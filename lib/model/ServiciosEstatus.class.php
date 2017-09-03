@@ -92,10 +92,23 @@
       WHERE se.IdServicio = ".$values['IdServicio']."
       ORDER BY e.Orden DESC
       LIMIT 1";
-			$ConnectionORM= new ConnectionORM();
-			$q = $ConnectionORM->ejecutarPreparado($query);
-      $q = $q->fetch();
-			return $q;
+		$ConnectionORM= new ConnectionORM();
+		$q = $ConnectionORM->ejecutarPreparado($query);
+		$q = $q->fetch();
+		return $q;
+
+		}
+    function getListaServicioEstatus($values){
+
+      $query = "SELECT se.IdEstatus,se.Fecha,se.Hora
+      FROM ServiciosEstatus se
+      INNER JOIN Estatus es ON es.IdEstatus = se.IdEstatus
+      WHERE se.IdServicio = ".$values['IdServicio']."
+      ";
+		$ConnectionORM= new ConnectionORM();
+		$q = $ConnectionORM->ejecutarPreparado($query);
+		
+		return $q;
 
 		}
     function getEstatusOrden($values){
