@@ -106,15 +106,18 @@ class Push{
       return $result;
   }
 
-  function sendPushFirebase($values,$ids,$notification){
+  function sendPushFirebase($values,$ids,$data){
 //$url = "https://code.google.com/apis/console/#project:tugruero-19680";
 $url = 'https://fcm.googleapis.com/fcm/send';
+	//$data["IdServicio"] = $values['IdServicio'];
     $fields = array(
          'registration_ids' => $ids,
-		 'notification' => $notification,
-         'data' => array("IdServicio" => $values['IdServicio'])
+		 'data' => $data,
+		 
+         //'data' => array("IdServicio" => $values['IdServicio'])
 
         );
+	//print_r($notification);die;
     $headers = array(
         'Authorization:key = AAAAov3-Dnw:APA91bHokwmlK8Qpxa6YEU0sPby5UGu66AoqrnirlkQJO62yEPJ33JNsf26V1_qeJEsg_-jdCVYnngQEvYL55CEY4UlPVxZS3kKAOL236y4XjAxYk72EtMoq_d7IrWWUw6ag6g3hBbcA',
         'Content-Type: application/json'

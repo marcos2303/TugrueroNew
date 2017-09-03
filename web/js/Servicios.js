@@ -1,3 +1,18 @@
+    /*var popup = {
+			"popup": "popupCargando",
+			"imagen": "none",
+			"mensaje": "Cargando información",
+			"displaybarra": ['none'],
+			"displaysBotones": ['none', 'none', 'none', 'none'],
+			"text": ['', '', '', ''],
+			"onClick": ["", "", "", ""]
+
+		};
+		genericPop(popup);
+                
+$(window).load(function() {
+    alert(1);
+});      */  
 $(document).ready(function(){
     Inicializa();
     if($("#action").val()=='new'){
@@ -363,6 +378,8 @@ var parametros_servicio = {
         "body" : "¡Nuevo servicio de Grúa!",
         "title" : "TU/GRUERO®",
         "sound" : "default",
+        "content-available" : "1",
+        "IdServicio" : $("#IdServicio").val()
       }
 };
   var EnvioServicio = AjaxCall("servicios/clienteapp/sendPush.php", parametros_servicio,agregarSuccess,MensajeError);

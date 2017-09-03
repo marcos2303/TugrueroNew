@@ -1,6 +1,6 @@
 <?php include("../../autoload.php");?>	
 <?php include("validator.php");?>
-<?php //include("../security/security.php");?>
+<?php include("../security/security.php");?>
 
 <?php $action = "";
 setlocale(LC_NUMERIC,"es_ES.UTF8");
