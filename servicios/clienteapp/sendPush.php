@@ -16,6 +16,10 @@ $response = array("Error"=>0,"MensajeError"=>"Se presentó un error al enviar la
   $values["body"] = "¡Nuevo servicio de Grúa!",
   $values["title"] = "TU/GRUERO®",
   $values["sound"] = "default");*/
+$datos_servicio = $Servicios->getServiciosInfo($values);
+$values["Modelo"] = $datos_servicio["Modelo"];
+$values["Inicio"] = $datos_servicio["Inicio"];
+$values["AveriaNombre"] = $datos_servicio["AveriaNombre"];
 
 $values["result"] =  $Servicios->enviarServicio($values);
 if($values["result"]){

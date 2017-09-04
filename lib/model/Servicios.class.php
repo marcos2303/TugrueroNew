@@ -483,6 +483,7 @@ class Servicios {
 		Servicios.LatitudOrigen,Servicios.LongitudOrigen,Servicios.IdEstadoOrigen,Servicios.DireccionOrigen,Servicios.DireccionOrigenDetallada,
 		Servicios.LatitudDestino,Servicios.LongitudDestino,Servicios.IdEstadoDestino,Servicios.DireccionDestino,Servicios.DireccionDestinoDetallada,
 		Servicios.Agendado,Servicios.FechaAgendado,Servicios.IdAveria,Servicios.IdAveriaHijo,Servicios.AveriaDetalle,Servicios.IdCondicionLugar,Servicios.CondicionDetalle,Servicios.KM,Servicios.Inicio,Servicios.Fin,Servicios.Inicio,Servicios.Fin,Servicios.Observacion,Servicios.UltimaActCliente,Servicios.UltimaActGruero,
+		av.Nombre as AveriaNombre,
 		c.Nombres, c.Apellidos,c.Cedula,c.Placa,c.IdMarca, c.Modelo,c.Color,c.Anio,c.Celular,
 		g.IdGrua,g.IdProveedor,g.Nombres as NombresGruero,g.Apellidos as ApellidosGruero,g2.Placa as PlacaGruero,g.ServicioGeneral, g.TratoCordial, g.TratoVehiculo, g.Presencia, g.Recomienda,
 		g.FechaAsignacion, g.HoraAsignacion, g.TiempoEstimadoEspera, g.FechaEstimadaLlegada, g.HoraEstimadaLlegada,g.HoraTiempoEstimadoEspera,g.MinutosTiempoEstimadoEspera,

@@ -109,7 +109,9 @@ class Push{
   function sendPushFirebase($values,$ids,$data){
 //$url = "https://code.google.com/apis/console/#project:tugruero-19680";
 $url = 'https://fcm.googleapis.com/fcm/send';
-	//$data["IdServicio"] = $values['IdServicio'];
+	$data["Modelo"] = $values['Modelo'];
+	$data["Inicio"] = $values['Inicio'];
+	$data["AveriaNombre"] = $values['AveriaNombre'];
     $fields = array(
          'registration_ids' => $ids,
 		 'data' => $data,
