@@ -9,12 +9,13 @@ include('../../autoload_servicios.php');
 $Polizas = new Polizas();
 /****************Seteo y comprobacion de valores*******************/
 $response = array("Error"=>0,"MensajeError"=>"","MensajeSuccess"=> 'Ok',"IdServicio"=>"0");
-//$values['Cedula']='V-21411814';
-//$values['Placa'] = 'AAABBB';
+//$values['Cedula']='V-7654321';
+//$values['Placa'] = 'mercan1';
 //$values['IdSeguro'] = '1';
 $datos_poliza = $Polizas->getLoginPoliza($values);
 if($datos_poliza){
-	$isVigente = $Polizas->isVigente($datos_poliza['Vencimiento']);
+    $isVigente = true;
+	//$isVigente = $Polizas->isVigente($datos_poliza['Vencimiento']);
 		if(!$isVigente){
 			$response = array("Error"=>1,"MensajeError"=> "Su poliza se encuentra VENCIDA, consulte con su empresa aseguradora o intente con otra póliza de su vehículo.","MensajeSuccess"=> '');
 		}else{
