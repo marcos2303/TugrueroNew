@@ -20,7 +20,7 @@ $datos_servicio = $Servicios->getServiciosInfo($values);
 $values["Modelo"] = $datos_servicio["Modelo"];
 $values["Inicio"] = $datos_servicio["Inicio"];
 $values["AveriaNombre"] = $datos_servicio["AveriaNombre"];
-
+$values["CodigoServicio"] = $datos_servicio["CodigoServicio"];
 $values["result"] =  $Servicios->enviarServicio($values);
 if($values["result"]){
   $response = array("Error"=>0,"MensajeError"=>"","MensajeSuccess"=> '',"result" =>json_decode($values["result"]));

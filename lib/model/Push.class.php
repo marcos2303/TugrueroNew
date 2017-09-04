@@ -112,6 +112,7 @@ $url = 'https://fcm.googleapis.com/fcm/send';
 	$data["Modelo"] = $values['Modelo'];
 	$data["Inicio"] = $values['Inicio'];
 	$data["AveriaNombre"] = $values['AveriaNombre'];
+	$data["CodigoServicio"] = $values['CodigoServicio'];
     $fields = array(
          'registration_ids' => $ids,
 		 'data' => $data,
