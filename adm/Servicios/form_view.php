@@ -227,15 +227,8 @@ function displayRoute(directionsService, directionsDisplay, start, end) {
 function getGeocodeOrigen(){
   geocoder.geocode({'address': document.getElementById('end').value}, function(results, status) {
     if (status === 'OK') {
-      //console.log("Origen");
-      //console.log(results);
       var LatitudOrigen = results[0].geometry.location.lat();
       var LongitudOrigen = results[0].geometry.location.lng();
-      //console.log(LatitudOrigen + " "  +LongitudOrigen);
-      //console.log(results);
-      //console.log(results[0].formatted_address);
-      //$("#end").val(results[0].formatted_address);
-      //map.setCenter(results[0].geometry.location);
     } else {
       console.log('Geocode was not successful for the following reason: ' + status);
     }
@@ -244,13 +237,8 @@ function getGeocodeOrigen(){
 function getGeocodeDestino(){
   geocoder.geocode({'address': document.getElementById('end').value}, function(results, status) {
     if (status === 'OK') {
-      //console.log("Destino");
-      //console.log(results);
       LatitudDestino = results[0].geometry.location.lat();
       LongitudDestino = results[0].geometry.location.lng();
-      //console.log(LatitudDestino + "  "  + LongitudDestino);
-
-      //map.setCenter(results[0].geometry.location);
     } else {
       console.log('Geocode was not successful for the following reason: ' + status);
     }
@@ -278,9 +266,6 @@ ConsultarBaremo();
   }
   total = total / 1000;
   $("#KM").val(total);
-  //console.log(total);
-  //document.getElementById('total').innerHTML = total + ' km';
-
 }
 function formateaOrigen(Latitud, Longitud){
   var latlng = {lat: parseFloat(Latitud), lng: parseFloat(Longitud)};
@@ -335,20 +320,6 @@ function formateaDestino(Latitud, Longitud){
 
               });
               GuardarAutomaticoServicio();
-              /*$('#IdEstadoDestino option:contains(' + results[1].address_components[3].long_name + ')').each(function(){
-                  if ($(this).text() == results[1].address_components[3].long_name) {
-                      $(this).attr('selected', 'selected');
-                      return false;
-                  }
-                  return true;
-              });
-              $('#IdEstadoDestino option:contains(' + results[1].address_components[4].long_name + ')').each(function(){
-                  if ($(this).text() == results[1].address_components[4].long_name) {
-                      $(this).attr('selected', 'selected');
-                      return false;
-                  }
-                  return true;
-              });*/
             } else {
               console.log('No results found');
               //return false;

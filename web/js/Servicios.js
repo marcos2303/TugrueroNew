@@ -397,6 +397,10 @@ function ConsultarBaremo(){
   $("#PrecioSIvaBaremo").val(DatosServicio.Baremo.PrecioSIvaBaremo);
   $("#IvaBaremo").val(DatosServicio.Baremo.IvaBaremo);
   $("#PrecioCIvaBaremo").val(DatosServicio.Baremo.PrecioCIvaBaremo);
+
+  $("#PrecioClienteSIva").val(DatosServicio.Baremo.IvaCliente);
+  $("#IvaCliente").val(DatosServicio.Baremo.IvaCliente);
+  $("#PrecioClienteCIva").val(DatosServicio.Baremo.PrecioClienteCIva);
 }
 function CambiarNegociar(e){
 

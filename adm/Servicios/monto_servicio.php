@@ -21,19 +21,19 @@
         <div class="row">
           <div class="col-sm-4">
             <div class="form-group">
-              <label> Pago gruero</label>
+              <label> Pago gruero(Baremo)</label>
               <input type="text" class="form-control SaveAutomaticoServicioPrecio input-sm " id="PrecioSIvaBaremo" name="PrecioSIvaBaremo" readonly="readonly">
             </div>
           </div>
           <div class="col-sm-4">
             <div class="form-group">
-              <label>Iva</label>
+              <label>Iva(Baremo)</label>
               <input class="form-control SaveAutomaticoServicioPrecio input-sm " id="IvaBaremo" name="IvaBaremo" type="text" autocomplete="off" readonly="readonly">
             </div>
           </div>
           <div class="col-sm-4">
             <div class="form-group">
-              <label> Pago total gruero</label>
+              <label> Pago total gruero(Baremo)</label>
               <input class="form-control SaveAutomaticoServicioPrecio input-sm " name="PrecioCIvaBaremo" id="PrecioCIvaBaremo" type="text" placeholder="" autocomplete="off" readonly="readonly">
             </div>
           </div>
