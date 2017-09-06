@@ -205,6 +205,7 @@ function executeListaServiciosCorta($values){
     $values["filtro_status"] = 1;
     $values['order'][0]['dir'] = "desc";
 	$servicios_list = $Servicios ->getList($values);
+	//var_dump($servicios_list);die;
 	require("lista_servicios_corta.php");
 }
 function executeListaServiciosAdministracion($values){

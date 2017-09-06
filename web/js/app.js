@@ -1,6 +1,21 @@
 var Servidor = "http://localhost/";
 var Proyecto = "TugrueroNew/";
 var link_servidor = Servidor + Proyecto;
+var popup = {
+			"popup": "popupCargando",
+			"imagen": "Loader",
+			"mensaje": "",
+			"displaybarra": ['none'],
+			"displaysBotones": ['none', 'none', 'none', 'none'],
+			"text": ['', '', '', ''],
+			"onClick": ["", "", "", ""]
+
+		};
+		genericPop(popup);
+                 
+$(window).on('load', function(){
+    closePops();
+});
 function listaProveedoresTipo(IdProveedorTipo){
   //$('#IdProveedorTipo').find('option').remove().end().append('<option value="">Seleccione...</option>');
   $('#IdProveedorTipo').find('option').remove().end();
@@ -644,10 +659,10 @@ function genericPop(parametros) {
   if(parametros.imagen !='none'){
     var imagen = pop.getElementsByTagName('img');
     imagen[0].src = link_servidor + "/web/img_admin/SVGs/" + parametros.imagen + ".svg";
-    $(imagen[0]).css('width', 'auto');
-    $(imagen[0]).css('height', 'auto');
-    $(imagen[0]).css('min-width', '50%');
-    $(imagen[0]).css('min-height', '50%');
+    $(imagen[0]).css('width', '50%');
+    $(imagen[0]).css('height', '50%');
+    $(imagen[0]).css('min-width', '25%');
+    $(imagen[0]).css('min-height', '25%');
   }
 
 

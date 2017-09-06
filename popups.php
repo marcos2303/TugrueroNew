@@ -51,17 +51,10 @@
         <img src="">
       </div>
       <div class="modal-body">
-        <p>...</p>
-        <div name="progress" class="progress active">
-          <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">                  <span class="sr-only">40% Complete (success)</span>
-          </div>
+        <p></p>
+        <div name="progress" class="progress">
+
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success"></button>
-        <button type="button" class="btn btn-success"></button>
-        <button type="button" class="btn btn-danger"></button>
-        <button type="button" class="btn btn-success"></button>
       </div>
     </div>
   </div>

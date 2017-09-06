@@ -16,6 +16,7 @@
 <script src="<?php echo full_url;?>/web/js/fnReloadAjax.js"></script>
 <script src="<?php echo full_url;?>/web/js/dataTables.buttons.min.js"></script>
 <script src="<?php echo full_url;?>/web/js/buttons.colVis.min.js"></script>
+<script src="<?php echo full_url;?>/web/js/moment.min.js"></script>
 <script src="<?php echo full_url;?>/web/js/app.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFeSlIAjDg8U7zsWW82uJCNLi3IZxq9fI&v=3.exp&libraries=places"></script>
 <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>

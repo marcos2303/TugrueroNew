@@ -62,6 +62,14 @@
 <script src="<?php echo full_url;?>/web/js/mercadopago.js"></script>
 
 <script>
+	$(document).ready(function(){
+		if($("#LatitudOrigen").val() !='' && $("#LongitudOrigen").val()!='' && $("#LatitudDestino").val()!='' && $("#LongitudDestino").val()!=''){
+			var start = new google.maps.LatLng($("#LatitudOrigen").val(), $("#LongitudOrigen").val());
+			var end = new google.maps.LatLng($("#LatitudDestino").val(), $("#LongitudDestino").val());
+			displayRoute(directionsService, directionsDisplay,start, end);
+		}
+		
+	});
 var map;
 var geocoder = new google.maps.Geocoder;
 var directionsService = new google.maps.DirectionsService;
@@ -74,8 +82,8 @@ directionsDisplay.setOptions({
 //suppressMarkers : true,
 polylineOptions: {
             strokeWeight: 4,
-            strokeOpacity: 1,
-            strokeColor:  'red'
+            strokeOpacity: 0.8,
+            strokeColor:  'blue'
         }
 });
 var markerArray = [];
@@ -98,8 +106,10 @@ function initialize() {
     zoomControl: true,
     scaleControl: true,
     zoomControl: true,
+    tilt: 45,
+    rotateControl: true,
     center: new google.maps.LatLng(6.760825009855806, -66.84538344062503),
-    styles: [
+   /* styles: [
       {
         "featureType": "all",
         "stylers": [
@@ -146,7 +156,7 @@ function initialize() {
           }
         ]
       }
-    ]
+    ]*/
   };//end map options
 
   map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
@@ -184,16 +194,35 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
   }, function(response, status) {
     if (status === 'OK') {
       directionsDisplay.setDirections(response);
-
+		//console.log(response);
         getGeocodeOrigen();
         getGeocodeDestino();
+		
 
     } else {
-      //window.alert('Directions request failed due to ' + status);
+      console.log('Directions request failed due to ' + status);
     }
+	
   });
-  //getGeocodeOrigen();
-  //getGeocodeDestino();
+
+}
+function displayRoute(directionsService, directionsDisplay, start, end) {
+  for (var i = 0; i < markerArray.length; i++) {
+    markerArray[i].setMap(null);
+  }
+  directionsService.route({
+    origin: start,
+    destination: end,
+    travelMode: 'DRIVING'
+  }, function(response, status) {
+    if (status === 'OK') {
+      directionsDisplay.setDirections(response);
+	  //ConsultarBaremo();
+    }else{
+		console.log('Directions request failed due to ' + status);
+	}
+  });
+  
 }
 function getGeocodeOrigen(){
   geocoder.geocode({'address': document.getElementById('end').value}, function(results, status) {
@@ -228,11 +257,7 @@ function getGeocodeDestino(){
   });
 }
 function computeTotalDistance(results) {
- /*LatitudDestino = results[0].geometry.location.lat();
- LongitudDestino = results[0].geometry.location.lng();
- console.log(LatitudDestino + "  "  + LongitudDestino);*/
-  //getGeocodeOrigen();
-  //getGeocodeDestino();
+ConsultarBaremo();
   LatitudOrigen = results.routes[0].legs[0].start_location.lat();
   LongitudOrigen = results.routes[0].legs[0].start_location.lng();
   LatitudDestino = results.routes[0].legs[0].end_location.lat();
@@ -266,7 +291,7 @@ function formateaOrigen(Latitud, Longitud){
               $("#DireccionOrigen").val(results[1].formatted_address);
               //console.log(results[1].address_components[3].long_name);
               $.each(results[1].address_components, function(index, valores) {
-                console.log(index + " " + valores.long_name);
+                //console.log(index + " " + valores.long_name);
                 $('#IdEstadoOrigen option:contains(' + valores.long_name + ')').each(function(){
                     if ($(this).text() == valores.long_name) {
                         $(this).attr('selected', 'selected');
@@ -299,7 +324,7 @@ function formateaDestino(Latitud, Longitud){
               //console.log(1);
               //console.log(results[1].address_components);
               $.each(results[1].address_components, function(index, valores) {
-                console.log(index + " " + valores.long_name);
+                //console.log(index + " " + valores.long_name);
                 $('#IdEstadoDestino option:contains(' + valores.long_name + ')').each(function(){
                     if ($(this).text() == valores.long_name) {
                         $(this).attr('selected', 'selected');

@@ -1,18 +1,3 @@
-    /*var popup = {
-			"popup": "popupCargando",
-			"imagen": "none",
-			"mensaje": "Cargando información",
-			"displaybarra": ['none'],
-			"displaysBotones": ['none', 'none', 'none', 'none'],
-			"text": ['', '', '', ''],
-			"onClick": ["", "", "", ""]
-
-		};
-		genericPop(popup);
-                
-$(window).load(function() {
-    alert(1);
-});      */  
 $(document).ready(function(){
     Inicializa();
     if($("#action").val()=='new'){
@@ -78,7 +63,10 @@ function AccionesChange(e){
       CargaHistorialServicios();
     }
     if($(e).attr('name') == "Cedula" || $(e).attr('name') == "Placa"){
-      CargaHistorialServicios();
+      if($("#Cedula").val() != '' && $("#Placa").val() !=''){
+          CargaHistorialServicios();
+      }
+      
     }
     if($(e).attr('name') == "IdAveria"){
         //console.log('averia');
@@ -205,6 +193,9 @@ function EditarDatosServicio(){
        }
        
     });
+    
+    //cargo los marcadores en el mapa
+    
     
     
 }
@@ -400,6 +391,7 @@ function CambiarAgendado(e){
   GuardarAutomaticoServicio();
 }
 function ConsultarBaremo(){
+    //console.log("baremo");
   var parametros_servicio = convertiraAJson(DataForm);
   var DatosServicio = AjaxCall("servicios/clienteapp/Baremo.php", parametros_servicio,agregarSuccess,MensajeError);
   $("#PrecioSIvaBaremo").val(DatosServicio.Baremo.PrecioSIvaBaremo);
