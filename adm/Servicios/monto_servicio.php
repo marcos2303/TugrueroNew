@@ -13,7 +13,7 @@
           <div class="col-sm-offset-8 col-sm-4">
             <div class="form-group">
               <label class="checkbox-inline">
-                <input class="" onchange="CambiarNegociar(this);" type="checkbox" id="" name=""> A negociar
+				  <input class=""  type="checkbox" onchange="CambiarNegociar(this)" id="Negociar" name="Negociar"> A negociar
               </label>
             </div>
           </div>
@@ -38,7 +38,7 @@
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row Negociar" style="display:none;">
           <div class="col-sm-4">
             <div class="form-group">
               <label> Pago gruero</label>
@@ -96,6 +96,17 @@
               <label> Pago total cliente</label>
               <input class="form-control SaveAutomaticoServicioPrecio input-sm " name="PrecioClienteCIvaModificado" id="PrecioClienteCIvaModificado" type="text" placeholder="" autocomplete="off">
             </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <div class="form-group">
+                    
+                      <button type="button" class="btn btn-default">Mensajes</button>
+                      <button type="button" class="btn btn-success" onclick="EnviarServicio();">Enviar solicitud</button>
+                      <button type="button" class="btn btn-danger">Cancelar</button>
+                           
+			</div>
           </div>
         </div>
       </div>

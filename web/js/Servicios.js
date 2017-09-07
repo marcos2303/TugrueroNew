@@ -171,6 +171,11 @@ function EditarDatosServicio(){
             }
             if(index == 'IdGrua') DatosGrua(item);
             if(index == 'AnioTarjeta') listaAnioTarjeta(item);
+            if(index == 'Negociar' && item == 1){
+                    $("#Negociar").val(1);
+                    $(".Negociar").show();
+                    $('#Negociar').prop('checked', 'checked');
+            } 
             AccionesChange($("#"+index));
         }
 
@@ -240,9 +245,24 @@ function GuardarAutomaticoServicioPrecio(){
   var DataForm = $('#DataForm .SaveAutomaticoServicioPrecio').serializeArray();
   var parametros_servicio_precio = convertiraAJson(DataForm);
   //console.log(parametros_servicio_precio);;
-    var actualizarServicioGrua = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros_servicio_precio, agregarSuccess, MensajeError);
+    var actualizarServicioPrecio = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros_servicio_precio, agregarSuccess, MensajeError);
+}
+function GuardarServicioNegociar(valor){
+  var DataForm = $('#DataForm .SaveAutomaticoServicioPrecio').serializeArray();
+  var Negociar = {
+    "name" :  "Negociar",
+    "value" :  valor,
+    
+  };
+  DataForm.push(Negociar);
+  var parametros_servicio_precio = convertiraAJson(DataForm);
+  
 
+  
+  console.log(DataForm);
 
+  //console.log(parametros_servicio_precio);;
+    var actualizarServicioPrecio = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros_servicio_precio, agregarSuccess, MensajeError);
 }
 function CargaHistorialServicios(){
   var Cedula = $("#Cedula").val();
@@ -309,11 +329,6 @@ function DatosPoliza(){
 		};
 		genericPop(popup);
   }
-  function cerrarPopAutenticacion(){
-  	//limpiarGruaForm();
-  	closePops();
-
-  }
   function permitirPolizaForanea(){
   	var Usuario = $('#Usuario').val();
   	var ClaveEspecial = $('#UsuarioClaveEspecial').val();
@@ -357,7 +372,67 @@ function DatosPoliza(){
   		//limpiarGruaForm();
   	}
 }
+  function autenticacionCambiarPrecios(){
+        $(".Negociar").hide();
+        $("#Negociar").val(0);   
+        $('#Negociar').prop('checked', false);
+    var popup = {
+			"popup": "popupAutenticacion",
+			"imagen": "none",
+			"mensaje": "¿Está seguro(a) de cambiar los precios?",
+			"displaybarra": ['none'],
+			"displaysBotones": ['none', 'none', 'inline', 'inline'],
+			"text": ['', '', 'Cancelar', 'Aceptar'],
+			"onClick": ["", "", "cerrarPopAutenticacion()", "permitirCambioPrecio()"]
+
+		};
+		genericPop(popup);
+  }
+
+  function permitirCambioPrecio(){
+  	var Usuario = $('#Usuario').val();
+  	var ClaveEspecial = $('#UsuarioClaveEspecial').val();
+  	var autenticacion = autenticacionEspecial(Usuario, ClaveEspecial);
+
+
+  	if(autenticacion.MensajeError == ''){
+  		if(autenticacion.AutorizarPagos != "1"){
+                    $(".Negociar").hide();
+                    $("#Negociar").val(0);
+  			closePops();
+  			var popup = {
+  				"popup": "popupError",
+  				"imagen": "Error",
+  				"mensaje": "No tiene los privilegios suficientes para realizar esta modificación",
+  				"displaybarra": ['none'],
+  				"displaysBotones": ['none', 'none', 'none', 'inline'],
+  				"text": ['', '', '', 'Aceptar'],
+  				"onClick": ["", "", "", "closePops()"]
+
+  			};
+  			genericPop(popup);
+  		}else{
+                    console.log("Mostrar");
+                    $(".Negociar").show();
+                    $("#Negociar").val(1);
+                    $('#Negociar').prop('checked', 'checked');
+                    GuardarServicioNegociar(1);
+                }
+  	}else{
+            console.log("Ocultar");
+  		//limpiarGruaForm();
+  	}
+}
+  function cerrarPopAutenticacion(){
+  	//limpiarGruaForm();
+  	closePops();
+
+  }
 function EnviarServicio(){
+Cargando("Enviando la solicitud. Espere un momento.");
+extra = {
+    Gruas : 0
+};
 var parametros_servicio = {
       "IdServicio": $("#IdServicio").val(),
       "TipoEnvio" : "Masivo",
@@ -373,8 +448,8 @@ var parametros_servicio = {
         "IdServicio" : $("#IdServicio").val()
       }
 };
-  var EnvioServicio = AjaxCall("servicios/clienteapp/sendPush.php", parametros_servicio,agregarSuccess,MensajeError);
-
+  var EnvioServicio = AjaxCall("servicios/clienteapp/sendPush.php", parametros_servicio,ServicioEnviado,MensajeError,extra);
+  
 
 }
 function CambiarAgendado(e){
@@ -398,22 +473,23 @@ function ConsultarBaremo(){
   $("#IvaBaremo").val(DatosServicio.Baremo.IvaBaremo);
   $("#PrecioCIvaBaremo").val(DatosServicio.Baremo.PrecioCIvaBaremo);
 
-  $("#PrecioClienteSIva").val(DatosServicio.Baremo.IvaCliente);
+  $("#PrecioClienteSIva").val(DatosServicio.Baremo.PrecioClienteSIva);
   $("#IvaCliente").val(DatosServicio.Baremo.IvaCliente);
   $("#PrecioClienteCIva").val(DatosServicio.Baremo.PrecioClienteCIva);
 }
 function CambiarNegociar(e){
 
   if ($(e).is(':checked')) {
-    $("#Agendado").val(1);
-    $(".Agendado").show();
+    autenticacionCambiarPrecios();
   }else{
-    $("#Agendado").val(0);
-    $(".Agendado").hide();
-    $("#FechaAgendado").val("");
-    $("#HoraAgendado").val("");
+    $("#Negociar").val(0);
+    $(".Negociar").hide();
+    $("#PrecioSIvaBaremoModificado").val(0);
+    $("#IvaBaremoModificado").val(0);
+    $("#PrecioCIvaBaremoModificado").val(0);
+    GuardarServicioNegociar(0);
   }
-  GuardarAutomaticoServicio();
+  
 }
 function BusquedaGrueroMapa(){
   $.ajax({

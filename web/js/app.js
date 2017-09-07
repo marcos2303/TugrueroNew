@@ -1,21 +1,24 @@
 var Servidor = "http://localhost/";
 var Proyecto = "TugrueroNew/";
 var link_servidor = Servidor + Proyecto;
+Cargando("");
+                 
+$(window).on('load', function(){
+    closePops();
+});
+function Cargando(mensaje){
 var popup = {
 			"popup": "popupCargando",
 			"imagen": "Loader",
-			"mensaje": "",
+			"mensaje": mensaje,
 			"displaybarra": ['none'],
 			"displaysBotones": ['none', 'none', 'none', 'none'],
 			"text": ['', '', '', ''],
 			"onClick": ["", "", "", ""]
 
 		};
-		genericPop(popup);
-                 
-$(window).on('load', function(){
-    closePops();
-});
+		genericPop(popup);  
+}
 function listaProveedoresTipo(IdProveedorTipo){
   //$('#IdProveedorTipo').find('option').remove().end().append('<option value="">Seleccione...</option>');
   $('#IdProveedorTipo').find('option').remove().end();
@@ -529,7 +532,7 @@ function AjaxCall(URL, parametros, exito, fallo, extra) {
         if (exito === undefined || exito =="" || exito == null ) {
 
         }else{
-          exito(data);
+          exito(data,extra);
         }
 
 
@@ -604,6 +607,27 @@ function CargaSuccess(data, extra){
     parametros.mensaje = data.MensajeError;
     genericPop(parametros);
   }
+}
+function ServicioEnviado(data, extra){
+  closePops();
+  var parametros = {
+    "popup": "popupSuccess",
+    "imagen": "Check",
+    "mensaje": "<h4>Solicitud enviada satisfactoriamente. Recibido por: " + data.result.success + " Grueros </h4>",
+    "displaybarra": ['none'],
+    "displaysBotones": ['none', 'none', 'none', 'inline'],
+    "text": ['', '', '', 'Aceptar'],
+    "onClick": ["", "", "", "closePops()"]
+
+  };
+
+  if(data.MensajeError =='1'){
+    parametros.mensaje = data.MensajeError;
+    genericPop(parametros);
+  }else{
+     genericPop(parametros); 
+  }
+
 }
 function MensajeError(jqXHR){
   var parametros = {
@@ -701,7 +725,7 @@ function autenticacionEspecial(Usuario, ClaveEspecial){
     Usuario: Usuario,
     ClaveEspecial: ClaveEspecial
   }
-  var respuesta = AjaxCall("servicios/adminapp/autenticacionEspecial.php", parametros);
+  var respuesta = AjaxCall("servicios/adminapp/autenticacionEspecial.php", parametros,null, MensajeError);
   $("#Usuario").val("");
   $("#UsuarioClaveEspecial").val("");
   return respuesta;
