@@ -28,6 +28,8 @@ if(isset($values['KM']) and isset($values['IdAveria']) and isset($values['IdCond
 	//calculo el precio con iva
     $values['IvaBaremo'] = ($values['PrecioSIvaBaremo'] * 1.12) / 100;
     $values['PrecioCIvaBaremo'] = $values['PrecioSIvaBaremo'] + $values['IvaBaremo'];
+	
+	
 }else{
 	$values['PrecioSIvaBaremo'] = 0;
 	$values['PrecioCIvaBaremo'] = 0;

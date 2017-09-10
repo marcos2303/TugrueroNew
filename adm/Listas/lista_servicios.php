@@ -71,7 +71,7 @@ $(document).ready(function() {
         },
                 "aoColumnDefs": [
                   { "visible": false, "targets": []},
-				  { "targets": -1, "visible": false},
+				  //{ "targets": -1, "visible": false},
                   { 'bSortable': false, 'aTargets': [ 3 ] }
                 ]
               });
@@ -93,7 +93,7 @@ $(document).ready(function() {
 	var data = table.row( this ).data();
 	$(this).addClass('seleccionado');
 
-	$(location).attr('href', '<?php echo full_url."/adm/Servicios/index.php?action=edit&IdServicio="?>' + data.IdServicio);
+	$(location).attr('href', '<?php echo full_url."/adm/Servicios/index.php?action=edit&IdServicio="?>' + data.IdServicio + "&IdServicioTipo=" + data.IdServicioTipo);
 	} );
         $('#column_0').on ('keypress', function(e){
           if(e.which == 13) {

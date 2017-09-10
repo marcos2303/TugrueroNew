@@ -290,6 +290,7 @@ function executeListaServiciosJson($values)
 				"PrecioSIvaModificado" =>  $list['PrecioSIvaModificado'],
 				"PrecioCIvaModificado" =>  $list['PrecioCIvaModificado'],
 				"NombreUsuarioPrecio" =>  $list['NombreUsuarioPrecio'],
+				"IdServicioTipo" => $list['IdServicioTipo'],
 				"actions" => '
 				<div class="btn-group">
 				<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -369,6 +370,7 @@ function executeListaServiciosJson($values)
 			"PrecioSIvaModificado" =>  "",
 			"PrecioCIvaModificado" =>  "",
 			"NombreUsuarioPrecio" =>  "",
+			"IdServicioTipo" => "",
 			"actions" => ''
 		);
 	}
