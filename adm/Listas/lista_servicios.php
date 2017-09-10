@@ -1,15 +1,17 @@
-<table id="example" class="table table-striped table-bordered table-responsive" width="100%">
-  <thead class="">
-    <tr>
-      <th>IdServicio</th>
+<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">  
+  <thead>
+    <tr>      
       <th>Código</th>
+	  <th>Tipo</th>
+	  <th>Estatus</th>
       <th>Detalle</th>
     </tr>
   </thead>
   <tfoot>
     <tr>
-      <th><input id="IdServicio" name="IdServicio" type="text"></th>
       <th><input id="CodigoServicio" name="CodigoServicio" type="text"></th>
+	  <th><input id="NombreServicioTipo" name="NombreServicioTipo" type="text"></th>
+	  <th><input id="NombreEstatus" name="NombreEstatus" type="text"></th>
       <th>Detalle</th>
     </tr>
   </tfoot>
@@ -36,34 +38,44 @@ $(document).ready(function() {
 
 
   var table = $('#example').DataTable({
-    "scrollX": true,
+   
     "processing": true,
     "sServerMethod": "POST",
     "serverSide": true,
-    "bAutoWidth": true,
-    "sScrollY": "260",
+	lengthChange: false,
+    //scrollCollapse: true,
+    //"sScrollXInner":"110%",
     "sDom": 'Btrp',
     "ajax":link_servidor + "/adm/Listas/index.php?action=lista_servicios_json&IdProveedor=<?php echo $values['IdProveedor'];?>&IdGrua=<?php echo $values['IdGrua'];?>&EditarServicio=<?php echo $values['EditarServicio'];?>",
     "language": {
       "url": link_servidor + "/web/js/datatables.spanish.lang"
     },
-
-buttons: [
-            'colvis'
-        ],
+			
                 "columns": [
-                  { "data" : "IdServicio" },
                   { "data" : "CodigoServicio" },
+				  { "data" : "NombreServicioTipo" },
+				  { "data" : "NombreEstatus" },
                   { "data" : "actions" },
                 ],
+        buttons: [
+            {
+                extend: 'colvis',
+                collectionLayout: 'fixed two-column'
+            }
+        ],
+        language: {
+            buttons: {
+                colvis: 'Mostrar/Ocultar columnas',
+				colvisRestore: "Restaurar columnas",
+            }
+        },
                 "aoColumnDefs": [
-                  { "visible": false, "targets": []
-                  },
-                  { 'bSortable': false, 'aTargets': [ 2 ] }
+                  { "visible": false, "targets": []},
+				  { "targets": -1, "visible": false},
+                  { 'bSortable': false, 'aTargets': [ 3 ] }
                 ]
               });
-                 new FixedColumns( table );
-                //$('#example').css( 'display', 'table' );
+	table.buttons().container().appendTo( '#example_wrapper .col-sm-6:eq(0)' );
 
 	//click
     $('#example tbody').on( 'click', 'tr', function () {
