@@ -87,7 +87,7 @@ $(document).ready(function() {
             table.$('tr.seleccionado').removeClass('seleccionado');
             $(this).addClass('seleccionado');
         }
-        console.log(data);
+        //console.log(data);
     } );
 	$('#example tbody').on('dblclick', 'tr', function () {
 	var data = table.row( this ).data();

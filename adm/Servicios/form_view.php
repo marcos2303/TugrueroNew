@@ -36,7 +36,7 @@
         <input type="hidden" class="" id="IdUsuario" name="IdUsuario" value="<?php if(isset($_SESSION['IdUsuario']) and $_SESSION['IdUsuario']!='') echo $_SESSION['IdUsuario'];?>">
         <input type="hidden" class="SaveAutomaticoServicio" id="IdServicioTipo" name="IdServicioTipo" value="<?php if(isset($values['IdServicioTipo']) and $values['IdServicioTipo']!='') echo $values['IdServicioTipo'];?>">
 		<input type="hidden" class="SaveAutomaticoServicioCliente SaveAutomaticoServicio SaveAutomaticoServicioPrecio SaveAutomaticoServicioGrua" id="IdServicio" name="IdServicio" value="<?php if(isset($values['IdServicio']) and $values['IdServicio']!='') echo $values['IdServicio'];?>">
-        <input type="hidden" class="form-control SaveAutomaticoServicioCliente" name="IdPoliza" id="IdPoliza">
+        <input type="text" class="form-control SaveAutomaticoServicioCliente" name="IdPoliza" id="IdPoliza">
         <input type="hidden" class="form-control SaveAutomaticoServicio" name="Inicio" id="Inicio">
         <input type="hidden" id="action" value="<?php echo $values['action'];?>">
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">

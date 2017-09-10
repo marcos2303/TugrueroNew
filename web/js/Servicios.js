@@ -221,8 +221,22 @@ function GuardarAutomaticoServicio(){
 
 }
 function GuardarAutomaticoServicioCliente(){
+ $('#IdSeguro').prop('disabled', false);
+ $('#IdMarca').prop('disabled', false);
+
   var DataForm = $('#DataForm .SaveAutomaticoServicioCliente').serializeArray();
   //Servicios clientes
+  
+  console.log(DataForm);
+  /*if($('#IdSeguro').is(':disabled')){
+      alert($('#IdSeguro option[disabled]:selected').val());
+    var IdSeguro = {
+      "name" :  "IdSeguro",
+      "value" :  $('#IdSeguro option[disabled]:selected').val()
+
+    };
+  }*/
+      
   var parametros_servicio_cliente = convertiraAJson(DataForm);
   //console.log(parametros_servicio_cliente);
   var actualizarServicio = AjaxCall("servicios/clienteapp/actualizarServicioCliente.php", parametros_servicio_cliente, agregarSuccess, MensajeError);
@@ -230,7 +244,8 @@ function GuardarAutomaticoServicioCliente(){
     "IdServicio" : $("#IdServicio").val()
   }
   var DatosServicio = AjaxCall("servicios/clienteapp/datosServicio.php", parametros_servicio, agregarSuccess, MensajeError);
-
+  $('#IdSeguro').prop('disabled', true);
+  $('#IdMarca').prop('disabled', true);
   $("#CodigoServicio").val(DatosServicio.CodigoServicio);
   $("#Inicio").val(DatosServicio.Inicio);
 }
@@ -291,7 +306,6 @@ function DatosPoliza(){
     //console.log("poliza");
     $('#IdServicioTipo').val(1);
     $("#IdPoliza").val(datos_poliza.IdPoliza);
-    $("#IdSeguro").val(datos_poliza.IdSeguro);
     $("#Nombres").val(datos_poliza.Nombres);
     $("#Apellidos").val(datos_poliza.Apellidos);
     $("#IdMarca").val(datos_poliza.IdMarca);
@@ -304,8 +318,16 @@ function DatosPoliza(){
     $("#Domicilio").val(datos_poliza.Domicilio);
     $("#Celular").val(datos_poliza.Celular);
     $('#Celular').prop('readonly', false);
+    $('#Nombres').prop('readonly', true);
+    $('#Apellidos').prop('readonly', true);
+    $('#Celular').prop('readonly', true);
+    $('#IdMarca').prop('disabled', true);
+    $('#Modelo').prop('readonly', true);
+    $('#Color').prop('readonly', true);
+    $('#IdSeguro').prop('disabled', true);
 
-    //listaSeguros(datos_poliza.IdSeguro);
+    listaSeguros(datos_poliza.IdSeguro);
+    listaMarcas(datos_poliza.IdMarca);
     /*console.log(datos_poliza.IdSeguro);
     console.log($('#IdSeguro option:selected').val());*/
     GuardarAutomaticoServicio();
@@ -349,15 +371,20 @@ function DatosPoliza(){
   			};
   			genericPop(popup);
   		}else{
+                    console.log("aqui");
         $('#IdServicioTipo').val(3);
-        $('#IdPoliza').val(null);
+        $('#IdPoliza').val(1);
         $('#Nombres').prop('readonly', false);
         $('#Apellidos').prop('readonly', false);
         $('#Celular').prop('readonly', false);
         $('#IdMarca').prop('disabled', false);
+        $('#IdMarca').removeAttr("disabled");
         $('#Modelo').prop('readonly', false);
         $('#Color').prop('readonly', false);
         $('#IdSeguro').prop('disabled', false);
+        $('#IdSeguro').removeAttr("disabled");
+        listaMarcas();
+        listaSeguros();
         GuardarAutomaticoServicio();
         GuardarAutomaticoServicioCliente();
         var parametros_servicio = {

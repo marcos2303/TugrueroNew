@@ -62,23 +62,23 @@
           <div class="col-sm-4">
             <div class="form-group">
               <label> Pago cliente</label>
-              <input type="text" class="form-control SaveAutomaticoServicioPrecio input-sm " id="PrecioClienteSIva" name="PrecioClienteSIva" readonly="readonly">
+              <input type="text" class="form-control SaveAutomaticoServicioPrecio input-sm " id="PrecioClienteSIva" name="PrecioClienteSIva">
             </div>
           </div>
           <div class="col-sm-4">
             <div class="form-group">
               <label>Iva</label>
-              <input class="form-control SaveAutomaticoServicioPrecio input-sm " id="IvaCliente" name="IvaCliente" type="text" autocomplete="off" readonly="readonly">
+              <input class="form-control SaveAutomaticoServicioPrecio input-sm " id="IvaCliente" name="IvaCliente" type="text" autocomplete="off">
             </div>
           </div>
           <div class="col-sm-4">
             <div class="form-group">
               <label> Pago total cliente</label>
-              <input class="form-control SaveAutomaticoServicioPrecio input-sm " name="PrecioClienteCIva" id="PrecioClienteCIva" type="text" placeholder="" value="0.00" autocomplete="off" readonly="readonly">
+              <input class="form-control SaveAutomaticoServicioPrecio input-sm " name="PrecioClienteCIva" id="PrecioClienteCIva" type="text" placeholder="" value="0.00" autocomplete="off">
             </div>
           </div>
         </div>
-        <div class="row">
+         <!--<div class="row">
           <div class="col-sm-4">
             <div class="form-group">
               <label> Pago cliente</label>
@@ -97,7 +97,7 @@
               <input class="form-control SaveAutomaticoServicioPrecio input-sm " name="PrecioClienteCIvaModificado" id="PrecioClienteCIvaModificado" type="text" placeholder="" autocomplete="off">
             </div>
           </div>
-        </div>
+        </div>-->
         <div class="row">
           <div class="col-sm-12 text-center">
             <div class="form-group">
