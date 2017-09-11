@@ -14,6 +14,9 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+		    <li><a class="">Grueros online <span class="label label-success">9</span> <span class="label label-danger">1</span></a></li>
+		</ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a class="" href="<?php echo full_url;?>/adm/Servicios/index.php"> <!--<i class="fa fa-automobile"></i>--> Servicios y monitoreo</a></li>
         <li><a class="" href="<?php echo full_url;?>/adm/Proveedores/index.php"> <!--<i class="fa fa-truck"></i>--> Grueros</a></li>
@@ -31,6 +34,7 @@
             <li><a href="#">Separated link</a></li>
           </ul>
         </li>
+		
         <li><a href="<?php echo full_url;?>/adm/index.php?action=logout"> <!--<i class="fa fa-power-off"></i>--> Salir</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
