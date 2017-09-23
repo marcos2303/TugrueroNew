@@ -857,11 +857,12 @@ class Servicios {
 		p.Identificacion AS IdentificacionProveedor,pt.Nombre AS NombreProveedorTipo, sg.Nombres AS NombresGruas, sg.Apellidos AS ApellidosGruas,
 		sg.Cedula AS CedulaGruas, sg.Celular AS CelularGruas,g.Placa AS PlacaGrua, m.Nombre AS NombreMarcaGruas,g.Modelo AS ModeloGrua, g.Color AS ColorGrua,g.Anio AS AnioGrua,
 		sg.Nombres AS NombresGrua,sg.Apellidos AS ApellidosGrua,sg.Cedula AS CedulaGrua,sg.Celular AS CelularGrua,sg.TratoCordial, sg.Presencia,
-		sg.TratoVehiculo, sg.ServicioGeneral, sc.IdPoliza , m2.Nombre AS NombreMarcaCliente, sc.Nombres AS NombresCliente,sc.Apellidos AS ApellidosCliente,
+		sg.TratoVehiculo, sg.ServicioGeneral, sc.IdPoliza , m2.Nombre AS NombreMarcaCliente, sc.Nombres AS NombresCliente,sc.Apellidos AS ApellidosCliente,seg.Nombre AS NombreSeguro,
 		sc.Cedula AS CedulaCliente, sc.Placa AS PlacaCliente, sc.Modelo AS ModeloCliente, sc.Color AS ColorCliente, sc.Anio AS AnioCliente,
 		sc.Celular AS CelularCliente,
 		CASE PolizaVencida WHEN PolizaVencida = 1 THEN 'SI' ELSE 'NO' END AS PolizaVencida, u2.Login AS NombreUsuarioCliente,
-		sp.PrecioModificado, sp.PrecioSIvaBaremo, sp.PrecioCIvaBaremo, sp.PrecioSIvaModificado, sp.PrecioSIvaModificado,sp.PrecioCIvaModificado, u3.login AS NombreUsuarioPrecio
+		sp.PrecioSIvaBaremo,sp.IvaBaremo, sp.PrecioCIvaBaremo, sp.PrecioSIvaBaremoModificado, sp.IvaBaremoModificado, sp.PrecioCIvaBaremoModificado, sp.PrecioClienteSIva,
+		sp.IvaCliente, sp.PrecioClienteCIva, sp.PrecioClienteSIvaModificado, sp.IvaClienteModificado,sp.PrecioClienteCIvaModificado		
 		FROM Servicios
 		INNER JOIN ServiciosClientes sc ON sc.IdServicio = Servicios.IdServicio
 		INNER JOIN Usuarios u ON u.IdUsuario = Servicios.IdUsuario
@@ -882,11 +883,12 @@ class Servicios {
 		LEFT JOIN Estados e1 ON e1.IdEstado = Servicios.IdEstadoOrigen
 		LEFT JOIN Estados e2 ON e2.IdEstado = Servicios.IdEstadoDestino
 		LEFT JOIN Averias a ON a.IdAveria = Servicios.IdAveria
-		INNER JOIN CondicionLugar cl ON cl.IdCondicionLugar = Servicios.IdCondicionLugar
-		INNER JOIN Aplicaciones ap ON ap.IdAplicacion = Servicios.IdAplicacion
+		LEFT JOIN CondicionLugar cl ON cl.IdCondicionLugar = Servicios.IdCondicionLugar
+		LEFT JOIN Aplicaciones ap ON ap.IdAplicacion = Servicios.IdAplicacion
 
 		WHERE Servicios.IdServicio = $IdServicio";
 		$q = $ConnectionORM->ejecutarPreparado($query);
+		//echo $query;die;
 		$q = $q->fetch();
 		return $q;
 

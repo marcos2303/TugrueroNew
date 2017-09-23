@@ -1,3 +1,4 @@
+<input type="text" id="IdServicio" value="<?php echo $values["IdServicio"]?>">
 <h1 class="text-center">Servicio</h1>
 <div class="panel-group" id="accordion_servicios" role="tablist" aria-multiselectable="true">
   <div class="panel panel-tugruero">
@@ -63,24 +64,37 @@
     </div>
     <div id="collapseServiciosTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingServiciosTwo">
       <div class="panel-body">
+		 <div class="row">
+          <div class="col-sm-3">
+            <label>NombreSeguro </label><p id="NombreSeguro"></p>
+          </div>
+        </div>
         <div class="row">
-          <div class="col-sm-2">
-            <label>Código servicio </label><p id="CodigoServicio"></p>
+          <div class="col-sm-3">
+            <label>CedulaCliente </label><p id="CedulaCliente"></p>
           </div>
-          <div class="col-sm-2">
-            <label>Código servicio </label><p id="CodigoServicio"></p>
+          <div class="col-sm-3">
+            <label>ApellidosCliente</label><p id="ApellidosCliente"></p>
           </div>
-          <div class="col-sm-2">
-            <label>Código servicio </label><p id="CodigoServicio"></p>
+          <div class="col-sm-3">
+            <label>NombresCliente </label><p id="NombresCliente"></p>
           </div>
-          <div class="col-sm-2">
-            <label>Código servicio </label><p id="CodigoServicio"></p>
+          <div class="col-sm-3">
+            <label>CelularCliente </label><p id="CelularCliente"></p>
           </div>
-          <div class="col-sm-2">
-            <label>Código servicio </label><p id="CodigoServicio"></p>
+		</div>
+		 <div class="row">
+          <div class="col-sm-3">
+            <label>PlacaCliente</label><p id="PlacaCliente"></p>
           </div>
-          <div class="col-sm-2">
-            <label>Código servicio </label><p id="CodigoServicio"></p>
+          <div class="col-sm-3">
+            <label>NombreMarcaCliente </label><p id="NombreMarcaCliente"></p>
+          </div>
+          <div class="col-sm-3">
+            <label>ModeloCliente </label><p id="ModeloCliente"></p>
+          </div>			 
+          <div class="col-sm-3">
+            <label>ColorCliente </label><p id="ColorCliente"></p>
           </div>
         </div>
       </div>
@@ -98,22 +112,22 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-sm-2">
-            <label>Código servicio </label><p id="CodigoServicio"></p>
+            <label>NombresProveedor </label><p id="NombresProveedor"></p>
           </div>
           <div class="col-sm-2">
-            <label>Código servicio </label><p id="CodigoServicio"></p>
+            <label>CedulaGruas </label><p id="CedulaGruas"></p>
           </div>
           <div class="col-sm-2">
-            <label>Código servicio </label><p id="CodigoServicio"></p>
+            <label>NombresGruas </label><p id="NombresGruas"></p>
           </div>
           <div class="col-sm-2">
-            <label>Código servicio </label><p id="CodigoServicio"></p>
+            <label>ApellidosGruas </label><p id="ApellidosGruas"></p>
           </div>
           <div class="col-sm-2">
-            <label>Código servicio </label><p id="CodigoServicio"></p>
+            <label>CelularGruas </label><p id="CelularGruas"></p>
           </div>
           <div class="col-sm-2">
-            <label>Código servicio </label><p id="CodigoServicio"></p>
+            <label>PlacaGrua </label><p id="PlacaGrua"></p>
           </div>
         </div>
         <div class="row">
@@ -174,16 +188,21 @@
   </div>
 </div>
 <script>
-$.ajax({
-	url: link_servidor + "/adm/Listas/index.php?action=detalle_servicio_json",
-	success: function(data){
-    $.each(data, function(i, item) {
+	
+$(document).ready(function(){
+	$.ajax({
+		
+		url: link_servidor + "/adm/Listas/index.php?action=detalle_servicio_json&IdServicio=" + $("#IdServicio").val(),
+		success: function(data){
+			$.each(data, function(i, item) {
 
-      $("#" + i).html(item);
-      //console.log(i + " " + item);
-    });
-	},
-  dataType: "json"
+			  $("#" + i).html(item);
+
+			});
+		},
+	  dataType: "json"
+	});
+	
 });
 
 
