@@ -10,6 +10,9 @@
     <div class="panel-body">
       <div class="" id="DivAsignacionGruero">
         <input type="text" class="form-control SaveAutomaticoServicioGrua" name="IdGrua" id="IdGrua">
+		<input type="text" class="form-control SaveAutomaticoServicioGrua" name="IdProveedor" id="IdProveedor">
+		<input type="text" class="form-control SaveAutomaticoServicioGrua" name="Cedula" id="Cedula">
+
         <div class="row">
           <div class="col-lg-4 col-xs-4 col-xs-offset-4">
             <!-- small box -->
@@ -24,10 +27,16 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-4">
+          <div class="col-sm-2">
             <div class="form-group">
-              <label> Nombres y apellidos</label>
-              <input type="text" class="form-control input-sm " id="NombresGrua" name="NombresGrua" readonly="readonly">
+              <label> Nombres</label>
+              <input type="text" class="form-control input-sm SaveAutomaticoServicioGrua" id="Nombres" name="Nombres" readonly="readonly">
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="form-group">
+              <label> Apellidos</label>
+              <input type="text" class="form-control input-sm SaveAutomaticoServicioGrua" id="Apellidos" name="Apellidos" readonly="readonly">
             </div>
           </div>
           <div class="col-sm-4">
@@ -39,7 +48,7 @@
           <div class="col-sm-4">
             <div class="form-group">
               <label> Celular</label>
-              <input class="form-control input-sm " name="CelularGrua" id="CelularGrua" type="text" placeholder="" autocomplete="off" readonly="readonly">
+              <input class="form-control input-sm SaveAutomaticoServicioGrua " name="Celular" id="Celular" type="text" placeholder="" autocomplete="off" readonly="readonly">
             </div>
           </div>
         </div>

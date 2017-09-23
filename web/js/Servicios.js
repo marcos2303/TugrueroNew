@@ -573,9 +573,13 @@ function DatosGrua(IdGrua){
     IdGrua: IdGrua
   };
   var Datos = AjaxCall("servicios/clienteapp/datosGrua.php", parametros);
-  $("#NombresGrua").val(Datos.Nombres + ' ' + Datos.Apellidos);
+  $("#IdGrua.SaveAutomaticoServicioGrua").val(Datos.IdGrua);
+  $("#Cedula.SaveAutomaticoServicioGrua").val(Datos.Cedula);
+  $("#Nombres.SaveAutomaticoServicioGrua").val(Datos.Nombres);
+  $("#Apellidos.SaveAutomaticoServicioGrua").val(Datos.Apellidos);
   $("#NombreGruasTipo").val(Datos.NombreGruasTipo);
-  $("#CelularGrua").val(Datos.Celular);
+  $("#Celular.SaveAutomaticoServicioGrua").val(Datos.Celular);
+  $("#IdProveedor.SaveAutomaticoServicioGrua").val(Datos.IdProveedor);
   var fechahora = new Date();
   minutos = fechahora.getMinutes();
   hora = fechahora.getHours();
@@ -598,7 +602,7 @@ function DatosGrua(IdGrua){
   $("#FechaAsignacion").val(FechaAsignacion);
   $("#HoraAsignacion").val(HoraAsignacion);
   calculaTiempoDeEspera();
-
+  GuardarAutomaticoServicioGrua();
 
 }
 function FinalizarServicio(){
