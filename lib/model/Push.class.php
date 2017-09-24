@@ -117,6 +117,7 @@ $url = 'https://fcm.googleapis.com/fcm/send';
 	$data["LongitudOrigen"] = $values["LongitudOrigen"];
 	$data["LatitudDestino"] = $values["LatitudDestino"];
 	$data["LongitudDestino"] = $values["LongitudDestino"];
+	$data["IdEstatus"] = $values["IdEstatus"];
     $fields = array(
          'registration_ids' => $ids,
 		 'data' => $data,

@@ -445,7 +445,7 @@ class Servicios {
 			'Inicio' => $values['Inicio'],
 			'Fin' => null,
 			'Observacion' => $values['Observacion'],
-			'UltimaActCliente' => date('Y-m-d h:i:s'),
+			'UltimaActCliente' => date('Y-m-d H:i:s'),
 			'UltimaActGruero' => null
 		);
 
@@ -481,11 +481,11 @@ class Servicios {
 		->select("
 		Servicios.IdServicio,Servicios.CodigoServicio,Servicios.IdEstatus,Servicios.CodigoServicio,Servicios.IdAplicacion,Servicios.IdServicioTipo,
 		Servicios.LatitudOrigen,Servicios.LongitudOrigen,Servicios.IdEstadoOrigen,Servicios.DireccionOrigen,Servicios.DireccionOrigenDetallada,
-		Servicios.LatitudDestino,Servicios.LongitudDestino,Servicios.IdEstadoDestino,Servicios.DireccionDestino,Servicios.DireccionDestinoDetallada,
+		Servicios.LatitudDestino,Servicios.LongitudDestino,Servicios.IdEstadoDestino,Servicios.DireccionDestino,Servicios.DireccionDestinoDetallada,Servicios.InfoExtra,
 		Servicios.Agendado,Servicios.FechaAgendado,Servicios.IdAveria,Servicios.IdAveriaHijo,Servicios.AveriaDetalle,Servicios.IdCondicionLugar,Servicios.CondicionDetalle,Servicios.KM,
 		DATE_FORMAT(Servicios.Inicio, '%d/%m/%Y %H:%i:%s') as Inicio, DATE_FORMAT(Servicios.Fin, '%d/%m/%Y %H:%i:%s') as Fin,Servicios.Inicio,Servicios.Fin,Servicios.Observacion,Servicios.UltimaActCliente,Servicios.UltimaActGruero,
 		av.Nombre as AveriaNombre,
-		c.Nombres, c.Apellidos,c.Cedula,c.Placa,c.IdMarca, c.Modelo,c.Color,c.Anio,c.Celular,c.IdSeguro,
+		c.Nombres, c.Apellidos,c.Cedula,c.Placa,c.IdMarca, c.Modelo,c.Color,c.Anio,c.Celular,c.IdSeguro,c.InfoAdicional,
 		g.IdGrua,g.IdProveedor,g.Nombres as NombresGruero,g.Apellidos as ApellidosGruero,g2.Placa as PlacaGruero,g.ServicioGeneral, g.TratoCordial, g.TratoVehiculo, g.Presencia, g.Recomienda,
 		g.FechaAsignacion, g.HoraAsignacion, g.TiempoEstimadoEspera, g.FechaEstimadaLlegada, g.HoraEstimadaLlegada,g.HoraTiempoEstimadoEspera,g.MinutosTiempoEstimadoEspera,
 		g2.IdGruaTipo  as IdGruaTipo,g2.IdMarca  as IdMarcaGruero,g2.Modelo as ModeloGruero,g2.Color as ColorGruero,g2.Anio as AnioGruero,g.Celular as CelularGruero,g.Cedula as CedulaGruero,g2.Latitud as LatitudGruero,g2.Longitud as LongitudGruero,
@@ -849,17 +849,17 @@ class Servicios {
 		$IdServicio = $values['IdServicio'];
 		$ConnectionORM = new ConnectionORM();
 		$query = "		SELECT
-		Servicios.IdServicio,CodigoServicio,ap.Nombre AS NombreAplicacion, st.Nombre AS NombreServicioTipo,e.Nombre AS NombreEstatus,
-		CASE WHEN Agendado = 1 THEN 'SI' ELSE 'NO' END AS Agendado, FechaAgendado, u.Login AS NombreUsuarioServicio, a.Nombre AS NombreAveria,
+		Servicios.IdServicio,CodigoServicio,ap.Nombre AS NombreAplicacion, st.Nombre AS NombreServicioTipo,e.Nombre AS NombreEstatus,Servicios.InfoExtra,
+		CASE WHEN Agendado = 1 THEN 'SI' ELSE 'NO' END AS Agendado, DATE_FORMAT(FechaAgendado, '%d/%m/%Y') as FechaAgendado,Servicios.HoraAgendado, u.Login AS NombreUsuarioServicio, a.Nombre AS NombreAveria,
 		AveriaDetalle, cl.Nombre AS NombreCondicionLugar, CondicionDetalle,LatitudOrigen, LongitudOrigen, e1.Nombre AS NombreEstadoOrigen,
 		DireccionOrigen, DireccionOrigenDetallada, LatitudDestino, LongitudDestino,e2.Nombre AS NombreEstadoDestino,DireccionDestino, DireccionDestinoDetallada,
-		KM, Inicio, Fin, UltimaActCliente, UltimaActGruero, sg.IdGrua, p.Nombres AS NombresProveedor,p.Apellidos AS ApellidosProveedor,
+		KM, DATE_FORMAT(Inicio, '%d/%m/%Y %H:%i') as Inicio, Fin, UltimaActCliente, UltimaActGruero, sg.IdGrua, p.Nombres AS NombresProveedor,p.Apellidos AS ApellidosProveedor,
 		p.Identificacion AS IdentificacionProveedor,pt.Nombre AS NombreProveedorTipo, sg.Nombres AS NombresGruas, sg.Apellidos AS ApellidosGruas,
 		sg.Cedula AS CedulaGruas, sg.Celular AS CelularGruas,g.Placa AS PlacaGrua, m.Nombre AS NombreMarcaGruas,g.Modelo AS ModeloGrua, g.Color AS ColorGrua,g.Anio AS AnioGrua,
 		sg.Nombres AS NombresGrua,sg.Apellidos AS ApellidosGrua,sg.Cedula AS CedulaGrua,sg.Celular AS CelularGrua,sg.TratoCordial, sg.Presencia,Recomienda,
 		sg.TratoVehiculo, sg.ServicioGeneral, sc.IdPoliza , m2.Nombre AS NombreMarcaCliente, sc.Nombres AS NombresCliente,sc.Apellidos AS ApellidosCliente,seg.Nombre AS NombreSeguro,
 		sc.Cedula AS CedulaCliente, sc.Placa AS PlacaCliente, sc.Modelo AS ModeloCliente, sc.Color AS ColorCliente, sc.Anio AS AnioCliente,
-		sc.Celular AS CelularCliente,
+		sc.Celular AS CelularCliente,sc.InfoAdicional,
 		CASE PolizaVencida WHEN PolizaVencida = 1 THEN 'SI' ELSE 'NO' END AS PolizaVencida, u2.Login AS NombreUsuarioCliente,
 		sp.PrecioSIvaBaremo,sp.IvaBaremo, sp.PrecioCIvaBaremo, sp.PrecioSIvaBaremoModificado, sp.IvaBaremoModificado, sp.PrecioCIvaBaremoModificado, sp.PrecioClienteSIva,
 		sp.IvaCliente, sp.PrecioClienteCIva, sp.PrecioClienteSIvaModificado, sp.IvaClienteModificado,sp.PrecioClienteCIvaModificado,		

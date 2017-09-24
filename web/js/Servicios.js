@@ -731,4 +731,13 @@ function calculaTiempoDeEspera(){
   $("#TiempoEstimadoEspera").val(horasumada + ":" + minutosumado);
     //GuardarAutomaticoServicioGrua();
 }
+function mensajes(){
+  $.ajax({
+    url: link_servidor + "/adm/Listas/index.php?action=mensajes&IdServicio=" + $("#IdServicio").val(),
+    success: function(html){
+      $('#popupListas .modal-body').html(html);
+      $('#popupListas').modal('show');
+    }
+  });
+}
 

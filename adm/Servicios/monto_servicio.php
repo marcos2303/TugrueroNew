@@ -102,9 +102,9 @@
           <div class="col-sm-12 text-center">
             <div class="form-group">
                     
-                      <button type="button" class="btn btn-default">Mensajes</button>
-                      <button type="button" class="btn btn-success" onclick="EnviarServicio();">Enviar solicitud</button>
-                      <button type="button" class="btn btn-danger">Cancelar</button>
+				<button type="button" class="btn btn-default" onclick="mensajes();">Mensajes</button>
+                <button type="button" class="btn btn-success" onclick="EnviarServicio();">Enviar solicitud</button>
+                <button type="button" class="btn btn-danger">Cancelar</button>
                            
 			</div>
           </div>

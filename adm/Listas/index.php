@@ -59,6 +59,12 @@ switch ($action) {
 	case "mercadopagolink":
 		executeMercadoPagoLink($values);
 	break;
+	case "mensajes":
+		executeMensajes($values);
+	break;
+	case "mensajes_json":
+		executeMensajesJson($values);
+	break;
 	default:
 	executeIndex($values);
 	break;
@@ -649,5 +655,29 @@ function executeListaUsuariosJson($values)
 		$values["Link"] = $valor_parametro['Valor'];
         $values["Link"] = $values["Link"].$values["PrecioClienteCIva"];
 		echo json_encode($values);
+		
+	}
+	function executeMensajes($values){
+		
+		require('mensajes.php');
+		
+	}
+	function executeMensajesJson($values){
+	$Servicios= new Servicios();
+	/****************Seteo y comprobacion de valores*******************/
+	//$values["IdServicio"] = 50;
+	$response = array("Error"=>1,"MensajeError"=>"No existen datos del servicio","MensajeSuccess"=> '');
+	$datos = $Servicios->getServiciosDetalle($values);
+	
+	if($datos){
+		foreach($datos as $key=> $value){
+			if($value == "" or $value == "Seleccione..."){
+				$value = "No posee";
+			}
+			$response[$key] = $value;
+		}
+
+	}
+	echo json_encode($response,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 		
 	}

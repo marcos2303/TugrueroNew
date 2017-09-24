@@ -7,15 +7,7 @@ include('../../autoload_servicios.php');
 $Servicios = new Servicios();
 //$version = curl_version();
 $response = array("Error"=>0,"MensajeError"=>"Se presentó un error al enviar la petición.","MensajeSuccess"=> '',"result" => array());
-  /*$values["IdServicio"]="212";
-  $values["TipoEnvio"] = "Masivo";
-  $values["LatitudOrigen"] = "10.5216435";
-  $values["LongitudOrigen"] = "-66.92799379999997";
-  $values["IdEstadoOrigen"]="11";
-  $values["notification"] = array(
-  $values["body"] = "¡Nuevo servicio de Grúa!",
-  $values["title"] = "TU/GRUERO®",
-  $values["sound"] = "default");*/
+
 $datos_servicio = $Servicios->getServiciosInfo($values);
 $values["Modelo"] = $datos_servicio["Modelo"];
 $values["Inicio"] = $datos_servicio["Inicio"];
@@ -26,6 +18,7 @@ $values["LongitudOrigen"] = $datos_servicio["LongitudOrigen"];
 $values["LatitudDestino"] = $datos_servicio["LatitudDestino"];
 $values["LongitudDestino"] = $datos_servicio["LongitudDestino"];
 $values["CodigoServicio"] = $datos_servicio["CodigoServicio"];
+$values["IdEstatus"] = $datos_servicio["IdEstatus"];
 $values["result"] =  $Servicios->enviarServicio($values);
 if($values["result"]){
   $response = array("Error"=>0,"MensajeError"=>"","MensajeSuccess"=> '',"result" =>json_decode($values["result"]));

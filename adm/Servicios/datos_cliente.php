@@ -117,8 +117,15 @@
               </div>
             </div>
           </div>
-
         </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label> Información adicional</label>
+                <textarea class="form-control input-sm SaveAutomaticoServicioCliente" name="InfoAdicional" id="InfoAdicional"></textarea>
+              </div>
+            </div>
+          </div>
       </div>
 
 

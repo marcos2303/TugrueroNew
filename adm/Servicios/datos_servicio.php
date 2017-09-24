@@ -144,6 +144,15 @@
             </div>
           </div>
         </div>
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="form-group">
+					<label>Información extra</label>
+					<textarea class="form-control SaveAutomaticoServicio input-sm " id="InfoExtra" name="InfoExtra" placeholder=""></textarea>
+				</div>
+			 </div>
+			
+		</div>
       </div>
     </div>
   </div>

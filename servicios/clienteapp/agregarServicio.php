@@ -21,7 +21,7 @@ $values['LatitudDestino']  = '10.212626514872';
 $values['LongitudDestino']  = '-67.8864110297';
 $values['IdEstatus']  = '1';*/
 if(!isset($values['Inicio']) or $values['Inicio']==''){
-	$values['Inicio'] = date('Y-m-d h:i:s');
+	$values['Inicio'] = date('Y-m-d H:i:s');
 }
 if(!isset($values['KM']) or $values['KM']==''){
 
@@ -63,7 +63,7 @@ if(isset($values['IdServicio'])){
 	}
 
 	$values['Fecha'] = date("Y-m-d");
-	$values['Hora'] = date("h:i:s");
+	$values['Hora'] = date("H:i:s");
 	if(!$ServiciosEstatus ->addServiciosEstatus($values)){
 		$response = array("Error"=>0,"MensajeError" => "Se ha presentado un error iniciando el servicio estatus. Intente de nuevo.");
 		echo json_encode($response);die;
