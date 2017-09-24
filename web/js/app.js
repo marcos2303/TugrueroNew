@@ -730,3 +730,23 @@ function autenticacionEspecial(Usuario, ClaveEspecial){
   $("#UsuarioClaveEspecial").val("");
   return respuesta;
 }
+function creaEstrellas(elemento, estrellas){
+	var html = "";
+	for(i=0; i<estrellas; i++){
+		html+= '<i class="fa fa-star"></i>';
+	}
+	$("#" + elemento).html(html);
+}
+function siNo(elemento, respuesta){
+	var html = "";
+        
+            if(respuesta == 1){
+                html = "Si";
+            }
+            else if(respuesta == 1){
+                html = "No";
+            }
+        
+
+	$("#" + elemento).html(html);
+}

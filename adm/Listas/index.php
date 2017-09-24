@@ -576,6 +576,9 @@ function executeDetalleServicioJson($values)
 	
 	if($datos){
 		foreach($datos as $key=> $value){
+			if($value == ""){
+				$value = "No posee";
+			}
 			$response[$key] = $value;
 		}
 

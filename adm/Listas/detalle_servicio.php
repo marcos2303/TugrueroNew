@@ -137,22 +137,19 @@
         </div>
         <div class="row">
           <div class="col-md-2">
-            <label>Código servicio </label><p id="CodigoServicio"></p>
+            <label>ServicioGeneral </label><p id="ServicioGeneral"></p>
           </div>
           <div class="col-md-2">
-            <label>Código servicio </label><p id="CodigoServicio"></p>
+            <label>TratoCordial </label><p id="TratoCordial"></p>
           </div>
           <div class="col-md-2">
-            <label>Código servicio </label><p id="CodigoServicio"></p>
+            <label>TratoVehiculo </label><p id="TratoVehiculo"></p>
           </div>
           <div class="col-md-2">
-            <label>Código servicio </label><p id="CodigoServicio"></p>
+            <label>Presencia </label><p id="Presencia"></p>
           </div>
-          <div class="col-md-2">
-            <label>Código servicio </label><p id="CodigoServicio"></p>
-          </div>
-          <div class="col-md-2">
-            <label>Código servicio </label><p id="CodigoServicio"></p>
+          <div class="col-md-4">
+			  <label>Recomienda </label><p id="Recomienda"><i class="fa fa-star"></i></p>
           </div>
         </div>
       </div>
@@ -170,22 +167,70 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-md-2">
-            <label>Código servicio </label><p id="CodigoServicio"></p>
+            <label>NombreMetodoPago </label><p id="NombreMetodoPago"></p>
+          </div>
+		</div>
+		<div class="row">	
+          <div class="col-md-4">
+            <label>NombreBanco </label><p id="NombreBanco"></p>
+          </div>
+          <div class="col-md-4">
+            <label>Referencia </label><p id="Referencia"></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            <label>NombreTipoPagoElectronico </label><p id="NombreTipoPagoElectronico"></p>
           </div>
           <div class="col-md-2">
-            <label>Código servicio </label><p id="CodigoServicio"></p>
+            <label>NombreTipoPagoElectronico </label><p id="NombreTipoPagoElectronico"></p>
+          </div>
+		</div>
+        <div class="row">
+          <div class="col-md-2">
+            <label>Link </label><p id="Link"></p>
           </div>
           <div class="col-md-2">
-            <label>Código servicio </label><p id="CodigoServicio"></p>
+            <label>NumeroDocumento </label><p id="NombreTipoPagoElectronico"></p>
           </div>
           <div class="col-md-2">
-            <label>Código servicio </label><p id="CodigoServicio"></p>
+            <label>TipoDocumento </label><p id="TipoDocumento"></p>
           </div>
           <div class="col-md-2">
-            <label>Código servicio </label><p id="CodigoServicio"></p>
+            <label>NumeroDocumento </label><p id="NombreTipoPagoElectronico"></p>
           </div>
-          <div class="col-md-2">
-            <label>Código servicio </label><p id="CodigoServicio"></p>
+		</div>
+        <div class="row">
+          <div class="col-md-4">
+            <label>PrecioSIvaBaremo </label><p id="PrecioSIvaBaremo"></p>
+          </div>
+          <div class="col-md-4">
+            <label>IvaBaremo </label><p id="IvaBaremo"></p>
+          </div>
+          <div class="col-md-4">
+            <label>PrecioCIvaBaremo </label><p id="PrecioCIvaBaremo"></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label>PrecioSIvaBaremoModificado </label><p id="PrecioSIvaBaremoModificado"></p>
+          </div>
+          <div class="col-md-4">
+            <label>IvaBaremoModificado </label><p id="IvaBaremoModificado"></p>
+          </div>
+          <div class="col-md-4">
+            <label>PrecioCIvaBaremoModificado </label><p id="PrecioCIvaBaremoModificado"></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label>PrecioClienteSIva </label><p id="PrecioClienteSIva"></p>
+          </div>
+          <div class="col-md-4">
+            <label>IvaCliente </label><p id="IvaCliente"></p>
+          </div>
+          <div class="col-md-4">
+            <label>PrecioClienteCIva </label><p id="PrecioClienteCIva"></p>
           </div>
         </div>
       </div>
@@ -195,20 +240,30 @@
 <script>
 	
 $(document).ready(function(){
-	$.ajax({
-		
+	$.ajax({		
 		url: link_servidor + "/adm/Listas/index.php?action=detalle_servicio_json&IdServicio=" + $("#IdServicio").val(),
 		success: function(data){
 			$.each(data, function(i, item) {
 
 			  $("#" + i).html(item);
-
+			  
+						if(($("#" + i).attr('id')=="ServicioGeneral" || 
+							  $("#" + i).attr('id')=="TratoCordial" || 
+							  $("#" + i).attr('id')=="TratoVehiculo" || 
+							  $("#" + i).attr('id')=="Presencia") 
+							  && (parseInt(item) > 0) 
+						) 
+						{
+						  creaEstrellas($("#" + i).attr('id'),item);
+					    } 
+						if($("#" + i).attr('id')=="Recomienda"){
+							 siNo($("#" + i).attr('id'),item);
+						}
 			});
 		},
 	  dataType: "json"
 	});
 	
 });
-
 
 </script>

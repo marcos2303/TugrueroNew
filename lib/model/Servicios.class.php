@@ -856,13 +856,15 @@ class Servicios {
 		KM, Inicio, Fin, UltimaActCliente, UltimaActGruero, sg.IdGrua, p.Nombres AS NombresProveedor,p.Apellidos AS ApellidosProveedor,
 		p.Identificacion AS IdentificacionProveedor,pt.Nombre AS NombreProveedorTipo, sg.Nombres AS NombresGruas, sg.Apellidos AS ApellidosGruas,
 		sg.Cedula AS CedulaGruas, sg.Celular AS CelularGruas,g.Placa AS PlacaGrua, m.Nombre AS NombreMarcaGruas,g.Modelo AS ModeloGrua, g.Color AS ColorGrua,g.Anio AS AnioGrua,
-		sg.Nombres AS NombresGrua,sg.Apellidos AS ApellidosGrua,sg.Cedula AS CedulaGrua,sg.Celular AS CelularGrua,sg.TratoCordial, sg.Presencia,
+		sg.Nombres AS NombresGrua,sg.Apellidos AS ApellidosGrua,sg.Cedula AS CedulaGrua,sg.Celular AS CelularGrua,sg.TratoCordial, sg.Presencia,Recomienda,
 		sg.TratoVehiculo, sg.ServicioGeneral, sc.IdPoliza , m2.Nombre AS NombreMarcaCliente, sc.Nombres AS NombresCliente,sc.Apellidos AS ApellidosCliente,seg.Nombre AS NombreSeguro,
 		sc.Cedula AS CedulaCliente, sc.Placa AS PlacaCliente, sc.Modelo AS ModeloCliente, sc.Color AS ColorCliente, sc.Anio AS AnioCliente,
 		sc.Celular AS CelularCliente,
 		CASE PolizaVencida WHEN PolizaVencida = 1 THEN 'SI' ELSE 'NO' END AS PolizaVencida, u2.Login AS NombreUsuarioCliente,
 		sp.PrecioSIvaBaremo,sp.IvaBaremo, sp.PrecioCIvaBaremo, sp.PrecioSIvaBaremoModificado, sp.IvaBaremoModificado, sp.PrecioCIvaBaremoModificado, sp.PrecioClienteSIva,
-		sp.IvaCliente, sp.PrecioClienteCIva, sp.PrecioClienteSIvaModificado, sp.IvaClienteModificado,sp.PrecioClienteCIvaModificado		
+		sp.IvaCliente, sp.PrecioClienteCIva, sp.PrecioClienteSIvaModificado, sp.IvaClienteModificado,sp.PrecioClienteCIvaModificado,		
+		sp.Referencia, sp.TipoDocumento, sp.NumeroDocumento, sp.NumeroTarjeta, sp.NombreTarjeta, sp.CodigoSeguridad, sp.AnioTarjeta, sp.Mestarjeta, sp.TipoTarjeta, sp.Link,
+		mp.Nombre AS NombreMetodoPago, tpe.Nombre AS NombreTipoPagoElectronico,b.Nombre AS NombreBanco	
 		FROM Servicios
 		INNER JOIN ServiciosClientes sc ON sc.IdServicio = Servicios.IdServicio
 		INNER JOIN Usuarios u ON u.IdUsuario = Servicios.IdUsuario
@@ -885,7 +887,9 @@ class Servicios {
 		LEFT JOIN Averias a ON a.IdAveria = Servicios.IdAveria
 		LEFT JOIN CondicionLugar cl ON cl.IdCondicionLugar = Servicios.IdCondicionLugar
 		LEFT JOIN Aplicaciones ap ON ap.IdAplicacion = Servicios.IdAplicacion
-
+		LEFT JOIN MetodosPago mp ON mp.IdMetodoPago = sp.IdMetodoPago
+		LEFT JOIN TiposPagosElectronicos tpe ON tpe.idTipoPagoElectronico = sp.idTipoPagoElectronico
+		LEFT JOIN Bancos b ON b.IdBanco = sp.IdBanco 
 		WHERE Servicios.IdServicio = $IdServicio";
 		$q = $ConnectionORM->ejecutarPreparado($query);
 		//echo $query;die;

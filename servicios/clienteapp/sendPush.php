@@ -21,6 +21,11 @@ $values["Modelo"] = $datos_servicio["Modelo"];
 $values["Inicio"] = $datos_servicio["Inicio"];
 $values["AveriaNombre"] = $datos_servicio["AveriaNombre"];
 $values["CodigoServicio"] = $datos_servicio["CodigoServicio"];
+$values["LatitudOrigen"] = $datos_servicio["LatitudOrigen"];
+$values["LongitudOrigen"] = $datos_servicio["LongitudOrigen"];
+$values["LatitudDestino"] = $datos_servicio["LatitudDestino"];
+$values["LongitudDestino"] = $datos_servicio["LongitudDestino"];
+$values["CodigoServicio"] = $datos_servicio["CodigoServicio"];
 $values["result"] =  $Servicios->enviarServicio($values);
 if($values["result"]){
   $response = array("Error"=>0,"MensajeError"=>"","MensajeSuccess"=> '',"result" =>json_decode($values["result"]));
