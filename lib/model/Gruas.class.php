@@ -309,5 +309,16 @@ class Gruas {
 		//echo $q;die;
 		return $q;
 	}
+	public function getGruerosOnOffLine(){
+		$ConnectionORM = new ConnectionORM();
+		$query = "SELECT * FROM (
+					(SELECT COUNT(*) AS online FROM Gruas WHERE Estatus = 1) AS online,
+					(SELECT COUNT(*) AS offline FROM Gruas WHERE Estatus = 0) AS offline ,
+					(SELECT COUNT(*) AS onservice FROM Gruas WHERE Estatus = 2) AS onservice)";
+		
+		$q = $ConnectionORM->ejecutarPreparado($query);
+		
+		return $q;
+	}
 
 }

@@ -15,7 +15,12 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
-		    <li><a class="">Grueros online <span class="label label-success">9</span> <span class="label label-danger">1</span></a></li>
+		    <li><a class="">Grueros 
+					<span class="label label-success GruerosOnline" id="online" onclick="AbrirGruaEstatus(1);"> 0 </span> 
+					<span class="label label-danger" class="GruerosOnline" id="offline" onclick="AbrirGruaEstatus(0);"> 0 </span>  
+					<span class="label label-warning" class="GruerosOnline" id="onservice" onclick="AbrirGruaEstatus(2);"> 0 </span> 
+				</a>
+			</li>
 		</ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a class="" href="<?php echo full_url;?>/adm/Servicios/index.php"> <!--<i class="fa fa-automobile"></i>--> Servicios y monitoreo</a></li>
