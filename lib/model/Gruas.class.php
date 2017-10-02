@@ -117,6 +117,9 @@ class Gruas {
 		if(isset($values['IdProveedor']) and $values['IdProveedor']!=''){
 			$where.=" AND p.IdProveedor = '".$values['IdProveedor']."'";
 		}
+		if(isset($values['Estatus']) and $values['Estatus']!=''){
+			$where.=" AND Gruas.Estatus = '".$values['Estatus']."'";
+		}
 		if(isset($values['columns'][0]['search']['value']) and $values['columns'][0]['search']['value']!='')
 		{
 			$where.=" AND upper(Placa) like ('%".strtoupper($values['columns'][0]['search']['value'])."%')";
@@ -276,10 +279,10 @@ class Gruas {
 		if(!isset($datos_servicio['IdGrua']) or $datos_servicio['IdGrua']==''){
 			$where = " Disponible = 1
 			AND
-				((Latitud BETWEEN '".$mTopes['infLat']."'
-				AND '".$mTopes['supLat']."'
-				AND Longitud BETWEEN '".$mTopes['supLng']."'
-				AND '".$mTopes['infLng']."'
+			((Latitud BETWEEN '".$mTopes['infLat']."'
+			AND '".$mTopes['supLat']."'
+			AND Longitud BETWEEN '".$mTopes['supLng']."'
+			AND '".$mTopes['infLng']."'
 			)
 			OR IdEstado = '".$datos_servicio['IdEstadoOrigen']."'
 
@@ -312,13 +315,20 @@ class Gruas {
 	public function getGruerosOnOffLine(){
 		$ConnectionORM = new ConnectionORM();
 		$query = "SELECT * FROM (
-					(SELECT COUNT(*) AS online FROM Gruas WHERE Estatus = 1) AS online,
-					(SELECT COUNT(*) AS offline FROM Gruas WHERE Estatus = 0) AS offline ,
-					(SELECT COUNT(*) AS onservice FROM Gruas WHERE Estatus = 2) AS onservice)";
-		
-		$q = $ConnectionORM->ejecutarPreparado($query);
-		
-		return $q;
-	}
+			(SELECT COUNT(*) AS online FROM Gruas WHERE Estatus = 1) AS online,
+			(SELECT COUNT(*) AS offline FROM Gruas WHERE Estatus = 0) AS offline ,
+			(SELECT COUNT(*) AS onservice FROM Gruas WHERE Estatus = 2) AS onservice)";
 
-}
+			$q = $ConnectionORM->ejecutarPreparado($query);
+
+			return $q;
+		}
+		public function getGruerosPorEstatus($Estatus){
+			$ConnectionORM = new ConnectionORM();
+			$query = "SELECT * FROM Gruas where Estatus = '".$Estatus."' ";
+
+			$q = $ConnectionORM->ejecutarPreparado($query);
+
+				return $q;
+			}
+	}

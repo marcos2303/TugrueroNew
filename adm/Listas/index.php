@@ -91,7 +91,8 @@ function executeListaGruasJson($values)
 		{
 
 			$IdGrua = $list['IdGrua'];
-            $IdProveedor = $list['IdProveedor'];
+      $IdProveedor = $list['IdProveedor'];
+			$Estatus = $list['Estatus'];
 			$array_json['data'][$i] = array(
 				"IdProveedor" => $IdProveedor,
 				"Placa" => $list['Placa'],
@@ -138,7 +139,12 @@ function executeListaGruasJson($values)
 						</ul>
 						</div>';
 				}
-
+				if(isset($values['opcion']) and $values['opcion']=='2'){
+						$array_json['data'][$i]['actions'] = '
+						<div class="btn-group">
+						nada
+						</div>';
+				}
 
 				$i++;
 		}
@@ -196,7 +202,7 @@ function executeListaConexionesJson($values){
                 );
 		}
 	}else{
-			
+
 			$array_json['data'][] = array(
 				"NombreAplicacion" => null,
                 "NombreConexionTipo" => null,
@@ -579,7 +585,7 @@ function executeDetalleServicioJson($values)
 	//$values["IdServicio"] = 50;
 	$response = array("Error"=>1,"MensajeError"=>"No existen datos del servicio","MensajeSuccess"=> '');
 	$datos = $Servicios->getServiciosDetalle($values);
-	
+
 	if($datos){
 		foreach($datos as $key=> $value){
 			if($value == ""){
@@ -649,18 +655,18 @@ function executeListaUsuariosJson($values)
 		require('mercadopago.php');
 	}
 	function executeMercadoPagoLink($values){
-		
+
 		$Parametros = new Parametros();
 		$valor_parametro = $Parametros->getValor(2);
 		$values["Link"] = $valor_parametro['Valor'];
         $values["Link"] = $values["Link"].$values["PrecioClienteCIva"];
 		echo json_encode($values);
-		
+
 	}
 	function executeMensajes($values){
-		
+
 		require('mensajes.php');
-		
+
 	}
 	function executeMensajesJson($values){
 	$Servicios= new Servicios();
@@ -668,7 +674,7 @@ function executeListaUsuariosJson($values)
 	//$values["IdServicio"] = 50;
 	$response = array("Error"=>1,"MensajeError"=>"No existen datos del servicio","MensajeSuccess"=> '');
 	$datos = $Servicios->getServiciosDetalle($values);
-	
+
 	if($datos){
 		foreach($datos as $key=> $value){
 			if($value == "" or $value == "Seleccione..."){
@@ -679,5 +685,5 @@ function executeListaUsuariosJson($values)
 
 	}
 	echo json_encode($response,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-		
+
 	}

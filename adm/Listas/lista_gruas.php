@@ -69,7 +69,7 @@ $(document).ready(function() {
         "sServerMethod": "POST",
 		"sScrollY": "300",
 		"sDom": 'Btrp',
-		"ajax": "<?php echo full_url."/adm/Listas/index.php?action=lista_gruas_json&IdProveedor=";if(isset($values['IdProveedor']) and $values['IdProveedor']!='') echo $values['IdProveedor']; ?>&opcion=<?php echo $values['opcion']?>",
+		"ajax": "<?php echo full_url."/adm/Listas/index.php?action=lista_gruas_json&IdProveedor=";if(isset($values['IdProveedor']) and $values['IdProveedor']!='') echo $values['IdProveedor']; ?>&opcion=<?php echo $values['opcion']?>&Estatus=<?php echo $values['Estatus']?>",
 		"language": {
 			"url": "<?php echo full_url."/web/js/"?>datatables.spanish.lang"
 		},

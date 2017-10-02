@@ -1,6 +1,6 @@
-<input type="text" id="IdServicio" value="<?php echo $values["IdServicio"]?>">
+<input type="hidden" id="IdServicio" value="<?php echo $values["IdServicio"]?>">
 <div class="row">
-	<div class="col-sm-12"><h1>SERVICIO DE TU/GRUERO</h1></div>	
+	<div class="col-sm-12"><h1>SERVICIO DE TU/GRUERO</h1></div>
 </div>
 <div class="row" id="esAgendado">
 	<div class="col-sm-12">
@@ -35,13 +35,16 @@
 		</p>
 		<p>
 			O responder este mensaje con la palabra <b> SI </b>
-		</p>		
+		</p>
+		<p>
+			📢📢📢📢📢📢📢📢📢
+		</p>
 	</div>
 </div>
 <script>
-	
+
 $(document).ready(function(){
-	$.ajax({		
+	$.ajax({
 		url: link_servidor + "/adm/Listas/index.php?action=mensajes_json&IdServicio=" + $("#IdServicio").val(),
 		success: function(data){
 			$.each(data, function(i, item) {
@@ -54,8 +57,7 @@ $(document).ready(function(){
 		},
 	  dataType: "json"
 	});
-	
+
 });
 
 </script>
-

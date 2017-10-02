@@ -1,8 +1,8 @@
 $(document).ready(function(){
-    consultaGruerosOnline(); 
-    
+    consultaGruerosOnline();
+
     setInterval(function() {
-         consultaGruerosOnline(); 
+         consultaGruerosOnline();
     }, 60000);
 });
 function consultaGruerosOnline(){
@@ -20,13 +20,15 @@ function consultaGruerosOnline(){
   })
   .fail(function() {
     console.log( "error en comunicacion con gruerosOnline" );
-  });    
-    
+  });
+
 }
-function AbrirGruaEstatus(estatus) {
-    
-      
-      $('#popupListas .modal-body').html();
+function AbrirGruaEstatus(Estatus) {
+  $.ajax({
+    url: link_servidor + "adm/Listas/index.php?action=lista_gruas&Estatus=" + Estatus + "&opcion=2",
+    success: function(html){
+      $('#popupListas .modal-body').html(html);
       $('#popupListas').modal('show');
-    
+    }
+  });
 }
