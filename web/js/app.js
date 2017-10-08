@@ -609,7 +609,8 @@ function CargaSuccess(data, extra){
   }
 }
 function ServicioEnviado(data, extra){
-  closePops();
+  /*closePops();
+  if(data.result != '' || data.result != null){
   var parametros = {
     "popup": "popupSuccess",
     "imagen": "Check",
@@ -619,14 +620,10 @@ function ServicioEnviado(data, extra){
     "text": ['', '', '', 'Aceptar'],
     "onClick": ["", "", "", "closePops()"]
 
-  };
-
-  if(data.MensajeError =='1'){
-    parametros.mensaje = data.MensajeError;
+  }; 
     genericPop(parametros);
-  }else{
-     genericPop(parametros); 
-  }
+  
+  }*/
 
 }
 function MensajeError(jqXHR){

@@ -103,7 +103,7 @@
             <div class="form-group">
                     
 				<button type="button" class="btn btn-default" onclick="mensajes();">Mensajes</button>
-                <button type="button" class="btn btn-success" onclick="EnviarServicio();">Enviar solicitud</button>
+                <button type="button" class="btn btn-success" onclick="EnviarServicio(1);">Enviar solicitud</button>
                 <button type="button" class="btn btn-danger">Cancelar</button>
                            
 			</div>

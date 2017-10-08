@@ -94,6 +94,18 @@ function AccionesChange(e){
         }
         
     }
+    if($(e).attr('name') == "PrecioSIvaBaremoModificado"){
+        var iva = calculaIva(9,parseInt($(e).val()));
+        $("#IvaBaremoModificado").val(iva);
+        var precioCIva = calculaPrecioCIva(9,parseInt($(e).val()));
+        $("#PrecioCIvaBaremoModificado").val(precioCIva);
+    }
+    if($(e).attr('name') == "PrecioClienteSIva"){
+        var iva = calculaIva(9,parseInt($(e).val()));
+        $("#IvaCliente").val(iva);
+        var precioCIva = calculaPrecioCIva(9,parseInt($(e).val()));
+        $("#PrecioClienteCIva").val(precioCIva);
+    }
 }
 function Inicializa(){
   $("#IdAveriaHijo").hide();
@@ -244,7 +256,7 @@ function GuardarAutomaticoServicioCliente(){
   var DataForm = $('#DataForm .SaveAutomaticoServicioCliente').serializeArray();
   //Servicios clientes
   
-  console.log(DataForm);
+  //console.log(DataForm);
   /*if($('#IdSeguro').is(':disabled')){
       alert($('#IdSeguro option[disabled]:selected').val());
     var IdSeguro = {
@@ -295,7 +307,7 @@ function GuardarServicioNegociar(valor){
   
 
   
-  console.log(DataForm);
+  //console.log(DataForm);
 
   //console.log(parametros_servicio_precio);;
     var actualizarServicioPrecio = AjaxCall("servicios/clienteapp/actualizarServicioPrecio.php", parametros_servicio_precio, agregarSuccess, MensajeError);
@@ -325,6 +337,11 @@ function DatosPoliza(){
   var datos_poliza = AjaxCall("servicios/adminapp/datosPoliza.php", parametros_poliza);
   if(datos_poliza.IdPoliza){
     //console.log("poliza");
+    if(datos_poliza.Estatus == 2){
+        autenticacionPolizaVencida(datos_poliza);
+        return false;
+    }
+    
     $('#IdServicioTipo').val(1);
     $("#IdPoliza").val(datos_poliza.IdPoliza);
     $("#Nombres").val(datos_poliza.Nombres);
@@ -349,8 +366,6 @@ function DatosPoliza(){
 
     listaSeguros(datos_poliza.IdSeguro);
     listaMarcas(datos_poliza.IdMarca);
-    /*console.log(datos_poliza.IdSeguro);
-    console.log($('#IdSeguro option:selected').val());*/
     GuardarAutomaticoServicio();
     GuardarAutomaticoServicioCliente();
 
@@ -359,6 +374,77 @@ function DatosPoliza(){
       autenticacionPolizaForanea();
   }
 }
+  function autenticacionPolizaVencida(datos_poliza){
+    var popup = {
+			"popup": "popupAutenticacion",
+			"imagen": "none",
+			"mensaje": "¿La póliza consultada se encuentra vencida, coloque credenciales para continuar con el servicio",
+			"displaybarra": ['none'],
+			"displaysBotones": ['none', 'none', 'inline', 'inline'],
+			"text": ['', '', 'Cancelar', 'Aceptar'],
+			"onClick": ["", "", "cerrarPopAutenticacion()", "permitirPolizaVencida("+ datos_poliza +")"]
+
+		};
+		genericPop(popup);
+  }
+    function permitirPolizaVencida(datos_poliza){
+       console.log(datos_poliza);
+  	var Usuario = $('#Usuario').val();
+  	var ClaveEspecial = $('#UsuarioClaveEspecial').val();
+  	var autenticacion = autenticacionEspecial(Usuario, ClaveEspecial);
+
+  	if(autenticacion.MensajeError == ''){
+  		if(autenticacion.AutorizarServicios != "1"){
+  			closePops();
+  			var popup = {
+  				"popup": "popupError",
+  				"imagen": "Error",
+  				"mensaje": "No tiene los privilegios suficientes para realizar esta modificación",
+  				"displaybarra": ['none'],
+  				"displaysBotones": ['none', 'none', 'none', 'inline'],
+  				"text": ['', '', '', 'Aceptar'],
+  				"onClick": ["", "", "", "closePops()"]
+
+  			};
+  			genericPop(popup);
+  		}else{
+                    //console.log("aqui");
+    $('#IdServicioTipo').val(1);
+    $("#IdPoliza").val(datos_poliza.IdPoliza);
+    $("#Nombres").val(datos_poliza.Nombres);
+    $("#Apellidos").val(datos_poliza.Apellidos);
+    $("#IdMarca").val(datos_poliza.IdMarca);
+    $("#Modelo").val(datos_poliza.Modelo);
+    $("#Color").val(datos_poliza.Color);
+    $("#CelularBD").val(datos_poliza.Celular);
+    $("#DesdeVigencia").val(datos_poliza.DesdeVigencia);
+    $("#Vencimiento").val(datos_poliza.Vencimiento);
+    $("#CelularBD").val(datos_poliza.Celular);
+    $("#Domicilio").val(datos_poliza.Domicilio);
+    $("#Celular").val(datos_poliza.Celular);
+    $('#Celular').prop('readonly', false);
+    $('#Nombres').prop('readonly', true);
+    $('#Apellidos').prop('readonly', true);
+    $('#Celular').prop('readonly', true);
+    $('#IdMarca').prop('disabled', true);
+    $('#Modelo').prop('readonly', true);
+    $('#Color').prop('readonly', true);
+    $('#IdSeguro').prop('disabled', true);
+        listaMarcas();
+        listaSeguros();
+        GuardarAutomaticoServicio();
+        GuardarAutomaticoServicioCliente();
+        var parametros_servicio = {
+          "IdServicio" : $("#IdServicio").val()
+        }
+        var DatosServicio = AjaxCall("servicios/clienteapp/datosServicio.php", parametros_servicio, agregarSuccess, MensajeError);
+
+        $("#CodigoServicio").val(DatosServicio.CodigoServicio);
+        $("#Inicio").val(DatosServicio.Inicio);
+  		
+   }
+ }
+    }
   function autenticacionPolizaForanea(){
     var popup = {
 			"popup": "popupAutenticacion",
@@ -404,6 +490,8 @@ function DatosPoliza(){
         $('#Color').prop('readonly', false);
         $('#IdSeguro').prop('disabled', false);
         $('#IdSeguro').removeAttr("disabled");
+        $('#DesdeVigencia').val("");
+        $('#Vencimiento').val("");
         listaMarcas();
         listaSeguros();
         GuardarAutomaticoServicio();
@@ -460,14 +548,17 @@ function DatosPoliza(){
   			};
   			genericPop(popup);
   		}else{
-                    console.log("Mostrar");
+                    //console.log("Mostrar");
                     $(".Negociar").show();
                     $("#Negociar").val(1);
                     $('#Negociar').prop('checked', 'checked');
+                    $("#PrecioSIvaBaremoModificado").val( $("#PrecioSIvaBaremo").val() );
+                    $("#PrecioCIvaBaremoModificado").val( $("#PrecioCIvaBaremo").val() );
+                    $("#IvaBaremoModificado").val( $("#IvaBaremo").val() );
                     GuardarServicioNegociar(1);
                 }
   	}else{
-            console.log("Ocultar");
+            //console.log("Ocultar");
   		//limpiarGruaForm();
   	}
 }
@@ -476,14 +567,33 @@ function DatosPoliza(){
   	closePops();
 
   }
-function EnviarServicio(){
+function EnviarServicio(tipo){
+    
+if(tipo == 2){//directo a gruero
+    if($("#IdGrua").val() == ""){
+  			var popup = {
+  				"popup": "popupError",
+  				"imagen": "Error",
+  				"mensaje": "No se ha asignado gruero.",
+  				"displaybarra": ['none'],
+  				"displaysBotones": ['none', 'none', 'none', 'inline'],
+  				"text": ['', '', '', 'Aceptar'],
+  				"onClick": ["", "", "", "closePops()"]
+
+  			};
+  			genericPop(popup);
+        return false;
+    }
+    
+}    
+    
 Cargando("Enviando la solicitud. Espere un momento.");
 extra = {
     Gruas : 0
 };
 var parametros_servicio = {
       "IdServicio": $("#IdServicio").val(),
-      "TipoEnvio" : "Masivo",
+      "TipoEnvio" : tipo,
       "LatitudOrigen": $("#LatitudOrigen").val(),
       "LongitudOrigen": $("#LongitudOrigen").val(),
       "IdEstadoOrigen": $('#IdEstadoOrigen').val(),
@@ -496,8 +606,21 @@ var parametros_servicio = {
         "IdServicio" : $("#IdServicio").val()
       }
 };
+
   var EnvioServicio = AjaxCall("servicios/clienteapp/sendPush.php", parametros_servicio,ServicioEnviado,MensajeError,extra);
-  
+        if(EnvioServicio.result == null || EnvioServicio.result == ""){
+                              var popup = {
+                                      "popup": "popupError",
+                                      "imagen": "Error",
+                                      "mensaje": "No se encontraron grueros activos.",
+                                      "displaybarra": ['none'],
+                                      "displaysBotones": ['none', 'none', 'none', 'inline'],
+                                      "text": ['', '', '', 'Aceptar'],
+                                      "onClick": ["", "", "", "closePops()"]
+
+                              };
+                              genericPop(popup);
+        }
 
 }
 function CambiarAgendado(e){
@@ -581,26 +704,28 @@ function DatosGrua(IdGrua){
   $("#Celular.SaveAutomaticoServicioGrua").val(Datos.Celular);
   $("#IdProveedor.SaveAutomaticoServicioGrua").val(Datos.IdProveedor);
   var fechahora = new Date();
-  minutos = fechahora.getMinutes();
-  hora = fechahora.getHours();
-  dia = fechahora.getDate();
+  var minutos = fechahora.getMinutes();
+  var hora = fechahora.getHours();
+  var dia = fechahora.getDate();
   mes = fechahora.getMonth() + 1;
   anio= fechahora.getFullYear();
+  
 
-
-  if(minutos <10){
+  if(minutos < 10){
     minutos = "0" + minutos;
   }
-  if(hora <10){
+  if(hora < 10){
     hora = "0" + hora;
   }
-  if(dia<10){
+  if(dia < 10){
     dia = "0" + dia;
   }
+  
   var HoraAsignacion = String(hora+":"+minutos);
-  var FechaAsignacion = String(anio+"-"+"0"+mes+"-"+dia);
+  var FechaAsignacion = String(anio+"-"  +mes+"-"+dia);
   $("#FechaAsignacion").val(FechaAsignacion);
   $("#HoraAsignacion").val(HoraAsignacion);
+  
   calculaTiempoDeEspera();
   GuardarAutomaticoServicioGrua();
 
@@ -671,7 +796,7 @@ function CargarLinkMercadoPago(){
 function BloqueaCamposPago(){
     $(".BloqueoPagos").attr("disabled", "disabled");
     $(".BloqueoPagos").attr("readonly", "readonly");
-    console.log("Bloqueo");
+    //console.log("Bloqueo");
 }
 function calculaTiempoDeEspera(){
     

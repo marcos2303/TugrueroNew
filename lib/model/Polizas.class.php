@@ -278,6 +278,7 @@
 			->select("*")
 			->where("upper(Cedula)=?",strtoupper($values['Cedula']))
 			->and('upper(Placa)=?',strtoupper($values['Placa']))
+			
 			->fetch();
 			}
 

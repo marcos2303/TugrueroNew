@@ -37,7 +37,7 @@
 			O responder este mensaje con la palabra <b> SI </b>
 		</p>
 		<p>
-			📢📢📢📢📢📢📢📢📢
+			<label id="PrefijoCodigo"></label>
 		</p>
 	</div>
 </div>
@@ -48,8 +48,14 @@ $(document).ready(function(){
 		url: link_servidor + "/adm/Listas/index.php?action=mensajes_json&IdServicio=" + $("#IdServicio").val(),
 		success: function(data){
 			$.each(data, function(i, item) {
-			  console.log(i);
+			  //console.log(i);
 			  $("#" + i +".Mensajes").html(item);
+			  	if($("#" + i).attr('id')=="CodigoServicio"){
+					prefijo = item;
+					prefijo = prefijo.split('-');
+					console.log(prefijo[0]);
+					$("#PrefijoCodigo").html(prefijo[0]);
+				}
 			  	if($("#" + i).attr('id')=="Agendado" && item == 'NO'){
 					$("#esAgendado").hide();
 				}

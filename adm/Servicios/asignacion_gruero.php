@@ -93,6 +93,13 @@
             </div>
           </div>
         </div>
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<a class="btn btn-success" onclick="EnviarServicio(2);"><i class="fa"></i> Enviar servicio a gruero seleccionado</a>
+				
+			</div>
+			
+		</div>
       </div>
     </div>
   </div>
