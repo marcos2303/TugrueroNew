@@ -33,13 +33,14 @@ if(!isset($values['KM']) or $values['KM']==''){
 	}
 }
 if(!isset($values['Neumaticos']) and $values['Neumaticos']==''){
-	$values['Neumaticos'] = '1000';
+	$values['Neumaticos'] = '0000';
 }
 /**********************se efectua el calculo del baremo automatico****************************/
 //calculo el precio sin iva
 if(isset($values['KM']) and isset($values['IdAveria']) and isset($values['IdCondicionLugar']) and isset($values['Inicio']) ){
 	$values['PrecioSIvaBaremo'] = $Baremo->calcularOferta( $values['KM'], $values['IdAveria'], $values['Neumaticos'],$values['IdCondicionLugar'] , $values['Inicio']);
 	//calculo el precio con iva
+	$values['IvaBaremo'] = ($values['PrecioSIvaBaremo'] * 12) /100;
 	$values['PrecioCIvaBaremo'] = $values['PrecioSIvaBaremo'] * 1.12;
 }else{
 	$values['PrecioSIvaBaremo'] = 0;
@@ -91,5 +92,7 @@ if(isset($values['IdServicio']) and $values['IdServicio']!=''){
 	$data_servicio = $Servicios->getServiciosInfo($values);
 	//var_dump($data_servicio);die;
 }
+$Push = new Push();
+$Push->despacharPush($values);
 $response = array("Error"=>0,"MensajeError"=>"","MensajeSuccess"=> 'Ok',"IdServicio"=>$values['IdServicio'],"CodigoServicio"=>$data_servicio['CodigoServicio'],"DatosServicio" => $data_servicio);
 echo json_encode($response,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);

@@ -15,7 +15,7 @@ class Gruas {
 	public function getGruaInfo($IdGrua){
 		$ConnectionORM = new ConnectionORM();
 		$q = $ConnectionORM->getConnect()->Gruas
-		->select("Gruas.*, m.Nombre as NombreMarca, p.Nombres as NombresProveedor, p.Apellidos as ApellidosProveedor, gt.Nombre as NombreGruasTipo,p.Identificacion as IdentificacionProveedor")
+		->select("Gruas.*, m.Nombre as NombreMarca, p.Nombres as NombresProveedor, p.Apellidos as ApellidosProveedor, gt.Nombre as NombreGruaTipo,p.Identificacion as IdentificacionProveedor, gt.Nombre as NombreTipoGrua")
 		->join("Proveedores","INNER JOIN Proveedores p on p.IdProveedor = Gruas.IdProveedor")
 		->join("Marcas","INNER JOIN Marcas m on m.IdMarca = Gruas.IdMarca")
 		->join("GruasTipos","INNER JOIN GruasTipos gt on gt.IdGruaTipo = Gruas.IdGruaTipo")

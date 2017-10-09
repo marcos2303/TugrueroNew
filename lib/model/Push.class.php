@@ -145,4 +145,107 @@ $url = 'https://fcm.googleapis.com/fcm/send';
    curl_close($ch);
    return $result;
   }
+  function despacharPush($values){
+		
+		$IdServicio = $values["IdServicio"];
+		$data = $this->formateaServicio($IdServicio);
+		$tokens = array();
+		//print_r($datos_servicio);die;
+		switch ($data["IdEstatus"]){
+			case "1":
+				if($values['IdAplicacion'] == 2)//viene desde el cliente una nueva solicitud
+				{
+					
+					$data["body"] = "¡Nuevo servicio de Grúa!";
+					$data["title"] = "TU/GRUERO®";
+					$data["sound"] = "default";
+					$data["content-available"] = "1";
+					//array de grueros
+					$Gruas = new Gruas();
+					//Busqueda de todos los grueros
+					$gruas_disponibles = $Gruas->getGruasServicio($values, 0.10);
+					foreach ($gruas_disponibles as $grua) {
+						$tokens[] = $grua["Token"];
+
+					}
+					
+					$envio = $this->sendPush($data,$tokens);
+				}
+			
+				
+				//echo ($envio);
+				break;
+			case "2":
+				echo "case2";
+				break;
+			case "3":
+				if($values['IdAplicacion'] == 1)//viene desde el gruero la aceptacion de la solicitud
+				{
+					
+					$data["body"] = "Un gruero ha aceptado su solicitud.";
+					$data["title"] = "TU/GRUERO®";
+					$data["sound"] = "default";
+					$data["content-available"] = "1";
+					//Token del cliente
+					$tokens = array(
+						$data['ClienteToken']
+
+					);
+					$envio = $this->sendPush($data,$tokens);
+				}
+				break;
+			case "4":
+				echo "case4";
+				break;		
+		}
+  }
+  function formateaServicio($IdServicio){
+		$values["IdServicio"] = $IdServicio;
+		$Servicios = new Servicios();
+		$datos_servicio = $Servicios->getServiciosInfo($values);  
+		foreach($datos_servicio as $key => $value){
+
+			$response[$key] = $value;
+
+		}
+		
+		return $response;
+
+		
+  }
+  function sendPush($data,$tokens){
+	
+	$url = 'https://fcm.googleapis.com/fcm/send';
+
+
+
+	
+    $fields = array(
+         'registration_ids' => $tokens,
+		 'data' => $data,
+		 
+         //'data' => array("IdServicio" => $values['IdServicio'])
+
+        );
+	//print_r($notification);die;
+    $headers = array(
+        'Authorization:key = AAAAov3-Dnw:APA91bHokwmlK8Qpxa6YEU0sPby5UGu66AoqrnirlkQJO62yEPJ33JNsf26V1_qeJEsg_-jdCVYnngQEvYL55CEY4UlPVxZS3kKAOL236y4XjAxYk72EtMoq_d7IrWWUw6ag6g3hBbcA',
+        'Content-Type: application/json'
+        );
+   $ch = curl_init(); 
+   curl_setopt($ch, CURLOPT_URL, $url);
+   curl_setopt($ch, CURLOPT_POST, true);
+   curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+   curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 0);  
+   curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+   curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+   $result = curl_exec($ch);           
+   if ($result === FALSE) {
+       die('Curl failed: ' . curl_error($ch));
+   }
+   curl_close($ch);
+   return $result;  
+  }
+  
 }

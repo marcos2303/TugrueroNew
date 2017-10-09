@@ -446,7 +446,8 @@ class Servicios {
 			'Fin' => null,
 			'Observacion' => $values['Observacion'],
 			'UltimaActCliente' => date('Y-m-d H:i:s'),
-			'UltimaActGruero' => null
+			'UltimaActGruero' => null,
+			'Neumaticos' => $values['Neumaticos']
 		);
 
 		$ConnectionORM = new ConnectionORM();
@@ -484,11 +485,13 @@ class Servicios {
 		Servicios.LatitudDestino,Servicios.LongitudDestino,Servicios.IdEstadoDestino,Servicios.DireccionDestino,Servicios.DireccionDestinoDetallada,Servicios.InfoExtra,
 		Servicios.Agendado,Servicios.FechaAgendado,Servicios.IdAveria,Servicios.IdAveriaHijo,Servicios.AveriaDetalle,Servicios.IdCondicionLugar,Servicios.CondicionDetalle,Servicios.KM,
 		DATE_FORMAT(Servicios.Inicio, '%d/%m/%Y %H:%i:%s') as Inicio, DATE_FORMAT(Servicios.Fin, '%d/%m/%Y %H:%i:%s') as Fin,Servicios.Inicio,Servicios.Fin,Servicios.Observacion,Servicios.UltimaActCliente,Servicios.UltimaActGruero,
-		av.Nombre as AveriaNombre,
+		av.Nombre as AveriaNombre, 
+		Servicios.Token as ClienteToken, 
 		c.Nombres, c.Apellidos,c.Cedula,c.Placa,c.IdMarca, c.Modelo,c.Color,c.Anio,c.Celular,c.IdSeguro,c.InfoAdicional,
 		g.IdGrua,g.IdProveedor,g.Nombres as NombresGruero,g.Apellidos as ApellidosGruero,g2.Placa as PlacaGruero,g.ServicioGeneral, g.TratoCordial, g.TratoVehiculo, g.Presencia, g.Recomienda,
 		g.FechaAsignacion, g.HoraAsignacion, g.TiempoEstimadoEspera, g.FechaEstimadaLlegada, g.HoraEstimadaLlegada,g.HoraTiempoEstimadoEspera,g.MinutosTiempoEstimadoEspera,
 		g2.IdGruaTipo  as IdGruaTipo,g2.IdMarca  as IdMarcaGruero,g2.Modelo as ModeloGruero,g2.Color as ColorGruero,g2.Anio as AnioGruero,g.Celular as CelularGruero,g.Cedula as CedulaGruero,g2.Latitud as LatitudGruero,g2.Longitud as LongitudGruero,
+		g2.Token as GruaToken,
 		p.PrecioSIvaBaremo,p.IvaBaremo, p.PrecioCIvaBaremo, p.PrecioSIvaBaremoModificado, p.IvaBaremoModificado, p.PrecioCIvaBaremoModificado, p.PrecioClienteSIva,
 		p.IvaCliente, p.PrecioClienteCIva, p.PrecioClienteSIvaModificado, p.IvaClienteModificado,p.PrecioClienteCIvaModificado, p.IdUsuarioPermiso, p.FechaFacturaDigital, p.FechaFacturaFisica, p.FechaEstimadaPago, p.FacturaPagada,
 		p.IdMetodoPago, p.IdBanco,p.Referencia,p.IdTipoPagoElectronico,p.TipoDocumento,p.NumeroDocumento,p.NumeroTarjeta,p.CodigoSeguridad,p.AnioTarjeta,p.TipoTarjeta,p.Link,p.NumeroTarjeta,p.Pagado,p.Negociar
