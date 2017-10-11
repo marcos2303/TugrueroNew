@@ -5,8 +5,8 @@ $values = json_decode($values, true);
 
 include('../../autoload_servicios.php');
 $Push = new Push();
-$values["IdServicio"] = 951;
-$values["IdAplicacion"] = 1;
+/*$values["IdServicio"] = 951;
+$values["IdAplicacion"] = 1;*/
 //$datos_servicio = $Servicios->getServiciosInfo($values);
 $Push->despacharPush($values);
 

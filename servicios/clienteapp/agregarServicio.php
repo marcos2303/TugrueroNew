@@ -13,13 +13,6 @@ $ServiciosEstatus = new ServiciosEstatus();
 $Baremo = new Baremo();
 /****************Seteo y comprobacion de valores*******************/
 $response = array("Error"=>0,"MensajeError"=>"","MensajeSuccess"=> 'Ok',"IdServicio"=>"0");
-/*$values['IdCondicionLugar'] = 1;
-$values['IdAveria'] = 3;
-$values['LatitudOrigen']  = '10.2131868';
-$values['LongitudOrigen']  = '-67.8862887';
-$values['LatitudDestino']  = '10.212626514872';
-$values['LongitudDestino']  = '-67.8864110297';
-$values['IdEstatus']  = '1';*/
 if(!isset($values['Inicio']) or $values['Inicio']==''){
 	$values['Inicio'] = date('Y-m-d H:i:s');
 }
@@ -56,7 +49,6 @@ if(!$Servicios ->addServicios($values)){
 	echo json_encode($response);die;
 }
 $values['IdServicio'] = $Servicios->getIdServicio();//Variable IdServicio
-
 if(isset($values['IdServicio'])){
 	//Insertamos en ServiciosEstatus la traza
 	if(isset($values['IdEstatus']) and $values['IdEstatus']==''){
@@ -92,6 +84,7 @@ if(isset($values['IdServicio']) and $values['IdServicio']!=''){
 	$data_servicio = $Servicios->getServiciosInfo($values);
 	//var_dump($data_servicio);die;
 }
+
 $Push = new Push();
 $Push->despacharPush($values);
 $response = array("Error"=>0,"MensajeError"=>"","MensajeSuccess"=> 'Ok',"IdServicio"=>$values['IdServicio'],"CodigoServicio"=>$data_servicio['CodigoServicio'],"DatosServicio" => $data_servicio);

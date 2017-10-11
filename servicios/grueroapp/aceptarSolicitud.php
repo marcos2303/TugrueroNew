@@ -70,15 +70,20 @@ if(!($datos_servicio["IdEstatus"] == 1 or $datos_servicio["IdEstatus"]==2)){
 	$ServiciosGruas->updateServiciosGruas($update_servicio_grua);
 	$Servicios->updateServicios($update_servicio);
 	$ServiciosEstatus->addServiciosEstatus($update_servicio_estatus);
+	$datos_servicio = $Servicios->getServiciosInfo($values);
 	$response = array(
 		"Error"=>0,"Actualizado"=> 1,
 		"MensajeError"=>"",
 		"MensajeSuccess"=> 'Servicio asignado',
 		"IdGrua"=>$datos_gruero["IdGrua"],
 		"Placa"=>$datos_gruero["Placa"],
+		"IdEstatus"=>$datos_servicio["IdEstatus"],
 		"DatosGrua" => $datos_gruero
 	);
+	$values["IdEstatus"] = $datos_servicio["IdEstatus"];
+	$Push = new Push();
+	$Push->despacharPush($values);
 	echo json_encode($response,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);	
-	
+
 }
 

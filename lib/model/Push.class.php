@@ -148,11 +148,36 @@ $url = 'https://fcm.googleapis.com/fcm/send';
   function despacharPush($values){
 		
 		$IdServicio = $values["IdServicio"];
+		
 		$data = $this->formateaServicio($IdServicio);
 		$tokens = array();
 		//print_r($datos_servicio);die;
 		switch ($data["IdEstatus"]){
 			case "1":
+				if($values['IdAplicacion'] == 2)//viene desde el cliente una nueva solicitud
+				{
+					
+					$data["body"] = "¡Nuevo servicio de Grúa!";
+					$data["title"] = "TU/GRUERO®";
+					$data["sound"] = "default";
+					$data["content-available"] = "1";
+					
+					//array de grueros
+					$Gruas = new Gruas();
+					//Busqueda de todos los grueros
+					$gruas_disponibles = $Gruas->getGruasServicio($values, 0.10);
+					foreach ($gruas_disponibles as $grua) {
+						$tokens[] = $grua["Token"];
+
+					}
+					
+					$envio = $this->sendPush($data,$tokens);
+				}
+			
+				
+				//echo ($envio);
+				break;
+			case "2":
 				if($values['IdAplicacion'] == 2)//viene desde el cliente una nueva solicitud
 				{
 					
@@ -171,15 +196,9 @@ $url = 'https://fcm.googleapis.com/fcm/send';
 					
 					$envio = $this->sendPush($data,$tokens);
 				}
-			
-				
-				//echo ($envio);
-				break;
-			case "2":
-				echo "case2";
 				break;
 			case "3":
-				if($values['IdAplicacion'] == 1)//viene desde el gruero la aceptacion de la solicitud
+				if($values['IdAplicacion'] == 1)//viene desde el gruero la aceptacion de la solicitud. Se le envia al cliente
 				{
 					
 					$data["body"] = "Un gruero ha aceptado su solicitud.";
@@ -195,8 +214,37 @@ $url = 'https://fcm.googleapis.com/fcm/send';
 				}
 				break;
 			case "4":
-				echo "case4";
-				break;		
+				if($values['IdAplicacion'] == 1)//viene desde el gruero diciendo que se encuentra en el sitio con el cliente
+				{
+					
+					$data["body"] = "El gruero ha indicado que se encuentra con usted.";
+					$data["title"] = "TU/GRUERO®";
+					$data["sound"] = "default";
+					$data["content-available"] = "1";
+					//Token del cliente
+					$tokens = array(
+						$data['ClienteToken']
+
+					);
+					$envio = $this->sendPush($data,$tokens);
+				}
+				break;
+			case "5":
+				if($values['IdAplicacion'] == 2)//viene desde el cliente la confirmación del gruero en sitio
+				{
+					
+					$data["body"] = "El cliente indicó que se encuentra con usted.";
+					$data["title"] = "TU/GRUERO®";
+					$data["sound"] = "default";
+					$data["content-available"] = "1";
+					//Token del cliente
+					$tokens = array(
+						$data['GrueroToken']
+
+					);
+					$envio = $this->sendPush($data,$tokens);
+				}
+				break;
 		}
   }
   function formateaServicio($IdServicio){

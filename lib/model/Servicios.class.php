@@ -447,7 +447,8 @@ class Servicios {
 			'Observacion' => $values['Observacion'],
 			'UltimaActCliente' => date('Y-m-d H:i:s'),
 			'UltimaActGruero' => null,
-			'Neumaticos' => $values['Neumaticos']
+			'Neumaticos' => $values['Neumaticos'],
+			'Token' => $values['Token']
 		);
 
 		$ConnectionORM = new ConnectionORM();
@@ -507,7 +508,7 @@ class Servicios {
 		->join("Estados","LEFT JOIN Estados e on e.IdEstado = Servicios.IdEstadoOrigen")
 		->join("Estados","LEFT JOIN Estados e2 on e2.IdEstado = Servicios.IdEstadoDestino")
 		->where("Servicios.IdServicio=?",$values['IdServicio'])
-		//echo $q;die;
+		//echo $values['IdServicio']."".$q;die;
 		->fetch();
 		return $q;
 	}
