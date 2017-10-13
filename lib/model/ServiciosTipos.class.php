@@ -17,4 +17,13 @@
 			->order('Nombre');
 			return $q;
 		}
+		public function getListEstadistica($values){
+			$ConnectionORM = new ConnectionORM();
+            $q = $ConnectionORM->getConnect()->ServiciosTipos
+			->select("*")
+            ->where("Estatus=?",1)
+			->and("Estadistica =?",1)
+			->order('Nombre');
+			return $q;
+		}
 	}

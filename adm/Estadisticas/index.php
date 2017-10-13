@@ -27,7 +27,9 @@ $values = array_merge($values,$_FILES);
 	}
 	function executeResumenGeneral($values = null)
 	{   
-        print_r($values);die;    
+		//print_r($values);
+
+		//echo $Estadisticas->getWhere();
 		require('resumen_general.php');
 	}
 	function executeSave($values = null)

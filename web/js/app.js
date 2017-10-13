@@ -344,6 +344,41 @@ function listaServiciosTipos(IdServicioTipo){
 
   }).responseJSON;
 }
+function listaServiciosTiposEstadistica(IdServicioTipo){
+  $('#IdServicioTipo').find('option').remove().end().append('<option value="0">Seleccione...</option>');
+  //$('#IdServicioTipo').find('option').remove().end();
+
+  var selected = "";
+  var parametros = {
+
+  };
+  var jqxhr = $.ajax({
+    url:  link_servidor + "/servicios/adminapp/listaServiciosTiposEstadistica.php",
+    type: "POST",
+    data: JSON.stringify(parametros),
+    dataType: "json",
+    timeout: 20000,
+    global: false,
+    async:false,
+    success: function(datos) {
+      $.each(datos.data, function(i, item) {
+        selected = "";
+        if(typeof(IdServicioTipo) != 'undefined'){
+          if(parseInt(IdServicioTipo) === parseInt(item.IdServicioTipo)){
+            selected = 'selected = "selected"';
+          }
+        }
+        $("#IdServicioTipo").append('<option value="'+ item.IdServicioTipo +'" '+selected+'>' + item.Nombre + '</option>');
+      });
+    },
+    error: function(jqXHR, textStatus) {
+      if (textStatus !== "abort") {
+        console.log("error");
+      }
+    }
+
+  }).responseJSON;
+}
 function listaEstatusFinales(IdEstatusFinal){
   $('#IdEstatusFinal').find('option').remove().end().append('<option value="0">Seleccione...</option>');
   //$('#IdServicioTipo').find('option').remove().end();

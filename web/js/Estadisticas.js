@@ -1,6 +1,6 @@
   var datos = {};
   listaSeguros();
-  listaServiciosTipos();
+  listaServiciosTiposEstadistica();
   listaEstatusFinales();
   
 $(document).ready(function(){
@@ -85,6 +85,15 @@ $(document).ready(function(){
             delete datos[$("#BaseDatos").attr("id")];
         }        
     }
+     if($(this).attr('id') == "activaAgendado"){
+        if ($(this).is(':checked')) {
+            $("#Agendado").attr("disabled",false);
+        }else{
+            $("#Agendado").attr("disabled","disabled");
+            delete datos[$("#activaAgendado").attr("id")];
+            delete datos[$("#Agendado").attr("id")];
+        }        
+    }
   });
   
   $(".DatosEstadistica").change(function(){
@@ -92,7 +101,95 @@ $(document).ready(function(){
         //datos[$(this).attr("id" )] = $(this).val();
         console.log(datos);
   });
+  $("#btnResumenGeneral").click(function(){
+        if ( $.fn.DataTable.isDataTable( '#tbl' ) ) {
+         // $('#tbl').destroy();
+        }
+        $("#ResumenLLamadas").find("tbody tr").remove();
+      $(".NoBd").html(0);
+      $(".Bd").html(0);
+      var DataForm = $('#DataForm  .DatosEstadistica').serializeArray();
+      var parametros = convertiraAJson(DataForm);
+      var datos = AjaxCall("servicios/adminapp/resumen_general.php", parametros, null,null);
+        $.each(datos.countbd, function(field, value) {
+            $("#Bd" + field).html(value);
+        });
+        $.each(datos.countbd_agendados, function(field, value) {
+            $("#BdAgendado" + field).html(value);
+        });
+        $.each(datos.countnobd, function(field, value) {
+            $("#NoBd" + field).html(value);
+        });
+        $.each(datos.countnobd_agendados, function(field, value) {
+            $("#NoBdAgendado" + field).html(value);
+        });
+        
+        columnArray = [];
+        var data = []; 
+        $.each(datos.datos_generales, function(field, value) {
+                console.log(value);
+                data.push(value);
+        });
+        $.each(datos.datos_generales[0], function(field, value) {
+            if(!parseInt(field)){
+               
+                var put = {
+                    "title" : field 
+                };   
+            
+                columnArray.push(put);
+            }
+        });
+        delete columnArray[0];
+        //console.log(data);
+        
+        $('#tbl').DataTable( {
+            "sDom": 'trp',
+            "destroy": true,
+            data: data,
+            columns: [
+                    {
+                   "title" : "IdServicio"
+                    },
+                    {
+                   "title" : "Codigo"
+                    },                    {
+                   "title" : "Aplicación"
+                    },                    {
+                   "title" : "Tipo servicio"
+                    },                    {
+                   "title" : "Estatus"
+                    },                    {
+                   "title" : "Agendado"
+                    },                    {
+                   "title" : "FechaAgendado"
+                    },                    {
+                   "title" : "Inicio"
+                    },                    {
+                   "title" : "Fin"
+                    }
+   
+                   
+            ]
+        });
+        
+        llenarLLamadasParticulares(datos.datos_llamadas_particular);
+        llenarLLamadasSeguros(datos.datos_llamadas_seguros);
+      
+      $("#DivResumenGeneral").show();
+  });
 });//end document ready
+
+function llenarLLamadasParticulares(datos){
+        $.each(datos, function(field, value) {
+            $( "#ResumenLLamadasTbody" ).append( "<tr><td>" + value.Nombre + "</td><td>" + value.Cuenta + "</td></tr>" );
+        });
+}
+function llenarLLamadasSeguros(datos){
+        $.each(datos, function(field, value) {
+            $( "#ResumenLLamadasTbody" ).append( "<tr><td>" + value.Nombre + "</td><td>" + value.Cuenta + "</td></tr>" );
+        });
+}
 
 
 
