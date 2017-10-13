@@ -151,7 +151,7 @@ $url = 'https://fcm.googleapis.com/fcm/send';
 		
 		$data = $this->formateaServicio($IdServicio);
 		$tokens = array();
-		//print_r($datos_servicio);die;
+		
 		switch ($data["IdEstatus"]){
 			case "1":
 				if($values['IdAplicacion'] == 2)//viene desde el cliente una nueva solicitud
@@ -170,7 +170,6 @@ $url = 'https://fcm.googleapis.com/fcm/send';
 						$tokens[] = $grua["Token"];
 
 					}
-					
 					$envio = $this->sendPush($data,$tokens);
 				}
 			
@@ -230,6 +229,7 @@ $url = 'https://fcm.googleapis.com/fcm/send';
 				}
 				break;
 			case "5":
+				
 				if($values['IdAplicacion'] == 2)//viene desde el cliente la confirmación del gruero en sitio
 				{
 					
@@ -239,9 +239,10 @@ $url = 'https://fcm.googleapis.com/fcm/send';
 					$data["content-available"] = "1";
 					//Token del cliente
 					$tokens = array(
-						$data['GrueroToken']
+						$data['GruaToken']
 
 					);
+
 					$envio = $this->sendPush($data,$tokens);
 				}
 				break;
@@ -262,20 +263,11 @@ $url = 'https://fcm.googleapis.com/fcm/send';
 		
   }
   function sendPush($data,$tokens){
-	
 	$url = 'https://fcm.googleapis.com/fcm/send';
-
-
-
-	
     $fields = array(
          'registration_ids' => $tokens,
 		 'data' => $data,
-		 
-         //'data' => array("IdServicio" => $values['IdServicio'])
-
         );
-	//print_r($notification);die;
     $headers = array(
         'Authorization:key = AAAAov3-Dnw:APA91bHokwmlK8Qpxa6YEU0sPby5UGu66AoqrnirlkQJO62yEPJ33JNsf26V1_qeJEsg_-jdCVYnngQEvYL55CEY4UlPVxZS3kKAOL236y4XjAxYk72EtMoq_d7IrWWUw6ag6g3hBbcA',
         'Content-Type: application/json'
@@ -293,7 +285,40 @@ $url = 'https://fcm.googleapis.com/fcm/send';
        die('Curl failed: ' . curl_error($ch));
    }
    curl_close($ch);
-   return $result;  
-  }
+   	  //print_r($result);die;
+   return $result; 
+   
+  
+   }
+   function sendPushManual(){
+	$tokens = array();
+	$tokens[] = "dod3g3KUFS8:APA91bGCKerx_pWOmGxGITk1BWAPx8uQ7MVkP-HLzv647fUjcNEQ9CDHGy8EafTGfe-pWIcSbWZ20eN6o_chzsLoiZr7BvOEfbxUe90nITkYoPI5Va2zQhV-2jOQZRjHhg1PLx_XOvLX";
+	$url = 'https://fcm.googleapis.com/fcm/send';
+    $fields = array(
+         'registration_ids' => $tokens,
+		 'data' => $data,
+        );
+    $headers = array(
+        'Authorization:key = AAAAov3-Dnw:APA91bHokwmlK8Qpxa6YEU0sPby5UGu66AoqrnirlkQJO62yEPJ33JNsf26V1_qeJEsg_-jdCVYnngQEvYL55CEY4UlPVxZS3kKAOL236y4XjAxYk72EtMoq_d7IrWWUw6ag6g3hBbcA',
+        'Content-Type: application/json'
+        );
+   $ch = curl_init(); 
+   curl_setopt($ch, CURLOPT_URL, $url);
+   curl_setopt($ch, CURLOPT_POST, true);
+   curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+   curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 0);  
+   curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+   curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+   $result = curl_exec($ch);           
+   if ($result === FALSE) {
+       die('Curl failed: ' . curl_error($ch));
+   }
+   curl_close($ch);
+   	  //print_r($result);die;
+   return $result; 	   
+	   
+	   
+   }
   
 }
