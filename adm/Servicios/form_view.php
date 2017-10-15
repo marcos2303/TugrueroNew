@@ -35,8 +35,10 @@
       <form action="" name="DataForm" id="DataForm" class="">
         <input type="hidden" class="" id="IdUsuario" name="IdUsuario" value="<?php if(isset($_SESSION['IdUsuario']) and $_SESSION['IdUsuario']!='') echo $_SESSION['IdUsuario'];?>">
         <input type="text" class="SaveAutomaticoServicio" id="IdServicioTipo" name="IdServicioTipo" value="<?php if(isset($values['IdServicioTipo']) and $values['IdServicioTipo']!='') echo $values['IdServicioTipo'];?>">
-		<input type="hidden" class="SaveAutomaticoServicioCliente SaveAutomaticoServicio SaveAutomaticoServicioPrecio SaveAutomaticoServicioGrua" id="IdServicio" name="IdServicio" value="<?php if(isset($values['IdServicio']) and $values['IdServicio']!='') echo $values['IdServicio'];?>">
-        <input type="text" class="form-control SaveAutomaticoServicioCliente" name="IdPoliza" id="IdPoliza">
+        IdEsttais<input type="text" class="form-control SaveAutomaticoServicio" id="IdEstatus" name="IdEstatus" value="">
+
+    <input type="hidden" class="SaveAutomaticoServicioCliente SaveAutomaticoServicio SaveAutomaticoServicioPrecio SaveAutomaticoServicioGrua" id="IdServicio" name="IdServicio" value="<?php if(isset($values['IdServicio']) and $values['IdServicio']!='') echo $values['IdServicio'];?>">
+        idPOliza = <input type="text" class="form-control SaveAutomaticoServicioCliente" name="IdPoliza" id="IdPoliza">
         <input type="hidden" class="form-control SaveAutomaticoServicio" name="Inicio" id="Inicio">
         <input type="hidden" id="action" value="<?php echo $values['action'];?>">
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -68,7 +70,7 @@
 			var end = new google.maps.LatLng($("#LatitudDestino").val(), $("#LongitudDestino").val());
 			displayRoute(directionsService, directionsDisplay,start, end);
 		}
-		
+
 	});
 var map;
 var geocoder = new google.maps.Geocoder;
@@ -197,12 +199,12 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 		//console.log(response);
         getGeocodeOrigen();
         getGeocodeDestino();
-		
+
 
     } else {
       console.log('Directions request failed due to ' + status);
     }
-	
+
   });
 
 }
@@ -222,7 +224,7 @@ function displayRoute(directionsService, directionsDisplay, start, end) {
 		console.log('Directions request failed due to ' + status);
 	}
   });
-  
+
 }
 function getGeocodeOrigen(){
   geocoder.geocode({'address': document.getElementById('end').value}, function(results, status) {

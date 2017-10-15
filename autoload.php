@@ -1,6 +1,6 @@
 <?php
 session_start();
-error_reporting(1);
+//error_reporting(1);
 $project_folder = '';
 $development_env = false;
 setlocale(LC_NUMERIC,"es_ES.UTF8");

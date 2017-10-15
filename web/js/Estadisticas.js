@@ -2,7 +2,7 @@
   listaSeguros();
   listaServiciosTiposEstadistica();
   listaEstatusFinales();
-  
+
 $(document).ready(function(){
   $('#IdServicioTipo').append('<option value="Todos">Todos</option>');
   //$("#IdSeguro option").eq(-1).before("<option>hi</option")
@@ -16,14 +16,14 @@ $(document).ready(function(){
             $("#IdServicioTipo").attr("disabled",false);
         }else{
             $("#IdServicioTipo").attr("disabled","disabled");
-        }        
+        }
     }
     if($(this).attr('id') == "activaIdSeguro"){
         if ($(this).is(':checked')) {
             $("#IdSeguro").attr("disabled",false);
         }else{
             $("#IdSeguro").attr("disabled","disabled");
-        }        
+        }
     }
     if($(this).attr('id') == "activaFechasRango"){
         if ($(this).is(':checked')) {
@@ -41,13 +41,13 @@ $(document).ready(function(){
           $("#FechaDesde").prop("disabled","disabled");
           $("#FechaHasta").prop("disabled","disabled");
           $("#FechaDesde").val(null);
-          $("#FechaHasta").val(null);          
-        }  
+          $("#FechaHasta").val(null);
+        }
 
     }
     if($(this).attr('id') == "activaFechaEspecifica"){
 
-        
+
         if ($(this).is(':checked')) {
           $("#FechaEspecifica").prop("disabled",false);
           if ($("#activaFechasRango").is(':checked')) {
@@ -56,16 +56,16 @@ $(document).ready(function(){
                 $("#FechaHasta").prop("disabled","disabled");
                 $("#FechaDesde").val(null);
                 $("#FechaHasta").val(null);
-          }     
+          }
 
         }else{
           $("#FechaEspecifica").prop("disabled","disabled");
           $("#FechaEspecifica").val(null);
           delete datos[$("#activaFechaEspecifica").attr("id")];
           delete datos[$("#FechaEspecifica").attr("id")];
-        }  
-          
- 
+        }
+
+
     }
     if($(this).attr('id') == "activaIdEstatusFinal"){
         if ($(this).is(':checked')) {
@@ -74,7 +74,7 @@ $(document).ready(function(){
             $("#IdEstatusFinal").attr("disabled","disabled");
             delete datos[$("#activaIdEstatusFinal").attr("id")];
             delete datos[$("#IdEstatusFinal").attr("id")];
-        }        
+        }
     }
     if($(this).attr('id') == "activaBaseDatos"){
         if ($(this).is(':checked')) {
@@ -83,7 +83,7 @@ $(document).ready(function(){
             $("#BaseDatos").attr("disabled","disabled");
             delete datos[$("#activaBaseDatos").attr("id")];
             delete datos[$("#BaseDatos").attr("id")];
-        }        
+        }
     }
      if($(this).attr('id') == "activaAgendado"){
         if ($(this).is(':checked')) {
@@ -92,12 +92,12 @@ $(document).ready(function(){
             $("#Agendado").attr("disabled","disabled");
             delete datos[$("#activaAgendado").attr("id")];
             delete datos[$("#Agendado").attr("id")];
-        }        
+        }
     }
   });
-  
+
   $(".DatosEstadistica").change(function(){
-        
+
         //datos[$(this).attr("id" )] = $(this).val();
         console.log(datos);
   });
@@ -123,59 +123,60 @@ $(document).ready(function(){
         $.each(datos.countnobd_agendados, function(field, value) {
             $("#NoBdAgendado" + field).html(value);
         });
-        
+
         columnArray = [];
-        var data = []; 
+        var data = [];
         $.each(datos.datos_generales, function(field, value) {
                 console.log(value);
                 data.push(value);
         });
         $.each(datos.datos_generales[0], function(field, value) {
             if(!parseInt(field)){
-               
+
                 var put = {
-                    "title" : field 
-                };   
-            
+                    "title" : field
+                };
+
                 columnArray.push(put);
             }
         });
         delete columnArray[0];
         //console.log(data);
-        
+
         $('#tbl').DataTable( {
-            "sDom": 'trp',
+            "sDom": 'Btrp',
             "destroy": true,
             data: data,
+            buttons: [
+                {
+                    extend: 'colvis',
+                    collectionLayout: 'fixed two-column'
+                },
+              ],
+              language: {
+                  buttons: {
+                          colvis: 'Mostrar/Ocultar columnas',
+      				            colvisRestore: "Restaurar columnas",
+                  }
+              },
             columns: [
-                    {
-                   "title" : "IdServicio"
-                    },
-                    {
-                   "title" : "Codigo"
-                    },                    {
-                   "title" : "Aplicación"
-                    },                    {
-                   "title" : "Tipo servicio"
-                    },                    {
-                   "title" : "Estatus"
-                    },                    {
-                   "title" : "Agendado"
-                    },                    {
-                   "title" : "FechaAgendado"
-                    },                    {
-                   "title" : "Inicio"
-                    },                    {
-                   "title" : "Fin"
-                    }
-   
-                   
+                    { "title" : "IdServicio" },
+                    { "title" : "Codigo"},
+                    {"title" : "Aplicación" },
+                    {"title" : "Tipo servicio"},
+                    {"title" : "Estatus"},
+                    {"title" : "Agendado"},
+                    {"title" : "FechaAgendado","bVisible": false },
+                    {"title" : "Inicio"},
+                    {"title" : "Fin"}
+
+
             ]
         });
-        
+
         llenarLLamadasParticulares(datos.datos_llamadas_particular);
         llenarLLamadasSeguros(datos.datos_llamadas_seguros);
-      
+
       $("#DivResumenGeneral").show();
   });
 });//end document ready
@@ -190,6 +191,3 @@ function llenarLLamadasSeguros(datos){
             $( "#ResumenLLamadasTbody" ).append( "<tr><td>" + value.Nombre + "</td><td>" + value.Cuenta + "</td></tr>" );
         });
 }
-
-
-

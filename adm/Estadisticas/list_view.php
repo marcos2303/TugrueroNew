@@ -1,11 +1,11 @@
 <?php include('../../view_header_admin.php')?>
 <?php include('../menu.php')?>
 
-<form id="DataForm" action="index.php" method="">    
+<form id="DataForm" action="index.php" method="">
 <div id="DivBusquedaGeneral">
 
 <input type="hidden" name="action" value="resumen_general">
-<h1 class="text-center">Estadísticas</h1>	
+<h1 class="text-center">Estadísticas</h1>
         <div class="row">
           <div class="col-sm-2">
             <div class="form-group">
@@ -15,7 +15,7 @@
 						<input type="checkbox" value="1" id="activaIdServicioTipo"  class="activaInputs">
 					</span>
 					<select class="form-control DatosEstadistica input-sm" id="IdServicioTipo" name="IdServicioTipo" style="width: 100%;" disabled="disabled"></select>
-			
+
 				</div>
             </div>
           </div>
@@ -27,13 +27,13 @@
 						<input type="checkbox" value="1" id="activaIdSeguro"  class="activaInputs DatosResumenGeneral">
 					</span>
 					<select class="form-control DatosEstadistica input-sm" id="IdSeguro" name="IdSeguro" style="width: 100%;" disabled="disabled"></select>
-			
+
 				</div>
             </div>
           </div>
           <div class="col-sm-2">
             <div class="form-group">
-              <label>Rango de fechas</label>   
+              <label>Rango de fechas</label>
 				<div class="input-group">
 					<span class="input-group-addon">
 						<input type="checkbox" id="activaFechasRango" value="1" class="activaInputs">
@@ -45,7 +45,7 @@
           </div>
           <div class="col-sm-2">
             <div class="form-group">
-              <label>Fecha específica</label>   
+              <label>Fecha específica</label>
 				<div class="input-group">
 					<span class="input-group-addon">
 					  <input type="checkbox" id="activaFechaEspecifica" value="2" class="activaInputs">
@@ -53,18 +53,18 @@
 					<input type="date" class="form-control DatosEstadistica input-sm" name="FechaEspecifica" id="FechaEspecifica" disabled="disabled">
 				</div>
             </div>
-		  </div>			
-       
+		  </div>
+
           <div class="col-sm-2">
             <div class="form-group">
-              <label>Estatus</label> 
+              <label>Estatus</label>
 				<div class="input-group">
 					<span class="input-group-addon">
 						<input type="checkbox" value="1" id="activaIdEstatusFinal" class="activaInputs">
 					</span>
 					<select class="form-control DatosEstadistica input-sm" name="IdEstatusFinal" id="IdEstatusFinal"  style="width: 100%;" disabled="disabled"></select>
 				</div>
-                
+
             </div>
           </div>
           <!--<div class="col-sm-2">
@@ -79,7 +79,7 @@
 						<option value="2">Si</option>
 						<option value="1">No</option>
 						<option value="3">Ambos</option>
-					</select>				
+					</select>
 				</div>
             </div>
           </div>-->
@@ -95,7 +95,7 @@
 						<option value="2">Si</option>
 						<option value="1">No</option>
 						<option value="3">Ambos</option>
-					</select>				
+					</select>
 				</div>
             </div>
           </div>
@@ -107,13 +107,13 @@
 		</div>
 </div>
 	<div id="DivResumenGeneral" style="display: none;">
-		
+
 		<div class="col-sm-4">
 			<div class="box">
 					<div class="box-header with-border">
 					  <h3 class="box-title">Llamadas: <label></label></h3>
 					<div class="box-tools pull-right">
-					  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+					  <button type="button" class="btn btn-box-tool" data-widget="collapse">Mostrar/Ocultar</button>
 					</div>
 					</div>
 					<!-- /.box-header -->
@@ -122,22 +122,22 @@
 						  <thead>
 							<tr>
 							  <th colspan="4">Llamadas</th>
-							</tr>  
+							</tr>
 						  </thead>
 						  <tbody id="ResumenLLamadasTbody">
-							  
+
 						  </tbody>
 
 					  </table>
 					</div>
-			</div>	
+			</div>
 		</div>
 		<div class="col-sm-4">
 			<div class="box">
 					<div class="box-header with-border">
 					  <h3 class="box-title">BD</h3>
 					<div class="box-tools pull-right">
-					  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+					  <button type="button" class="btn btn-box-tool" data-widget="collapse">Mostrar/Ocultar</button>
 					</div>
 					</div>
 					<!-- /.box-header -->
@@ -155,14 +155,14 @@
 						</tr>
 					  </table>
 					</div>
-			</div>	
+			</div>
 		</div>
 		<div class="col-sm-4">
 			<div class="box">
 					<div class="box-header with-border">
 					  <h3 class="box-title">No BD</h3>
 						<div class="box-tools pull-right">
-						  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+						  <button type="button" class="btn btn-box-tool" data-widget="collapse">Mostrar/Ocultar</button>
 						</div>
 					</div>
 					<!-- /.box-header -->
@@ -180,22 +180,25 @@
 						</tr>
 					  </table>
 					</div>
-			</div>	
+			</div>
 		</div>
-		
+
 		<div class="row">
 		<div class="col-sm-12">
 			<div class="box">
-					<div class="box-header with-border">
-					  <h3 class="box-title">Detalles</h3>
-					</div>
+        <div class="box-header with-border">
+          <h3 class="box-title">Detalles</h3>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse">Mostrar/Ocultar</button>
+          </div>
+        </div>
 					<!-- /.box-header -->
 					<div class="box-body">
-					  <table class="table table-bordered" id="tbl">
+					  <table class="table table-bordered table-responsive" id="tbl">
 
 					  </table>
 					</div>
-			</div>	
+			</div>
 		</div>
 		</div>
 	</div>

@@ -26,21 +26,21 @@ if(!isset($values['Neumaticos']) or $values['Neumaticos']==''){
 if(isset($values['KM']) and isset($values['IdAveria']) and isset($values['IdCondicionLugar']) and isset($values['Inicio']) ){
     $values['PrecioSIvaBaremo'] = $Baremo->calcularOferta( $values['KM'], $values['IdAveria'], $values['Neumaticos'],$values['IdCondicionLugar'] , $values['Inicio']);
 	//calculo el precio con iva
-    $values['IvaBaremo'] = ($values['PrecioSIvaBaremo'] * 1.12) / 100;
-    $values['PrecioCIvaBaremo'] = $values['PrecioSIvaBaremo'] + $values['IvaBaremo'];
-	
-	
+    $values['IvaBaremo'] = round((($values['PrecioSIvaBaremo'] * 1.12) / 100),2);
+    $values['PrecioCIvaBaremo'] = round($values['PrecioSIvaBaremo'] + $values['IvaBaremo'],2);
+
+
 }else{
 	$values['PrecioSIvaBaremo'] = 0;
 	$values['PrecioCIvaBaremo'] = 0;
-    $values['IvaBaremo'] = 0;
+  $values['IvaBaremo'] = 0;
 }
 
 
   $precios_actualizar = array(
     "IdServicio" => $values['IdServicio'],
     "PrecioSIvaBaremo"=>$values['PrecioSIvaBaremo'],
-  	"IvaBaremo"=>$values['IvaBaremo'],
+  	"IvaBaremo"=> $values['IvaBaremo'],
     "PrecioCIvaBaremo"=>$values['PrecioCIvaBaremo'],
     "PrecioClienteSIva"=>$values['PrecioSIvaBaremo'],
   	"IvaCliente"=>$values['IvaBaremo'],
@@ -49,7 +49,7 @@ if(isset($values['KM']) and isset($values['IdAveria']) and isset($values['IdCond
   $values["PrecioClienteSIva"] = $precios_actualizar['PrecioSIvaBaremo'];
   $values["IvaCliente"] = $precios_actualizar['IvaCliente'];
   $values["PrecioClienteCIva"] = $precios_actualizar['PrecioClienteCIva'];
-  
+
   $ServiciosPrecios->updateServiciosPrecios($precios_actualizar);
   $response = array("Error"=>0,
   "Actualizado"=>"0",

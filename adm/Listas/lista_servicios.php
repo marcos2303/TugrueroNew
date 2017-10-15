@@ -1,6 +1,6 @@
-<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">  
+<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
   <thead>
-    <tr>      
+    <tr>
       <th>Código</th>
 	  <th>Tipo</th>
 	  <th>Estatus</th>
@@ -38,7 +38,7 @@ $(document).ready(function() {
 
 
   var table = $('#example').DataTable({
-   
+
     "processing": true,
     "sServerMethod": "POST",
     "serverSide": true,
@@ -50,7 +50,7 @@ $(document).ready(function() {
     "language": {
       "url": link_servidor + "/web/js/datatables.spanish.lang"
     },
-			
+
                 "columns": [
                   { "data" : "CodigoServicio" },
 				  { "data" : "NombreServicioTipo" },

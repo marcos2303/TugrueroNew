@@ -121,7 +121,7 @@ $url = 'https://fcm.googleapis.com/fcm/send';
     $fields = array(
          'registration_ids' => $ids,
 		 'data' => $data,
-		 
+
          //'data' => array("IdServicio" => $values['IdServicio'])
 
         );
@@ -130,15 +130,15 @@ $url = 'https://fcm.googleapis.com/fcm/send';
         'Authorization:key = AAAAov3-Dnw:APA91bHokwmlK8Qpxa6YEU0sPby5UGu66AoqrnirlkQJO62yEPJ33JNsf26V1_qeJEsg_-jdCVYnngQEvYL55CEY4UlPVxZS3kKAOL236y4XjAxYk72EtMoq_d7IrWWUw6ag6g3hBbcA',
         'Content-Type: application/json'
         );
-   $ch = curl_init(); 
+   $ch = curl_init();
    curl_setopt($ch, CURLOPT_URL, $url);
    curl_setopt($ch, CURLOPT_POST, true);
    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-   curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 0);  
+   curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 0);
    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
-   $result = curl_exec($ch);           
+   $result = curl_exec($ch);
    if ($result === FALSE) {
        die('Curl failed: ' . curl_error($ch));
    }
@@ -146,60 +146,61 @@ $url = 'https://fcm.googleapis.com/fcm/send';
    return $result;
   }
   function despacharPush($values){
-		
 		$IdServicio = $values["IdServicio"];
-		
 		$data = $this->formateaServicio($IdServicio);
 		$tokens = array();
-		
+
 		switch ($data["IdEstatus"]){
 			case "1":
-				if($values['IdAplicacion'] == 2)//viene desde el cliente una nueva solicitud
+				if($values['IdAplicacion'] == 2 or $values['IdAplicacion'] == 3)//viene desde el cliente una nueva solicitud
 				{
-					
 					$data["body"] = "¡Nuevo servicio de Grúa!";
 					$data["title"] = "TU/GRUERO®";
 					$data["sound"] = "default";
 					$data["content-available"] = "1";
-					
 					//array de grueros
 					$Gruas = new Gruas();
-					//Busqueda de todos los grueros
-					$gruas_disponibles = $Gruas->getGruasServicio($values, 0.10);
-					foreach ($gruas_disponibles as $grua) {
-						$tokens[] = $grua["Token"];
-
-					}
-					$envio = $this->sendPush($data,$tokens);
+          if(isset($values["TipoEnvio"]) and $values["TipoEnvio"] == 2){
+              //Busqueda de individual de grua
+              $datos_grua = $Gruas -> getGruaInfo($values["IdGrua"]);
+              $tokens[] = $datos_grua["Token"];
+          }else{
+            //Busqueda de todos los grueros
+            $gruas_disponibles = $Gruas->getGruasServicio($values, 0.10);
+  					foreach ($gruas_disponibles as $grua) {
+  						$tokens[] = $grua["Token"];
+  					}
+          }
+          return $this->sendPush($data,$tokens);
 				}
-			
-				
-				//echo ($envio);
 				break;
 			case "2":
-				if($values['IdAplicacion'] == 2)//viene desde el cliente una nueva solicitud
-				{
-					
-					$data["body"] = "¡Nuevo servicio de Grúa!";
-					$data["title"] = "TU/GRUERO®";
-					$data["sound"] = "default";
-					$data["content-available"] = "1";
-					//array de grueros
-					$Gruas = new Gruas();
-					//Busqueda de todos los grueros
-					$gruas_disponibles = $Gruas->getGruasServicio($values, 0.10);
-					foreach ($gruas_disponibles as $grua) {
-						$tokens[] = $grua["Token"];
-
-					}
-					
-					$envio = $this->sendPush($data,$tokens);
-				}
+      if($values['IdAplicacion'] == 2 or $values['IdAplicacion'] == 3)//viene desde el cliente una nueva solicitud
+      {
+        $data["body"] = "¡Nuevo servicio de Grúa!";
+        $data["title"] = "TU/GRUERO®";
+        $data["sound"] = "default";
+        $data["content-available"] = "1";
+        //array de grueros
+        $Gruas = new Gruas();
+        if(isset($values["TipoEnvio"]) and $values["TipoEnvio"] == 2){
+            //Busqueda de individual de grua
+            $datos_grua = $Gruas -> getGruaInfo($values["IdGrua"]);
+            $tokens[] = $datos_grua["Token"];
+            print_r($tokens);
+        }else{
+          //Busqueda de todos los grueros
+          $gruas_disponibles = $Gruas->getGruasServicio($values, 0.10);
+          foreach ($gruas_disponibles as $grua) {
+            $tokens[] = $grua["Token"];
+          }
+        }
+        return $this->sendPush($data,$tokens);
+      }
 				break;
 			case "3":
 				if($values['IdAplicacion'] == 1)//viene desde el gruero la aceptacion de la solicitud. Se le envia al cliente
 				{
-					
 					$data["body"] = "Un gruero ha aceptado su solicitud.";
 					$data["title"] = "TU/GRUERO®";
 					$data["sound"] = "default";
@@ -207,15 +208,13 @@ $url = 'https://fcm.googleapis.com/fcm/send';
 					//Token del cliente
 					$tokens = array(
 						$data['ClienteToken']
-
 					);
-					$envio = $this->sendPush($data,$tokens);
+					return $this->sendPush($data,$tokens);
 				}
 				break;
 			case "4":
 				if($values['IdAplicacion'] == 1)//viene desde el gruero diciendo que se encuentra en el sitio con el cliente
 				{
-					
 					$data["body"] = "El gruero ha indicado que se encuentra con usted.";
 					$data["title"] = "TU/GRUERO®";
 					$data["sound"] = "default";
@@ -223,46 +222,45 @@ $url = 'https://fcm.googleapis.com/fcm/send';
 					//Token del cliente
 					$tokens = array(
 						$data['ClienteToken']
-
 					);
-					$envio = $this->sendPush($data,$tokens);
+					return $this->sendPush($data,$tokens);
 				}
 				break;
 			case "5":
-				
 				if($values['IdAplicacion'] == 2)//viene desde el cliente la confirmación del gruero en sitio
 				{
-					
-					$data["body"] = "El cliente indicó que se encuentra con usted.";
+					$data["body"] = "El cliente ha confirmado que se encuentra con usted.";
 					$data["title"] = "TU/GRUERO®";
 					$data["sound"] = "default";
 					$data["content-available"] = "1";
 					//Token del cliente
 					$tokens = array(
 						$data['GruaToken']
-
 					);
-
-					$envio = $this->sendPush($data,$tokens);
+					return $this->sendPush($data,$tokens);
 				}
 				break;
 		}
+    return null;
   }
   function formateaServicio($IdServicio){
 		$values["IdServicio"] = $IdServicio;
 		$Servicios = new Servicios();
-		$datos_servicio = $Servicios->getServiciosInfo($values);  
+		$datos_servicio = $Servicios->getServiciosInfo($values);
 		foreach($datos_servicio as $key => $value){
 
 			$response[$key] = $value;
 
 		}
-		
+
 		return $response;
 
-		
+
   }
   function sendPush($data,$tokens){
+  if(count($tokens)<1){
+    $tokens[] = "";
+  }
 	$url = 'https://fcm.googleapis.com/fcm/send';
     $fields = array(
          'registration_ids' => $tokens,
@@ -272,23 +270,23 @@ $url = 'https://fcm.googleapis.com/fcm/send';
         'Authorization:key = AAAAov3-Dnw:APA91bHokwmlK8Qpxa6YEU0sPby5UGu66AoqrnirlkQJO62yEPJ33JNsf26V1_qeJEsg_-jdCVYnngQEvYL55CEY4UlPVxZS3kKAOL236y4XjAxYk72EtMoq_d7IrWWUw6ag6g3hBbcA',
         'Content-Type: application/json'
         );
-   $ch = curl_init(); 
+   $ch = curl_init();
    curl_setopt($ch, CURLOPT_URL, $url);
    curl_setopt($ch, CURLOPT_POST, true);
    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-   curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 0);  
+   curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 0);
    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
-   $result = curl_exec($ch);           
+   $result = curl_exec($ch);
    if ($result === FALSE) {
        die('Curl failed: ' . curl_error($ch));
    }
    curl_close($ch);
    	  //print_r($result);die;
-   return $result; 
-   
-  
+   return $result;
+
+
    }
    function sendPushManual(){
 	$tokens = array();
@@ -302,23 +300,22 @@ $url = 'https://fcm.googleapis.com/fcm/send';
         'Authorization:key = AAAAov3-Dnw:APA91bHokwmlK8Qpxa6YEU0sPby5UGu66AoqrnirlkQJO62yEPJ33JNsf26V1_qeJEsg_-jdCVYnngQEvYL55CEY4UlPVxZS3kKAOL236y4XjAxYk72EtMoq_d7IrWWUw6ag6g3hBbcA',
         'Content-Type: application/json'
         );
-   $ch = curl_init(); 
+   $ch = curl_init();
    curl_setopt($ch, CURLOPT_URL, $url);
    curl_setopt($ch, CURLOPT_POST, true);
    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-   curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 0);  
+   curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 0);
    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
-   $result = curl_exec($ch);           
+   $result = curl_exec($ch);
    if ($result === FALSE) {
        die('Curl failed: ' . curl_error($ch));
    }
    curl_close($ch);
-   	  //print_r($result);die;
-   return $result; 	   
-	   
-	   
+   return $result;
+
+
    }
-  
+
 }
