@@ -1,4 +1,4 @@
-<input type="text" id="IdServicio" value="<?php echo $values["IdServicio"]?>">
+<input type="hidden" id="IdServicio" value="<?php echo $values["IdServicio"]?>">
 <h1 class="text-center">Servicio</h1>
 <div class="panel-group" id="accordion_servicios" role="tablist" aria-multiselectable="true">
   <div class="panel panel-tugruero">
@@ -89,7 +89,7 @@
           </div>
           <div class="col-md-3">
             <label>ModeloCliente </label><p id="ModeloCliente"></p>
-          </div>			 
+          </div>
           <div class="col-md-3">
             <label>ColorCliente </label><p id="ColorCliente"></p>
           </div>
@@ -118,7 +118,7 @@
             <label>Apellidos proveedor </label><p id="ApellidosProveedor"></p>
           </div>
 		</div>
-		<div class="row"> 
+		<div class="row">
           <div class="col-md-2">
             <label>CedulaGruas </label><p id="CedulaGruas"></p>
           </div>
@@ -170,7 +170,7 @@
             <label>NombreMetodoPago </label><p id="NombreMetodoPago"></p>
           </div>
 		</div>
-		<div class="row">	
+		<div class="row">
           <div class="col-md-4">
             <label>NombreBanco </label><p id="NombreBanco"></p>
           </div>
@@ -238,24 +238,24 @@
   </div>
 </div>
 <script>
-	
+
 $(document).ready(function(){
-	$.ajax({		
+	$.ajax({
 		url: link_servidor + "/adm/Listas/index.php?action=detalle_servicio_json&IdServicio=" + $("#IdServicio").val(),
 		success: function(data){
 			$.each(data, function(i, item) {
 
 			  $("#" + i).html(item);
-			  
-						if(($("#" + i).attr('id')=="ServicioGeneral" || 
-							  $("#" + i).attr('id')=="TratoCordial" || 
-							  $("#" + i).attr('id')=="TratoVehiculo" || 
-							  $("#" + i).attr('id')=="Presencia") 
-							  && (parseInt(item) > 0) 
-						) 
+
+						if(($("#" + i).attr('id')=="ServicioGeneral" ||
+							  $("#" + i).attr('id')=="TratoCordial" ||
+							  $("#" + i).attr('id')=="TratoVehiculo" ||
+							  $("#" + i).attr('id')=="Presencia")
+							  && (parseInt(item) > 0)
+						)
 						{
 						  creaEstrellas($("#" + i).attr('id'),item);
-					    } 
+					    }
 						if($("#" + i).attr('id')=="Recomienda"){
 							 siNo($("#" + i).attr('id'),item);
 						}
@@ -263,7 +263,7 @@ $(document).ready(function(){
 		},
 	  dataType: "json"
 	});
-	
+
 });
 
 </script>

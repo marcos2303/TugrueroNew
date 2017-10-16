@@ -32,7 +32,6 @@ $port      = $_SERVER['SERVER_PORT'];
 $disp_port = ($protocol == 'http' && $port == 80 || $protocol == 'https' && $port == 443) ? '' : ":$port";
 $domain    = $_SERVER['SERVER_NAME'].$project_folder;
 $full_url  = "${protocol}://${domain}";
-
 define("base_dir",__DIR__);// Absolute path to your installation, ex: /var/www/mywebsite
 define("doc_root", preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']));// ex: /var/www
 define("base_url",preg_replace("!^${doc_root}!", '', $base_dir));# ex: '' or '/mywebsite'
@@ -58,8 +57,8 @@ define("image_url",full_url."/web/images/");
  define('IVA',1.12);
 //Class definition
 spl_autoload_register(function ($nombre_clase) {
-    include $_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/".$nombre_clase . '.class.php';
-	include $_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/notorm-master/".$nombre_clase . '.php';
-	include $_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/".$nombre_clase . '.class.php';
+  @include $_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/".$nombre_clase . '.class.php';
+	@include $_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/notorm-master/".$nombre_clase . '.php';
+	@include $_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/".$nombre_clase . '.class.php';
 
 });

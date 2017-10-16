@@ -28,7 +28,7 @@
 					</tr>
 				</tfoot>
 			</table>
-			<a class="btn btn-primary"  href="<?php echo full_url."/adm/Proveedores/index.php?action=new"?>"><i class="fa fa-plus"></i> Agregar</a>
+			<a class="btn btn-primary"  href="<?php echo full_url."/adm/Proveedores/index.php?action=new"?>"> Agregar</a>
 
 </div>
 <?php include('../../view_footer_admin.php')?>
@@ -52,35 +52,29 @@ $(document).ready(function() {
 
 
 	var table = $('#example').DataTable({
-		"scrollX": true,
 		"processing": true,
-		"serverSide": true,
-		"sScrollY": "300",
-		"sDom": 'Btrp',
-
+    "sServerMethod": "POST",
+    "serverSide": true,
+	lengthChange: false,
+    //scrollCollapse: true,
+    //"sScrollXInner":"110%",
+    "sDom": 'Btrp',
 		"ajax": "<?php echo full_url."/adm/Proveedores/index.php?action=list_json"?>",
 		"language": {
 			"url": "<?php echo full_url."/web/js/"?>datatables.spanish.lang"
 		},
 		buttons: [
 				{
-						extend: 'colvisGroup',
-						text: 'Datos básicos',
-						show: [ 1, 2, 3 ],
-						hide: [ 4, 5,6 ]
-				},
-				{
-						extend: 'colvisGroup',
-						text: 'Datos ubicación',
-						show: [  4, 5,6 ],
-						hide: [ 1, 2,3 ]
-				},
-				{
-						extend: 'colvisGroup',
-						text: 'Todos',
-						show: ':hidden'
+						extend: 'colvis',
+						collectionLayout: 'fixed two-column'
 				}
 		],
+		language: {
+				buttons: {
+						colvis: 'Mostrar/Ocultar columnas',
+		colvisRestore: "Restaurar columnas",
+				}
+		},
 		"columns": [
 			{ "data": "Identificacion" },
 			{ "data": "Nombres" },
@@ -92,10 +86,6 @@ $(document).ready(function() {
 			{ "data": "actions" }
 		],"rowCallback": function( row, data, index ) {
 		},
-		"aoColumnDefs": [
-			{ "visible": false, "targets": [4,5,6] },
-			{ 'bSortable': false, 'aTargets': [ 7 ] }
-		]
 	});
 	$('#column_0').on ('keypress', function(e){
 		if(e.which == 13) {

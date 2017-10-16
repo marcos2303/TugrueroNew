@@ -1,63 +1,63 @@
 
 #custom-bootstrap-menu.navbar-default .navbar-brand {
-    color: #ddd;
+  color: #ddd;
 }
 #custom-bootstrap-menu.navbar-default {
-    /*font-size: 14px;*/
-    background-color: #444;
-    border-width: 1px;
-    border-radius: 4px;
+  /*font-size: 14px;*/
+  background-color: #444;
+  border-width: 1px;
+  border-radius: 4px;
 }
 #custom-bootstrap-menu.navbar-default .navbar-nav>li>a {
-    color: #ddd;
-    background-color: #444;
+  color: #ddd;
+  background-color: #444;
 }
 #custom-bootstrap-menu.navbar-default .navbar-nav>li>a:hover,
 #custom-bootstrap-menu.navbar-default .navbar-nav>li>a:focus {
-    color: #ddd;
-    background-color: #444;
+  color: #ddd;
+  background-color: #444;
 }
 #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a,
 #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:hover,
 #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:focus {
-    color: #ddd;
-    background-color: #444;
+  color: #ddd;
+  background-color: #444;
 }
 #custom-bootstrap-menu.navbar-default .navbar-toggle {
-    border-color: #fff;
+  border-color: #fff;
 }
 #custom-bootstrap-menu.navbar-default .navbar-toggle:hover,
 #custom-bootstrap-menu.navbar-default .navbar-toggle:focus {
-    background-color: #444;
+  background-color: #444;
 }
 #custom-bootstrap-menu.navbar-default .navbar-toggle .icon-bar {
-    background-color: #444;
+  background-color: #444;
 }
 #custom-bootstrap-menu.navbar-default .navbar-toggle:hover .icon-bar,
 #custom-bootstrap-menu.navbar-default .navbar-toggle:focus .icon-bar {
-    background-color: #444;
+  background-color: #444;
 }
 .wrapper{
-    margin-top: -20px !important;
+  margin-top: -20px !important;
 }
 .main-sidebar{
-     margin-top: -50px !important;
+  margin-top: -50px !important;
 }
 
 @media (max-width: 767px) {
-.left-side {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding-top: 50px;
-  min-height: 100%;
-  width: 550px;
-  z-index: 810;
-  -webkit-transition: -webkit-transform 0.3s ease-in-out, width 0.3s ease-in-out;
-  -moz-transition: -moz-transform 0.3s ease-in-out, width 0.3s ease-in-out;
-  -o-transition: -o-transform 0.3s ease-in-out, width 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
-}
+  .left-side {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-top: 50px;
+    min-height: 100%;
+    width: 550px;
+    z-index: 810;
+    -webkit-transition: -webkit-transform 0.3s ease-in-out, width 0.3s ease-in-out;
+    -moz-transition: -moz-transform 0.3s ease-in-out, width 0.3s ease-in-out;
+    -o-transition: -o-transform 0.3s ease-in-out, width 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+  }
   .main-sidebar,
   .left-side {
     padding-top: 100px;
@@ -74,19 +74,19 @@
   }
 }
 @media (min-width: 768px) {
-.left-side {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding-top: 50px;
-  min-height: 100%;
-  width: 800px;
-  z-index: 810;
-  -webkit-transition: -webkit-transform 0.3s ease-in-out, width 0.3s ease-in-out;
-  -moz-transition: -moz-transform 0.3s ease-in-out, width 0.3s ease-in-out;
-  -o-transition: -o-transform 0.3s ease-in-out, width 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
-}
+  .left-side {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-top: 50px;
+    min-height: 100%;
+    width: 800px;
+    z-index: 810;
+    -webkit-transition: -webkit-transform 0.3s ease-in-out, width 0.3s ease-in-out;
+    -moz-transition: -moz-transform 0.3s ease-in-out, width 0.3s ease-in-out;
+    -o-transition: -o-transform 0.3s ease-in-out, width 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+  }
   .sidebar-collapse .main-sidebar,
   .sidebar-collapse .left-side {
     -webkit-transform: translate(-800px, 0);
@@ -113,7 +113,7 @@
 }
 /************Datatable*****************/
 table tbody tr {
-	cursor: pointer;
+  cursor: pointer;
 }
 table.dataTable tbody > tr.seleccionado,
 table.dataTable tbody > tr > .seleccionado {
@@ -126,7 +126,7 @@ table.dataTable tbody > tr > .seleccionado {
 }
 table.dataTable thead .sorting_asc_disabled:after,
 table.dataTable thead .sorting_desc_disabled:after {
-    color: #eee;
+  color: #eee;
 }
 
 table.dataTable thead .sorting:after {
@@ -155,23 +155,23 @@ table.dataTable thead .sorting_desc:after {
   }
   #popupListas .modal-content {
     -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
   }
   #popupListas .modal-lg {
     width: 90%;
   }
 }
 @media (max-width: 1100px) {
-    * {
-        font-size: 12px !important;
-    }
-    table.dataTable thead, tbody, tfoot{
-        font-size: 12px;
+  * {
+    font-size: 12px !important;
+  }
+  table.dataTable thead, tbody, tfoot{
+    font-size: 12px;
 
-    }
-    h1 {
-        font-size: 14px;
-    }
+  }
+  h1 {
+    font-size: 14px;
+  }
 }
 .login-box {
   background: transparent url("../img_admin/Fondos/fondoinicio.jpg") no-repeat fixed top;
@@ -184,7 +184,7 @@ table.dataTable thead .sorting_desc:after {
   color: #FFF;
 }
 .login-entrada-logo {
-    color: #FFF;
+  color: #FFF;
 }
 .login-logo {
   padding-top: 20px;
@@ -231,38 +231,38 @@ table.table tr th {
   color: #fff !important;
 }
 .bg-tugruero {
-    background-color: #444;
-    color: #f27730 !important;
+  background-color: #444;
+  color: #f27730 !important;
 }
 .bg-body-tugruero {
-    background-color: #444 !important;
-    color: #000;
+  background-color: #444 !important;
+  color: #000;
 }
 .btn-tugruero {
-    color: #fff;
-    background-color: #444 !important;
-    border-color: #fff !important;
+  color: #fff;
+  background-color: #444 !important;
+  border-color: #fff !important;
 }
 .btn-tugruero:hover {
-    color: #000;
-    background-color: #f27730 !important;
-    border-color: #fff;
+  color: #000;
+  background-color: #f27730 !important;
+  border-color: #fff;
 }
 .btn-tugruero:active {
-    color: #fff;
+  color: #fff;
 }
 a .btn-tugruero:hover {
-    color: #000;
-    background-color: #f27730;
-    border-color: #fff;
+  color: #000;
+  background-color: #f27730;
+  border-color: #fff;
 }
 a .btn-tugruero:visited {
-    color: #000;
-    background-color: #f27730;
-    border-color: #fff;
+  color: #000;
+  background-color: #f27730;
+  border-color: #fff;
 }
- .btn-tugruero, a:active {
-    color: #fff !important;
+.btn-tugruero, a:active {
+  color: #fff !important;
 }
 
 .buttons-colvisGroup{
@@ -273,24 +273,24 @@ a .btn-tugruero:visited {
   padding: 5px;
 }
 .buttons-colvisGroup:hover {
-    color: #000;
-    background-color: #f27730;
-    border-color: #fff;
+  color: #000;
+  background-color: #f27730;
+  border-color: #fff;
 }
 .buttons-colvisGroup:active {
-    color: #fff;
+  color: #fff;
 }
 .panel-tugruero > .panel-heading {
-    color: #f27730;
-    background-color: #444;
-    border-color: #bce8f1;
+  color: #f27730;
+  background-color: #444;
+  border-color: #bce8f1;
 }
 .small-box {
-    border-radius: 10px;
-    position: relative;
-    display: block;
-    margin-bottom: 20px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  position: relative;
+  display: block;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 .small-box h3 {
   font-size: 26px;
@@ -299,63 +299,77 @@ a .btn-tugruero:visited {
   text-decoration: none;
 }
 .content-wrapper, .left-side, .right-side {
-    min-height: 100%;
-    background-color: #fff;
-    z-index: 800;
+  min-height: 100%;
+  background-color: #fff;
+  z-index: 800;
 }
 .table-striped > tbody > tr:nth-of-type(odd) {
-    background-color: #bbb;
-    color: #000;
+  background-color: #bbb;
+  color: #000;
 }
 .table-striped > tbody > tr:hover {
-    background-color: #fff;
-    color: #000;
+  background-color: #fff;
+  color: #000;
 }
 .table-small {
   font-size: 12px !important;
 }
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
-    z-index: 3;
-    color: #fff;
-    cursor: default;
-    background-color: #f27730;
-    border-color: #f27730;
+  z-index: 3;
+  color: #fff;
+  cursor: default;
+  background-color: #f27730;
+  border-color: #f27730;
 }
 .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus {
-    z-index: 2;
-    color: #fff;
-    background-color: #ccc;
-    border-color: #ddd;
+  z-index: 2;
+  color: #fff;
+  background-color: #ccc;
+  border-color: #ddd;
 }
 .pagination > li > a, .pagination > li > span {
-    position: relative;
-    float: left;
-    padding: 6px 12px;
-    margin-left: -1px;
-    line-height: 1.42857143;
-    color: #fff;
-    text-decoration: none;
-    background-color: #444;
-    border: 1px solid #ddd;
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: -1px;
+  line-height: 1.42857143;
+  color: #fff;
+  text-decoration: none;
+  background-color: #444;
+  border: 1px solid #ddd;
 }
 input[readonly], .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
-    background-color: #aaa;
-    color: #fff !important;
-    opacity: 1;
+  background-color: #aaa;
+  color: #fff !important;
+  opacity: 1;
 }
 .alert {
-    padding: 5px;
+  padding: 5px;
 
-    border-radius: 4px;
+  border-radius: 4px;
 }
 .alert-tugruero {
-    color: #000;
-    font-size: 16px !important;
-    background-color: #ccc;
+  color: #000;
+  font-size: 16px !important;
+  background-color: #ccc;
 }
 .panel-group .panel + .panel {
-    margin-top: 0px;
+  margin-top: 0px;
 }
 table tfoot .input-sm {
-    color: #000 !important;
+  color: #000 !important;
+}
+a.dt-button.buttons-columnVisibility.active {
+  background-color: #444 !important;
+  border-color: #fff !important;
+}
+div.dt-button-collection button.dt-button:active:not(.disabled), div.dt-button-collection button.dt-button.active:not(.disabled), div.dt-button-collection div.dt-button:active:not(.disabled), div.dt-button-collection div.dt-button.active:not(.disabled), div.dt-button-collection a.dt-button:active:not(.disabled), div.dt-button-collection a.dt-button.active:not(.disabled) {
+  color: #fff;
+  background-color: #444 !important;
+  border-color: #fff !important;
+  background-image: none;
+  background-image: none;
+  background-image: none;
+  background-image: none;
+  background-image: none;
 }

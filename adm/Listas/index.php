@@ -468,9 +468,16 @@ function executeListaServiciosAdministracionJson($values)
 				/*****************ServiciosPrecios*************************************/
 				"PrecioModificado" =>  $list['PrecioModificado'],
 				"PrecioSIvaBaremo" =>  $list['PrecioSIvaBaremo'],
+				"IvaBaremo" =>  $list['IvaBaremo'],
 				"PrecioCIvaBaremo" =>  $list['PrecioCIvaBaremo'],
 				"PrecioSIvaModificado" =>  $list['PrecioSIvaModificado'],
+				"IvaModificado" =>  $list['IvaModificado'],
 				"PrecioCIvaModificado" =>  $list['PrecioCIvaModificado'],
+
+				"PrecioClienteSIva" =>  $list['PrecioClienteSIva'],
+				"IvaCliente" =>  $list['IvaCliente'],
+				"PrecioClienteCIva" =>  $list['PrecioClienteCIva'],
+
 				"NombreUsuarioPrecio" =>  $list['NombreUsuarioPrecio'],
 				"NumeroFactura" =>  "<input type='text' value='".$list['NumeroFactura']."' class=' bloquear NumeroFactura_".$list['IdServicio']."' onchange='CambiarNumeroFactura(this,".$list['IdServicio'].");' id='NumeroFactura[".$list['IdServicio']."]'>",
                 "FechaFacturaDigital" =>  '<input type="date" value="'.$list['FechaFacturaDigital'].'" class="bloquear FechaFacturaDigital_'.$list['IdServicio'].'" onchange="CambiarFechaFacturaDigital(this,'.$list['IdServicio'].');" id="FechaFacturaDigital_'.$list['IdServicio'].'">',
@@ -487,10 +494,7 @@ function executeListaServiciosAdministracionJson($values)
 					<i class="fa fa-gear"></i> <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu dropdown-menu-right">
-					<li><a href="#" onclick="editarDatatable('."'".$list['Placa']."'".')"> Editar</a></li>
-					<li><a href="#" onclick="ListarServiciosGrua(1,1)"> Historial de servicios</a></li>
-					<li><a href="#"> Conexiones</a></li>
-					<li><a href="#"> Reiniciar dispositivo</a></li>
+					<li><a href="#" onclick="DetalleServicio('.$list['IdServicio'].')"> Detalle servicio</a></li>
 					</ul>
 					</div>'
 			);
@@ -559,8 +563,13 @@ function executeListaServiciosAdministracionJson($values)
 			"PrecioModificado" =>  "",
 			"PrecioSIvaBaremo" =>  "",
 			"PrecioCIvaBaremo" =>  "",
+			"IvaBaremo" =>  "",
 			"PrecioSIvaModificado" =>  "",
+			"IvaModificado" =>  "",
 			"PrecioCIvaModificado" =>  "",
+			"PrecioClienteSIva" =>  "",
+			"IvaCliente" =>  "",
+			"PrecioClienteCIva" =>  "",
 			"NombreUsuarioPrecio" =>  "",
             "NumeroFactura" =>  "",
             "FechaFacturaDigital" =>  "",
@@ -628,7 +637,7 @@ function executeListaUsuariosJson($values)
 				<i class="fa fa-gear"></i> <span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu dropdown-menu-right">
-				<li><a href="#" onclick="DetalleServicio('.$list['IdUsuario'].')"> Detalle servicio</a></li>
+				<li><a href="#" onclick="DetalleServicio('.$list['IdServicio'].')"> Detalle servicio</a></li>
 				</ul>
 				</div>'
 			);
