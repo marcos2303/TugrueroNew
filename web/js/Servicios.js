@@ -596,6 +596,10 @@ var parametros_servicio = {
       "TipoEnvio" : tipo,
       "IdEstatus" : $("#IdEstatus").val(),
       "IdAplicacion" : 3,
+      "LatitudOrigen" : $("#LatitudOrigen").val(),
+      "LongitudOrigen" : $("#LongitudOrigen").val(),
+      "LatitudDestino" : $("#LatitudDestino").val(),
+      "LongitudDestino" : $("#LongitudDestino").val(),
       "IdGrua" : $("#IdGrua").val(),
 };
 

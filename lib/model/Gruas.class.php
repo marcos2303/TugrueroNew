@@ -275,10 +275,10 @@ class Gruas {
 			'supLng' => $datos_servicio["LongitudOrigen"] + $grados,
 			'infLng' => $datos_servicio["LongitudOrigen"] - $grados
 		);
-		$mTopes['supLat'] = str_replace(",", ".", $mTopes['supLat']);		
-		$mTopes['infLat'] = str_replace(",", ".", $mTopes['infLat']);		
-		$mTopes['supLng'] = str_replace(",", ".", $mTopes['supLng']);		
-		$mTopes['infLng'] = str_replace(",", ".", $mTopes['infLng']);		
+		$mTopes['supLat'] = str_replace(",", ".", $mTopes['supLat']);
+		$mTopes['infLat'] = str_replace(",", ".", $mTopes['infLat']);
+		$mTopes['supLng'] = str_replace(",", ".", $mTopes['supLng']);
+		$mTopes['infLng'] = str_replace(",", ".", $mTopes['infLng']);
 		if(!isset($datos_servicio['IdGrua']) or $datos_servicio['IdGrua']==''){
 			$where = " Disponible = 1
 			AND

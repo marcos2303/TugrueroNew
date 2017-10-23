@@ -211,6 +211,18 @@ $url = 'https://fcm.googleapis.com/fcm/send';
 					);
 					return $this->sendPush($data,$tokens);
 				}
+        if($values['IdAplicacion'] == 2)//viene desde el gruero la aceptacion de la solicitud. Se le envia al cliente
+				{
+					$data["body"] = "El cliente no confirmó su atención.";
+					$data["title"] = "TU/GRUERO®";
+					$data["sound"] = "default";
+					$data["content-available"] = "1";
+					//Token del cliente
+					$tokens = array(
+						$data['GruaToken']
+					);
+					return $this->sendPush($data,$tokens);
+				}
 				break;
 			case "4":
 				if($values['IdAplicacion'] == 1)//viene desde el gruero diciendo que se encuentra en el sitio con el cliente
@@ -240,6 +252,20 @@ $url = 'https://fcm.googleapis.com/fcm/send';
 					return $this->sendPush($data,$tokens);
 				}
 				break;
+        case "6":
+  				if($values['IdAplicacion'] == 2)//viene desde el cliente la confirmación del gruero en sitio
+  				{
+  					$data["body"] = "El cliente ha confirmado que se encuentra con usted.";
+  					$data["title"] = "TU/GRUERO®";
+  					$data["sound"] = "default";
+  					$data["content-available"] = "1";
+  					//Token del cliente
+  					$tokens = array(
+  						$data['GruaToken']
+  					);
+  					return $this->sendPush($data,$tokens);
+  				}
+  				break;
 		}
     return null;
   }
@@ -258,6 +284,7 @@ $url = 'https://fcm.googleapis.com/fcm/send';
 
   }
   function sendPush($data,$tokens){
+	  //print_r($tokens);die;
   if(count($tokens)<1){
     $tokens[] = "";
   }
@@ -309,6 +336,7 @@ $url = 'https://fcm.googleapis.com/fcm/send';
    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
    $result = curl_exec($ch);
+
    if ($result === FALSE) {
        die('Curl failed: ' . curl_error($ch));
    }
