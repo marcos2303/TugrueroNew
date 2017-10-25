@@ -99,7 +99,7 @@ $(document).ready(function(){
   $(".DatosEstadistica").change(function(){
 
         //datos[$(this).attr("id" )] = $(this).val();
-        console.log(datos);
+        //console.log(datos);
   });
   $("#btnResumenGeneral").click(function(){
         if ( $.fn.DataTable.isDataTable( '#tbl' ) ) {
@@ -111,14 +111,40 @@ $(document).ready(function(){
       var DataForm = $('#DataForm  .DatosEstadistica').serializeArray();
       var parametros = convertiraAJson(DataForm);
       var datos = AjaxCall("servicios/adminapp/resumen_general.php", parametros, null,null);
+        $("#tbody_resumen_fechas_bd").empty();
         $.each(datos.countbd, function(field, value) {
-            $("#Bd" + field).html(value);
+            //console.log(value);
+            var html = '';
+            html+="<tr>";
+            html+="<td>" + field;
+            html+="</td>";
+            html+="<td><a class='btn btn-default'><b>" + (value.Efectivo==null?0:value.Efectivo) + '</b> <span class="badge">' + (value.EfectivoAgendado==null?0:value.EfectivoAgendado) + '</span></a>';
+            html+="</td>";
+            html+="<td><a class='btn btn-default'><b>" + (value.Fallido==null?0:value.Fallido) + '</b> <span class="badge">' + (value.FallidoAgendado==null?0:value.FallidoAgendado) + '</span></a>';
+            html+="</td>";
+            html+="<td><a class='btn btn-default'><b>" + (value.Cancelado==null?0:value.Cancelado) + '</b> <span class="badge">' + (value.CanceladoAgendado==null?0:value.CanceladoAgendado) + '</span></a>';
+            html+="</td>";
+            html+="</tr>";
+            $("#tbody_resumen_fechas_bd").append(html);
         });
         $.each(datos.countbd_agendados, function(field, value) {
             $("#BdAgendado" + field).html(value);
         });
+        $("#tbody_resumen_fechas_nobd").empty();
         $.each(datos.countnobd, function(field, value) {
-            $("#NoBd" + field).html(value);
+            //console.log(value);
+            var html = '';
+            html+="<tr>";
+            html+="<td>" + field;
+            html+="</td>";
+            html+="<td><a class='btn btn-default'><b>" + (value.Efectivo==null?0:value.Efectivo) + '</b> <span class="badge">' + (value.EfectivoAgendado==null?0:value.EfectivoAgendado) + '</span></a>';
+            html+="</td>";
+            html+="<td><a class='btn btn-default'><b>" + (value.Fallido==null?0:value.Fallido) + '</b> <span class="badge">' + (value.FallidoAgendado==null?0:value.FallidoAgendado) + '</span></a>';
+            html+="</td>";
+            html+="<td><a class='btn btn-default'><b>" + (value.Cancelado==null?0:value.Cancelado) + '</b> <span class="badge">' + (value.CanceladoAgendado==null?0:value.CanceladoAgendado) + '</span></a>';
+            html+="</td>";
+            html+="</tr>";
+            $("#tbody_resumen_fechas_nobd").append(html);
         });
         $.each(datos.countnobd_agendados, function(field, value) {
             $("#NoBdAgendado" + field).html(value);
@@ -127,7 +153,7 @@ $(document).ready(function(){
         columnArray = [];
         var data = [];
         $.each(datos.datos_generales, function(field, value) {
-                console.log(value);
+                //console.log(value);
                 data.push(value);
         });
         $.each(datos.datos_generales[0], function(field, value) {

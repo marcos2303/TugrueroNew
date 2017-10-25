@@ -45,9 +45,30 @@ if($datos_generales){
 
 	}
 	if($datos_countbd){
-		foreach($datos_countbd as $value){
-			$response["countbd"][$value["Nombre"]] = $value["Cuenta"];
+		$array = array();
+		foreach($datos_countbd as $key => $value){
+
+				if (!array_key_exists($value["Fecha"], $array)) {
+    				//echo "no existe debo agregar el indice fecha";;
+						$cuenta_efectivos = $Estadisticas->getCountStatusBD($Estadisticas->getWhere(),6,$value["Fecha"]);
+						$cuenta_fallido = $Estadisticas->getCountStatusBD($Estadisticas->getWhere(),7,$value["Fecha"]);
+						$cuenta_cancelado = $Estadisticas->getCountStatusBD($Estadisticas->getWhere(),9,$value["Fecha"]);
+						$cuenta_efectivos_agendado = $Estadisticas->getCountStatusBDAgendado($Estadisticas->getWhere(),6,$value["Fecha"]);
+						$cuenta_fallido_agendado = $Estadisticas->getCountStatusBDAgendado($Estadisticas->getWhere(),7,$value["Fecha"]);
+						$cuenta_cancelado_agendado = $Estadisticas->getCountStatusBDAgendado($Estadisticas->getWhere(),9,$value["Fecha"]);
+
+
+						$array[$value["Fecha"]] = array(
+							"Efectivo" => $cuenta_efectivos["Cuenta"],//6
+							"Fallido" => $cuenta_fallido["Cuenta"],//7
+							"Cancelado" => $cuenta_cancelado["Cuenta"],//9
+							"EfectivoAgendado" => $cuenta_efectivos_agendado["Cuenta"],
+							"FallidoAgendado" => $cuenta_fallido_agendado["Cuenta"],
+							"CanceladoAgendado" => $cuenta_cancelado_agendado["Cuenta"],
+						);
+				}
 		}
+		$response["countbd"] = $array;
 
 	}
 	if($datos_countbd_agendados){
@@ -57,9 +78,30 @@ if($datos_generales){
 
 	}
 	if($datos_countnobd){
-		foreach($datos_countnobd as $key=> $value){
-			$response["countnobd"][$value["Nombre"]] = $value["Cuenta"];
+		$array = array();
+		foreach($datos_countnobd as $key => $value){
+
+				if (!array_key_exists($value["Fecha"], $array)) {
+    				//echo "no existe debo agregar el indice fecha";;
+						$cuenta_efectivos = $Estadisticas->getCountStatusNoBD($Estadisticas->getWhere(),6,$value["Fecha"]);
+						$cuenta_fallido = $Estadisticas->getCountStatusNoBd($Estadisticas->getWhere(),7,$value["Fecha"]);
+						$cuenta_cancelado = $Estadisticas->getCountStatusNoBD($Estadisticas->getWhere(),9,$value["Fecha"]);
+						$cuenta_efectivos_agendado = $Estadisticas->getCountStatusNoBDNoAgendado($Estadisticas->getWhere(),6,$value["Fecha"]);
+						$cuenta_fallido_agendado = $Estadisticas->getCountStatusNoBDNoAgendado($Estadisticas->getWhere(),7,$value["Fecha"]);
+						$cuenta_cancelado_agendado = $Estadisticas->getCountStatusNoBDNoAgendado($Estadisticas->getWhere(),9,$value["Fecha"]);
+
+						$array[$value["Fecha"]] = array(
+							"Efectivo" => $cuenta_efectivos["Cuenta"],//6
+							"Fallido" => $cuenta_fallido["Cuenta"],//7
+							"Cancelado" => $cuenta_cancelado["Cuenta"],//9
+							"EfectivoAgendado" => $cuenta_efectivos_agendado["Cuenta"],
+							"FallidoAgendado" => $cuenta_fallido_agendado["Cuenta"],
+							"CanceladoAgendado" => $cuenta_cancelado_agendado["Cuenta"],
+
+						);
+				}
 		}
+		$response["countnobd"] = $array;
 
 	}
 	if($datos_countnobd_agendados){
@@ -79,7 +121,7 @@ if($datos_generales){
 			$response["datos_llamadas_seguros"][] = $value;
 		}
 
-	}	
+	}
 }
 	$response["Error"] = 0;
 	$response["MensajeError"] = "";
