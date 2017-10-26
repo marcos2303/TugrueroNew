@@ -15,19 +15,19 @@
 
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
-                  <b>Última conexión </b> <a class="pull-right"><?php echo $_SESSION['UltimaConexion']?></a>
+                  <b>Última conexión </b> <label class="pull-right"><?php echo $_SESSION['UltimaConexion']?></label>
                 </li>
                 <li class="list-group-item">
-                  <b>Cantidad de conexiones </b> <a class="pull-right"><?php echo $_SESSION['CuentaConexiones']?></a>
+                  <b>Cantidad de conexiones </b> <label class="pull-right"><?php echo $_SESSION['CuentaConexiones']?></label>
                 </li>
                 <li class="list-group-item">
-                  <b>Servicios ultimos 3 dias</b> <a class="pull-right">1,322</a>
+                  <b>Servicios últimos 3 días</b> <label class="pull-right" id="last3Days"> 0 </label>
                 </li>
                 <li class="list-group-item">
-                  <b>Servicios ultimos 15 dias</b> <a class="pull-right">543</a>
+                  <b>Servicios últimos 15 días</b> <label class="pull-right" id="last15Days"> 0 </label>
                 </li>
                 <li class="list-group-item">
-                  <b>Servicios ultimos 45 dias</b> <a class="pull-right">13,287</a>
+                  <b>Servicios últimos 45 días</b> <label class="pull-right" id="last45Days"> 0 </label>
                 </li>
               </ul>
             </div>
@@ -37,3 +37,4 @@
         </div>
 </div>
 <?php include("../view_footer_admin.php");?>
+<script src="<?php echo full_url;?>/web/js/Bienvenida.js"></script>

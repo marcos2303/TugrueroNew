@@ -486,8 +486,8 @@ class Servicios {
 		Servicios.LatitudDestino,Servicios.LongitudDestino,Servicios.IdEstadoDestino,Servicios.DireccionDestino,Servicios.DireccionDestinoDetallada,Servicios.InfoExtra,
 		Servicios.Agendado,Servicios.FechaAgendado,Servicios.IdAveria,Servicios.IdAveriaHijo,Servicios.AveriaDetalle,Servicios.IdCondicionLugar,Servicios.CondicionDetalle,Servicios.KM,
 		DATE_FORMAT(Servicios.Inicio, '%d/%m/%Y %H:%i:%s') as Inicio, DATE_FORMAT(Servicios.Fin, '%d/%m/%Y %H:%i:%s') as Fin,Servicios.Inicio,Servicios.Fin,Servicios.Observacion,Servicios.UltimaActCliente,Servicios.UltimaActGruero,
-		av.Nombre as AveriaNombre, 
-		Servicios.Token as ClienteToken, 
+		av.Nombre as AveriaNombre,
+		Servicios.Token as ClienteToken,
 		c.Nombres, c.Apellidos,c.Cedula,c.Placa,c.IdMarca, c.Modelo,c.Color,c.Anio,c.Celular,c.IdSeguro,c.InfoAdicional,
 		g.IdGrua,g.IdProveedor,g.Nombres as NombresGruero,g.Apellidos as ApellidosGruero,g2.Placa as PlacaGruero,g.ServicioGeneral, g.TratoCordial, g.TratoVehiculo, g.Presencia, g.Recomienda,
 		g.FechaAsignacion, g.HoraAsignacion, g.TiempoEstimadoEspera, g.FechaEstimadaLlegada, g.HoraEstimadaLlegada,g.HoraTiempoEstimadoEspera,g.MinutosTiempoEstimadoEspera,
@@ -866,9 +866,9 @@ class Servicios {
 		sc.Celular AS CelularCliente,sc.InfoAdicional,
 		CASE PolizaVencida WHEN PolizaVencida = 1 THEN 'SI' ELSE 'NO' END AS PolizaVencida, u2.Login AS NombreUsuarioCliente,
 		sp.PrecioSIvaBaremo,sp.IvaBaremo, sp.PrecioCIvaBaremo, sp.PrecioSIvaBaremoModificado, sp.IvaBaremoModificado, sp.PrecioCIvaBaremoModificado, sp.PrecioClienteSIva,
-		sp.IvaCliente, sp.PrecioClienteCIva, sp.PrecioClienteSIvaModificado, sp.IvaClienteModificado,sp.PrecioClienteCIvaModificado,		
+		sp.IvaCliente, sp.PrecioClienteCIva, sp.PrecioClienteSIvaModificado, sp.IvaClienteModificado,sp.PrecioClienteCIvaModificado,
 		sp.Referencia, sp.TipoDocumento, sp.NumeroDocumento, sp.NumeroTarjeta, sp.NombreTarjeta, sp.CodigoSeguridad, sp.AnioTarjeta, sp.Mestarjeta, sp.TipoTarjeta, sp.Link,
-		mp.Nombre AS NombreMetodoPago, tpe.Nombre AS NombreTipoPagoElectronico,b.Nombre AS NombreBanco	
+		mp.Nombre AS NombreMetodoPago, tpe.Nombre AS NombreTipoPagoElectronico,b.Nombre AS NombreBanco
 		FROM Servicios
 		INNER JOIN ServiciosClientes sc ON sc.IdServicio = Servicios.IdServicio
 		INNER JOIN Usuarios u ON u.IdUsuario = Servicios.IdUsuario
@@ -893,7 +893,7 @@ class Servicios {
 		LEFT JOIN Aplicaciones ap ON ap.IdAplicacion = Servicios.IdAplicacion
 		LEFT JOIN MetodosPago mp ON mp.IdMetodoPago = sp.IdMetodoPago
 		LEFT JOIN TiposPagosElectronicos tpe ON tpe.idTipoPagoElectronico = sp.idTipoPagoElectronico
-		LEFT JOIN Bancos b ON b.IdBanco = sp.IdBanco 
+		LEFT JOIN Bancos b ON b.IdBanco = sp.IdBanco
 		WHERE Servicios.IdServicio = $IdServicio";
 		$q = $ConnectionORM->ejecutarPreparado($query);
 		//echo $query;die;
@@ -909,10 +909,23 @@ class Servicios {
 			$gruas_disponibles = $Gruas->getGruasServicio($values, 0.10);
 			foreach ($gruas_disponibles as $grua) {
 				$tokens[] = $grua["Token"];
-				
+
 			}
 			$resultado_envio = $Push->sendPushFirebase( $values,$tokens,$values["notification"] );
 			return $resultado_envio;
+	}
+	public function getServiciosUsuarioLastDay(){
+		$IdUsuario = $_SESSION["IdUsuario"];
+
+		$ConnectionORM = new ConnectionORM();
+		$query = "SELECT * FROM (
+									(SELECT COUNT(*) AS last3Days FROM Servicios WHERE Inicio >= DATE_ADD(CURDATE(), INTERVAL -3 DAY) AND IdUsuario = $IdUsuario) AS last3Days ,
+									(SELECT COUNT(*) AS last15Days FROM Servicios WHERE Inicio >= DATE_ADD(CURDATE(), INTERVAL -15 DAY) AND IdUsuario = $IdUsuario) AS last15Days,
+									(SELECT COUNT(*) AS last45Days FROM Servicios WHERE Inicio >= DATE_ADD(CURDATE(), INTERVAL -45 DAY) AND IdUsuario = $IdUsuario) AS last45Days
+									)";
+		$q = $ConnectionORM->ejecutarPreparado($query);
+		$q = $q->fetch();
+		return $q;
 	}
 
 }
