@@ -393,8 +393,8 @@ function executeListaServiciosJson($values)
 function executeListaServiciosAdministracionJson($values)
 {
 	$Servicios = new Servicios();
-	$list_json = $Servicios ->getList($values);
-	$list_json_cuenta = $Servicios ->getCountList($values);
+	$list_json = $Servicios ->getListAdministracion($values);
+	$list_json_cuenta = $Servicios ->getCountListAdministracion($values);
 	$array_json = array();
 	$array_json['recordsTotal'] = $list_json_cuenta;
 	$array_json['recordsFiltered'] = $list_json_cuenta;

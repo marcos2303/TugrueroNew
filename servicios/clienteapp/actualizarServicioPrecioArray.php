@@ -16,8 +16,8 @@ if(isset($values['FechaFacturaFisica']) and $values['FechaFacturaFisica']!=''){
 
 if(isset($values['IdServicio']) and count($values['IdServicio'])>0){
     foreach($values['IdServicio'] as $IdServicio){
-        
-        $valores = $values; 
+
+        $valores = $values;
         $valores['IdServicio'] = $IdServicio;
         if($ServiciosPrecios->updateServiciosPrecios($valores)){
             $response = array(
