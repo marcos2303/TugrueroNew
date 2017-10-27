@@ -1,50 +1,35 @@
 <table id="example" border="1" class="table table-striped table-bordered table-responsive" width="100%" cellspacing="0">
   <thead class="">
     <tr>
-      <td colspan="64"><label for="Seleccionador"><input type="checkbox" id="Seleccionador"> Seleccionar/Deseleccionar</label></td>
+      <td colspan="20"><label for="Seleccionador"><input type="checkbox" id="Seleccionador"> Seleccionar/Deseleccionar</label></td>
     </tr>
     <tr>
       <th>Código</th>
-      <th>Aplicación</th>
       <th>Tipo</th>
       <th>#Factura</th>
       <th>Fecha factura digital</th>
       <th>Fecha factura física</th>
       <th>Fecha estimada pago</th>
       <th>¿Pagada?</th>
-      <th>Precio S/IVA baremo</th>
-      <th>IVA baremo</th>
-      <th>Precio C/IVA Baremo</th>
-      <th>Precio S/IVA modificado</th>
-      <th>IVA modificado</th>
-      <th>Precio C/IVA modificado</th>
-      <th>Precio cliente S/IVA</th>
-      <th>IVA cliente</th>
-      <th>Precio cliente C/IVA</th>
       <th>Detalle</th>
     </tr>
   </thead>
   <tfoot>
     <tr>
-      <th><input id="CodigoServicio" name="CodigoServicio" type="text"></th>
-      <th><input id="NombreAplicacion" name="NombreAplicacion" type="text"></th>
-      <th><input id="NombreServicioTipo" name="NombreServicioTipo" type="text"></th>
-      <th><input id="NumeroFactura" name="NumeroFactura" type="text"></th>
-      <th><input id="FechaFacturaDigital" name="FechaFacturaDigital" type="text"></th>
-      <th><input id="FechaFacturaFisica" name="FechaFacturaFisica" type="text"></th>
-      <th><input id="FechaEstimadaPagos" name="FechaEstimadaPago" type="text"></th>
-      <th><input id="FacturaPagada" name="FacturaPagada" type="text"></th>
-      <th><input id="PrecioSIvaBaremo" name="PrecioSIvaBaremo" type="text"></th>
-      <th><input id="IvaBaremo" name="IvaBaremo" type="text"></th>
-      <th><input id="PrecioCIvaBaremo" name="PrecioCIvaBaremo" type="text"></th>
-      <th><input id="PrecioSIvaModificado" name="PrecioSIvaModificado" type="text"></th>
-      <th><input id="IvaModificado" name="IvaModificado" type="text"></th>
-      <th><input id="PrecioCIvaModificado" name="PrecioCIvaModificado" type="text"></th>
-      <th><input id="PrecioClienteSIva" name="PrecioClienteSIva" type="text"></th>
-      <th><input id="IvaCliente" name="IvaCliente" type="text"></th>
-      <th><input id="PrecioClienteCIva" name="PrecioClienteCIva" type="text"></th>
-
-      <th>Detalle</th>
+      <th class="text-center"><input id="CodigoServicio" class="form-control" name="CodigoServicio" type="text"></th>
+      <th class="text-center"><input id="NombreServicioTipo" class="form-control" name="NombreServicioTipo" type="text"></th>
+      <th class="text-center"><input id="NumeroFactura" class="form-control" name="NumeroFactura" type="text"></th>
+      <th class="text-center"><input id="FechaFacturaDigital" class="form-control" name="FechaFacturaDigital" type="text"></th>
+      <th class="text-center"><input id="FechaFacturaFisica" class="form-control" name="FechaFacturaFisica" type="text"></th>
+      <th class="text-center"><input id="FechaEstimadaPagos" class="form-control" name="FechaEstimadaPago" type="text"></th>
+      <th class="text-center">
+        <select id="SelectFacturaPagada" class="form-control">
+          <option>...</option>
+          <option value = "1" >Si</option>
+          <option value = "0" >No</option>
+        </select>
+      </th>
+      <th class="text-center">Detalle</th>
     </tr>
   </tfoot>
 </table>
@@ -57,9 +42,9 @@
 $('#example tfoot th').each( function () {
   var title = $('#example thead th').eq( $(this).index() ).text();
 
-  if(title != 'Detalle')
+  if(title != 'Detalle' && title != '¿Pagada?')
   {
-    $(this).html( '<input size="5%" class="input-sm filtros" id="column_'+$(this).index()+'" type="text" placeholder="'+title+'" />' );
+    $(this).html( '<input size="10%" class="form-control" id="column_'+$(this).index()+'" type="text" placeholder="'+title+'" />' );
   }
   if(title == 'Detalle')
   {
@@ -93,45 +78,35 @@ var table = $('#example').DataTable({
   },
   "columns": [
     { "data" : "CodigoServicio" },
-    { "data" : "NombreAplicacion" },
     { "data" : "NombreServicioTipo" },
     { "data" : "NumeroFactura" },
     { "data" : "FechaFacturaDigital" },
     { "data" : "FechaFacturaFisica" },
     { "data" : "FechaEstimadaPago" },
     { "data" : "FacturaPagada" },
-    { "data" : "PrecioSIvaBaremo" },
-    { "data" : "IvaBaremo" },
-    { "data" : "PrecioCIvaBaremo" },
-    { "data" : "PrecioSIvaModificado" },
-    { "data" : "IvaModificado" },
-    { "data" : "PrecioCIvaModificado" },
-    { "data" : "PrecioClienteSIva" },
-    { "data" : "IvaCliente" },
-    { "data" : "PrecioClienteCIva" },
     { "data" : "actions" },
   ],
   "aoColumnDefs": [
-    { "visible": false, "targets": [1,8,9,10,11,12,13,14,15,16]},
+    { "visible": false, "targets": []},
     //{ "targets": -1, "visible": false},
-    { 'bSortable': false, 'aTargets': [ 17 ] }
+    { 'bSortable': false, 'aTargets': [ 7 ] }
   ]
 });
 $('#example').css( 'display', 'table' );
 
 //table.responsive.recalc();
 
-$('#column_0').on ('keypress', function(e){
+$('#column_0').on('keypress', function(e){
   if(e.which == 13) {
     table.column(table.column(0)).search($(this).val()).draw();
   }
 });
-$('#column_1').on ('keypress', function(e){
+$('#column_1').on('keypress', function(e){
   if(e.which == 13) {
     table.column(table.column(1)).search($(this).val()).draw();
   }
 });
-$('#column_2').on ('keypress', function(e){
+$('#column_2').on('keypress', function(e){
   if(e.which == 13) {
     table.column(table.column(2)).search($(this).val()).draw();
   }
@@ -141,30 +116,24 @@ $('#column_3').on ('keypress', function(e){
     table.column(table.column(3)).search($(this).val()).draw();
   }
 });
-$('#column_4').on ('keypress', function(e){
+$('#column_4').on('keypress', function(e){
   if(e.which == 13) {
     table.column(table.column(4)).search($(this).val()).draw();
   }
 });
-$('#column_5').on ('keypress', function(e){
+$('#column_5').on('keypress', function(e){
   if(e.which == 13) {
     table.column(table.column(5)).search($(this).val()).draw();
   }
 });
-$('#column_6').on ('keypress', function(e){
+$('#column_6').on('keypress', function(e){
   if(e.which == 13) {
     table.column(table.column(6)).search($(this).val()).draw();
   }
 });
-$('#column_7').on ('keypress', function(e){
-  if(e.which == 13) {
-    table.column(table.column(7)).search($(this).val()).draw();
-  }
-});
-$('#column_8').on ('keypress', function(e){
-  if(e.which == 13) {
-    table.column(table.column(8)).search($(this).val()).draw();
-  }
+$('#SelectFacturaPagada').on('change', function(e){
+    if($(this).val() == 0 || $(this).val() == 1)  table.column(table.column(6)).search($(this).val()).draw();
+
 });
 $('#clear').click(function(){
   table.search( '' ).columns().search( '' ).draw();
@@ -199,7 +168,6 @@ function CambiarNumeroFactura(e,IdServicioPadre){
   });
 
   var actualizarServicioPrecio = AjaxCall("servicios/clienteapp/actualizarServicioPrecioArray.php", parametros, null, null,null);
-
 
   var popup = {
     "popup": "popupSuccess",
