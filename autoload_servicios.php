@@ -1,6 +1,6 @@
 <?php
 session_start();
-error_reporting(1);
+error_reporting(0);
 $project_folder = '';
 $development_env = false;
 setlocale(LC_NUMERIC,"es_ES.UTF8");
@@ -11,7 +11,7 @@ if(@$_SERVER['HTTP_HOST'] == '127.0.0.1' or @$_SERVER['HTTP_HOST'] == 'localhost
 }
 if($development_env == true)
 {
-    $project_folder = '/TugrueroNew';
+	$project_folder = '/TugrueroNew';
 }
 
 define("main_folder",$project_folder);//Project name and directory name//prueba 2
@@ -42,16 +42,16 @@ define("full_url",protocol."://".domain);
 define("image_url",full_url."/web/images/");
 
 /*********************** definicion de constantes *********************************/
- define('mail_from',"tugruero@tugruero.com");
- define('message_updated',"Registro actualizado satisfactoriamente");
- define('message_created',"Registro creado satisfactoriamente");
- define('max_input_size',1000000);
- define('message_max_size',"El archivo debe pesar máximo 10MB");
- define('IVA',1.12);
+define('mail_from',"tugruero@tugruero.com");
+define('message_updated',"Registro actualizado satisfactoriamente");
+define('message_created',"Registro creado satisfactoriamente");
+define('max_input_size',1000000);
+define('message_max_size',"El archivo debe pesar máximo 10MB");
+define('IVA',1.12);
 
 /******************** definicion de clases *************/
- spl_autoload_register(function ($nombre_clase) {
-    include $_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/".$nombre_clase . '.class.php';
+spl_autoload_register(function ($nombre_clase) {
+	include $_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/model/".$nombre_clase . '.class.php';
 	include $_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/notorm-master/".$nombre_clase . '.php';
 	include $_SERVER["DOCUMENT_ROOT"]."/".main_folder."/lib/".$nombre_clase . '.class.php';
 

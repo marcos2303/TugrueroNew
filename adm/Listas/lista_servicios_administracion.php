@@ -1,38 +1,48 @@
-<table id="example" border="1" class="table table-striped table-bordered table-responsive" width="100%" cellspacing="0">
-  <thead class="">
-    <tr>
-      <td colspan="20"><label for="Seleccionador"><input type="checkbox" id="Seleccionador"> Seleccionar/Deseleccionar</label></td>
-    </tr>
-    <tr>
-      <th>Código</th>
-      <th>Tipo</th>
-      <th>#Factura</th>
-      <th>Fecha factura digital</th>
-      <th>Fecha factura física</th>
-      <th>Fecha estimada pago</th>
-      <th>¿Pagada?</th>
-      <th>Detalle</th>
-    </tr>
-  </thead>
-  <tfoot>
-    <tr>
-      <th class="text-center"><input id="CodigoServicio" class="form-control" name="CodigoServicio" type="text"></th>
-      <th class="text-center"><input id="NombreServicioTipo" class="form-control" name="NombreServicioTipo" type="text"></th>
-      <th class="text-center"><input id="NumeroFactura" class="form-control" name="NumeroFactura" type="text"></th>
-      <th class="text-center"><input id="FechaFacturaDigital" class="form-control" name="FechaFacturaDigital" type="text"></th>
-      <th class="text-center"><input id="FechaFacturaFisica" class="form-control" name="FechaFacturaFisica" type="text"></th>
-      <th class="text-center"><input id="FechaEstimadaPagos" class="form-control" name="FechaEstimadaPago" type="text"></th>
-      <th class="text-center">
-        <select id="SelectFacturaPagada" class="form-control">
-          <option>...</option>
-          <option value = "1" >Si</option>
-          <option value = "0" >No</option>
-        </select>
-      </th>
-      <th class="text-center">Detalle</th>
-    </tr>
-  </tfoot>
-</table>
+<div class="table-responsive">
+  <table id="example" border="1" class="table table-striped table-bordered" width="100%" cellspacing="0">
+    <thead class="">
+      <tr>
+        <td colspan="20"><label for="Seleccionador"><input type="checkbox" id="Seleccionador"> Seleccionar/Deseleccionar</label></td>
+      </tr>
+      <tr>
+        <th>Código</th>
+        <th>Cédula/RIF</th>
+        <th>Nombre proveedor</th>
+        <th>Tipo</th>
+        <th>#Factura</th>
+        <th>Fecha factura digital</th>
+        <th>Fecha factura física</th>
+        <th>Fecha estimada pago</th>
+        <th>¿Pagada?</th>
+        <th>Detalle</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th class="text-center"><input id="CodigoServicio" class="form-control" name="CodigoServicio" type="text"></th>
+        <th class="text-center"><input id="IdentificacionProveedor" class="form-control" name="IdentificacionProveedor" type="text"></th>
+        <th class="text-center"><input id="NombreProveedor" class="form-control" name="NombreProveedor" type="text"></th>
+        <th class="text-center"><input id="NombreServicioTipo" class="form-control" name="NombreServicioTipo" type="text"></th>
+        <th class="text-center"><input id="NumeroFactura" class="form-control" name="NumeroFactura" type="text"></th>
+        <th class="text-center"><input id="FechaFacturaDigital" class="form-control" name="FechaFacturaDigital" type="date|"></th>
+        <th class="text-center"><input id="FechaFacturaFisica" class="form-control" name="FechaFacturaFisica" type="date"></th>
+        <th class="text-center"><input id="FechaEstimadaPagos" class="form-control" name="FechaEstimadaPago" type="date"></th>
+        <th class="text-center">
+          <select id="SelectFacturaPagada" class="form-control">
+            <option value="...">...</option>
+            <option value = "1" >Si</option>
+            <option value = "0" >No</option>
+          </select>
+        </th>
+        <th class="text-center">Detalle</th>
+      </tr>
+    </tfoot>
+  </table>
+
+
+</div>
+
+
 <?php if(isset($values['regresar']) and $values['regresar'] == 1):?>
   <a href="#" class="btn btn-default" onclick="ListarGruas(<?php echo $values['IdProveedor']?>);"><i class="fa fa-arrow-circle-left"></i> Regresar</a>
 
@@ -45,6 +55,10 @@ $('#example tfoot th').each( function () {
   if(title != 'Detalle' && title != '¿Pagada?')
   {
     $(this).html( '<input size="10%" class="form-control" id="column_'+$(this).index()+'" type="text" placeholder="'+title+'" />' );
+    if($(this).index() == 6 || $(this).index() == 5 || $(this).index() == 7){
+      $(this).html( '<input size="10%" class="form-control" id="column_'+$(this).index()+'" type="date" placeholder="'+title+'" />' );
+
+    }
   }
   if(title == 'Detalle')
   {
@@ -77,7 +91,9 @@ var table = $('#example').DataTable({
     }
   },
   "columns": [
-    { "data" : "CodigoServicio" },
+    { "data" : "CodigoServicio"},
+    { "data" : "IdentificacionProveedor" },
+    { "data" : "NombreProveedor" },
     { "data" : "NombreServicioTipo" },
     { "data" : "NumeroFactura" },
     { "data" : "FechaFacturaDigital" },
@@ -87,9 +103,10 @@ var table = $('#example').DataTable({
     { "data" : "actions" },
   ],
   "aoColumnDefs": [
-    { "visible": false, "targets": []},
+
+    { "visible": false, "targets": [3]},
     //{ "targets": -1, "visible": false},
-    { 'bSortable': false, 'aTargets': [ 7 ] }
+    { 'bSortable': false, 'aTargets': [ 9 ] }
   ]
 });
 $('#example').css( 'display', 'table' );
@@ -121,23 +138,34 @@ $('#column_4').on('keypress', function(e){
     table.column(table.column(4)).search($(this).val()).draw();
   }
 });
-$('#column_5').on('keypress', function(e){
-  if(e.which == 13) {
+$('#column_5').on('change', function(e){
+
     table.column(table.column(5)).search($(this).val()).draw();
-  }
+
 });
-$('#column_6').on('keypress', function(e){
-  if(e.which == 13) {
+$('#column_6').on('change', function(e){
+
     table.column(table.column(6)).search($(this).val()).draw();
-  }
+
+});
+$('#column_7').on('change', function(e){
+
+    table.column(table.column(7)).search($(this).val()).draw();
+
 });
 $('#SelectFacturaPagada').on('change', function(e){
-    if($(this).val() == 0 || $(this).val() == 1)  table.column(table.column(6)).search($(this).val()).draw();
+    if($(this).val() == 0 || $(this).val() == 1)
+     table.column(table.column(8)).search($(this).val()).draw();
 
 });
 $('#clear').click(function(){
   table.search( '' ).columns().search( '' ).draw();
   $('.filtros').val('');
+  //$('#SelectFacturaPagada option:contains("...")');
+  $('#SelectFacturaPagada option:eq(0)').prop('selected', true)
+  $('column_5').val('');
+  $('#column_6').val('');
+  $('#column_7').val('');
 });
 
 $("#Seleccionador").click(function(){

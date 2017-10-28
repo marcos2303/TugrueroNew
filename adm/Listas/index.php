@@ -411,29 +411,25 @@ function executeListaGruasJson($values)
 				$array_json['data'][] = array(
 					"CodigoServicio" =>  '<input type="checkbox" name="" class="selec" value="'.$IdServicio.'" id="CodigoServicio['.$list['IdServicio'].']"> ['.$list['CodigoServicio']."]",
 					"NombreServicioTipo" => $list['NombreServicioTipo'],
-					"NumeroFactura" =>  "<input type='text' class='form-control' value='".$list['NumeroFactura']."' class=' bloquear NumeroFactura_".$list['IdServicio']."' onchange='CambiarNumeroFactura(this,".$list['IdServicio'].");' id='NumeroFactura[".$list['IdServicio']."]'>",
-					"FechaFacturaDigital" =>  '<input type="date" class="form-control" value="'.$list['FechaFacturaDigital'].'" class="bloquear FechaFacturaDigital_'.$list['IdServicio'].'" onchange="CambiarFechaFacturaDigital(this,'.$list['IdServicio'].');" id="FechaFacturaDigital_'.$list['IdServicio'].'">',
-					"FechaFacturaFisica" =>  "<input type='date' class='form-control' value='".$list['FechaFacturaFisica']."' class='bloquear FechaFacturaFisica_".$list['IdServicio']."'  onchange='CambiarFechaFacturaFisica(this,".$list['IdServicio'].");' id='FechaFacturaFisica[".$list['IdServicio']."]'>",
-					"FechaEstimadaPago" =>  "<input type='date' class='form-control' readonly='readonly' value='".$list['FechaEstimadaPago']."' class=' bloquear FechaEstimadaPago_".$list['IdServicio']."' onchange='CambiarFechaEstimadaPago(this,".$list['IdServicio'].");' id='FechaEstimadaPago[".$list['IdServicio']."]'>",
-					"FacturaPagada" =>  "<input type='checkbox' class='form-check-input' $checked value='".$list['FacturaPagada']."' class='bloquear FacturaPagada_".$list['IdServicio']."' onchange='CambiarFacturaPagada(this,".$list['IdServicio'].");' id='FacturaPagada[".$list['IdServicio']."]'>",
+					"NumeroFactura" =>  "<input type='text' value='".$list['NumeroFactura']."' class='form-control bloquear NumeroFactura_".$list['IdServicio']."' onchange='CambiarNumeroFactura(this,".$list['IdServicio'].");' id='NumeroFactura[".$list['IdServicio']."]'>",
+					"FechaFacturaDigital" =>  '<input type="date" value="'.$list['FechaFacturaDigital'].'" class="form-control bloquear FechaFacturaDigital_'.$list['IdServicio'].'" onchange="CambiarFechaFacturaDigital(this,'.$list['IdServicio'].');" id="FechaFacturaDigital_'.$list['IdServicio'].'">',
+					"FechaFacturaFisica" =>  "<input type='date' value='".$list['FechaFacturaFisica']."' class='form-control bloquear FechaFacturaFisica_".$list['IdServicio']."'  onchange='CambiarFechaFacturaFisica(this,".$list['IdServicio'].");' id='FechaFacturaFisica[".$list['IdServicio']."]'>",
+					"FechaEstimadaPago" =>  "<input type='date'  readonly='readonly' value='".$list['FechaEstimadaPago']."' class='form-control bloquear FechaEstimadaPago_".$list['IdServicio']."' onchange='CambiarFechaEstimadaPago(this,".$list['IdServicio'].");' id='FechaEstimadaPago[".$list['IdServicio']."]'>",
+					"FacturaPagada" =>  "<input type='checkbox' $checked value='".$list['FacturaPagada']."' class=' bloquear FacturaPagada_".$list['IdServicio']."' onchange='CambiarFacturaPagada(this,".$list['IdServicio'].");' id='FacturaPagada[".$list['IdServicio']."]'>",
 					"PrecioSIvaBaremo" => $list['PrecioSIvaBaremo'],
 					"IvaBaremo" =>  $list['IvaBaremo'],
 					"PrecioCIvaBaremo" =>  $list['PrecioCIvaBaremo'],
 					"PrecioSIvaModificado" => $list['PrecioSIvaModificado'],
 					"IvaModificado" =>  $list['IvaModificado'],
 					"PrecioCIvaModificado" => $list['PrecioCIvaModificado'],
-
-
 					"PrecioModificado" => $list['PrecioModificado'],
-
-
-
 
 
 					"PrecioClienteSIva" =>  $list['PrecioClienteSIva'],
 					"IvaCliente" => $list['IvaCliente'],
 					"PrecioClienteCIva" =>  $list['PrecioClienteCIva'],
-
+					"NombreProveedor" => $list['NombreProveedor'],
+					"IdentificacionProveedor" => $list['IdentificacionProveedor'],
 					"actions" => '
 					<div class="btn-group">
 					<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -522,6 +518,8 @@ function executeListaGruasJson($values)
 				"FechaEstimadaPago" =>  "",
 				"FechaFacturaFisica" =>  "",
 				"FacturaPagada" =>  "",
+				"NombreProveedor" => null,
+				"IdentificacionProveedor" => null,
 
 				"actions" => ''
 			);

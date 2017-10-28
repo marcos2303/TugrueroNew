@@ -403,3 +403,9 @@ a.dt-button.buttons-collection.buttons-colvis {
   text-decoration: none;
   outline: none;
 }
+th.sorting {
+  padding-right: 5px;
+}
+td {
+  padding: 3px;
+}

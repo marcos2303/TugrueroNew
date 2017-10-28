@@ -938,15 +938,18 @@ class Servicios {
 	}
 	public function getListAdministracion($values)
 	{
+
 		/************Datos Servicios******************/
 		$columns = array();
 		$columns[0] = "SUBSTRING_INDEX(SUBSTRING_INDEX(CodigoServicio, '-', 2), '-', -1) ";
-		$columns[1] = 'st.Nombre';
-		$columns[2] = 'sp.NumeroFactura';
-		$columns[3] = 'sp.FechaFacturaDigital';
-		$columns[4] = 'sp.FechaFacturaFisica';
-		$columns[5] = 'sp.FechaEstimadaPago';
-		$columns[6] = 'sp.FacturaPagada';
+		$columns[1] = 'p.Identificacion';
+		$columns[2] = "CONCAT(p.Nombres, ' ' ,p.Apellidos )";
+		$columns[3] = 'st.Nombre';
+		$columns[4] = 'sp.NumeroFactura';
+		$columns[5] = 'sp.FechaFacturaDigital';
+		$columns[6] = 'sp.FechaFacturaFisica';
+		$columns[7] = 'sp.FechaEstimadaPago';
+		$columns[8] = 'sp.FacturaPagada';
 		$column_order = $columns[0];
 		$where = '1 = 1';
 		$order = 'asc';
@@ -982,27 +985,35 @@ class Servicios {
 		}
 		if(isset($values['columns'][1]['search']['value']) and $values['columns'][1]['search']['value']!='')
 		{
-			$where.=" AND upper(st.Nombre) like ('%".strtoupper($values['columns'][1]['search']['value'])."%')";
+			$where.=" AND upper(p.Identificacion) like ('%".strtoupper($values['columns'][1]['search']['value'])."%')";
 		}
 		if(isset($values['columns'][2]['search']['value']) and $values['columns'][2]['search']['value']!='')
 		{
-			$where.=" AND upper(sp.NumeroFactura) like ('%".strtoupper($values['columns'][2]['search']['value'])."%')";
+			$where.=" AND upper(CONCAT(p.Nombres, ' ' ,p.Apellidos )) like ('%".strtoupper($values['columns'][2]['search']['value'])."%')";
 		}
 		if(isset($values['columns'][3]['search']['value']) and $values['columns'][3]['search']['value']!='')
 		{
-			$where.=" AND DATE_FORMAT(sp.FechaFacturaDigital, '%d-%m-%Y') = '".$values['columns'][3]['search']['value']."'";
+			$where.=" AND upper(st.Nombre) like ('%".strtoupper($values['columns'][3]['search']['value'])."%')";
 		}
 		if(isset($values['columns'][4]['search']['value']) and $values['columns'][4]['search']['value']!='')
 		{
-			$where.=" AND DATE_FORMAT(sp.FechaFacturaFisica, '%d-%m-%Y') = '".$values['columns'][4]['search']['value']."'";
+			$where.=" AND upper(sp.NumeroFactura) like ('%".strtoupper($values['columns'][4]['search']['value'])."%')";
 		}
 		if(isset($values['columns'][5]['search']['value']) and $values['columns'][5]['search']['value']!='')
 		{
-			$where.=" AND DATE_FORMAT(sp.FechaEstimadaPago, '%d-%m-%Y') = '".$values['columns'][5]['search']['value']."'";
+			$where.=" AND DATE_FORMAT(sp.FechaFacturaDigital, '%d-%m-%Y') =  DATE_FORMAT('".$values['columns'][5]['search']['value']."', '%d-%m-%Y')";
 		}
 		if(isset($values['columns'][6]['search']['value']) and $values['columns'][6]['search']['value']!='')
 		{
-			$where.=" AND sp.FacturaPagada = '".$values['columns'][6]['search']['value']."'";
+			$where.=" AND DATE_FORMAT(sp.FechaFacturaFisica, '%d-%m-%Y') =  DATE_FORMAT('".$values['columns'][6]['search']['value']."', '%d-%m-%Y')";
+		}
+		if(isset($values['columns'][7]['search']['value']) and $values['columns'][7]['search']['value']!='')
+		{
+			$where.=" AND DATE_FORMAT(sp.FechaEstimadaPago, '%d-%m-%Y') =  DATE_FORMAT('".$values['columns'][7]['search']['value']."', '%d-%m-%Y')";
+		}
+		if(isset($values['columns'][8]['search']['value']) and $values['columns'][8]['search']['value']!='')
+		{
+			$where.=" AND sp.FacturaPagada = '".$values['columns'][8]['search']['value']."'";
 		}
 		/*****************************ORDER**************************************************************************/
 		if(isset($values['order'][0]['column']) and $values['order'][0]['column']!='0')
@@ -1021,6 +1032,7 @@ class Servicios {
 		DireccionOrigen, DireccionOrigenDetallada, LatitudDestino, LongitudDestino,e2.Nombre AS NombreEstadoDestino,DireccionDestino, DireccionDestinoDetallada,
 		KM, DATE_FORMAT(Inicio, '%d/%m/%Y %H:%i:%s') as Inicio, DATE_FORMAT(Fin, '%d/%m/%Y %H:%i:%s') as Fin, UltimaActCliente, UltimaActGruero, sg.IdGrua, p.Nombres AS NombresProveedor,p.Apellidos AS ApellidosProveedor,
 		p.Identificacion AS IdentificacionProveedor,pt.Nombre AS NombreProveedorTipo, sg.Nombres AS NombresGruas, sg.Apellidos AS ApellidosGruas,
+		CONCAT(p.Nombres, ' ' ,p.Apellidos ) AS NombreProveedor,
 		sg.Cedula AS CedulaGruas, sg.Celular AS CelularGruas,g.Placa AS PlacaGrua, m.Nombre AS NombreMarcaGruas,g.Modelo AS ModeloGrua, g.Color AS ColorGrua,g.Anio AS AnioGrua,
 		sg.Nombres AS NombresGrua,sg.Apellidos AS ApellidosGrua,sg.Cedula AS CedulaGrua,sg.Celular AS CelularGrua,sg.TratoCordial, sg.Presencia,
 		sg.TratoVehiculo, sg.ServicioGeneral, sc.IdPoliza , m2.Nombre AS NombreMarcaCliente, sc.Nombres AS NombresCliente,sc.Apellidos AS ApellidosCliente,
@@ -1056,40 +1068,65 @@ class Servicios {
 		ORDER BY $column_order $order
 		LIMIT $limit
 		OFFSET $offset";
-        //echo $query;die;
     $q = $ConnectionORM->ejecutarPreparado($query);
 		return $q;
 	}
 	public function getCountListAdministracion($values)
 	{
 		$where = '1 = 1';
+		if(isset($values['IdProveedor']) and $values['IdProveedor']!=''){
+      $where.=" AND sg.IdProveedor = ".$values['IdProveedor']."";
+    }
+    if(isset($values['IdGrua']) and $values['IdGrua']!=''){
+      $where.=" AND sg.IdGrua = ".$values['IdGrua']."";
+    }
+		if(isset($values['Placa']) and $values['Placa']!=''){
+      $where.=" AND sc.Placa = '".$values['Placa']."'";
+    }
+		if(isset($values['Cedula']) and $values['Cedula']!=''){
+      $where.=" AND sc.Cedula = '".$values['Cedula']."'";
+    }
+    if(isset($values['filtro_status']) and $values['filtro_status']!=''){
+        $where.=" AND Servicios.IdEstatus <> 1";
+    }
+		if(isset($values['filtro_administracion']) and $values['filtro_administracion']=='1'){
+        $where.=" AND Servicios.IdEstatus in(6,7,8,9)";
+    }
 		if(isset($values['columns'][0]['search']['value']) and $values['columns'][0]['search']['value']!='')
 		{
 			$where.=" AND upper(CodigoServicio) like ('%".strtoupper($values['columns'][0]['search']['value'])."%')";
 		}
 		if(isset($values['columns'][1]['search']['value']) and $values['columns'][1]['search']['value']!='')
 		{
-			$where.=" AND upper(st.Nombre) like ('%".strtoupper($values['columns'][1]['search']['value'])."%')";
+			$where.=" AND upper(p.Identificacion) like ('%".strtoupper($values['columns'][1]['search']['value'])."%')";
 		}
 		if(isset($values['columns'][2]['search']['value']) and $values['columns'][2]['search']['value']!='')
 		{
-			$where.=" AND upper(sp.NumeroFactura) like ('%".strtoupper($values['columns'][2]['search']['value'])."%')";
+			$where.=" AND upper(CONCAT(p.Nombres, ' ' ,p.Apellidos )) like ('%".strtoupper($values['columns'][2]['search']['value'])."%')";
 		}
 		if(isset($values['columns'][3]['search']['value']) and $values['columns'][3]['search']['value']!='')
 		{
-			$where.=" AND DATE_FORMAT(sp.FechaFacturaDigital, '%d-%m-%Y') = '".$values['columns'][3]['search']['value']."'";
+			$where.=" AND upper(st.Nombre) like ('%".strtoupper($values['columns'][3]['search']['value'])."%')";
 		}
 		if(isset($values['columns'][4]['search']['value']) and $values['columns'][4]['search']['value']!='')
 		{
-			$where.=" AND DATE_FORMAT(sp.FechaFacturaFisica, '%d-%m-%Y') = '".$values['columns'][4]['search']['value']."'";
+			$where.=" AND upper(sp.NumeroFactura) like ('%".strtoupper($values['columns'][4]['search']['value'])."%')";
 		}
 		if(isset($values['columns'][5]['search']['value']) and $values['columns'][5]['search']['value']!='')
 		{
-			$where.=" AND DATE_FORMAT(sp.FechaEstimadaPago, '%d-%m-%Y') = '".$values['columns'][5]['search']['value']."'";
+			$where.=" AND DATE_FORMAT(sp.FechaFacturaDigital, '%d-%m-%Y') =  DATE_FORMAT('".$values['columns'][5]['search']['value']."', '%d-%m-%Y')";
 		}
 		if(isset($values['columns'][6]['search']['value']) and $values['columns'][6]['search']['value']!='')
 		{
-			$where.=" AND sp.FacturaPagada = '".$values['columns'][6]['search']['value']."'";
+			$where.=" AND DATE_FORMAT(sp.FechaFacturaFisica, '%d-%m-%Y') =  DATE_FORMAT('".$values['columns'][6]['search']['value']."', '%d-%m-%Y')";
+		}
+		if(isset($values['columns'][7]['search']['value']) and $values['columns'][7]['search']['value']!='')
+		{
+			$where.=" AND DATE_FORMAT(sp.FechaEstimadaPago, '%d-%m-%Y') =  DATE_FORMAT('".$values['columns'][7]['search']['value']."', '%d-%m-%Y')";
+		}
+		if(isset($values['columns'][8]['search']['value']) and $values['columns'][8]['search']['value']!='')
+		{
+			$where.=" AND sp.FacturaPagada = '".$values['columns'][8]['search']['value']."'";
 		}
 		$ConnectionORM = new ConnectionORM();
 		$query = "SELECT count(*) as cuenta
