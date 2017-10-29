@@ -4,14 +4,7 @@
 	<input type="text" id="IdProveedor" name="IdUsuario" value="<?php if(isset($values['IdUsuario']) and $values['IdUsuario']!='') echo $values['IdUsuario'];?>">
 	<input type="text" id="action" value="<?php echo $values['action'];?>">
 	<h1 class="text-center">Cuenta</h1>
-	<div class="box box-shadow">
-		<div class="box-header with-border">
-			<h2 class="box-title">Datos básicos</h2>
-			<div class="box-tools pull-right">
-				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-			</div>
-		</div>
-		<div class="box-body">
+
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="form-group">
@@ -42,12 +35,12 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="btn-group">
-						<button type="submit" id="EnviarUsuario" class="btn btn-primary"><i class="fa fa-save"></i> Aceptar</button>
+						<button type="submit" id="EnviarUsuario" class="btn btn-primary"> Aceptar</button>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
+
+
 </form>
 
 <?php include('../../view_footer_admin.php')?>

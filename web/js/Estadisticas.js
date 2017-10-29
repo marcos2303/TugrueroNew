@@ -194,7 +194,8 @@ $(document).ready(function(){
                     {"title" : "Agendado"},
                     {"title" : "FechaAgendado","bVisible": false },
                     {"title" : "Inicio"},
-                    {"title" : "Fin"}
+                    {"title" : "Fin"},
+                    {"title" : "actions",'bSortable': false}
 
 
             ]

@@ -102,7 +102,7 @@
 </div>
 <div class="row">
   <div class="col-sm-4 col-sm-offset-5">
-    <button type="button" class="btn btn-success" id="btnResumenGeneral">Resumen General</button>
+    <button type="button" class="btn btn-success" id="btnResumenGeneral">Generar</button>
   </div>
 </div>
 </div>
@@ -146,9 +146,9 @@
           <thead>
             <tr>
               <th>Fecha</th>
-              <th>Efectivos</th>
-              <th>Fallidos</th>
-              <th>Cancelados</th>
+              <th><a class="btn btn-default">Efectivos</a></th>
+              <th><a class="btn btn-default">Fallidos</a></th>
+              <th><a class="btn btn-default">Cancelados</a></th>
             </tr>
           </thead>
           <tbody id="tbody_resumen_fechas_bd">
@@ -194,8 +194,9 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-          <table class="table table-bordered table-responsive" id="tbl">
-
+          <div class="table-responsive">
+            <table class="table table-bordered" id="tbl">
+          </div>
           </table>
         </div>
       </div>

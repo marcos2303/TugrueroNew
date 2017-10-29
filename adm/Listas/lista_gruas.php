@@ -1,4 +1,5 @@
-	<h3 class="text-center">Grúas</h3>
+<h3 class="text-center">Grúas</h3>
+<div class="table-responsive">
 	<table id="TablaGruas" class="table table-striped table-bordered table-responsive" width="100%" cellspacing="0">
 		<thead>
 			<tr>
@@ -43,6 +44,7 @@
 			</tr>
 		</tfoot>
 	</table>
+</div>
 <script>
 
 
@@ -63,11 +65,10 @@ $(document).ready(function() {
 
 
 	var table = $('#TablaGruas').DataTable({
-		"scrollX": true,
+
 		"processing": true,
 		"serverSide": true,
-        "sServerMethod": "POST",
-		"sScrollY": "300",
+		"sServerMethod": "POST",
 		"sDom": 'Btrp',
 		"ajax": "<?php echo full_url."/adm/Listas/index.php?action=lista_gruas_json&IdProveedor=";if(isset($values['IdProveedor']) and $values['IdProveedor']!='') echo $values['IdProveedor']; ?>&opcion=<?php echo $values['opcion']?>&Estatus=<?php echo $values['Estatus']?>",
 		"language": {
@@ -75,30 +76,17 @@ $(document).ready(function() {
 		},
 
 		buttons: [
-				{
-						extend: 'colvisGroup',
-						text: 'Básicos',
-						show: [ 1, 2, 3,4,16 ],
-						hide: [ 5,6,7,8,9,10,11 ]
-				},
-				{
-						extend: 'colvisGroup',
-						text: 'APP',
-						show: [  6,15,16 ],
-						hide: [ 1, 2,3,4,5,7,8,9,10,11 ]
-				},
-				{
-						extend: 'colvisGroup',
-						text: 'Proveedor',
-						show: [  7,8,9,10,11,16 ],
-						hide: [ 1, 2,3,4,5,6,15 ]
-				},
-				{
-						extend: 'colvisGroup',
-						text: 'Todos',
-						show: ':hidden'
-				}
+			{
+				extend: 'colvis',
+				collectionLayout: 'fixed two-column'
+			}
 		],
+		language: {
+			buttons: {
+				colvis: 'Mostrar/Ocultar columnas',
+				colvisRestore: "Restaurar columnas",
+			}
+		},
 		"columns": [
 			{ "data": "Placa" },
 			{ "data": "NombreGruaTipo" },
@@ -120,7 +108,7 @@ $(document).ready(function() {
 		],"rowCallback": function( row, data, index ) {
 		},
 		"aoColumnDefs": [
-			{ "visible": false, "targets": [5,6,7,8,9,10,11,12,13,14,15] },
+			{ "visible": false, "targets": [5,6,7,8,9,10,11,12,13,14] },
 			{ 'bSortable': false, 'aTargets': [ 16 ] }
 		]
 	});

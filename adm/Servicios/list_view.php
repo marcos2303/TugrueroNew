@@ -21,8 +21,8 @@
             <div class="inner">
                 <h3 class="text-center">Monitoreo</h3>
                 <div class="text-center">
-                    <a href="<?php echo full_url."/adm/Servicios/index.php?action=new"?>" class="btn btn-tugruero">Servicios activos</a>
-                    <a href="<?php echo full_url."/adm/Servicios/index.php?action=new"?>" class="btn btn-tugruero">Grueros</a>
+                    <a  href="<?php echo full_url."/adm/Monitoreo/index.php?action=servicios"?>" class="btn btn-tugruero">Servicios activos</a>
+                    <a href="<?php echo full_url."/adm/Monitoreo/index.php?action=grueros"?>" class="btn btn-tugruero">Grueros</a>
                 </div>
             </div>
           </div>

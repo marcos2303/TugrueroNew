@@ -1159,4 +1159,189 @@ class Servicios {
 		$q = $q->fetch();
 		return $q['cuenta'];
 	}
+	public function getListServiciosGrua($values)
+	{
+		/************Datos Servicios******************/
+		$columns = array();
+		$columns[0] = "SUBSTRING_INDEX(SUBSTRING_INDEX(CodigoServicio, '-', 2), '-', -1) ";
+		$columns[1] = 'ap.Nombre';
+		$columns[2] = 'st.Nombre';
+		$columns[3] = 'e.Nombre';
+		$columns[4] = 'Servicios.Inicio';
+		$columns[5] = 'Servicios.Fin';
+		$column_order = $columns[0];
+		$where = '1 = 1';
+		$order = 'asc';
+		$limit = $values['length'];
+		$offset = $values['start'];
+				if($limit == ""){
+						$limit = 100;
+				}
+				if($offset == ""){
+						$offset = 0;
+				}
+		if(isset($values['IdProveedor']) and $values['IdProveedor']!=''){
+			$where.=" AND sg.IdProveedor = ".$values['IdProveedor']."";
+		}
+		if(isset($values['IdGrua']) and $values['IdGrua']!=''){
+			$where.=" AND sg.IdGrua = ".$values['IdGrua']."";
+		}
+		if(isset($values['Placa']) and $values['Placa']!=''){
+			$where.=" AND sc.Placa = '".$values['Placa']."'";
+		}
+		if(isset($values['Cedula']) and $values['Cedula']!=''){
+			$where.=" AND sc.Cedula = '".$values['Cedula']."'";
+		}
+		if(isset($values['filtro_status']) and $values['filtro_status']!=''){
+				$where.=" AND Servicios.IdEstatus <> 1";
+		}
+		if(isset($values['filtro_administracion']) and $values['filtro_administracion']=='1'){
+				$where.=" AND Servicios.IdEstatus in(6,7,8,9)";
+		}
+		if(isset($values['columns'][0]['search']['value']) and $values['columns'][0]['search']['value']!='')
+		{
+			$where.=" AND upper(CodigoServicio) like ('%".strtoupper($values['columns'][0]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][1]['search']['value']) and $values['columns'][1]['search']['value']!='')
+		{
+			$where.=" AND upper(st.Nombre) like ('%".strtoupper($values['columns'][1]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][2]['search']['value']) and $values['columns'][2]['search']['value']!='')
+		{
+			$where.=" AND upper(e.Nombre) like ('%".strtoupper($values['columns'][2]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][3]['search']['value']) and $values['columns'][3]['search']['value']!='')
+		{
+			$where.=" AND DATE_FORMAT(Servicios.Inicio, '%d-%m-%Y') =  DATE_FORMAT('".$values['columns'][3]['search']['value']."', '%d-%m-%Y')";
+		}
+		if(isset($values['columns'][4]['search']['value']) and $values['columns'][4]['search']['value']!='')
+		{
+			$where.=" AND DATE_FORMAT(Servicios.Fin, '%d-%m-%Y') =  DATE_FORMAT('".$values['columns'][4]['search']['value']."', '%d-%m-%Y')";
+		}
+		/*****************************ORDER**************************************************************************/
+		if(isset($values['order'][0]['column']) and $values['order'][0]['column']!='0')
+		{
+			$column_order = $columns[$values['order'][0]['column']];
+		}
+		if(isset($values['order'][0]['dir']) and $values['order'][0]['dir']!='0')
+		{
+			$order = $values['order'][0]['dir'];//asc o desc
+		}
+		$ConnectionORM = new ConnectionORM();
+		$query = "		SELECT
+		Servicios.IdServicio,CodigoServicio,Servicios.IdServicioTipo,ap.Nombre AS NombreAplicacion, st.Nombre AS NombreServicioTipo,e.Nombre AS NombreEstatus,
+		CASE WHEN Agendado = 1 THEN 'SI' ELSE 'NO' END AS Agendado, FechaAgendado, u.Login AS NombreUsuarioServicio, a.Nombre AS NombreAveria,
+		AveriaDetalle, cl.Nombre AS NombreCondicionLugar, CondicionDetalle,LatitudOrigen, LongitudOrigen, e1.Nombre AS NombreEstadoOrigen,
+		DireccionOrigen, DireccionOrigenDetallada, LatitudDestino, LongitudDestino,e2.Nombre AS NombreEstadoDestino,DireccionDestino, DireccionDestinoDetallada,
+		KM, DATE_FORMAT(Inicio, '%d/%m/%Y %H:%i:%s') as Inicio, DATE_FORMAT(Fin, '%d/%m/%Y %H:%i:%s') as Fin, UltimaActCliente, UltimaActGruero, sg.IdGrua, p.Nombres AS NombresProveedor,p.Apellidos AS ApellidosProveedor,
+		p.Identificacion AS IdentificacionProveedor,pt.Nombre AS NombreProveedorTipo, sg.Nombres AS NombresGruas, sg.Apellidos AS ApellidosGruas,
+		sg.Cedula AS CedulaGruas, sg.Celular AS CelularGruas,g.Placa AS PlacaGrua, m.Nombre AS NombreMarcaGruas,g.Modelo AS ModeloGrua, g.Color AS ColorGrua,g.Anio AS AnioGrua,
+		sg.Nombres AS NombresGrua,sg.Apellidos AS ApellidosGrua,sg.Cedula AS CedulaGrua,sg.Celular AS CelularGrua,sg.TratoCordial, sg.Presencia,
+		sg.TratoVehiculo, sg.ServicioGeneral, sc.IdPoliza , m2.Nombre AS NombreMarcaCliente, sc.Nombres AS NombresCliente,sc.Apellidos AS ApellidosCliente,
+		sc.Cedula AS CedulaCliente, sc.Placa AS PlacaCliente, sc.Modelo AS ModeloCliente, sc.Color AS ColorCliente, sc.Anio AS AnioCliente,
+		sc.Celular AS CelularCliente,
+		CASE PolizaVencida WHEN PolizaVencida = 1 THEN 'SI' ELSE 'NO' END AS PolizaVencida, u2.Login AS NombreUsuarioCliente,
+		sp.PrecioSIvaBaremo,sp.IvaBaremo, sp.PrecioCIvaBaremo, sp.PrecioSIvaBaremoModificado, sp.IvaBaremoModificado, sp.PrecioCIvaBaremoModificado, sp.PrecioClienteSIva,
+		sp.IvaCliente, sp.PrecioClienteCIva, sp.PrecioClienteSIvaModificado, sp.IvaClienteModificado,sp.PrecioClienteCIvaModificado, u3.login AS NombreUsuarioPrecio,
+				sp.FechaFacturaDigital, sp.FechaFacturaFisica, sp.FechaEstimadaPago, sp.FacturaPagada, sp.NumeroFactura
+		FROM Servicios
+		INNER JOIN ServiciosClientes sc ON sc.IdServicio = Servicios.IdServicio
+		INNER JOIN Usuarios u ON u.IdUsuario = Servicios.IdUsuario
+		LEFT JOIN ServiciosGruas sg ON sg.IdServicio = Servicios.IdServicio
+		LEFT JOIN Gruas g ON g.IdGrua = sg.IdGrua
+		LEFT JOIN Marcas m ON m.IdMarca = g.IdMarca
+		LEFT JOIN GruasTipos gt ON gt.IdGruaTipo = g.IdGruaTipo
+		LEFT JOIN Proveedores p ON p.IdProveedor = g.IdProveedor
+		LEFT JOIN ProveedoresTipos pt ON pt.IdProveedorTipo = p.IdProveedorTipo
+		LEFT JOIN Usuarios u2 ON u2.IdUsuario = sc.IdUsuarioPermiso
+		LEFT JOIN Polizas pol ON pol.IdPoliza = sc.IdPoliza
+		LEFT JOIN Seguros seg ON seg.IdSeguro = pol.IdSeguro
+		LEFT JOIN Marcas m2 ON m2.IdMarca = sc.IdMarca
+		LEFT JOIN ServiciosPrecios sp ON sp.IdServicio = Servicios.IdServicio
+		LEFT JOIN Usuarios u3 ON u3.IdUsuario = sp.IdUsuarioPermiso
+		LEFT JOIN ServiciosTipos st ON st.IdServicioTipo = Servicios.IdServicioTipo
+		LEFT JOIN Estatus e ON e.IdEstatus = Servicios.IdEstatus
+		LEFT JOIN Estados e1 ON e1.IdEstado = Servicios.IdEstadoOrigen
+		LEFT JOIN Estados e2 ON e2.IdEstado = Servicios.IdEstadoDestino
+		LEFT JOIN Averias a ON a.IdAveria = Servicios.IdAveria
+		LEFT JOIN CondicionLugar cl ON cl.IdCondicionLugar = Servicios.IdCondicionLugar
+		INNER JOIN Aplicaciones ap ON ap.IdAplicacion = Servicios.IdAplicacion
+		WHERE $where
+		ORDER BY $column_order $order
+		LIMIT $limit
+		OFFSET $offset";
+		$q = $ConnectionORM->ejecutarPreparado($query);
+		return $q;
+	}
+	public function getCountListServiciosGrua($values)
+	{
+		$where = '1 = 1';
+		if(isset($values['IdProveedor']) and $values['IdProveedor']!=''){
+      $where.=" AND sg.IdProveedor = ".$values['IdProveedor']."";
+    }
+    if(isset($values['IdGrua']) and $values['IdGrua']!=''){
+      $where.=" AND sg.IdGrua = ".$values['IdGrua']."";
+    }
+		if(isset($values['Placa']) and $values['Placa']!=''){
+      $where.=" AND sc.Placa = '".$values['Placa']."'";
+    }
+		if(isset($values['Cedula']) and $values['Cedula']!=''){
+      $where.=" AND sc.Cedula = '".$values['Cedula']."'";
+    }
+    if(isset($values['filtro_status']) and $values['filtro_status']!=''){
+        $where.=" AND Servicios.IdEstatus <> 1";
+    }
+		if(isset($values['filtro_administracion']) and $values['filtro_administracion']=='1'){
+        $where.=" AND Servicios.IdEstatus in(6,7,8,9)";
+    }
+		if(isset($values['columns'][0]['search']['value']) and $values['columns'][0]['search']['value']!='')
+		{
+			$where.=" AND upper(CodigoServicio) like ('%".strtoupper($values['columns'][0]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][1]['search']['value']) and $values['columns'][1]['search']['value']!='')
+		{
+			$where.=" AND upper(st.Nombre) like ('%".strtoupper($values['columns'][1]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][2]['search']['value']) and $values['columns'][2]['search']['value']!='')
+		{
+			$where.=" AND upper(e.Nombre) like ('%".strtoupper($values['columns'][2]['search']['value'])."%')";
+		}
+		if(isset($values['columns'][3]['search']['value']) and $values['columns'][3]['search']['value']!='')
+		{
+			$where.=" AND DATE_FORMAT(Servicios.Inicio, '%d-%m-%Y') =  DATE_FORMAT('".$values['columns'][3]['search']['value']."', '%d-%m-%Y')";
+		}
+		if(isset($values['columns'][4]['search']['value']) and $values['columns'][4]['search']['value']!='')
+		{
+			$where.=" AND DATE_FORMAT(Servicios.Fin, '%d-%m-%Y') =  DATE_FORMAT('".$values['columns'][4]['search']['value']."', '%d-%m-%Y')";
+		}
+		$ConnectionORM = new ConnectionORM();
+		$query = "SELECT count(*) as cuenta
+		FROM Servicios
+		INNER JOIN ServiciosClientes sc ON sc.IdServicio = Servicios.IdServicio
+		INNER JOIN Usuarios u ON u.IdUsuario = Servicios.IdUsuario
+		LEFT JOIN ServiciosGruas sg ON sg.IdServicio = Servicios.IdServicio
+		LEFT JOIN Gruas g ON g.IdGrua = sg.IdGrua
+		LEFT JOIN Marcas m ON m.IdMarca = g.IdMarca
+		LEFT JOIN GruasTipos gt ON gt.IdGruaTipo = g.IdGruaTipo
+		LEFT JOIN Proveedores p ON p.IdProveedor = g.IdProveedor
+		LEFT JOIN ProveedoresTipos pt ON pt.IdProveedorTipo = p.IdProveedorTipo
+		LEFT JOIN Usuarios u2 ON u2.IdUsuario = sc.IdUsuarioPermiso
+		LEFT JOIN Polizas pol ON pol.IdPoliza = sc.IdPoliza
+		LEFT JOIN Seguros seg ON seg.IdSeguro = pol.IdSeguro
+		LEFT JOIN Marcas m2 ON m2.IdMarca = sc.IdMarca
+		LEFT JOIN ServiciosPrecios sp ON sp.IdServicio = Servicios.IdServicio
+		LEFT JOIN Usuarios u3 ON u3.IdUsuario = sp.IdUsuarioPermiso
+		LEFT JOIN ServiciosTipos st ON st.IdServicioTipo = Servicios.IdServicioTipo
+		LEFT JOIN Estatus e ON e.IdEstatus = Servicios.IdEstatus
+		LEFT JOIN Estados e1 ON e1.IdEstado = Servicios.IdEstadoOrigen
+		LEFT JOIN Estados e2 ON e2.IdEstado = Servicios.IdEstadoDestino
+		LEFT JOIN Averias a ON a.IdAveria = Servicios.IdAveria
+		LEFT JOIN CondicionLugar cl ON cl.IdCondicionLugar = Servicios.IdCondicionLugar
+		INNER JOIN Aplicaciones ap ON ap.IdAplicacion = Servicios.IdAplicacion
+		WHERE $where
+		";
+		$q = $ConnectionORM->ejecutarPreparado($query);
+		$q = $q->fetch();
+		return $q['cuenta'];
+	}
 }

@@ -5,6 +5,8 @@
         <th>Código</th>
         <th>Tipo</th>
         <th>Estatus</th>
+        <th>Inicio</th>
+        <th>Fin</th>
         <th>Detalle</th>
       </tr>
     </thead>
@@ -13,6 +15,8 @@
         <th><input id="CodigoServicio" name="CodigoServicio" type="text"></th>
         <th><input id="NombreServicioTipo" name="NombreServicioTipo" type="text"></th>
         <th><input id="NombreEstatus" name="NombreEstatus" type="text"></th>
+        <th><input id="Inicio" name="Inicio" type="text"></th>
+        <th><input id="Fin" name="Fin" type="text"></th>
         <th>Detalle</th>
       </tr>
     </tfoot>
@@ -31,6 +35,10 @@ $(document).ready(function() {
     if(title != 'Detalle')
     {
       $(this).html( '<input size="5%" class="input-sm filtros" id="column_'+$(this).index()+'" type="text" placeholder="'+title+'" />' );
+      if($(this).index() == 3 || $(this).index() == 4){
+        $(this).html( '<input size="5%" class="input-sm filtros" id="column_'+$(this).index()+'" type="date" placeholder="'+title+'" />' );
+
+      }
     }
     if(title == 'Detalle')
     {
@@ -48,7 +56,7 @@ $(document).ready(function() {
     //scrollCollapse: true,
     //"sScrollXInner":"110%",
     "sDom": 'Btrp',
-    "ajax":link_servidor + "/adm/Listas/index.php?action=lista_servicios_json&IdProveedor=<?php echo $values['IdProveedor'];?>&IdGrua=<?php echo $values['IdGrua'];?>&EditarServicio=<?php echo $values['EditarServicio'];?>",
+    "ajax":link_servidor + "/adm/Listas/index.php?action=lista_servicios_grua_json&IdProveedor=<?php echo $values['IdProveedor'];?>&IdGrua=<?php echo $values['IdGrua'];?>&EditarServicio=<?php echo $values['EditarServicio'];?>",
     "language": {
       "url": link_servidor + "/web/js/datatables.spanish.lang"
     },
@@ -57,6 +65,8 @@ $(document).ready(function() {
       { "data" : "CodigoServicio" },
       { "data" : "NombreServicioTipo" },
       { "data" : "NombreEstatus" },
+      { "data" : "Inicio" },
+      { "data" : "Fin" },
       { "data" : "actions" },
     ],
     buttons: [
@@ -74,7 +84,7 @@ $(document).ready(function() {
     "aoColumnDefs": [
       { "visible": false, "targets": []},
       //{ "targets": -1, "visible": false},
-      { 'bSortable': false, 'aTargets': [ 3 ] }
+      { 'bSortable': false, 'aTargets': [ 5 ] }
     ]
   });
   table.buttons().container().appendTo( '#example_wrapper .col-sm-6:eq(0)' );
@@ -112,10 +122,15 @@ $(document).ready(function() {
       table.column(table.column(2)).search($(this).val()).draw();
     }
   });
-  $('#column_3').on ('keypress', function(e){
-    if(e.which == 13) {
-      table.column(table.column(3)).search($(this).val()).draw();
-    }
+  $('#column_3').on ('change', function(e){
+
+    table.column(table.column(3)).search($(this).val()).draw();
+
+  });
+  $('#column_4').on ('change', function(e){
+
+    table.column(table.column(4)).search($(this).val()).draw();
+
   });
   $('#clear').click(function(){
     table.search( '' ).columns().search( '' ).draw();

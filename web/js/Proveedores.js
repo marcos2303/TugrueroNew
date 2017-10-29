@@ -256,26 +256,26 @@ function ListarGruas(IdProveedor){
 		$.ajax({
 			url: link_servidor + "adm/Listas/index.php?action=lista_gruas&IdProveedor="+ IdProveedor+"",
 			success: function(html){
-				$('#popupListas .modal-body').html(html);
-				$('#popupListas').modal('show');
+				$('#popupListas2 .modal-body').html(html);
+				$('#popupListas2').modal('show');
 			}
 		});
 }
 function ListarServiciosGrua(IdProveedor, IdGrua){
 		$.ajax({
-			url: link_servidor + "adm/Listas/index.php?action=lista_servicios&IdProveedor="+ IdProveedor+"&IdGrua="+ IdGrua+ "&regresar=1&services_regresar=lista_gruas",
+			url: link_servidor + "adm/Listas/index.php?action=lista_servicios_grua&IdProveedor="+ IdProveedor+"&IdGrua="+ IdGrua+ "&regresar=1&services_regresar=lista_gruas",
 			success: function(html){
-				$('#popupListas .modal-body').html(html);
-				$('#popupListas').modal('show');
+				$('#popupListas2 .modal-body').html(html);
+				$('#popupListas2').modal('show');
 			}
 		});
 }
 function ListarServicios(IdProveedor){
 		$.ajax({
-			url: link_servidor + "adm/Listas/index.php?action=lista_servicios&IdProveedor="+ IdProveedor,
+			url: link_servidor + "adm/Listas/index.php?action=lista_servicios_grua&IdProveedor="+ IdProveedor,
 			success: function(html){
-				$('#popupListas .modal-body').html(html);
-				$('#popupListas').modal('show');
+				$('#popupListas2 .modal-body').html(html);
+				$('#popupListas2').modal('show');
 			}
 		});
 }
@@ -284,8 +284,8 @@ function ListarConexionesGrua(IdProveedor,IdUsuario){
 		$.ajax({
 			url: link_servidor + "adm/Listas/index.php?action=lista_conexiones&IdProveedor=" +IdProveedor + "&IdUsuario="+ IdUsuario+ "&regresar=1&services_regresar=lista_gruas",
 			success: function(html){
-				$('#popupListas .modal-body').html(html);
-				$('#popupListas').modal('show');
+				$('#popupListas2 .modal-body').html(html);
+				$('#popupListas2').modal('show');
 			}
 		});
 }

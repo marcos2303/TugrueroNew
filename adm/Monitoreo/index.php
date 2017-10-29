@@ -12,11 +12,11 @@ switch ($action) {
 	case "index":
 	executeIndex($values);
 	break;
-	case "mapa_servicio":
-	executeMapaServicio($values);
+	case "grueros":
+	executeGrueros($values);
 	break;
-  case "mapa_grueros":
-	executeMapaGrueros($values);
+  case "servicios":
+	executeServicios($values);
 	break;
   default:
 	executeIndex($values);
@@ -26,9 +26,9 @@ function executeIndex($values = null)
 {
 	die;
 }
-function executeMapaServicio($values){
-    require("mapa_servicio.php");
+function executeGrueros($values){
+    require("grueros.php");
 }
-function executeMapaGrueros($values){
-    require("mapa_grueros.php");
+function executeServicios($values){
+    require("servicios.php");
 }

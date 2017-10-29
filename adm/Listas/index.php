@@ -29,14 +29,20 @@ switch ($action) {
 	case "lista_servicios":
 	executeListaServicios($values);
 	break;
-	case "lista_servicios_administracion":
-	executeListaServiciosAdministracion($values);
-	break;
 	case "lista_servicios_json":
 	executeListaServiciosJson($values);
 	break;
+	case "lista_servicios_administracion":
+	executeListaServiciosAdministracion($values);
+	break;
 	case "lista_servicios_administracion_json":
 	executeListaServiciosAdministracionJson($values);
+	break;
+	case "lista_servicios_grua":
+	executeListaServiciosGrua($values);
+	break;
+	case "lista_servicios_grua_json":
+	executeListaServiciosGruaJson($values);
 	break;
 	case "lista_servicios_corta":
 	executeListaServiciosCorta($values);
@@ -178,6 +184,9 @@ function executeListaGruasJson($values)
 	}
 	function executeListaServicios($values){
 		require("lista_servicios.php");
+	}
+	function executeListaServiciosGrua($values){
+		require("lista_servicios_grua.php");
 	}
 	function executeListaConexiones($values){
 		require("lista_conexiones.php");
@@ -383,6 +392,57 @@ function executeListaGruasJson($values)
 				"PrecioCIvaModificado" =>  "",
 				"NombreUsuarioPrecio" =>  "",
 				"IdServicioTipo" => "",
+				"actions" => ''
+			);
+		}
+
+		echo json_encode($array_json);die;
+
+	}
+	function executeListaServiciosGruaJson($values)
+	{
+		$Servicios = new Servicios();
+		$list_json = $Servicios ->getListServiciosGrua($values);
+		$list_json_cuenta = $Servicios ->getCountListServiciosGrua($values);
+		$array_json = array();
+		$array_json['recordsTotal'] = $list_json_cuenta;
+		$array_json['recordsFiltered'] = $list_json_cuenta;
+		if($list_json_cuenta['cuenta']>0)
+		{
+			foreach ($list_json as $list)
+			{
+
+				$IdServicio = $list['IdServicio'];
+				$array_json['data'][] = array(
+					"IdServicio" =>  $list['IdServicio'],
+					"CodigoServicio" =>  $list['CodigoServicio'],
+					"NombreAplicacion" =>  $list['NombreAplicacion'],
+					"NombreServicioTipo" =>  $list['NombreServicioTipo'],
+					"NombreEstatus" =>  $list['NombreEstatus'],
+					"Inicio" =>  $list['Inicio'],
+					"Fin" =>  $list['Fin'],
+					"actions" => '
+					<div class="btn-group">
+					<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<i class="fa fa-gear"></i> <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu dropdown-menu-right">
+					<li><a href="#" onclick="DetalleServicio('.$list['IdServicio'].')"> Detalle servicio</a></li>
+					</ul>
+					</div>'
+				);
+			}
+		}else{
+			$array_json['recordsTotal'] = 0;
+			$array_json['recordsFiltered'] = 0;
+			$array_json['data'][] = array(
+				"IdServicio" =>  "",
+				"CodigoServicio" =>  "",
+				"NombreAplicacion" =>  "",
+				"NombreServicioTipo" =>  "",
+				"NombreEstatus" => "",
+				"Inicio" =>  "",
+				"Fin" =>  "",
 				"actions" => ''
 			);
 		}

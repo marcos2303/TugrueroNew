@@ -2,7 +2,7 @@ var Servidor = "http://localhost/";
 var Proyecto = "TugrueroNew/";
 var link_servidor = Servidor + Proyecto;
 Cargando("");
-                 
+
 $(window).on('load', function(){
     closePops();
 });
@@ -17,7 +17,7 @@ var popup = {
 			"onClick": ["", "", "", ""]
 
 		};
-		genericPop(popup);  
+		genericPop(popup);
 }
 function listaProveedoresTipo(IdProveedorTipo){
   //$('#IdProveedorTipo').find('option').remove().end().append('<option value="">Seleccione...</option>');
@@ -430,10 +430,10 @@ function listaTiposPagosElectronicos(IdTipoPagoElectronico){
     global: false,
     async:false,
     success: function(datos) {
-      
+
       $.each(datos.data, function(i, item) {
         selected = "";
-        
+
         if(typeof(IdTipoPagoElectronico) != 'undefined'){
           if(parseInt(IdTipoPagoElectronico) === parseInt(item.IdTipoPagoElectronico)){
             selected = 'selected = "selected"';
@@ -511,7 +511,7 @@ function DetalleServicio(IdServicio){
 		});
 }
 function ReiniciarDatosDispositivo(IdGrua){
-    
+
         var parametros = {
 		"IdGrua": IdGrua,
                 "Disponible": 0,
@@ -655,9 +655,9 @@ function ServicioEnviado(data, extra){
     "text": ['', '', '', 'Aceptar'],
     "onClick": ["", "", "", "closePops()"]
 
-  }; 
+  };
     genericPop(parametros);
-  
+
   }*/
 
 }
@@ -690,11 +690,11 @@ function MensajeErrorJson(data){
 
   };
   if(data.MensajeError!=""){
-    genericPop(parametros);  
+    genericPop(parametros);
   }else{
       return false;
   }
-  
+
 }
 
 function genericPop(parametros) {
@@ -739,6 +739,12 @@ function closePops() {
   if ($("#popupMapa").hasClass("in"))
   $("#popupMapa").modal("hide");
 }
+function closePopsLista2() {
+
+
+  if ($("#popupListas2").hasClass("in"))
+  $("#popupListas2").modal("hide");
+}
 function hideShow(elementos, parametros) {
 
   for (var i = 0; i < elementos.length; i++) {
@@ -771,14 +777,14 @@ function creaEstrellas(elemento, estrellas){
 }
 function siNo(elemento, respuesta){
 	var html = "";
-        
+
             if(respuesta == 1){
                 html = "Si";
             }
             else if(respuesta == 1){
                 html = "No";
             }
-        
+
 
 	$("#" + elemento).html(html);
 }

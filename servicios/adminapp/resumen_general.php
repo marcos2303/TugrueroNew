@@ -25,6 +25,18 @@ if($datos_generales){
 	$response["Where"] = $Estadisticas->getWhere();
 	foreach($datos_generales as $key=> $value){
 		$response["datos_generales"][$key] = $value;
+		// echo $key." ";
+		// print_r($value);die;
+			$response["datos_generales"][$key][] = '
+			<div class="btn-group">
+			<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<i class="fa fa-gear"></i> <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu dropdown-menu-right">
+			<li><a href="#" onclick="DetalleServicio('.$value["IdServicio"].')"> Detalle servicio</a></li>
+			</ul>
+			</div>';
+
 	}
 	if($datos_bd){
 		foreach($datos_bd as $key=> $value){
